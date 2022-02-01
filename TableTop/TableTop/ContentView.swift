@@ -9,12 +9,15 @@ import SwiftUI
 import RealityKit
 
 struct ContentView: View {
+    @State private var isControlsVisible: Bool = true
+    @State private var showBrowse: Bool = false
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             
             ARViewContainer()
             
-            ControlView()
+            ControlView(isControlsVisible: $isControlsVisible, showBrowse: $showBrowse)
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -37,5 +40,6 @@ struct ARViewContainer: UIViewRepresentable {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            
     }
 }
