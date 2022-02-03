@@ -14,6 +14,7 @@ struct BrowseView: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 // Gridviews for thumbnails
+                RecentsGrid(showBrowse: $showBrowse)
                 ModelsByCategoryGrid(showBrowse: $showBrowse)
             }
             .navigationBarTitle(Text("Browse"), displayMode: .large)
@@ -24,6 +25,31 @@ struct BrowseView: View {
                 Text("Done").bold()
             })
         }
+    }
+}
+
+struct RecentsGrid: View {
+    @EnvironmentObject var placementSettings: PlacementSettings
+    @Binding var showBrowse: Bool
+    
+    var body: some View {
+        if !self.placementSettings.recentlyPlaced.isEmpty {
+            HorizontalGrid(showBrowse: $showBrowse, title: "Recents", items: getRecentsUniqueOrdered())
+        }
+    }
+    
+    func getRecentsUniqueOrdered() -> [Model] {
+        var recentsUniqueOrderedArray: [Model] = []
+        var modelNameSet: Set<String> = []
+        
+        for model in self.placementSettings.recentlyPlaced.reversed() {
+            if !modelNameSet.contains(model.name) {
+                recentsUniqueOrderedArray.append(model)
+                modelNameSet.insert(model.name)
+            }
+        }
+        
+        return recentsUniqueOrderedArray
     }
 }
 
@@ -45,6 +71,7 @@ struct ModelsByCategoryGrid: View {
 }
 
 struct HorizontalGrid: View {
+    @EnvironmentObject var placementSettings: PlacementSettings
     @Binding var showBrowse: Bool
     var title: String
     var items: [Model]
@@ -66,8 +93,8 @@ struct HorizontalGrid: View {
                         let model = items[index]
                         
                         ItemButton(model: model) {
-                            //TODO: call model method to async load modelEntity
-                            //TODO: select model for placement
+                            model.asyncLoadModelEntity()
+                            self.placementSettings.selectedModel = model
                             print("BrowseView: selected \(model.name) for placement.")
                             self.showBrowse = false
                         }

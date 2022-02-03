@@ -39,6 +39,8 @@ class Model {
     var modelEntity: ModelEntity?
     var scaleCompensation: Float
     
+    private var cancellable: AnyCancellable?
+    
     init(name: String, category: ModelCategory, scaleCompensation: Float = 1.0) {
         self.name = name
         self.category = category
@@ -46,10 +48,26 @@ class Model {
         self.scaleCompensation = scaleCompensation
     }
     
-    //TODO: Create a method to async load modelEntity
     func asyncLoadModelEntity() {
         let filename = self.name + ".usdz"
         
+        self.cancellable = ModelEntity.loadModelAsync(named: filename)
+            .sink(receiveCompletion: { loadCompletion in
+                
+                switch loadCompletion {
+                case .failure(let error): print("Unable to load modelEntity for \(filename). Error \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+                
+            }, receiveValue: { modelEntity in
+                
+                self.modelEntity = modelEntity
+                self.modelEntity?.scale *= self.scaleCompensation
+                
+                print("modelEntity for \(self.name) has been loaded.")
+                
+            })
         
     }
 }
@@ -59,10 +77,15 @@ struct Models {
     
     init() {
         // Games
-        let chessSet = Model(name: "Chess Set", category: .games, scaleCompensation: 0.32/100)
-        let checkersSet = Model(name: "Checkers Set", category: .games, scaleCompensation: 0.32/100)
+        let chessSet = Model(name: "Chess Set", category: .games, scaleCompensation: 10/100)
+        let checkersSet = Model(name: "Checkers Set", category: .games, scaleCompensation: 1/100)
         
         self.all += [chessSet, checkersSet]
+        
+        // Figures
+        let goku = Model(name: "Goku", category: .figures, scaleCompensation: 10/100)
+        
+        self.all += [goku]
     }
     
     func get(category: ModelCategory) -> [Model] {
