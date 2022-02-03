@@ -69,7 +69,7 @@ struct ARViewContainer: UIViewRepresentable {
         // 1. Clone modelEntity. This creates an identical copy of modelEntty and references the same model. This also allows us to have multple models of the same asset in our scene.
         let clonedEntity = modelEntity.clone(recursive: true)
         
-        // 2. Enable translation and rotation gestures.
+        // 2. Enable gestures.
         clonedEntity.generateCollisionShapes(recursive: true)
         arView.installGestures([.all], for: clonedEntity)
         

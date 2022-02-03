@@ -25,6 +25,7 @@
 		C5F7D38C27AB4D850052FA59 /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = C5F7D38B27AB4D850052FA59 /* FocusEntity */; };
 		C5F7D38E27AB4DA80052FA59 /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */; };
 		C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */; };
+		C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		C5F7D38827AB4A7C0052FA59 /* PlacementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementView.swift; sourceTree = "<group>"; };
 		C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
 		C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Goku_Drip.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 		C5EE087327A94FC700C3D9F6 /* 3D Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */,
 				C5F7D38427AB48410052FA59 /* Goku.usdz */,
 				C5E6798B27A9611B00E24F1D /* Checkers Set.usdz */,
 				C5EE087427A9500A00C3D9F6 /* Chess Set.usdz */,
@@ -281,6 +284,7 @@
 				C5E6798C27A9611B00E24F1D /* Checkers Set.usdz in Resources */,
 				C5EE087527A9500A00C3D9F6 /* Chess Set.usdz in Resources */,
 				C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */,
+				C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */,
 				C5F7D38527AB48410052FA59 /* Goku.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

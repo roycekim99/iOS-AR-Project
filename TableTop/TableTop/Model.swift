@@ -84,8 +84,9 @@ struct Models {
         
         // Figures
         let goku = Model(name: "Goku", category: .figures, scaleCompensation: 10/100)
+        let goku_drip = Model(name: "Goku_Drip", category: .figures, scaleCompensation: 100/100)
         
-        self.all += [goku]
+        self.all += [goku, goku_drip]
     }
     
     func get(category: ModelCategory) -> [Model] {
