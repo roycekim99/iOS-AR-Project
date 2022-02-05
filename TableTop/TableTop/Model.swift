@@ -10,7 +10,7 @@ import RealityKit
 import Combine
 
 enum ModelCategory: CaseIterable {
-    case games
+    case set
     case pieces
     case figures
     case idk
@@ -18,8 +18,8 @@ enum ModelCategory: CaseIterable {
     var label: String {
         get {
             switch self {
-            case .games:
-                return "Games"
+            case .set:
+                return "Set"
             case .pieces:
                 return "Pieces"
             case .figures:
@@ -77,8 +77,8 @@ struct Models {
     
     init() {
         // Games
-        let chessSet = Model(name: "Chess Set", category: .games, scaleCompensation: 10/100)
-        let checkersSet = Model(name: "Checkers Set", category: .games, scaleCompensation: 1/100)
+        let chessSet = Model(name: "Chess Set", category: .set, scaleCompensation: 5/100)
+        let checkersSet = Model(name: "Checkers Set", category: .set, scaleCompensation: 1/100)
         
         self.all += [chessSet, checkersSet]
         

@@ -26,6 +26,8 @@
 		C5F7D38E27AB4DA80052FA59 /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */; };
 		C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */; };
 		C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */; };
+		C5F7D39527AE40890052FA59 /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D39427AE40890052FA59 /* SessionSettings.swift */; };
+		C5F7D39727AE41D60052FA59 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D39627AE41D60052FA59 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
 		C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Goku_Drip.usdz; sourceTree = "<group>"; };
+		C5F7D39427AE40890052FA59 /* SessionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSettings.swift; sourceTree = "<group>"; };
+		C5F7D39627AE41D60052FA59 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +128,9 @@
 				C5EE087627A950E000C3D9F6 /* ControlView.swift */,
 				C5E6798727A95AA700E24F1D /* BrowseView.swift */,
 				C5F7D38827AB4A7C0052FA59 /* PlacementView.swift */,
+				C5F7D39627AE41D60052FA59 /* SettingsView.swift */,
 				C5F7D38627AB48F90052FA59 /* PlacementSettings.swift */,
+				C5F7D39427AE40890052FA59 /* SessionSettings.swift */,
 				C5E6798927A95CC100E24F1D /* Model.swift */,
 				C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */,
 				C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */,
@@ -162,12 +168,20 @@
 		C5EE087327A94FC700C3D9F6 /* 3D Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C5F7D39327AB73C90052FA59 /* Set */,
 				C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */,
 				C5F7D38427AB48410052FA59 /* Goku.usdz */,
-				C5E6798B27A9611B00E24F1D /* Checkers Set.usdz */,
 				C5EE087427A9500A00C3D9F6 /* Chess Set.usdz */,
 			);
 			path = "3D Assets";
+			sourceTree = "<group>";
+		};
+		C5F7D39327AB73C90052FA59 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				C5E6798B27A9611B00E24F1D /* Checkers Set.usdz */,
+			);
+			path = Set;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5F7D38727AB48F90052FA59 /* PlacementSettings.swift in Sources */,
+				C5F7D39527AE40890052FA59 /* SessionSettings.swift in Sources */,
 				C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */,
 				C5E6798A27A95CC100E24F1D /* Model.swift in Sources */,
 				C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */,
@@ -319,6 +334,7 @@
 				C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */,
 				C5F7D38E27AB4DA80052FA59 /* CustomARView.swift in Sources */,
 				C5F7D38927AB4A7C0052FA59 /* PlacementView.swift in Sources */,
+				C5F7D39727AE41D60052FA59 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,8 +671,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/maxxfrazer/FocusEntity";
 			requirement = {
-				kind = exactVersion;
-				version = 2.2.1;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
