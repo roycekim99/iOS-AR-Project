@@ -37,6 +37,17 @@ struct ARViewContainer: UIViewRepresentable {
         
         let arView = CustomARView(frame: .zero, sessionSettings: sessionSettings)
         
+        let floor = ModelEntity(mesh: .generateBox(size: [1000, 0, 1000]), materials: [SimpleMaterial()])
+        floor.generateCollisionShapes(recursive: true)
+        if let collisionComponent = floor.components[CollisionComponent.self] as? CollisionComponent {
+            floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 0, material: nil, mode: .static)
+            floor.components[ModelComponent.self] = nil // make the floor invisible
+        }
+        let anchorEntity = AnchorEntity(plane: .any)
+        anchorEntity.addChild(floor)
+        arView.scene.addAnchor(anchorEntity)
+        print("added floor")
+        
         // Subscribe to SceneEvents.Update
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, { (event) in
             
@@ -73,6 +84,10 @@ struct ARViewContainer: UIViewRepresentable {
         
         // 2. Enable gestures.
         clonedEntity.generateCollisionShapes(recursive: true)
+        if let collisionComponent = clonedEntity.components[CollisionComponent.self] as? CollisionComponent {
+            clonedEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 1, material: nil, mode: .dynamic)
+        }
+        
         arView.installGestures([.all], for: clonedEntity)
         
         // 3. Create an anchorEntity and add clonedEntity to the anchorEntity
