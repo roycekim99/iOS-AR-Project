@@ -33,6 +33,8 @@ class CustomARView: ARView {
         self.initializeSettings()
         
         self.setupSubscribers()
+        
+        self.moveObject()
     }
     
     required init(frame frameRect: CGRect) {
@@ -122,4 +124,27 @@ class CustomARView: ARView {
     private func updateMultiuser(isEnabled: Bool) {
         print("\(#file): isMultiuserEnabled is now \(isEnabled)")
     }
+}
+
+extension CustomARView {
+    func moveObject() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        self.addGestureRecognizer(tapGesture)
+        
+    }
+    
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        let location = recognizer.location(in: self)
+        
+        if let entity = self.entity(at: location) as? ModelEntity {
+            
+            if entity.physicsBody.self?.mode == .dynamic {
+                entity.physicsBody.self?.mode = .kinematic
+            } else {
+                entity.physicsBody.self?.mode = .dynamic
+            }
+        }
+        
+    }
+    
 }
