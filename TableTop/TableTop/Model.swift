@@ -11,6 +11,7 @@ import Combine
 
 enum ModelCategory: CaseIterable {
     case set
+    case board
     case pieces
     case figures
     case idk
@@ -19,7 +20,9 @@ enum ModelCategory: CaseIterable {
         get {
             switch self {
             case .set:
-                return "Set"
+                return "Sets"
+            case .board:
+                return "Boards"
             case .pieces:
                 return "Pieces"
             case .figures:
@@ -76,12 +79,22 @@ struct Models {
     var all: [Model] = []
     
     init() {
+        // Sets
+        let checkersBoard = Model(name: "Checkers Board", category: .set, scaleCompensation: 10/100)
+        let blackPiece1 = Model(name: "Black 1", category: .set, scaleCompensation: 10/100)
+        
+        self.all += [checkersBoard, blackPiece1]
         // Games
-        let chessSet = Model(name: "Chess Set", category: .set, scaleCompensation: 5/100)
-        let checkersSet = Model(name: "Checkers Set", category: .set, scaleCompensation: 1/100)
+        let chessSet = Model(name: "Chess Set", category: .board, scaleCompensation: 5/100)
+        let checkers = Model(name: "Checkers", category: .board, scaleCompensation: 1/100)
         
-        self.all += [chessSet, checkersSet]
+        self.all += [chessSet, checkers]
         
+        // Pieces
+        let blackCheckersPiece = Model(name: "Black Piece", category: .pieces, scaleCompensation: 10/100)
+        let redCheckersPiece = Model(name: "Red Piece", category: .pieces, scaleCompensation: 10/100)
+        
+        self.all += [blackCheckersPiece, redCheckersPiece]
         // Figures
         let goku = Model(name: "Goku", category: .figures, scaleCompensation: 10/100)
         let goku_drip = Model(name: "Goku_Drip", category: .figures, scaleCompensation: 100/100)

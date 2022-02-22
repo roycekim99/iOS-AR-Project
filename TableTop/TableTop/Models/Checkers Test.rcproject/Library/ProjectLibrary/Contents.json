@@ -1,0 +1,17 @@
+[
+  {
+    "libraryIdentifier" : "e5eb3ee68e19482cd43fbeaf24c201d1",
+    "format" : "model",
+    "displayName" : "Checkers Board.usdz"
+  },
+  {
+    "libraryIdentifier" : "d86ebde0fd158dfec0abe5b34cb6ecd4",
+    "format" : "model",
+    "displayName" : "Checkers Black Piece.usdz"
+  },
+  {
+    "libraryIdentifier" : "6835d692710869e8aa3804ab551bd30d",
+    "format" : "model",
+    "displayName" : "Checkers Red Piece.usdz"
+  }
+]

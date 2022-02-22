@@ -46,7 +46,7 @@ struct ARViewContainer: UIViewRepresentable {
         let anchorEntity = AnchorEntity(plane: .any)
         anchorEntity.addChild(floor)
         arView.scene.addAnchor(anchorEntity)
-        print("added floor ")
+        print("added floor")
         
         // Subscribe to SceneEvents.Update
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, { (event) in
@@ -101,45 +101,6 @@ struct ARViewContainer: UIViewRepresentable {
     
 }
 
-/*class placeHelper {
-    @objc func handleEntityGesture(_ sender: UIGestureRecognizer ) {
-        // Translation
-        if let translationGesture = sender as? EntityTranslationGestureRecognizer {
-            print("crazy")
-            let ent = translationGesture.entity
-            switch translationGesture.state {
-            case .began:
-                ent?.components[PhysicsBodyComponent.self] = PhysicsBodyMode.kinematic as? Component
-                /*
-                if let collisionComponent = ent?.components[CollisionComponent.self] as? CollisionComponent {
-                    ent?.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 1, material: nil, mode: .kinematic)
-                }
-                print("started moving")
-                 */
-                print("started moving")
-            case .ended:
-                if let collisionComponent = ent?.components[CollisionComponent.self] as? CollisionComponent {
-                    ent?.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 1, material: nil, mode: .dynamic)
-                }
-                print("stopped moving")
-            case .changed:
-                print("changed")
-            case .cancelled:
-                if let collisionComponent = ent?.components[CollisionComponent.self] as? CollisionComponent {
-                    ent?.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 1, material: nil, mode: .dynamic)
-                }
-            case .failed:
-                if let collisionComponent = ent?.components[CollisionComponent.self] as? CollisionComponent {
-                    ent?.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 1, material: nil, mode: .dynamic)
-                }
-            case .possible:
-                print("cool")
-            @unknown default:
-                print("what just happened")
-            }
-        }
-    }
-}*/
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

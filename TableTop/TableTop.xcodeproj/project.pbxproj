@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5037CF227C5972700EE9549 /* Black 1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037CE127C5972600EE9549 /* Black 1.usdz */; };
+		C5037CF827C5972700EE9549 /* Checkers Board.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037CE727C5972700EE9549 /* Checkers Board.usdz */; };
+		C5037D0527C599A700EE9549 /* Black Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0327C599A700EE9549 /* Black Piece.usdz */; };
+		C5037D0627C599A700EE9549 /* Red Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0427C599A700EE9549 /* Red Piece.usdz */; };
+		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
+		C5037D0B27C5A41A00EE9549 /* Checkers Test2.reality in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0A27C5A41A00EE9549 /* Checkers Test2.reality */; };
 		C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798727A95AA700E24F1D /* BrowseView.swift */; };
 		C5E6798A27A95CC100E24F1D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798927A95CC100E24F1D /* Model.swift */; };
-		C5E6798C27A9611B00E24F1D /* Checkers Set.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Checkers Set.usdz */; };
+		C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Checkers.usdz */; };
 		C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */; };
 		C5EE084C27A24DA200C3D9F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE084B27A24DA200C3D9F6 /* ContentView.swift */; };
 		C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */; };
@@ -48,9 +54,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C5037CE127C5972600EE9549 /* Black 1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Black 1.usdz"; sourceTree = "<group>"; };
+		C5037CE727C5972700EE9549 /* Checkers Board.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Board.usdz"; sourceTree = "<group>"; };
+		C5037D0327C599A700EE9549 /* Black Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Black Piece.usdz"; sourceTree = "<group>"; };
+		C5037D0427C599A700EE9549 /* Red Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Red Piece.usdz"; sourceTree = "<group>"; };
+		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
+		C5037D0A27C5A41A00EE9549 /* Checkers Test2.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Checkers Test2.reality"; sourceTree = "<group>"; };
 		C5E6798727A95AA700E24F1D /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		C5E6798927A95CC100E24F1D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		C5E6798B27A9611B00E24F1D /* Checkers Set.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Set.usdz"; sourceTree = "<group>"; };
+		C5E6798B27A9611B00E24F1D /* Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Checkers.usdz; sourceTree = "<group>"; };
 		C5EE084627A24DA200C3D9F6 /* TableTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopApp.swift; sourceTree = "<group>"; };
 		C5EE084B27A24DA200C3D9F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +111,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C5037D0727C5A27900EE9549 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C5037D0A27C5A41A00EE9549 /* Checkers Test2.reality */,
+				C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C5EE083D27A24DA200C3D9F6 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +155,7 @@
 				C5E6798927A95CC100E24F1D /* Model.swift */,
 				C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */,
 				C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */,
+				C5037D0727C5A27900EE9549 /* Models */,
 				C5EE087327A94FC700C3D9F6 /* 3D Assets */,
 				C5EE084F27A24DA300C3D9F6 /* Preview Content */,
 			);
@@ -172,6 +194,9 @@
 				C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */,
 				C5F7D38427AB48410052FA59 /* Goku.usdz */,
 				C5EE087427A9500A00C3D9F6 /* Chess Set.usdz */,
+				C5E6798B27A9611B00E24F1D /* Checkers.usdz */,
+				C5037D0327C599A700EE9549 /* Black Piece.usdz */,
+				C5037D0427C599A700EE9549 /* Red Piece.usdz */,
 			);
 			path = "3D Assets";
 			sourceTree = "<group>";
@@ -179,7 +204,8 @@
 		C5F7D39327AB73C90052FA59 /* Set */ = {
 			isa = PBXGroup;
 			children = (
-				C5E6798B27A9611B00E24F1D /* Checkers Set.usdz */,
+				C5037CE127C5972600EE9549 /* Black 1.usdz */,
+				C5037CE727C5972700EE9549 /* Checkers Board.usdz */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -295,10 +321,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5EE085127A24DA300C3D9F6 /* Preview Assets.xcassets in Resources */,
-				C5E6798C27A9611B00E24F1D /* Checkers Set.usdz in Resources */,
+				C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */,
+				C5037D0627C599A700EE9549 /* Red Piece.usdz in Resources */,
+				C5037D0527C599A700EE9549 /* Black Piece.usdz in Resources */,
 				C5EE087527A9500A00C3D9F6 /* Chess Set.usdz in Resources */,
+				C5037CF227C5972700EE9549 /* Black 1.usdz in Resources */,
 				C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */,
+				C5037CF827C5972700EE9549 /* Checkers Board.usdz in Resources */,
 				C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */,
+				C5037D0B27C5A41A00EE9549 /* Checkers Test2.reality in Resources */,
 				C5F7D38527AB48410052FA59 /* Goku.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +360,7 @@
 				C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */,
 				C5E6798A27A95CC100E24F1D /* Model.swift in Sources */,
 				C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */,
+				C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */,
 				C5EE084C27A24DA200C3D9F6 /* ContentView.swift in Sources */,
 				C5EE087727A950E000C3D9F6 /* ControlView.swift in Sources */,
 				C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */,
