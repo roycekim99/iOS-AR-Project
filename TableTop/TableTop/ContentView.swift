@@ -71,9 +71,9 @@ struct ARViewContainer: UIViewRepresentable {
             self.place(modelEntity, in: arView)
             // After creating children variable to Model
             for chd in confirmedModel.childs {
-                chd.asyncLoadModelEntity()
+                //chd.asyncLoadModelEntity()
                 print(chd.name)
-                //self.place(chd.modelEntity!, in: arView)
+                self.place(chd.modelEntity!, in: arView)
             }
             self.placementSettings.confirmedModel = nil
         }

@@ -94,6 +94,11 @@ struct HorizontalGrid: View {
                         
                         ItemButton(model: model) {
                             model.asyncLoadModelEntity()
+                            for chd in model.childs {
+                                chd.asyncLoadModelEntity()
+                                print(chd.name)
+                                //self.place(chd.modelEntity!, in: arView)
+                            }
                             self.placementSettings.selectedModel = model
                             print("BrowseView: selected \(model.name) for placement.")
                             self.showBrowse = false

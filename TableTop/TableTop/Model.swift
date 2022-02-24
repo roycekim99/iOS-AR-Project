@@ -85,13 +85,25 @@ class Model {
 }
 
 struct Models {
+    // Hard coded and hard to read. Clean up in the future
+    
     var all: [Model] = []
     
     init() {
         // Tests
         let black1 = Model(name: "Black_1", category: .test, scaleCompensation: 1/1, childs: [])
         let black2 = Model(name: "Black_2", category: .test, scaleCompensation: 1/1, childs: [])
-        let checkersBoard = Model(name: "Checkers Board", category: .test, scaleCompensation: 1/1, childs: [black1, black2])
+        let black3 = Model(name: "Black_3", category: .test, scaleCompensation: 1/1, childs: [])
+        let black4 = Model(name: "Black_4", category: .test, scaleCompensation: 1/1, childs: [])
+        let black5 = Model(name: "Black_5", category: .test, scaleCompensation: 1/1, childs: [])
+        let black6 = Model(name: "Black_6", category: .test, scaleCompensation: 1/1, childs: [])
+        let black7 = Model(name: "Black_7", category: .test, scaleCompensation: 1/1, childs: [])
+        let black8 = Model(name: "Black_8", category: .test, scaleCompensation: 1/1, childs: [])
+        let black9 = Model(name: "Black_9", category: .test, scaleCompensation: 1/1, childs: [])
+        let black10 = Model(name: "Black_10", category: .test, scaleCompensation: 1/1, childs: [])
+        let black11 = Model(name: "Black_11", category: .test, scaleCompensation: 1/1, childs: [])
+        let black12 = Model(name: "Black_12", category: .test, scaleCompensation: 1/1, childs: [])
+        let checkersBoard = Model(name: "Checkers Board", category: .test, scaleCompensation: 1/1, childs: [black1, black2, black3, black4, black5, black6, black7, black8, black9, black10, black11, black12])
         self.all += [checkersBoard]
         // Sets
         // Games
