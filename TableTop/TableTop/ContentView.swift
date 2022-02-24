@@ -69,12 +69,14 @@ struct ARViewContainer: UIViewRepresentable {
         if let confirmedModel = self.placementSettings.confirmedModel, let modelEntity = confirmedModel.modelEntity {
             
             self.place(modelEntity, in: arView)
-            
+            // After creating children variable to Model
+            for chd in confirmedModel.childs {
+                chd.asyncLoadModelEntity()
+                print(chd.name)
+                //self.place(chd.modelEntity!, in: arView)
+            }
             self.placementSettings.confirmedModel = nil
-            
-            
         }
-        
     }
 
     private func place(_ modelEntity: ModelEntity, in arView: ARView) {
@@ -86,6 +88,13 @@ struct ARViewContainer: UIViewRepresentable {
         clonedEntity.generateCollisionShapes(recursive: true)
         if let collisionComponent = clonedEntity.components[CollisionComponent.self] as? CollisionComponent {
             clonedEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 1, material: nil, mode: .dynamic)
+        }
+        for ch in clonedEntity.children {
+            ch.generateCollisionShapes(recursive: true)
+            if let collisionComponent = ch.components[CollisionComponent.self] as? CollisionComponent {
+                clonedEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 1, material: nil, mode: .kinematic)
+            }
+            arView.installGestures(for: ch as! HasCollision)
         }
         arView.installGestures([.all], for: clonedEntity)
         

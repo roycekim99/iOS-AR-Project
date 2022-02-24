@@ -10,6 +10,7 @@ import RealityKit
 import Combine
 
 enum ModelCategory: CaseIterable {
+    case test
     case set
     case board
     case pieces
@@ -19,6 +20,8 @@ enum ModelCategory: CaseIterable {
     var label: String {
         get {
             switch self {
+            case .test:
+                return "Tests"
             case .set:
                 return "Sets"
             case .board:
@@ -36,19 +39,25 @@ enum ModelCategory: CaseIterable {
 
 
 class Model {
+    // Idea for rendering multiple objects at the same time:
+    // Have another Model variable for children to an object
+    // For each model, render their children as well
+    // However, figure out how to incorporate along with place function in ContentView
     var name: String
     var category: ModelCategory
     var thumbnail: UIImage
     var modelEntity: ModelEntity?
     var scaleCompensation: Float
+    var childs: [Model]
     
     private var cancellable: AnyCancellable?
     
-    init(name: String, category: ModelCategory, scaleCompensation: Float = 1.0) {
+    init(name: String, category: ModelCategory, scaleCompensation: Float = 1.0, childs: [Model]) {
         self.name = name
         self.category = category
         self.thumbnail = UIImage(named: name) ?? UIImage(systemName: "photo")!
         self.scaleCompensation = scaleCompensation
+        self.childs = childs
     }
     
     func asyncLoadModelEntity() {
@@ -79,25 +88,26 @@ struct Models {
     var all: [Model] = []
     
     init() {
+        // Tests
+        let black1 = Model(name: "Black_1", category: .test, scaleCompensation: 1/1, childs: [])
+        let black2 = Model(name: "Black_2", category: .test, scaleCompensation: 1/1, childs: [])
+        let checkersBoard = Model(name: "Checkers Board", category: .test, scaleCompensation: 1/1, childs: [black1, black2])
+        self.all += [checkersBoard]
         // Sets
-        let checkersBoard = Model(name: "Checkers Board", category: .set, scaleCompensation: 10/100)
-        let blackPiece1 = Model(name: "Black 1", category: .set, scaleCompensation: 10/100)
-        
-        self.all += [checkersBoard, blackPiece1]
         // Games
-        let chessSet = Model(name: "Chess Set", category: .board, scaleCompensation: 5/100)
-        let checkers = Model(name: "Checkers", category: .board, scaleCompensation: 1/100)
+        let chessSet = Model(name: "Chess Set", category: .board, scaleCompensation: 5/100, childs: [])
+        let checkers = Model(name: "Checkers", category: .board, scaleCompensation: 1/100, childs: [])
         
         self.all += [chessSet, checkers]
         
         // Pieces
-        let blackCheckersPiece = Model(name: "Black Piece", category: .pieces, scaleCompensation: 10/100)
-        let redCheckersPiece = Model(name: "Red Piece", category: .pieces, scaleCompensation: 10/100)
+        let blackCheckersPiece = Model(name: "Black Piece", category: .pieces, scaleCompensation: 10/100, childs: [])
+        let redCheckersPiece = Model(name: "Red Piece", category: .pieces, scaleCompensation: 10/100, childs: [])
         
         self.all += [blackCheckersPiece, redCheckersPiece]
         // Figures
-        let goku = Model(name: "Goku", category: .figures, scaleCompensation: 10/100)
-        let goku_drip = Model(name: "Goku_Drip", category: .figures, scaleCompensation: 100/100)
+        let goku = Model(name: "Goku", category: .figures, scaleCompensation: 10/100, childs: [])
+        let goku_drip = Model(name: "Goku_Drip", category: .figures, scaleCompensation: 100/100, childs: [])
         
         self.all += [goku, goku_drip]
     }
