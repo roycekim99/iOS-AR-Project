@@ -84,6 +84,7 @@ struct ARViewContainer: UIViewRepresentable {
             self.placementSettings.confirmedModel = nil
         }
     }
+    
 
     private func place(_ modelEntity: ModelEntity, in arView: ARView) {
         

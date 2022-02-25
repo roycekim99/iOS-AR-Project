@@ -101,7 +101,20 @@ struct Models {
         let black10 = Model(name: "Black_10", category: .test, scaleCompensation: 1/1, childs: [])
         let black11 = Model(name: "Black_11", category: .test, scaleCompensation: 1/1, childs: [])
         let black12 = Model(name: "Black_12", category: .test, scaleCompensation: 1/1, childs: [])
-        let checkersBoard = Model(name: "Checkers Board", category: .test, scaleCompensation: 1/1, childs: [black1, black2, black3, black4, black5, black6, black7, black8, black9, black10, black11, black12])
+        let red1 = Model(name: "Red_1", category: .test, scaleCompensation: 1/1, childs: [])
+        let red2 = Model(name: "Red_2", category: .test, scaleCompensation: 1/1, childs: [])
+        let red3 = Model(name: "Red_3", category: .test, scaleCompensation: 1/1, childs: [])
+        let red4 = Model(name: "Red_4", category: .test, scaleCompensation: 1/1, childs: [])
+        let red5 = Model(name: "Red_5", category: .test, scaleCompensation: 1/1, childs: [])
+        let red6 = Model(name: "Red_6", category: .test, scaleCompensation: 1/1, childs: [])
+        let red7 = Model(name: "Red_7", category: .test, scaleCompensation: 1/1, childs: [])
+        let red8 = Model(name: "Red_8", category: .test, scaleCompensation: 1/1, childs: [])
+        let red9 = Model(name: "Red_9", category: .test, scaleCompensation: 1/1, childs: [])
+        let red10 = Model(name: "Red_10", category: .test, scaleCompensation: 1/1, childs: [])
+        let red11 = Model(name: "Red_11", category: .test, scaleCompensation: 1/1, childs: [])
+        let red12 = Model(name: "Red_12", category: .test, scaleCompensation: 1/1, childs: [])
+
+        let checkersBoard = Model(name: "Checkers Board", category: .test, scaleCompensation: 1/1, childs: [black1, black2, black3, black4, black5, black6, black7, black8, black9, black10, black11, black12, red1, red2, red3, red4, red5, red6, red7, red8, red9, red10, red11, red12])
         self.all += [checkersBoard]
         // Sets
         // Games

@@ -25,6 +25,18 @@
 		C5037D6727C7224C00EE9549 /* Black_8.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D6127C7224B00EE9549 /* Black_8.usdz */; };
 		C5037D6827C7224C00EE9549 /* Black_7.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D6227C7224B00EE9549 /* Black_7.usdz */; };
 		C5037D6927C7224C00EE9549 /* Black_10.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D6327C7224B00EE9549 /* Black_10.usdz */; };
+		C5461C4927C973A0000197B0 /* Red_6.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C3D27C973A0000197B0 /* Red_6.usdz */; };
+		C5461C4A27C973A0000197B0 /* Red_11.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C3E27C973A0000197B0 /* Red_11.usdz */; };
+		C5461C4B27C973A0000197B0 /* Red_7.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C3F27C973A0000197B0 /* Red_7.usdz */; };
+		C5461C4C27C973A0000197B0 /* Red_3.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4027C973A0000197B0 /* Red_3.usdz */; };
+		C5461C4D27C973A0000197B0 /* Red_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4127C973A0000197B0 /* Red_1.usdz */; };
+		C5461C4E27C973A0000197B0 /* Red_8.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4227C973A0000197B0 /* Red_8.usdz */; };
+		C5461C4F27C973A0000197B0 /* Red_4.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4327C973A0000197B0 /* Red_4.usdz */; };
+		C5461C5027C973A0000197B0 /* Red_12.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4427C973A0000197B0 /* Red_12.usdz */; };
+		C5461C5127C973A0000197B0 /* Red_9.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4527C973A0000197B0 /* Red_9.usdz */; };
+		C5461C5227C973A0000197B0 /* Red_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4627C973A0000197B0 /* Red_2.usdz */; };
+		C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4727C973A0000197B0 /* Red_5.usdz */; };
+		C5461C5427C973A0000197B0 /* Red_10.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4827C973A0000197B0 /* Red_10.usdz */; };
 		C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798727A95AA700E24F1D /* BrowseView.swift */; };
 		C5E6798A27A95CC100E24F1D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798927A95CC100E24F1D /* Model.swift */; };
 		C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Checkers.usdz */; };
@@ -84,6 +96,18 @@
 		C5037D6127C7224B00EE9549 /* Black_8.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_8.usdz; sourceTree = "<group>"; };
 		C5037D6227C7224B00EE9549 /* Black_7.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_7.usdz; sourceTree = "<group>"; };
 		C5037D6327C7224B00EE9549 /* Black_10.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_10.usdz; sourceTree = "<group>"; };
+		C5461C3D27C973A0000197B0 /* Red_6.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_6.usdz; sourceTree = "<group>"; };
+		C5461C3E27C973A0000197B0 /* Red_11.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_11.usdz; sourceTree = "<group>"; };
+		C5461C3F27C973A0000197B0 /* Red_7.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_7.usdz; sourceTree = "<group>"; };
+		C5461C4027C973A0000197B0 /* Red_3.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_3.usdz; sourceTree = "<group>"; };
+		C5461C4127C973A0000197B0 /* Red_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_1.usdz; sourceTree = "<group>"; };
+		C5461C4227C973A0000197B0 /* Red_8.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_8.usdz; sourceTree = "<group>"; };
+		C5461C4327C973A0000197B0 /* Red_4.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_4.usdz; sourceTree = "<group>"; };
+		C5461C4427C973A0000197B0 /* Red_12.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_12.usdz; sourceTree = "<group>"; };
+		C5461C4527C973A0000197B0 /* Red_9.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_9.usdz; sourceTree = "<group>"; };
+		C5461C4627C973A0000197B0 /* Red_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_2.usdz; sourceTree = "<group>"; };
+		C5461C4727C973A0000197B0 /* Red_5.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_5.usdz; sourceTree = "<group>"; };
+		C5461C4827C973A0000197B0 /* Red_10.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_10.usdz; sourceTree = "<group>"; };
 		C5E6798727A95AA700E24F1D /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		C5E6798927A95CC100E24F1D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C5E6798B27A9611B00E24F1D /* Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Checkers.usdz; sourceTree = "<group>"; };
@@ -229,18 +253,30 @@
 		C5F7D39327AB73C90052FA59 /* Set */ = {
 			isa = PBXGroup;
 			children = (
-				C5037D6227C7224B00EE9549 /* Black_7.usdz */,
-				C5037D6127C7224B00EE9549 /* Black_8.usdz */,
-				C5037D6027C7224B00EE9549 /* Black_9.usdz */,
-				C5037D6327C7224B00EE9549 /* Black_10.usdz */,
-				C5037D5F27C7224B00EE9549 /* Black_11.usdz */,
-				C5037D5E27C7224B00EE9549 /* Black_12.usdz */,
+				C5461C4127C973A0000197B0 /* Red_1.usdz */,
+				C5461C4627C973A0000197B0 /* Red_2.usdz */,
+				C5461C4027C973A0000197B0 /* Red_3.usdz */,
+				C5461C4327C973A0000197B0 /* Red_4.usdz */,
+				C5461C4727C973A0000197B0 /* Red_5.usdz */,
+				C5461C3D27C973A0000197B0 /* Red_6.usdz */,
+				C5461C3F27C973A0000197B0 /* Red_7.usdz */,
+				C5461C4227C973A0000197B0 /* Red_8.usdz */,
+				C5461C4527C973A0000197B0 /* Red_9.usdz */,
+				C5461C4827C973A0000197B0 /* Red_10.usdz */,
+				C5461C3E27C973A0000197B0 /* Red_11.usdz */,
+				C5461C4427C973A0000197B0 /* Red_12.usdz */,
 				C5037D5227C70A3C00EE9549 /* Black_1.usdz */,
 				C5037D5127C70A3B00EE9549 /* Black_2.usdz */,
 				C5037D5627C70A3C00EE9549 /* Black_3.usdz */,
 				C5037D5427C70A3C00EE9549 /* Black_4.usdz */,
 				C5037D5327C70A3C00EE9549 /* Black_5.usdz */,
 				C5037D5527C70A3C00EE9549 /* Black_6.usdz */,
+				C5037D6227C7224B00EE9549 /* Black_7.usdz */,
+				C5037D6127C7224B00EE9549 /* Black_8.usdz */,
+				C5037D6027C7224B00EE9549 /* Black_9.usdz */,
+				C5037D6327C7224B00EE9549 /* Black_10.usdz */,
+				C5037D5F27C7224B00EE9549 /* Black_11.usdz */,
+				C5037D5E27C7224B00EE9549 /* Black_12.usdz */,
 				C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */,
 			);
 			path = Set;
@@ -362,22 +398,34 @@
 				C5037D6727C7224C00EE9549 /* Black_8.usdz in Resources */,
 				C5037D5C27C70A3C00EE9549 /* Black_6.usdz in Resources */,
 				C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */,
+				C5461C4E27C973A0000197B0 /* Red_8.usdz in Resources */,
 				C5037D6627C7224C00EE9549 /* Black_9.usdz in Resources */,
+				C5461C4F27C973A0000197B0 /* Red_4.usdz in Resources */,
 				C5037D6527C7224C00EE9549 /* Black_11.usdz in Resources */,
+				C5461C5427C973A0000197B0 /* Red_10.usdz in Resources */,
 				C5037D0627C599A700EE9549 /* Red Piece.usdz in Resources */,
 				C5037D0527C599A700EE9549 /* Black Piece.usdz in Resources */,
+				C5461C4C27C973A0000197B0 /* Red_3.usdz in Resources */,
 				C5EE087527A9500A00C3D9F6 /* Chess Set.usdz in Resources */,
 				C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */,
+				C5461C4D27C973A0000197B0 /* Red_1.usdz in Resources */,
 				C5037D5927C70A3C00EE9549 /* Black_1.usdz in Resources */,
+				C5461C5127C973A0000197B0 /* Red_9.usdz in Resources */,
 				C5037D6927C7224C00EE9549 /* Black_10.usdz in Resources */,
 				C5037D6827C7224C00EE9549 /* Black_7.usdz in Resources */,
 				C5037D5D27C70A3C00EE9549 /* Black_3.usdz in Resources */,
 				C5037D5A27C70A3C00EE9549 /* Black_5.usdz in Resources */,
+				C5461C5027C973A0000197B0 /* Red_12.usdz in Resources */,
 				C5037D5827C70A3C00EE9549 /* Black_2.usdz in Resources */,
+				C5461C5227C973A0000197B0 /* Red_2.usdz in Resources */,
+				C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */,
 				C5037D4F27C7024D00EE9549 /* check.usdz in Resources */,
 				C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */,
 				C5037D0B27C5A41A00EE9549 /* Checkers Test2.reality in Resources */,
 				C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */,
+				C5461C4927C973A0000197B0 /* Red_6.usdz in Resources */,
+				C5461C4B27C973A0000197B0 /* Red_7.usdz in Resources */,
+				C5461C4A27C973A0000197B0 /* Red_11.usdz in Resources */,
 				C5F7D38527AB48410052FA59 /* Goku.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

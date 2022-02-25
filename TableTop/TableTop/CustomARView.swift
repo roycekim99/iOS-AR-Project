@@ -145,8 +145,10 @@ extension CustomARView {
         if let entity = self.entity(at: location) as? ModelEntity {
             
             if entity.physicsBody.self?.mode == .dynamic {
+                // Start moving
                 entity.physicsBody.self?.mode = .kinematic
             } else {
+                // Finished moving
                 entity.physicsBody.self?.mode = .dynamic
             }
         }
