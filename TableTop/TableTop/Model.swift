@@ -37,12 +37,8 @@ enum ModelCategory: CaseIterable {
     }
 }
 
-
+// Model object class
 class Model {
-    // Idea for rendering multiple objects at the same time:
-    // Have another Model variable for children to an object
-    // For each model, render their children as well
-    // However, figure out how to incorporate along with place function in ContentView
     var name: String
     var category: ModelCategory
     var thumbnail: UIImage
@@ -60,6 +56,7 @@ class Model {
         self.childs = childs
     }
     
+    // Load models asynchronously for seamless gameplay
     func asyncLoadModelEntity() {
         let filename = self.name + ".usdz"
         
@@ -84,6 +81,7 @@ class Model {
     }
 }
 
+// Import models into TableTop App
 struct Models {
     // Hard coded and hard to read. Clean up in the future
     

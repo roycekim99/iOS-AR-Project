@@ -11,6 +11,7 @@ import FocusEntity
 import SwiftUI
 import Combine
 
+// CustomARView: Implements FocusEntity for object placement, people/object occlusion, lidar visualization, and tap response functionality
 class CustomARView: ARView {
     
     var focusEntity: FocusEntity?
@@ -63,7 +64,7 @@ class CustomARView: ARView {
         self.updateLidarDebug(isEnabled: sessionSettings.isLidarDebugEnabled)
         self.updateMultiuser(isEnabled: sessionSettings.isMultiuserEnabled)
     }
-    
+    // Set up subscribers to state variables
     private func setupSubscribers() {
         self.peopleOcclusionCancellable = sessionSettings.$isPeopleOcclusionEnabled.sink { [weak self] isEnabled in
             self?.updatePeopleOcclusion(isEnabled: isEnabled )
@@ -81,6 +82,8 @@ class CustomARView: ARView {
             self?.updateMultiuser(isEnabled: isEnabled )
         }
     }
+    
+    // Add functionality for people/object occlusion and lidar visualization
     
     private func updatePeopleOcclusion(isEnabled: Bool) {
         print("\(#file): isPeopleOcclusionEnabled is now \(isEnabled)")
@@ -121,11 +124,13 @@ class CustomARView: ARView {
         }
     }
     
+    // Not implemented. Copied from Reality School playlist. Will probably remove
     private func updateMultiuser(isEnabled: Bool) {
         print("\(#file): isMultiuserEnabled is now \(isEnabled)")
     }
 }
 
+// Add functionality to switch object physics body in order to move objects
 extension CustomARView {
     func moveObject() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
@@ -133,6 +138,7 @@ extension CustomARView {
         
     }
     
+    // Tap object to switch physics body mode
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: self)
         

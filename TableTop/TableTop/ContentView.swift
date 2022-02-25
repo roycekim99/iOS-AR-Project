@@ -19,9 +19,11 @@ struct ContentView: View {
             
             ARViewContainer()
             
+            // If no model is selected for placement, show default UI
             if self.placementSettings.selectedModel == nil {
                 ControlView(isControlsVisible: $isControlsVisible, showBrowse: $showBrowse, showSettings: $showSettings)
             } else {
+                // Show placement view
                 PlacementView()
             }
         }
@@ -37,6 +39,9 @@ struct ARViewContainer: UIViewRepresentable {
         
         let arView = CustomARView(frame: .zero, sessionSettings: sessionSettings)
         
+        // Add floor so that models do not fall infinitely on the floor
+        // Change so that there is a floor every entity
+        // Or change so that you scan an area before playing to determine where floor is
         let floor = ModelEntity(mesh: .generateBox(size: [1000, 0, 1000]), materials: [SimpleMaterial()])
         floor.generateCollisionShapes(recursive: true)
         if let collisionComponent = floor.components[CollisionComponent.self] as? CollisionComponent {
@@ -49,6 +54,7 @@ struct ARViewContainer: UIViewRepresentable {
         print("added floor")
         
         // Subscribe to SceneEvents.Update
+        // Check every frame for updates from the scene if object is placed, deleted, moved, etc.
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, { (event) in
             
             self.updateScene(for: arView)
@@ -89,6 +95,7 @@ struct ARViewContainer: UIViewRepresentable {
         if let collisionComponent = clonedEntity.components[CollisionComponent.self] as? CollisionComponent {
             clonedEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 1, material: nil, mode: .dynamic)
         }
+        // Enable gestures for children of objects
         for ch in clonedEntity.children {
             ch.generateCollisionShapes(recursive: true)
             if let collisionComponent = ch.components[CollisionComponent.self] as? CollisionComponent {
@@ -96,7 +103,7 @@ struct ARViewContainer: UIViewRepresentable {
             }
             arView.installGestures(for: ch as! HasCollision)
         }
-        arView.installGestures([.all], for: clonedEntity)
+        arView.installGestures(for: clonedEntity)
         
         // 3. Create an anchorEntity and add clonedEntity to the anchorEntity
         let anchorEntity = AnchorEntity(plane: .any)

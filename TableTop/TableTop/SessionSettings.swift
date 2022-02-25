@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// State variables for setting toggles
 class SessionSettings: ObservableObject {
     @Published var isPeopleOcclusionEnabled: Bool = false
     @Published var isObjectOcclusionEnabled: Bool = false

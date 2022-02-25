@@ -10,6 +10,7 @@ import SwiftUI
 struct PlacementView: View {
     @EnvironmentObject var placementSettings: PlacementSettings
     
+    // View to place object
     var body: some View {
         HStack {
             

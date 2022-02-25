@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// View of the Control settings
 struct ControlView: View {
     @Binding var isControlsVisible: Bool
     @Binding var showBrowse: Bool
@@ -26,6 +27,7 @@ struct ControlView: View {
     }
 }
 
+// Hide control settings if button is pressed
 struct ControlVisibilityToggleButton: View {
     @Binding var isControlsVisible: Bool
     

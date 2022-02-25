@@ -82,6 +82,7 @@ struct SettingsGrid: View {
     }
 }
 
+// Set up functions for buttons
 struct SettingToggleButton: View {
     let setting: Setting
     @Binding var isOn: Bool
