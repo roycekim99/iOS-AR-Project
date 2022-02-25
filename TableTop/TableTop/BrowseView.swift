@@ -93,11 +93,11 @@ struct HorizontalGrid: View {
                         let model = items[index]
                         
                         ItemButton(model: model) {
+                            // Load model and their children asynchronously
                             model.asyncLoadModelEntity()
                             for chd in model.childs {
                                 chd.asyncLoadModelEntity()
                                 print(chd.name)
-                                //self.place(chd.modelEntity!, in: arView)
                             }
                             self.placementSettings.selectedModel = model
                             print("BrowseView: selected \(model.name) for placement.")
