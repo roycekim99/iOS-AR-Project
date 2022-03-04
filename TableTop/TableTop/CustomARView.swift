@@ -199,8 +199,6 @@ extension CustomARView {
     }
     // Tap object to switch physics body mode
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
-        print("ZoomView.ZoomEnabled = \(String(describing: self.zoom.ZoomEnabled.description))")
-        
         
         let location = recognizer.location(in: self)
         
@@ -215,9 +213,5 @@ extension CustomARView {
                 entity.physicsBody.self?.mode = .dynamic
             }
         }
-        
-        
     }
-    
-    
 }

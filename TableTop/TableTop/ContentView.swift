@@ -94,7 +94,7 @@ struct ARViewContainer: UIViewRepresentable {
         // 2. Enable gestures.
         clonedEntity.generateCollisionShapes(recursive: true)
         if let collisionComponent = clonedEntity.components[CollisionComponent.self] as? CollisionComponent {
-            clonedEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 1, material: nil, mode: .dynamic)
+            clonedEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil , mode: .dynamic)
         }
         arView.installGestures(for: clonedEntity).forEach { entityGesture in
             entityGesture.addTarget(arView, action: #selector(CustomARView.transformObject(_:)))
@@ -118,7 +118,7 @@ struct ARViewContainer: UIViewRepresentable {
                 ent.transform.translation.y += 0.01
                 
             } else {
-                //ent.transform.translation.y -= 0.01
+                ent.transform.translation.y += -0.01
                 ent.physicsBody?.mode = .dynamic
             }
         }
