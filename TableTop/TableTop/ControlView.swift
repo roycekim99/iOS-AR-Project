@@ -70,7 +70,7 @@ struct ZoomButton: View {
     @Binding var isZoomEnabled: Bool
     @EnvironmentObject var zoomView: ZoomView
     @EnvironmentObject var sceneManager: SceneManager
-    var blah = ARViewContainer()
+    var arView = ARViewContainer()
     
     var body: some View {
         HStack {
@@ -82,7 +82,7 @@ struct ZoomButton: View {
                 
                     self.isZoomEnabled.toggle()
                     self.zoomView.ZoomEnabled = self.isZoomEnabled
-                    self.blah.moveAll(check: &self.isZoomEnabled, modelEntities: self.sceneManager.modelEntities)
+                    self.arView.moveAll(check: &self.isZoomEnabled, modelEntities: self.sceneManager.modelEntities)
                     
                 }) {
                     Image(systemName: self.isZoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")

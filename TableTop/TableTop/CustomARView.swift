@@ -13,14 +13,12 @@ import Combine
 
 // CustomARView: Implements FocusEntity for object placement, people/object occlusion, lidar visualization, and tap response functionality
 class CustomARView: ARView {
-    //@EnvironmentObject var zoom: ZoomView
-    
-    
-    
+    var objectMoved: Entity? = nil
     var zoom: ZoomView
     var sceneManager: SceneManager
     var focusEntity: FocusEntity?
     var sessionSettings: SessionSettings
+    var anchorMap = [ModelEntity:AnchorEntity]()
     
     private var peopleOcclusionCancellable: AnyCancellable?
     private var objectOcclusionCancellable: AnyCancellable?
@@ -160,35 +158,41 @@ extension CustomARView {
     }
     
     @objc func transformObject(_ sender: UIGestureRecognizer) {
-        /*if self.zoom.ZoomEnabled {
+        
+        if self.zoom.ZoomEnabled {
             if let transformGesture = sender as? EntityTranslationGestureRecognizer {
-                print(self.sceneManager.modelEntities.count)
-                for ent in self.sceneManager.modelEntities {
-                    if (ent != transformGesture.entity!) {
-                        ent.setParent(transformGesture.entity, preservingWorldTransform: true)
-                    }
+                if self.objectMoved == nil {
+                    self.objectMoved = transformGesture.entity!
+                } else if (transformGesture.entity! != self.objectMoved) {
+                    return
                 }
                 switch transformGesture.state {
                 case .began:
                     print("Started Moving")
-                case .changed:
-
-                    print("everything move")
-                case .ended:
-                    // child models end up disappearing
-                    /*for ent in self.sceneManager.modelEntities {
-                        //transformGesture.entity?.removeChild(ent)
+                    for ent in self.sceneManager.modelEntities {
                         if (ent != transformGesture.entity!) {
-                            ent.transform.translation.y += 0.01
-                            transformGesture.entity?.removeChild(ent, preservingWorldTransform: true)
+                            self.anchorMap[ent] = ent.parent as? AnchorEntity
+                            
+                            ent.setParent(transformGesture.entity, preservingWorldTransform: true)
                         }
-                    }*/
+                    }
+                case .ended:
+                    print(self.anchorMap.count)
+                    
+                    
+                    for ent in self.sceneManager.modelEntities {
+                        if (ent != transformGesture.entity!) {
+                            ent.setParent(self.anchorMap[ent], preservingWorldTransform: true)
+                        }
+                    }
+                    self.anchorMap.removeAll()
                     print("Stopped Moving")
+                    self.objectMoved = nil
                 default:
                     return
                 }
             }
-        }*/
+        }
         
         
         

@@ -10,7 +10,6 @@
 		C5037D0527C599A700EE9549 /* Black Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0327C599A700EE9549 /* Black Piece.usdz */; };
 		C5037D0627C599A700EE9549 /* Red Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0427C599A700EE9549 /* Red Piece.usdz */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
-		C5037D0B27C5A41A00EE9549 /* Checkers Test2.reality in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0A27C5A41A00EE9549 /* Checkers Test2.reality */; };
 		C5037D4F27C7024D00EE9549 /* check.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* check.usdz */; };
 		C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */; };
 		C5037D5827C70A3C00EE9549 /* Black_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5127C70A3B00EE9549 /* Black_2.usdz */; };
@@ -82,7 +81,6 @@
 		C5037D0327C599A700EE9549 /* Black Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Black Piece.usdz"; sourceTree = "<group>"; };
 		C5037D0427C599A700EE9549 /* Red Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Red Piece.usdz"; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
-		C5037D0A27C5A41A00EE9549 /* Checkers Test2.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Checkers Test2.reality"; sourceTree = "<group>"; };
 		C5037D4E27C7024D00EE9549 /* check.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = check.usdz; sourceTree = "<group>"; };
 		C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Board.usdz"; sourceTree = "<group>"; };
 		C5037D5127C70A3B00EE9549 /* Black_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_2.usdz; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 		C5037D0727C5A27900EE9549 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C5037D0A27C5A41A00EE9549 /* Checkers Test2.reality */,
 				C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */,
 			);
 			path = Models;
@@ -424,7 +421,6 @@
 				C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */,
 				C5037D4F27C7024D00EE9549 /* check.usdz in Resources */,
 				C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */,
-				C5037D0B27C5A41A00EE9549 /* Checkers Test2.reality in Resources */,
 				C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */,
 				C5461C4927C973A0000197B0 /* Red_6.usdz in Resources */,
 				C5461C4B27C973A0000197B0 /* Red_7.usdz in Resources */,
