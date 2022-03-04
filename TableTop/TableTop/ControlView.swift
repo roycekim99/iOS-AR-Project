@@ -12,11 +12,13 @@ struct ControlView: View {
     @Binding var isControlsVisible: Bool
     @Binding var showBrowse: Bool
     @Binding var showSettings: Bool
+    @Binding var isZoomEnabled: Bool
+    @EnvironmentObject var zoomView: ZoomView
     
     var body: some View {
         VStack {
             
-            ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible)
+            ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled)
             
             Spacer()
             
@@ -25,14 +27,20 @@ struct ControlView: View {
             }
         }
     }
+    
 }
 
 // Hide control settings if button is pressed
 struct ControlVisibilityToggleButton: View {
     @Binding var isControlsVisible: Bool
+    @Binding var isZoomEnabled: Bool
     
     var body: some View {
         HStack {
+            
+            if self.isControlsVisible {
+                ZoomButton(isZoomEnabled: $isZoomEnabled)
+            }
             
             Spacer()
             
@@ -55,6 +63,39 @@ struct ControlVisibilityToggleButton: View {
         }
         .padding(.top, 45)
         .padding(.trailing, 20)
+    }
+}
+
+struct ZoomButton: View {
+    @Binding var isZoomEnabled: Bool
+    @EnvironmentObject var zoomView: ZoomView
+    @EnvironmentObject var sceneManager: SceneManager
+    var arView = ARViewContainer()
+    
+    var body: some View {
+        HStack {
+            ZStack {
+                Color.black.opacity(0.25)
+                
+                Button(action: {
+                    print("Zoom Button Pressed.")
+                
+                    self.isZoomEnabled.toggle()
+                    self.zoomView.ZoomEnabled = self.isZoomEnabled
+                    self.arView.moveAll(check: &self.isZoomEnabled, modelEntities: self.sceneManager.modelEntities)
+                    
+                }) {
+                    Image(systemName: self.isZoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
+                        .font(.system(size: 25))
+                        .foregroundColor(.white)
+                        .buttonStyle(PlainButtonStyle())
+                }
+            }
+            .frame(width: 50, height: 50)
+            .cornerRadius(8.0)
+        }
+        .padding(.leading, 20)
+        
     }
 }
 

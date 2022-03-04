@@ -10,7 +10,6 @@
 		C5037D0527C599A700EE9549 /* Black Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0327C599A700EE9549 /* Black Piece.usdz */; };
 		C5037D0627C599A700EE9549 /* Red Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0427C599A700EE9549 /* Red Piece.usdz */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
-		C5037D0B27C5A41A00EE9549 /* Checkers Test2.reality in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0A27C5A41A00EE9549 /* Checkers Test2.reality */; };
 		C5037D4F27C7024D00EE9549 /* check.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* check.usdz */; };
 		C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */; };
 		C5037D5827C70A3C00EE9549 /* Black_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5127C70A3B00EE9549 /* Black_2.usdz */; };
@@ -37,6 +36,7 @@
 		C5461C5227C973A0000197B0 /* Red_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4627C973A0000197B0 /* Red_2.usdz */; };
 		C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4727C973A0000197B0 /* Red_5.usdz */; };
 		C5461C5427C973A0000197B0 /* Red_10.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4827C973A0000197B0 /* Red_10.usdz */; };
+		C5AB175C27CE362400C85228 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AB175B27CE362400C85228 /* ZoomView.swift */; };
 		C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798727A95AA700E24F1D /* BrowseView.swift */; };
 		C5E6798A27A95CC100E24F1D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798927A95CC100E24F1D /* Model.swift */; };
 		C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Checkers.usdz */; };
@@ -81,7 +81,6 @@
 		C5037D0327C599A700EE9549 /* Black Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Black Piece.usdz"; sourceTree = "<group>"; };
 		C5037D0427C599A700EE9549 /* Red Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Red Piece.usdz"; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
-		C5037D0A27C5A41A00EE9549 /* Checkers Test2.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Checkers Test2.reality"; sourceTree = "<group>"; };
 		C5037D4E27C7024D00EE9549 /* check.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = check.usdz; sourceTree = "<group>"; };
 		C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Board.usdz"; sourceTree = "<group>"; };
 		C5037D5127C70A3B00EE9549 /* Black_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_2.usdz; sourceTree = "<group>"; };
@@ -108,6 +107,7 @@
 		C5461C4627C973A0000197B0 /* Red_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_2.usdz; sourceTree = "<group>"; };
 		C5461C4727C973A0000197B0 /* Red_5.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_5.usdz; sourceTree = "<group>"; };
 		C5461C4827C973A0000197B0 /* Red_10.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_10.usdz; sourceTree = "<group>"; };
+		C5AB175B27CE362400C85228 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
 		C5E6798727A95AA700E24F1D /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		C5E6798927A95CC100E24F1D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C5E6798B27A9611B00E24F1D /* Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Checkers.usdz; sourceTree = "<group>"; };
@@ -162,7 +162,6 @@
 		C5037D0727C5A27900EE9549 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C5037D0A27C5A41A00EE9549 /* Checkers Test2.reality */,
 				C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */,
 			);
 			path = Models;
@@ -198,10 +197,11 @@
 				C5E6798727A95AA700E24F1D /* BrowseView.swift */,
 				C5F7D38827AB4A7C0052FA59 /* PlacementView.swift */,
 				C5F7D39627AE41D60052FA59 /* SettingsView.swift */,
-				C5F7D38627AB48F90052FA59 /* PlacementSettings.swift */,
 				C5F7D39427AE40890052FA59 /* SessionSettings.swift */,
 				C5E6798927A95CC100E24F1D /* Model.swift */,
 				C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */,
+				C5F7D38627AB48F90052FA59 /* PlacementSettings.swift */,
+				C5AB175B27CE362400C85228 /* ZoomView.swift */,
 				C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */,
 				C5037D0727C5A27900EE9549 /* Models */,
 				C5EE087327A94FC700C3D9F6 /* 3D Assets */,
@@ -421,7 +421,6 @@
 				C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */,
 				C5037D4F27C7024D00EE9549 /* check.usdz in Resources */,
 				C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */,
-				C5037D0B27C5A41A00EE9549 /* Checkers Test2.reality in Resources */,
 				C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */,
 				C5461C4927C973A0000197B0 /* Red_6.usdz in Resources */,
 				C5461C4B27C973A0000197B0 /* Red_7.usdz in Resources */,
@@ -453,6 +452,7 @@
 			files = (
 				C5F7D38727AB48F90052FA59 /* PlacementSettings.swift in Sources */,
 				C5F7D39527AE40890052FA59 /* SessionSettings.swift in Sources */,
+				C5AB175C27CE362400C85228 /* ZoomView.swift in Sources */,
 				C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */,
 				C5E6798A27A95CC100E24F1D /* Model.swift in Sources */,
 				C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */,

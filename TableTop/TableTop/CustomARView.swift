@@ -13,22 +13,29 @@ import Combine
 
 // CustomARView: Implements FocusEntity for object placement, people/object occlusion, lidar visualization, and tap response functionality
 class CustomARView: ARView {
-    
+    var objectMoved: Entity? = nil
+    var zoom: ZoomView
+    var sceneManager: SceneManager
     var focusEntity: FocusEntity?
     var sessionSettings: SessionSettings
+    var anchorMap = [ModelEntity:AnchorEntity]()
     
     private var peopleOcclusionCancellable: AnyCancellable?
     private var objectOcclusionCancellable: AnyCancellable?
     private var lidarDebugCancellable: AnyCancellable?
     private var multiuserCancellable: AnyCancellable?
     
-    required init(frame frameRect: CGRect, sessionSettings: SessionSettings) {
+    required init(frame frameRect: CGRect, sessionSettings: SessionSettings, zoom: ZoomView, sceneManager: SceneManager) {
         self.sessionSettings = sessionSettings
         
+        self.zoom = zoom
+        
+        self.sceneManager = sceneManager
+
         super.init(frame: frameRect)
         
         focusEntity = FocusEntity(on: self, focus: .classic)
-        
+                
         configure()
         
         self.initializeSettings()
@@ -36,6 +43,8 @@ class CustomARView: ARView {
         self.setupSubscribers()
         
         self.moveObject()
+        
+        
     }
     
     required init(frame frameRect: CGRect) {
@@ -128,18 +137,71 @@ class CustomARView: ARView {
     private func updateMultiuser(isEnabled: Bool) {
         print("\(#file): isMultiuserEnabled is now \(isEnabled)")
     }
+    
+    
 }
 
 // Add functionality to switch object physics body in order to move objects
 extension CustomARView {
+    
+    func testing() {
+        if self.zoom.ZoomEnabled {
+            print("nice")
+        } else {
+            print("cool")
+        }
+    }
+    
     func moveObject() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         self.addGestureRecognizer(tapGesture)
-        
     }
     
+    @objc func transformObject(_ sender: UIGestureRecognizer) {
+        
+        if self.zoom.ZoomEnabled {
+            if let transformGesture = sender as? EntityTranslationGestureRecognizer {
+                if self.objectMoved == nil {
+                    self.objectMoved = transformGesture.entity!
+                } else if (transformGesture.entity! != self.objectMoved) {
+                    return
+                }
+                switch transformGesture.state {
+                case .began:
+                    print("Started Moving")
+                    for ent in self.sceneManager.modelEntities {
+                        if (ent != transformGesture.entity!) {
+                            self.anchorMap[ent] = ent.parent as? AnchorEntity
+                            
+                            ent.setParent(transformGesture.entity, preservingWorldTransform: true)
+                        }
+                    }
+                case .ended:
+                    print(self.anchorMap.count)
+                    
+                    
+                    for ent in self.sceneManager.modelEntities {
+                        if (ent != transformGesture.entity!) {
+                            ent.setParent(self.anchorMap[ent], preservingWorldTransform: true)
+                        }
+                    }
+                    self.anchorMap.removeAll()
+                    print("Stopped Moving")
+                    self.objectMoved = nil
+                default:
+                    return
+                }
+            }
+        }
+        
+        
+        
+    }
     // Tap object to switch physics body mode
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        print("ZoomView.ZoomEnabled = \(String(describing: self.zoom.ZoomEnabled.description))")
+        
+        
         let location = recognizer.location(in: self)
         
         if let entity = self.entity(at: location) as? ModelEntity {
@@ -147,12 +209,15 @@ extension CustomARView {
             if entity.physicsBody.self?.mode == .dynamic {
                 // Start moving
                 entity.physicsBody.self?.mode = .kinematic
+                entity.transform.translation.y += 0.01
             } else {
                 // Finished moving
                 entity.physicsBody.self?.mode = .dynamic
             }
         }
         
+        
     }
+    
     
 }
