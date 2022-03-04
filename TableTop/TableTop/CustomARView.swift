@@ -13,7 +13,12 @@ import Combine
 
 // CustomARView: Implements FocusEntity for object placement, people/object occlusion, lidar visualization, and tap response functionality
 class CustomARView: ARView {
+    //@EnvironmentObject var zoom: ZoomView
     
+    
+    
+    var zoom: ZoomView
+    var sceneManager: SceneManager
     var focusEntity: FocusEntity?
     var sessionSettings: SessionSettings
     
@@ -22,13 +27,17 @@ class CustomARView: ARView {
     private var lidarDebugCancellable: AnyCancellable?
     private var multiuserCancellable: AnyCancellable?
     
-    required init(frame frameRect: CGRect, sessionSettings: SessionSettings) {
+    required init(frame frameRect: CGRect, sessionSettings: SessionSettings, zoom: ZoomView, sceneManager: SceneManager) {
         self.sessionSettings = sessionSettings
         
+        self.zoom = zoom
+        
+        self.sceneManager = sceneManager
+
         super.init(frame: frameRect)
         
         focusEntity = FocusEntity(on: self, focus: .classic)
-        
+                
         configure()
         
         self.initializeSettings()
@@ -36,6 +45,8 @@ class CustomARView: ARView {
         self.setupSubscribers()
         
         self.moveObject()
+        
+        
     }
     
     required init(frame frameRect: CGRect) {
@@ -128,18 +139,65 @@ class CustomARView: ARView {
     private func updateMultiuser(isEnabled: Bool) {
         print("\(#file): isMultiuserEnabled is now \(isEnabled)")
     }
+    
+    
 }
 
 // Add functionality to switch object physics body in order to move objects
 extension CustomARView {
+    
+    func testing() {
+        if self.zoom.ZoomEnabled {
+            print("nice")
+        } else {
+            print("cool")
+        }
+    }
+    
     func moveObject() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         self.addGestureRecognizer(tapGesture)
-        
     }
     
+    @objc func transformObject(_ sender: UIGestureRecognizer) {
+        /*if self.zoom.ZoomEnabled {
+            if let transformGesture = sender as? EntityTranslationGestureRecognizer {
+                print(self.sceneManager.modelEntities.count)
+                for ent in self.sceneManager.modelEntities {
+                    if (ent != transformGesture.entity!) {
+                        ent.setParent(transformGesture.entity, preservingWorldTransform: true)
+                    }
+                }
+                switch transformGesture.state {
+                case .began:
+                    print("Started Moving")
+                case .changed:
+
+                    print("everything move")
+                case .ended:
+                    // child models end up disappearing
+                    /*for ent in self.sceneManager.modelEntities {
+                        //transformGesture.entity?.removeChild(ent)
+                        if (ent != transformGesture.entity!) {
+                            ent.transform.translation.y += 0.01
+                            transformGesture.entity?.removeChild(ent, preservingWorldTransform: true)
+                        }
+                    }*/
+                    print("Stopped Moving")
+                default:
+                    return
+                }
+            }
+        }*/
+        
+        
+        
+    }
     // Tap object to switch physics body mode
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        print("ZoomView.ZoomEnabled = \(String(describing: self.zoom.ZoomEnabled.description))")
+        
+        
         let location = recognizer.location(in: self)
         
         if let entity = self.entity(at: location) as? ModelEntity {
@@ -147,12 +205,15 @@ extension CustomARView {
             if entity.physicsBody.self?.mode == .dynamic {
                 // Start moving
                 entity.physicsBody.self?.mode = .kinematic
+                entity.transform.translation.y += 0.01
             } else {
                 // Finished moving
                 entity.physicsBody.self?.mode = .dynamic
             }
         }
         
+        
     }
+    
     
 }

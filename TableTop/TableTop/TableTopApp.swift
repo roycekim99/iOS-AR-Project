@@ -11,12 +11,16 @@ import SwiftUI
 struct TableTopApp: App {
     @StateObject var placementSettings = PlacementSettings()
     @StateObject var sessionSettings = SessionSettings()
+    @StateObject var zoomView = ZoomView()
+    @StateObject var sceneManager = SceneManager()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(placementSettings)
                 .environmentObject(sessionSettings)
+                .environmentObject(zoomView)
+                .environmentObject(sceneManager)
         }
     }
 }
