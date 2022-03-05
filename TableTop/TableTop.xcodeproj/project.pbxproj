@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F2A677B27D411B800F292FD /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A677A27D411B800F292FD /* MultipeerSession.swift */; };
+		6F2A677D27D411D800F292FD /* MessageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A677C27D411D800F292FD /* MessageLabel.swift */; };
+		6F2A677F27D411F500F292FD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A677E27D411F500F292FD /* Utilities.swift */; };
+		6F2A678127D4121300F292FD /* CustomARView+CoachingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A678027D4121300F292FD /* CustomARView+CoachingOverlay.swift */; };
 		C5037D0527C599A700EE9549 /* Black Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0327C599A700EE9549 /* Black Piece.usdz */; };
 		C5037D0627C599A700EE9549 /* Red Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0427C599A700EE9549 /* Red Piece.usdz */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
@@ -78,6 +82,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F2A677A27D411B800F292FD /* MultipeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
+		6F2A677C27D411D800F292FD /* MessageLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLabel.swift; sourceTree = "<group>"; };
+		6F2A677E27D411F500F292FD /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		6F2A678027D4121300F292FD /* CustomARView+CoachingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomARView+CoachingOverlay.swift"; sourceTree = "<group>"; };
 		C5037D0327C599A700EE9549 /* Black Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Black Piece.usdz"; sourceTree = "<group>"; };
 		C5037D0427C599A700EE9549 /* Red Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Red Piece.usdz"; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
@@ -206,6 +214,10 @@
 				C5037D0727C5A27900EE9549 /* Models */,
 				C5EE087327A94FC700C3D9F6 /* 3D Assets */,
 				C5EE084F27A24DA300C3D9F6 /* Preview Content */,
+				6F2A677A27D411B800F292FD /* MultipeerSession.swift */,
+				6F2A677C27D411D800F292FD /* MessageLabel.swift */,
+				6F2A677E27D411F500F292FD /* Utilities.swift */,
+				6F2A678027D4121300F292FD /* CustomARView+CoachingOverlay.swift */,
 			);
 			path = TableTop;
 			sourceTree = "<group>";
@@ -456,6 +468,10 @@
 				C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */,
 				C5E6798A27A95CC100E24F1D /* Model.swift in Sources */,
 				C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */,
+				6F2A677F27D411F500F292FD /* Utilities.swift in Sources */,
+				6F2A677B27D411B800F292FD /* MultipeerSession.swift in Sources */,
+				6F2A678127D4121300F292FD /* CustomARView+CoachingOverlay.swift in Sources */,
+				6F2A677D27D411D800F292FD /* MessageLabel.swift in Sources */,
 				C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */,
 				C5EE084C27A24DA200C3D9F6 /* ContentView.swift in Sources */,
 				C5EE087727A950E000C3D9F6 /* ControlView.swift in Sources */,
@@ -623,7 +639,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = VNG6J3P3MV;
+				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To use Augmented Reality, this app needs access to your camera.";
@@ -638,7 +654,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.ucdavis.cs.ecs193a.w22.TableTop2;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.ucdavis.cs.ecs193a.w22.TableTop2nh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
