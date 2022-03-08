@@ -14,7 +14,9 @@ import MultipeerHelper
 import Combine
 
 // CustomARView: Implements FocusEntity for object placement, people/object occlusion, lidar visualization, and tap response functionality
-class CustomARView: ARView/*, MCSessionDelegate, MCBrowserViewControllerDelegate*/{
+class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserViewControllerDelegate*/{
+    
+    var multipeerHelp: MultipeerHelper!
     
     var objectMoved: Entity? = nil
     var zoom: ZoomView
@@ -68,6 +70,7 @@ class CustomARView: ARView/*, MCSessionDelegate, MCBrowserViewControllerDelegate
     
     
     private func configure() {
+        self.session.delegate = self
         let config = ARWorldTrackingConfiguration()
         config.isCollaborationEnabled = true
         config.planeDetection = [.horizontal, .vertical]
@@ -281,4 +284,38 @@ extension CustomARView {
         <#code#>
     }
      */
+}
+
+extension CustomARView: MultipeerHelperDelegate {
+    
+    func shouldSendJoinRequest(_ peer: MCPeerID, with discoveryInfo: [String : String]?) -> Bool {
+        if CustomARView.checkPeerToken(with: discoveryInfo) {
+            return true
+        }
+        print("incompatible peer!")
+        return false
+    }
+    
+    func setupMultipeer() {
+        multipeerHelp = MultipeerHelper(
+            serviceName: "helper-test",
+            sessionType: .both,
+            delegate: self
+        )
+        
+        // MARK: - Setting RealityKit Synchronization
+        
+        guard let syncService = multipeerHelp.syncService else {
+            fatalError("could not create multipeerHelp.syncService")
+        }
+        self.scene.synchronizationService = syncService
+    }
+    
+    func receivedData(_ data: Data, _ peer: MCPeerID) {
+        print(String(data: data, encoding: .unicode) ?? "Data is not a unicode string")
+    }
+    
+    func peerJoined(_ peer: MCPeerID) {
+        print("new peer has joined:")
+    }
 }
