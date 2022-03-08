@@ -9,11 +9,11 @@ import RealityKit
 import ARKit
 import FocusEntity
 import SwiftUI
-import MultipeerConnectivity
+//import MultipeerConnectivity
 import Combine
 
 // CustomARView: Implements FocusEntity for object placement, people/object occlusion, lidar visualization, and tap response functionality
-class CustomARView: ARView, MCSessionDelegate, MCBrowserViewControllerDelegate{
+class CustomARView: ARView/*, MCSessionDelegate, MCBrowserViewControllerDelegate*/{
     
     var objectMoved: Entity? = nil
     var zoom: ZoomView
@@ -23,10 +23,11 @@ class CustomARView: ARView, MCSessionDelegate, MCBrowserViewControllerDelegate{
     var anchorMap = [ModelEntity:AnchorEntity]()
     var startPos: SIMD3<Float>
     
+    /*
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiser: MCAdvertiserAssistant!
-    
+    */
     private var peopleOcclusionCancellable: AnyCancellable?
     private var objectOcclusionCancellable: AnyCancellable?
     private var lidarDebugCancellable: AnyCancellable?
@@ -250,6 +251,7 @@ extension CustomARView {
     }
     
     // MARK: MULTIPEER
+    /*
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         <#code#>
     }
@@ -277,4 +279,5 @@ extension CustomARView {
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         <#code#>
     }
+     */
 }
