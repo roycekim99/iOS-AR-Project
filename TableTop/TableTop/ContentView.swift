@@ -51,10 +51,13 @@ struct ARViewContainer: UIViewRepresentable {
             floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 0, material: nil, mode: .static)
             floor.components[ModelComponent.self] = nil // make the floor invisible
         }
+        
         let anchorEntity = AnchorEntity(plane: .any)
         anchorEntity.addChild(floor)
         arView.scene.addAnchor(anchorEntity)
         print("added floor")
+        
+        sceneManager.floor = anchorEntity
         
         // Subscribe to SceneEvents.Update
         // Check every frame for updates from the scene if object is placed, deleted, moved, etc.
@@ -106,7 +109,9 @@ struct ARViewContainer: UIViewRepresentable {
         
         // 4. Add the achorEntity to the arView.scene
         arView.scene.addAnchor(anchorEntity)
-    
+        sceneManager.floor.addChild(anchorEntity, preservingWorldTransform: true)
+        
+        print(anchorEntity.position)
         
         print("Added modelEntity to scene.")
     }
@@ -128,6 +133,8 @@ struct ARViewContainer: UIViewRepresentable {
 
 class SceneManager: ObservableObject {
     @Published var modelEntities: [ModelEntity] = []
+    @Published var floor = AnchorEntity()
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
