@@ -110,6 +110,7 @@
 		C5461C4627C973A0000197B0 /* Red_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_2.usdz; sourceTree = "<group>"; };
 		C5461C4727C973A0000197B0 /* Red_5.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_5.usdz; sourceTree = "<group>"; };
 		C5461C4827C973A0000197B0 /* Red_10.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_10.usdz; sourceTree = "<group>"; };
+		C55E64B627D79E5600EC5DE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C5AB175B27CE362400C85228 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
 		C5E6798727A95AA700E24F1D /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		C5E6798927A95CC100E24F1D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -194,6 +195,7 @@
 		C5EE084827A24DA200C3D9F6 /* TableTop */ = {
 			isa = PBXGroup;
 			children = (
+				C55E64B627D79E5600EC5DE7 /* Info.plist */,
 				C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */,
 				C5EE084B27A24DA200C3D9F6 /* ContentView.swift */,
 				C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */,
@@ -634,6 +636,7 @@
 				DEVELOPMENT_TEAM = VNG6J3P3MV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TableTop/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To use Augmented Reality, this app needs access to your camera.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This application synchronises with other iOS devices on the same network.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -666,6 +669,7 @@
 				DEVELOPMENT_TEAM = VNG6J3P3MV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TableTop/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To use Augmented Reality, this app needs access to your camera.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This application synchronises with other iOS devices on the same network.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

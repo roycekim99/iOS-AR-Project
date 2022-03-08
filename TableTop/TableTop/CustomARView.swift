@@ -51,6 +51,7 @@ class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserVie
                 
         configure()
         
+        setupMultipeer()
         
         self.initializeSettings()
         

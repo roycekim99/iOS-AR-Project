@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealityKit
+import ARKit
 
 struct ContentView: View {
     @EnvironmentObject var placementSettings: PlacementSettings
@@ -90,6 +91,12 @@ struct ARViewContainer: UIViewRepresentable {
     }
     
     private func place(_ modelEntity: ModelEntity, in arView: CustomARView) {
+        
+        let displayName = arView.multipeerHelp.myPeerID.displayName
+        if let myData = "hello! from \(displayName)".data(using: .unicode) {
+            arView.multipeerHelp.sendToAllPeers(myData, reliably: true)
+        }
+        
         // 1. Clone modelEntity. This creates an identical copy of modelEntty and references the same model. This also allows us to have multple models of the same asset in our scene.
         let clonedEntity = modelEntity.clone(recursive: true)
         
@@ -108,15 +115,17 @@ struct ARViewContainer: UIViewRepresentable {
         
         // 4. Add the achorEntity to the arView.scene
         arView.scene.addAnchor(anchorEntity)
+        
+        //let arAnchor = ARAnchor(transform: pos)
         sceneManager.floor.addChild(anchorEntity, preservingWorldTransform: true)
         
         //print(anchorEntity.position)
-        print(arView.focusEntity?.position ?? SIMD3<Float>(0,0,0))
+        //print(arView.focusEntity?.position ?? SIMD3<Float>(0,0,0))
         let focus = arView.focusEntity?.transform.translation
         let test = SIMD4<Float>(focus!.x, focus!.y, focus!.z, 1)
         
         let blah = simd_float4x4.init(diagonal: test)
-        print(blah)
+        //print(blah)
         
         
         
