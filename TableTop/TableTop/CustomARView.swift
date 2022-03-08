@@ -67,6 +67,7 @@ class CustomARView: ARView, MCSessionDelegate, MCBrowserViewControllerDelegate{
     
     private func configure() {
         let config = ARWorldTrackingConfiguration()
+        config.isCollaborationEnabled = true
         config.planeDetection = [.horizontal, .vertical]
         
         if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
