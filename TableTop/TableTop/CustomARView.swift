@@ -254,6 +254,7 @@ extension CustomARView {
                 }*/
                 if lockedEntities.contains(entity) {
                     entity.physicsBody?.mode = .dynamic
+                    entity.transform.translation.y += 0.01
                     for i in lockedEntities.indices {
                         if lockedEntities[i] == entity {
                             lockedEntities.remove(at: i)
