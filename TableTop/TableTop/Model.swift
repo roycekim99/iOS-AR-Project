@@ -124,8 +124,8 @@ struct Models {
         self.all += [chessSet, checkers]
         
         // Pieces
-        let blackCheckersPiece = Model(name: "Black Piece", category: .pieces, scaleCompensation: 10/100, childs: [])
-        let redCheckersPiece = Model(name: "Red Piece", category: .pieces, scaleCompensation: 10/100, childs: [])
+        let blackCheckersPiece = Model(name: "Black_Piece", category: .pieces, scaleCompensation: 1/1, childs: [])
+        let redCheckersPiece = Model(name: "Red_Piece", category: .pieces, scaleCompensation: 1/1, childs: [])
         
         self.all += [blackCheckersPiece, redCheckersPiece]
         // Figures

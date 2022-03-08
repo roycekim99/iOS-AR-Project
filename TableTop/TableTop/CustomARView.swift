@@ -25,6 +25,7 @@ class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserVie
     var sessionSettings: SessionSettings
     var anchorMap = [ModelEntity:AnchorEntity]()
     var startPos: SIMD3<Float>
+    var placementSettings: PlacementSettings
     
     /*
     var peerID: MCPeerID!
@@ -36,7 +37,7 @@ class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserVie
     private var lidarDebugCancellable: AnyCancellable?
     private var multiuserCancellable: AnyCancellable?
     
-    required init(frame frameRect: CGRect, sessionSettings: SessionSettings, zoom: ZoomView, sceneManager: SceneManager) {
+    required init(frame frameRect: CGRect, sessionSettings: SessionSettings, zoom: ZoomView, sceneManager: SceneManager, placementSettings: PlacementSettings) {
         self.sessionSettings = sessionSettings
         
         self.zoom = zoom
@@ -44,6 +45,8 @@ class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserVie
         self.sceneManager = sceneManager
         
         self.startPos = SIMD3<Float>(0,0,0)
+        
+        self.placementSettings = placementSettings
 
         super.init(frame: frameRect)
         
@@ -242,9 +245,78 @@ extension CustomARView {
         
         let location = recognizer.location(in: self)
         //print(focusEntity?.position)
-        
-        if let entity = self.entity(at: location) as? ModelEntity {
+        /*
+        let frameSize: CGPoint = CGPoint(x: UIScreen.main.bounds.size.width*0.5, y: UIScreen.main.bounds.size.height*0.5)
+        print(frameSize)
+         */
+        if self.placementSettings.selectedModel != nil {
+            let modelEntity = self.placementSettings.selectedModel?.modelEntity
+            if let result = self.raycast(from: location, allowing: .existingPlaneGeometry, alignment: .horizontal).first {
+                let arAnchor = ARAnchor(transform: result.worldTransform)
+            let clonedEntity = modelEntity?.clone(recursive: true)
+            clonedEntity?.generateCollisionShapes(recursive: true)
+            if let collisionComponent = clonedEntity?.components[CollisionComponent.self] as? CollisionComponent {
+                clonedEntity?.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil , mode: .dynamic)
+            }
+            self.installGestures(for: clonedEntity!).forEach { entityGesture in
+                entityGesture.addTarget(self, action: #selector(self.transformObject(_:)))
+            }
+            self.sceneManager.modelEntities.append(clonedEntity!)
+            let anchorEntity = AnchorEntity(plane: .any)
+            anchorEntity.addChild(clonedEntity!)
+            clonedEntity?.transform.translation.y += 0.03
+            anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
+            anchorEntity.anchoring = AnchoringComponent(arAnchor)
+            if let entity = self.entity(at: location) as? ModelEntity {
+                clonedEntity?.transform.translation.y += entity.transform.translation.y
+            }
+            self.scene.addAnchor(anchorEntity)
+            self.session.add(anchor: arAnchor)
+            }
+            /*
+            let children = self.placementSettings.selectedModel?.childs
+            for chd in children ?? [] {
+                let result = self.raycast(from: location, allowing: .existingPlaneGeometry, alignment: .horizontal).first
+                let arAnchor = ARAnchor(transform: result!.worldTransform)
+                let chdClone = chd.modelEntity?.clone(recursive: true)
+                chdClone?.generateCollisionShapes(recursive: true)
+                if let collisionComponent = chdClone?.components[CollisionComponent.self] as? CollisionComponent {
+                    chdClone?.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil , mode: .dynamic)
+                }
+                self.installGestures(for: chdClone!).forEach { entityGesture in
+                    entityGesture.addTarget(self, action: #selector(self.transformObject(_:)))
+                }
+                
+                let chdAnchorEntity = AnchorEntity(plane: .any)
+                chdAnchorEntity.synchronization?.ownershipTransferMode = .autoAccept
+                chdAnchorEntity.anchoring = AnchoringComponent(arAnchor)
+                self.scene.addAnchor(chdAnchorEntity)
+                self.session.add(anchor: arAnchor)
+                
+            }*/
             
+            
+            // 3. Create an anchorEntity and add clonedEntity to the anchorEntity
+
+        }
+        
+        else if let entity = self.entity(at: location) as? ModelEntity {
+            if !entity.isOwner {
+                entity.requestOwnership { result in
+                    if result == .granted {
+                        print("entity ownership being transferred")
+                        /*if entity.physicsBody.self?.mode == .dynamic {
+                            // Start moving
+                            entity.physicsBody.self?.mode = .kinematic
+                            entity.transform.translation.y += 0.01
+                        } else {
+                            // Finished moving
+                            entity.physicsBody.self?.mode = .dynamic
+                        }*/
+                    }
+                    
+                }
+            }
             if entity.physicsBody.self?.mode == .dynamic {
                 // Start moving
                 entity.physicsBody.self?.mode = .kinematic

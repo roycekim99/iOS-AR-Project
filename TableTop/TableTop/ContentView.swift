@@ -41,18 +41,19 @@ struct ARViewContainer: UIViewRepresentable {
     
     func makeUIView(context: Context) -> CustomARView {
         
-        let arView = CustomARView(frame: .zero, sessionSettings: sessionSettings, zoom: zoom, sceneManager: sceneManager)
+        let arView = CustomARView(frame: .zero, sessionSettings: sessionSettings, zoom: zoom, sceneManager: sceneManager, placementSettings: placementSettings)
         
         // Add floor so that models do not fall infinitely on the floor
         // Change so that there is a floor every entity
         // Or change so that you scan an area before playing to determine where floor is
-        let floor = ModelEntity(mesh: .generateBox(size: [1000, 0, 1000]), materials: [SimpleMaterial()])
+        let floor = ModelEntity(mesh: .generateBox(size: [1000, 1, 1000]), materials: [SimpleMaterial()])
         floor.generateCollisionShapes(recursive: true)
         if let collisionComponent = floor.components[CollisionComponent.self] as? CollisionComponent {
             floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 0, material: nil, mode: .static)
             floor.components[ModelComponent.self] = nil // make the floor invisible
         }
         
+        floor.transform.translation.y += -0.5
         let anchorEntity = AnchorEntity(plane: .any)
         anchorEntity.addChild(floor)
         arView.scene.addAnchor(anchorEntity)
@@ -113,6 +114,7 @@ struct ARViewContainer: UIViewRepresentable {
         let anchorEntity = AnchorEntity(plane: .any)
         anchorEntity.addChild(clonedEntity)
         
+        anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
         // 4. Add the achorEntity to the arView.scene
         arView.scene.addAnchor(anchorEntity)
         
