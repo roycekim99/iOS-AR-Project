@@ -46,20 +46,27 @@ struct ARViewContainer: UIViewRepresentable {
         // Add floor so that models do not fall infinitely on the floor
         // Change so that there is a floor every entity
         // Or change so that you scan an area before playing to determine where floor is
-        let floor = ModelEntity(mesh: .generateBox(size: [1000, 1, 1000]), materials: [SimpleMaterial()])
-        floor.generateCollisionShapes(recursive: true)
-        if let collisionComponent = floor.components[CollisionComponent.self] as? CollisionComponent {
-            floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 0, material: nil, mode: .static)
-            floor.components[ModelComponent.self] = nil // make the floor invisible
-        }
+        /*
+        print(arView.scene.anchors.count)
+        if arView.scene.anchors.count < 3 {
+            let floor = ModelEntity(mesh: .generateBox(size: [1000, 100, 1000]), materials: [SimpleMaterial()])
+            floor.generateCollisionShapes(recursive: true)
+            if let collisionComponent = floor.components[CollisionComponent.self] as? CollisionComponent {
+                floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 0, material: nil, mode: .static)
+                floor.components[ModelComponent.self] = nil // make the floor invisible
+            }
+            
+            floor.transform.translation.y += -50
+            let anchorEntity = AnchorEntity(plane: .any)
+            anchorEntity.addChild(floor)
+            anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
+            arView.scene.addAnchor(anchorEntity)
+            //arView.session.add(anchor: anchorEntity)
+            print("added floor")
+            
+            sceneManager.floor = anchorEntity
+        }*/
         
-        floor.transform.translation.y += -0.5
-        let anchorEntity = AnchorEntity(plane: .any)
-        anchorEntity.addChild(floor)
-        arView.scene.addAnchor(anchorEntity)
-        print("added floor")
-        
-        sceneManager.floor = anchorEntity
         
         // Subscribe to SceneEvents.Update
         // Check every frame for updates from the scene if object is placed, deleted, moved, etc.
@@ -80,15 +87,39 @@ struct ARViewContainer: UIViewRepresentable {
         // Add model to scene if confirmed for placement
         if let confirmedModel = self.placementSettings.confirmedModel, let modelEntity = confirmedModel.modelEntity {
             
-            self.place(modelEntity, in: arView)
-            // After creating children variable to Model
-            for chd in confirmedModel.childs {
-                //chd.asyncLoadModelEntity()
-                print(chd.name)
-                self.place(chd.modelEntity!, in: arView)
+            if confirmedModel.name != "floor" {
+                self.place(modelEntity, in: arView)
+                // After creating children variable to Model
+                for chd in confirmedModel.childs {
+                    //chd.asyncLoadModelEntity()
+                    print(chd.name)
+                    self.place(chd.modelEntity!, in: arView)
+                }
+                self.placementSettings.confirmedModel = nil
+            } else {
+                self.placeFloor(modelEntity, in: arView)
+                self.placementSettings.confirmedModel = nil
             }
-            self.placementSettings.confirmedModel = nil
         }
+    }
+    
+    private func placeFloor(_ modelEntity: ModelEntity, in arView: CustomARView) {
+        let floor = modelEntity.clone(recursive: true)
+        floor.generateCollisionShapes(recursive: true)
+        if let collisionComponent = floor.components[CollisionComponent.self] as? CollisionComponent {
+            floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 0, material: nil, mode: .static)
+            floor.components[ModelComponent.self] = nil // make the floor invisible
+        }
+        
+        floor.transform.translation.y += -50
+        let anchorEntity = AnchorEntity(plane: .any)
+        anchorEntity.addChild(floor)
+        anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
+        arView.scene.addAnchor(anchorEntity)
+        //arView.session.add(anchor: anchorEntity)
+        print("added floor")
+        
+        sceneManager.floor = anchorEntity
     }
     
     private func place(_ modelEntity: ModelEntity, in arView: CustomARView) {
@@ -119,7 +150,7 @@ struct ARViewContainer: UIViewRepresentable {
         arView.scene.addAnchor(anchorEntity)
         
         //let arAnchor = ARAnchor(transform: pos)
-        sceneManager.floor.addChild(anchorEntity, preservingWorldTransform: true)
+        //sceneManager.floor.addChild(anchorEntity, preservingWorldTransform: true)
         
         //print(anchorEntity.position)
         //print(arView.focusEntity?.position ?? SIMD3<Float>(0,0,0))

@@ -58,26 +58,31 @@ class Model {
     
     // Load models asynchronously for seamless gameplay
     func asyncLoadModelEntity() {
-        let filename = self.name + ".usdz"
-        
-        self.cancellable = ModelEntity.loadModelAsync(named: filename)
-            .sink(receiveCompletion: { loadCompletion in
-                
-                switch loadCompletion {
-                case .failure(let error): print("Unable to load modelEntity for \(filename). Error \(error.localizedDescription)")
-                case .finished:
-                    break
-                }
-                
-            }, receiveValue: { modelEntity in
-                
-                self.modelEntity = modelEntity
-                self.modelEntity?.scale *= self.scaleCompensation
-                
-                print("modelEntity for \(self.name) has been loaded.")
-                
-            })
-        
+        if self.name != "floor" {
+            let filename = self.name + ".usdz"
+            
+            self.cancellable = ModelEntity.loadModelAsync(named: filename)
+                .sink(receiveCompletion: { loadCompletion in
+                    
+                    switch loadCompletion {
+                    case .failure(let error): print("Unable to load modelEntity for \(filename). Error \(error.localizedDescription)")
+                    case .finished:
+                        break
+                    }
+                    
+                }, receiveValue: { modelEntity in
+                    
+                    self.modelEntity = modelEntity
+                    self.modelEntity?.scale *= self.scaleCompensation
+                    
+                    print("modelEntity for \(self.name) has been loaded.")
+                    
+                })
+            
+        } else {
+            self.modelEntity = ModelEntity(mesh: .generateBox(size: [1000, 100, 1000]), materials: [SimpleMaterial()])
+            //self.modelEntity?.transform.translation.y += -50
+        }
     }
 }
 
@@ -113,6 +118,8 @@ struct Models {
         let red10 = Model(name: "Red_10", category: .test, scaleCompensation: 1/1, childs: [])
         let red11 = Model(name: "Red_11", category: .test, scaleCompensation: 1/1, childs: [])
         let red12 = Model(name: "Red_12", category: .test, scaleCompensation: 1/1, childs: [])
+        
+        let floor = Model(name: "floor", category: .test, scaleCompensation: 1/1, childs: [])
 
         let checkersBoard = Model(name: "Checkers Board", category: .test, scaleCompensation: 1/1, childs: [black1, black2, black3, black4, black5, black6, black7, black8, black9, black10, black11, black12, red1, red2, red3, red4, red5, red6, red7, red8, red9, red10, red11, red12])
         self.all += [checkersBoard]
@@ -121,7 +128,7 @@ struct Models {
         let chessSet = Model(name: "Chess Set", category: .board, scaleCompensation: 5/100, childs: [])
         let checkers = Model(name: "Checkers", category: .board, scaleCompensation: 1/100, childs: [])
         
-        self.all += [chessSet, checkers]
+        self.all += [chessSet, checkers, floor]
         
         // Pieces
         let blackCheckersPiece = Model(name: "Black_Piece", category: .pieces, scaleCompensation: 1/1, childs: [])
