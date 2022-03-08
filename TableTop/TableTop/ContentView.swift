@@ -113,6 +113,12 @@ struct ARViewContainer: UIViewRepresentable {
         
         //print(anchorEntity.position)
         print(arView.focusEntity?.position ?? SIMD3<Float>(0,0,0))
+        let focus = arView.focusEntity?.transform.translation
+        let test = SIMD4<Float>(focus!.x, focus!.y, focus!.z, 1)
+        
+        let blah = simd_float4x4.init(diagonal: test)
+        print(blah)
+        
         
         print("Added modelEntity to scene.")
     }

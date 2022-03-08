@@ -19,6 +19,7 @@ class CustomARView: ARView {
     var focusEntity: FocusEntity?
     var sessionSettings: SessionSettings
     var anchorMap = [ModelEntity:AnchorEntity]()
+    var startPos: SIMD3<Float>
     
     private var peopleOcclusionCancellable: AnyCancellable?
     private var objectOcclusionCancellable: AnyCancellable?
@@ -31,6 +32,8 @@ class CustomARView: ARView {
         self.zoom = zoom
         
         self.sceneManager = sceneManager
+        
+        self.startPos = SIMD3<Float>(0,0,0)
 
         super.init(frame: frameRect)
         
@@ -159,30 +162,53 @@ extension CustomARView {
     
     @objc func transformObject(_ sender: UIGestureRecognizer) {
         
-        if self.zoom.ZoomEnabled {
+        //if self.zoom.ZoomEnabled {
             if let transformGesture = sender as? EntityTranslationGestureRecognizer {
-                if self.objectMoved == nil {
-                    self.objectMoved = transformGesture.entity!
-                } else if (transformGesture.entity! != self.objectMoved) {
-                    return
+                //print(startPos)
+                var endPos: SIMD3<Float>
+                var difference: SIMD3<Float>
+                if self.zoom.ZoomEnabled {
+
+                    if self.objectMoved == nil {
+                        self.objectMoved = transformGesture.entity!
+                    } else if (transformGesture.entity! != self.objectMoved) {
+                        return
+                    }
                 }
                 switch transformGesture.state {
                 case .began:
                     print("Started Moving")
-                    for ent in self.sceneManager.modelEntities {
-                        if (ent != transformGesture.entity!) {
-                            self.anchorMap[ent] = ent.parent as? AnchorEntity
-                            
-                            ent.setParent(transformGesture.entity, preservingWorldTransform: true)
+                    
+                    startPos = transformGesture.entity!.position
+                    
+                    
+                    
+                    ///
+                    if self.zoom.ZoomEnabled {
+
+                        for ent in self.sceneManager.modelEntities {
+                            if (ent != transformGesture.entity!) {
+                                self.anchorMap[ent] = ent.parent as? AnchorEntity
+                                
+                                ent.setParent(transformGesture.entity, preservingWorldTransform: true)
+                            }
                         }
                     }
                 case .ended:
                     print(self.anchorMap.count)
+                    endPos = transformGesture.entity!.position
+                    difference = endPos - startPos
+                    print("Start: \(startPos)")
+                    print("")
+                    print(difference)
                     
                     
-                    for ent in self.sceneManager.modelEntities {
-                        if (ent != transformGesture.entity!) {
-                            ent.setParent(self.anchorMap[ent], preservingWorldTransform: true)
+                    if self.zoom.ZoomEnabled {
+
+                        for ent in self.sceneManager.modelEntities {
+                            if (ent != transformGesture.entity!) {
+                                ent.setParent(self.anchorMap[ent], preservingWorldTransform: true)
+                            }
                         }
                     }
                     self.anchorMap.removeAll()
@@ -192,7 +218,7 @@ extension CustomARView {
                     return
                 }
             }
-        }
+        //}
         
         
         
