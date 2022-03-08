@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		87BFE33627D7335000FC9FD2 /* JSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BFE33527D7335000FC9FD2 /* JSONData.swift */; };
 		C5037D0527C599A700EE9549 /* Black Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0327C599A700EE9549 /* Black Piece.usdz */; };
 		C5037D0627C599A700EE9549 /* Red Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0427C599A700EE9549 /* Red Piece.usdz */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
@@ -78,6 +79,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		87BFE33527D7335000FC9FD2 /* JSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONData.swift; sourceTree = "<group>"; };
 		C5037D0327C599A700EE9549 /* Black Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Black Piece.usdz"; sourceTree = "<group>"; };
 		C5037D0427C599A700EE9549 /* Red Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Red Piece.usdz"; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */,
 				C5EE087627A950E000C3D9F6 /* ControlView.swift */,
 				C5E6798727A95AA700E24F1D /* BrowseView.swift */,
+				87BFE33527D7335000FC9FD2 /* JSONData.swift */,
 				C5F7D38827AB4A7C0052FA59 /* PlacementView.swift */,
 				C5F7D39627AE41D60052FA59 /* SettingsView.swift */,
 				C5F7D39427AE40890052FA59 /* SessionSettings.swift */,
@@ -455,6 +458,7 @@
 				C5AB175C27CE362400C85228 /* ZoomView.swift in Sources */,
 				C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */,
 				C5E6798A27A95CC100E24F1D /* Model.swift in Sources */,
+				87BFE33627D7335000FC9FD2 /* JSONData.swift in Sources */,
 				C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */,
 				C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */,
 				C5EE084C27A24DA200C3D9F6 /* ContentView.swift in Sources */,
@@ -623,7 +627,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = VNG6J3P3MV;
+				DEVELOPMENT_TEAM = 92MSYPJ969;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To use Augmented Reality, this app needs access to your camera.";
@@ -638,7 +642,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.ucdavis.cs.ecs193a.w22.TableTop2;
+				PRODUCT_BUNDLE_IDENTIFIER = JetBranch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -654,7 +658,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = VNG6J3P3MV;
+				DEVELOPMENT_TEAM = 92MSYPJ969;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To use Augmented Reality, this app needs access to your camera.";
@@ -669,7 +673,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.ucdavis.cs.ecs193a.w22.TableTop2;
+				PRODUCT_BUNDLE_IDENTIFIER = JetBranch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
