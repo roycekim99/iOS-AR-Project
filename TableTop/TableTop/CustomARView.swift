@@ -26,6 +26,7 @@ class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserVie
     var anchorMap = [ModelEntity:AnchorEntity]()
     var startPos: SIMD3<Float>
     var placementSettings: PlacementSettings
+    var lockedEntities = [ModelEntity]()
     
     /*
     var peerID: MCPeerID!
@@ -164,17 +165,14 @@ class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserVie
 // Add functionality to switch object physics body in order to move objects
 extension CustomARView {
     
-    func testing() {
-        if self.zoom.ZoomEnabled {
-            print("nice")
-        } else {
-            print("cool")
-        }
-    }
+    
     
     func moveObject() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressGesture.minimumPressDuration = 0.5
         self.addGestureRecognizer(tapGesture)
+        self.addGestureRecognizer(longPressGesture)
     }
     
     @objc func transformObject(_ sender: UIGestureRecognizer) {
@@ -237,9 +235,40 @@ extension CustomARView {
             }
         //}
         
-        
-        
     }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer) {
+        print("LongPressed")
+
+        let location = sender.location(in: self)
+        if let entity = self.entity(at: location) as? ModelEntity {
+            if sender.state == .began {
+                /*
+                if entity.physicsBody?.mode != .static {
+                    entity.physicsBody?.mode = .static
+                    print("Set to static.")
+                    
+                } else {
+                    entity.physicsBody?.mode = .dynamic
+                    print("Set to dynamic")
+                }*/
+                if lockedEntities.contains(entity) {
+                    entity.physicsBody?.mode = .dynamic
+                    for i in lockedEntities.indices {
+                        if lockedEntities[i] == entity {
+                            lockedEntities.remove(at: i)
+                        }
+                    }
+                } else {
+                    entity.physicsBody.self?.mode = .static
+                    entity.transform.translation.y += -0.01
+                    print("locking entity")
+                    lockedEntities.append(entity)
+                }
+            }
+        }
+    }
+    
     // Tap object to switch physics body mode
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         var isStacked: Bool = false
@@ -348,47 +377,22 @@ extension CustomARView {
                     
                 }
             }
-            if entity.physicsBody.self?.mode == .dynamic {
-                // Start moving
-                entity.physicsBody.self?.mode = .kinematic
-                entity.transform.translation.y += 0.01
-            } else {
-                // Finished moving
-                entity.physicsBody.self?.mode = .dynamic
+            if !lockedEntities.contains(entity) {
+                if entity.physicsBody.self?.mode == .dynamic {
+                    // Start moving
+                    print("to kinematic")
+                    entity.physicsBody.self?.mode = .kinematic
+                    entity.transform.translation.y += 0.01
+                } else {
+                    // Finished moving
+                    print("to dynamic")
+                    entity.physicsBody.self?.mode = .dynamic
+                }
             }
         }
     }
     
-    // MARK: MULTIPEER
-    /*
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        <#code#>
-    }
     
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        <#code#>
-    }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        <#code#>
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        <#code#>
-    }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        <#code#>
-    }
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        <#code#>
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        <#code#>
-    }
-     */
 }
 
 extension CustomARView: MultipeerHelperDelegate {
