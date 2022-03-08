@@ -9,6 +9,7 @@ import RealityKit
 import ARKit
 import FocusEntity
 import SwiftUI
+import MultipeerHelper
 //import MultipeerConnectivity
 import Combine
 

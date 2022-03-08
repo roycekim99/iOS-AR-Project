@@ -37,6 +37,7 @@
 		C5461C5227C973A0000197B0 /* Red_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4627C973A0000197B0 /* Red_2.usdz */; };
 		C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4727C973A0000197B0 /* Red_5.usdz */; };
 		C5461C5427C973A0000197B0 /* Red_10.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4827C973A0000197B0 /* Red_10.usdz */; };
+		C55E64B327D792B000EC5DE7 /* MultipeerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = C55E64B227D792B000EC5DE7 /* MultipeerHelper */; };
 		C5AB175C27CE362400C85228 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AB175B27CE362400C85228 /* ZoomView.swift */; };
 		C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798727A95AA700E24F1D /* BrowseView.swift */; };
 		C5E6798A27A95CC100E24F1D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798927A95CC100E24F1D /* Model.swift */; };
@@ -140,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C55E64B327D792B000EC5DE7 /* MultipeerHelper in Frameworks */,
 				C5F7D38C27AB4D850052FA59 /* FocusEntity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +305,7 @@
 			name = TableTop;
 			packageProductDependencies = (
 				C5F7D38B27AB4D850052FA59 /* FocusEntity */,
+				C55E64B227D792B000EC5DE7 /* MultipeerHelper */,
 			);
 			productName = TableTop;
 			productReference = C5EE084627A24DA200C3D9F6 /* TableTop.app */;
@@ -378,6 +381,7 @@
 			mainGroup = C5EE083D27A24DA200C3D9F6;
 			packageReferences = (
 				C5F7D38A27AB4D850052FA59 /* XCRemoteSwiftPackageReference "FocusEntity" */,
+				C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */,
 			);
 			productRefGroup = C5EE084727A24DA200C3D9F6 /* Products */;
 			projectDirPath = "";
@@ -799,6 +803,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/MultipeerHelper";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		C5F7D38A27AB4D850052FA59 /* XCRemoteSwiftPackageReference "FocusEntity" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/maxxfrazer/FocusEntity";
@@ -810,6 +822,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C55E64B227D792B000EC5DE7 /* MultipeerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */;
+			productName = MultipeerHelper;
+		};
 		C5F7D38B27AB4D850052FA59 /* FocusEntity */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C5F7D38A27AB4D850052FA59 /* XCRemoteSwiftPackageReference "FocusEntity" */;
