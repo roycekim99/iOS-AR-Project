@@ -199,8 +199,8 @@ extension CustomARView {
                     endPos = transformGesture.entity!.position
                     difference = endPos - startPos
                     print("Start: \(startPos)")
-                    print("")
-                    print(difference)
+                    print("End: \(endPos)")
+                    print("Difference \(difference)")
                     
                     
                     if self.zoom.ZoomEnabled {
