@@ -90,7 +90,7 @@ struct ARViewContainer: UIViewRepresentable {
     }
     
 
-    private func place(_ modelEntity: ModelEntity, in arView: ARView) {
+    private func place(_ modelEntity: ModelEntity, in arView: CustomARView) {
         // 1. Clone modelEntity. This creates an identical copy of modelEntty and references the same model. This also allows us to have multple models of the same asset in our scene.
         let clonedEntity = modelEntity.clone(recursive: true)
         
@@ -111,7 +111,8 @@ struct ARViewContainer: UIViewRepresentable {
         arView.scene.addAnchor(anchorEntity)
         sceneManager.floor.addChild(anchorEntity, preservingWorldTransform: true)
         
-        print(anchorEntity.position)
+        //print(anchorEntity.position)
+        print(arView.focusEntity?.position ?? SIMD3<Float>(0,0,0))
         
         print("Added modelEntity to scene.")
     }

@@ -201,6 +201,7 @@ extension CustomARView {
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         
         let location = recognizer.location(in: self)
+        //print(focusEntity?.position)
         
         if let entity = self.entity(at: location) as? ModelEntity {
             
