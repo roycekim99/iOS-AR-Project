@@ -10,7 +10,7 @@ import ARKit
 import FocusEntity
 import SwiftUI
 import MultipeerHelper
-//import MultipeerConnectivity
+import MultipeerConnectivity
 import Combine
 
 // CustomARView: Implements FocusEntity for object placement, people/object occlusion, lidar visualization, and tap response functionality
@@ -50,6 +50,7 @@ class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserVie
         focusEntity = FocusEntity(on: self, focus: .classic)
                 
         configure()
+        
         
         self.initializeSettings()
         
