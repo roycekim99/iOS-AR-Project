@@ -4,44 +4,49 @@
 //
 //  Created by Jet Aung on 2/2/22.
 //
-
 import RealityKit
 import ARKit
 import FocusEntity
 import SwiftUI
-import Combine
+import MultipeerHelper
 import MultipeerConnectivity
-import UIKit
+import Combine
 
 // CustomARView: Implements FocusEntity for object placement, people/object occlusion, lidar visualization, and tap response functionality
-class CustomARView: ARView {
+class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserViewControllerDelegate*/{
+    
+    var multipeerHelp: MultipeerHelper!
+    
     var objectMoved: Entity? = nil
     var zoom: ZoomView
     var sceneManager: SceneManager
     var focusEntity: FocusEntity?
     var sessionSettings: SessionSettings
     var anchorMap = [ModelEntity:AnchorEntity]()
+    var startPos: SIMD3<Float>
+    var placementSettings: PlacementSettings
+    var lockedEntities = [ModelEntity]()
     
+    /*
+    var peerID: MCPeerID!
+    var mcSession: MCSession!
+    var mcAdvertiser: MCAdvertiserAssistant!
+    */
     private var peopleOcclusionCancellable: AnyCancellable?
     private var objectOcclusionCancellable: AnyCancellable?
     private var lidarDebugCancellable: AnyCancellable?
     private var multiuserCancellable: AnyCancellable?
     
-    @IBOutlet weak var messageLabel: MessageLabel?
-    var multipeerSession: MultipeerSession?
-    let coachingOverlay = ARCoachingOverlayView()
-    // A dictionary to map MultiPeer IDs to ARSession ID's.
-    // This is useful for keeping track of which peer created which ARAnchors.
-    var peerSessionIDs = [MCPeerID: String]()
-    var sessionIDObservation: NSKeyValueObservation?
-    var configuration: ARWorldTrackingConfiguration?
-    
-    required init(frame frameRect: CGRect, sessionSettings: SessionSettings, zoom: ZoomView, sceneManager: SceneManager) {
+    required init(frame frameRect: CGRect, sessionSettings: SessionSettings, zoom: ZoomView, sceneManager: SceneManager, placementSettings: PlacementSettings) {
         self.sessionSettings = sessionSettings
         
         self.zoom = zoom
         
         self.sceneManager = sceneManager
+        
+        self.startPos = SIMD3<Float>(0,0,0)
+        
+        self.placementSettings = placementSettings
 
         super.init(frame: frameRect)
         
@@ -49,25 +54,15 @@ class CustomARView: ARView {
                 
         configure()
         
+        setupMultipeer()
+        
         self.initializeSettings()
         
         self.setupSubscribers()
         
         self.moveObject()
         
-        setupCoachingOverlay()
         
-        sessionIDObservation = observe(\.self.session.identifier, options: [.new]) { object, change in
-            print("SessionID changed to: \(change.newValue!)")
-            // Tell all other peers about your ARSession's changed ID, so
-            // that they can keep track of which ARAnchors are yours.
-            guard let multipeerSession = self.multipeerSession else { return }
-            self.sendARSessionIDTo(peers: multipeerSession.connectedPeers)
-        }
-        
-        // Start looking for other players via MultiPeerConnectivity.
-        multipeerSession = MultipeerSession(receivedDataHandler: receivedData, peerJoinedHandler:
-                                            peerJoined, peerLeftHandler: peerLeft, peerDiscoveredHandler: peerDiscovered)
     }
     
     required init(frame frameRect: CGRect) {
@@ -80,55 +75,16 @@ class CustomARView: ARView {
     
     
     private func configure() {
-        automaticallyConfigureSession = false
-        configuration = ARWorldTrackingConfiguration()
-        configuration?.planeDetection = [.horizontal, .vertical]
-        
-        configuration?.isCollaborationEnabled = true
-
+        self.session.delegate = self
+        let config = ARWorldTrackingConfiguration()
+        config.isCollaborationEnabled = true
+        config.planeDetection = [.horizontal, .vertical]
         
         if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
-            configuration?.sceneReconstruction = .mesh
+            config.sceneReconstruction = .mesh
         }
         
-        session.run(configuration!)
-        
-        UIApplication.shared.isIdleTimerDisabled = true
-    }
-    
-    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        for anchor in anchors {
-            if let participantAnchor = anchor as? ARParticipantAnchor {
-                messageLabel?.displayMessage("Established joint experience with a peer.")
-                // ...
-                let anchorEntity = AnchorEntity(anchor: participantAnchor)
-                
-                let coordinateSystem = MeshResource.generateCoordinateSystemAxes()
-                anchorEntity.addChild(coordinateSystem)
-                
-                let color = participantAnchor.sessionIdentifier?.toRandomColor() ?? .white
-                let coloredSphere = ModelEntity(mesh: MeshResource.generateSphere(radius: 0.03),
-                                                materials: [SimpleMaterial(color: color, isMetallic: true)])
-                anchorEntity.addChild(coloredSphere)
-                
-                self.scene.addAnchor(anchorEntity)
-            } else if anchor.name == "Anchor for object placement" {
-                // Create a cube at the location of the anchor.
-                let boxLength: Float = 0.05
-                // Color the cube based on the user that placed it.
-                let color = anchor.sessionIdentifier?.toRandomColor() ?? .white
-                let coloredCube = ModelEntity(mesh: MeshResource.generateBox(size: boxLength),
-                                              materials: [SimpleMaterial(color: color, isMetallic: true)])
-                // Offset the cube by half its length to align its bottom with the real-world surface.
-                coloredCube.position = [0, boxLength / 2, 0]
-                
-                // Attach the cube to the ARAnchor via an AnchorEntity.
-                //   World origin -> ARAnchor -> AnchorEntity -> ModelEntity
-                let anchorEntity = AnchorEntity(anchor: anchor)
-                anchorEntity.addChild(coloredCube)
-                self.scene.addAnchor(anchorEntity)
-            }
-        }
+        session.run(config)
     }
     
     private func initializeSettings() {
@@ -202,166 +158,71 @@ class CustomARView: ARView {
         print("\(#file): isMultiuserEnabled is now \(isEnabled)")
     }
     
-    /// - Tag: DidOutputCollaborationData
-    func session(_ session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
-        guard let multipeerSession = multipeerSession else { return }
-        if !multipeerSession.connectedPeers.isEmpty {
-            guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
-            else { fatalError("Unexpectedly failed to encode collaboration data.") }
-            // Use reliable mode if the data is critical, and unreliable mode if the data is optional.
-            let dataIsCritical = data.priority == .critical
-            multipeerSession.sendToAllPeers(encodedData, reliably: dataIsCritical)
-        } else {
-            print("Deferred sending collaboration to later because there are no peers.")
-        }
-    }
-
-    
-    func receivedData(_ data: Data, from peer: MCPeerID) {
-        if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self, from: data) {
-            self.session.update(with: collaborationData)
-            return
-        }
-        // ...
-        let sessionIDCommandString = "SessionID:"
-        if let commandString = String(data: data, encoding: .utf8), commandString.starts(with: sessionIDCommandString) {
-            let newSessionID = String(commandString[commandString.index(commandString.startIndex,
-                                                                     offsetBy: sessionIDCommandString.count)...])
-            // If this peer was using a different session ID before, remove all its associated anchors.
-            // This will remove the old participant anchor and its geometry from the scene.
-            if let oldSessionID = peerSessionIDs[peer] {
-                removeAllAnchorsOriginatingFromARSessionWithID(oldSessionID)
-            }
-            
-            peerSessionIDs[peer] = newSessionID
-        }
-    }
-    
-    func peerDiscovered(_ peer: MCPeerID) -> Bool {
-        guard let multipeerSession = multipeerSession else { return false }
-        
-        if multipeerSession.connectedPeers.count > 3 {
-            // Do not accept more than four users in the experience.
-            messageLabel?.displayMessage("A fifth peer wants to join the experience.\nThis app is limited to four users.", duration: 6.0)
-            return false
-        } else {
-            return true
-        }
-    }
-    /// - Tag: PeerJoined
-    func peerJoined(_ peer: MCPeerID) {
-        messageLabel?.displayMessage("""
-            A peer wants to join the experience.
-            Hold the phones next to each other.
-            """, duration: 6.0)
-        // Provide your session ID to the new user so they can keep track of your anchors.
-        sendARSessionIDTo(peers: [peer])
-    }
-        
-    func peerLeft(_ peer: MCPeerID) {
-        messageLabel?.displayMessage("A peer has left the shared experience.")
-        
-        // Remove all ARAnchors associated with the peer that just left the experience.
-        if let sessionID = peerSessionIDs[peer] {
-            removeAllAnchorsOriginatingFromARSessionWithID(sessionID)
-            peerSessionIDs.removeValue(forKey: peer)
-        }
-    }
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        guard error is ARError else { return }
-        
-        let errorWithInfo = error as NSError
-        let messages = [
-            errorWithInfo.localizedDescription,
-            errorWithInfo.localizedFailureReason,
-            errorWithInfo.localizedRecoverySuggestion
-        ]
-        
-        // Remove optional error messages.
-        let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
-        
-        DispatchQueue.main.async {
-            // Present the error that occurred.
-            let alertController = UIAlertController(title: "The AR session failed.", message: errorMessage, preferredStyle: .alert)
-            let restartAction = UIAlertAction(title: "Restart Session", style: .default) { _ in
-                alertController.dismiss(animated: true, completion: nil)
-                self.resetTracking()
-            }
-            alertController.addAction(restartAction)
-//            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func resetTracking() {
-        guard let configuration = self.session.configuration else { print("A configuration is required"); return }
-        self.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-    }
-    
-    private func removeAllAnchorsOriginatingFromARSessionWithID(_ identifier: String) {
-        guard let frame = self.session.currentFrame else { return }
-        for anchor in frame.anchors {
-            guard let anchorSessionID = anchor.sessionIdentifier else { continue }
-            if anchorSessionID.uuidString == identifier {
-                self.session.remove(anchor: anchor)
-            }
-        }
-    }
-    
-    private func sendARSessionIDTo(peers: [MCPeerID]) {
-        guard let multipeerSession = multipeerSession else { return }
-        let idString = self.session.identifier.uuidString
-        let command = "SessionID:" + idString
-        if let commandData = command.data(using: .utf8) {
-            multipeerSession.sendToPeers(commandData, reliably: true, peers: peers)
-        }
-    }
-    
     
 }
 
 // Add functionality to switch object physics body in order to move objects
 extension CustomARView {
     
-    func testing() {
-        if self.zoom.ZoomEnabled {
-            print("nice")
-        } else {
-            print("cool")
-        }
-    }
+    
     
     func moveObject() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressGesture.minimumPressDuration = 0.5
         self.addGestureRecognizer(tapGesture)
+        self.addGestureRecognizer(longPressGesture)
     }
     
     @objc func transformObject(_ sender: UIGestureRecognizer) {
         
-        if self.zoom.ZoomEnabled {
+        //if self.zoom.ZoomEnabled {
             if let transformGesture = sender as? EntityTranslationGestureRecognizer {
-                if self.objectMoved == nil {
-                    self.objectMoved = transformGesture.entity!
-                } else if (transformGesture.entity! != self.objectMoved) {
-                    return
+                //print(startPos)
+                var endPos: SIMD3<Float>
+                var difference: SIMD3<Float>
+                if self.zoom.ZoomEnabled {
+
+                    if self.objectMoved == nil {
+                        self.objectMoved = transformGesture.entity!
+                    } else if (transformGesture.entity! != self.objectMoved) {
+                        return
+                    }
                 }
                 switch transformGesture.state {
                 case .began:
                     print("Started Moving")
-                    for ent in self.sceneManager.modelEntities {
-                        if (ent != transformGesture.entity!) {
-                            self.anchorMap[ent] = ent.parent as? AnchorEntity
-                            
-                            ent.setParent(transformGesture.entity, preservingWorldTransform: true)
+                    
+                    startPos = transformGesture.entity!.position
+                    
+                    
+                    
+                    ///
+                    if self.zoom.ZoomEnabled {
+
+                        for ent in self.sceneManager.modelEntities {
+                            if (ent != transformGesture.entity!) {
+                                self.anchorMap[ent] = ent.parent as? AnchorEntity
+                                
+                                ent.setParent(transformGesture.entity, preservingWorldTransform: true)
+                            }
                         }
                     }
                 case .ended:
                     print(self.anchorMap.count)
+                    endPos = transformGesture.entity!.position
+                    difference = endPos - startPos
+                    print("Start: \(startPos)")
+                    print("End: \(endPos)")
+                    print("Difference \(difference)")
                     
                     
-                    for ent in self.sceneManager.modelEntities {
-                        if (ent != transformGesture.entity!) {
-                            ent.setParent(self.anchorMap[ent], preservingWorldTransform: true)
+                    if self.zoom.ZoomEnabled {
+
+                        for ent in self.sceneManager.modelEntities {
+                            if (ent != transformGesture.entity!) {
+                                ent.setParent(self.anchorMap[ent], preservingWorldTransform: true)
+                            }
                         }
                     }
                     self.anchorMap.removeAll()
@@ -371,32 +232,199 @@ extension CustomARView {
                     return
                 }
             }
-        }
-        
-        
+        //}
         
     }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer) {
+        print("LongPressed")
+
+        let location = sender.location(in: self)
+        if let entity = self.entity(at: location) as? ModelEntity {
+            if sender.state == .began {
+                /*
+                if entity.physicsBody?.mode != .static {
+                    entity.physicsBody?.mode = .static
+                    print("Set to static.")
+                    
+                } else {
+                    entity.physicsBody?.mode = .dynamic
+                    print("Set to dynamic")
+                }*/
+                if lockedEntities.contains(entity) {
+                    entity.physicsBody?.mode = .dynamic
+                    entity.transform.translation.y += 0.01
+                    for i in lockedEntities.indices {
+                        if lockedEntities[i] == entity {
+                            lockedEntities.remove(at: i)
+                        }
+                    }
+                } else {
+                    entity.physicsBody.self?.mode = .static
+                    entity.transform.translation.y += -0.01
+                    print("locking entity")
+                    lockedEntities.append(entity)
+                }
+            }
+        }
+    }
+    
     // Tap object to switch physics body mode
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
-        print("ZoomView.ZoomEnabled = \(String(describing: self.zoom.ZoomEnabled.description))")
-        
+        var isStacked: Bool = false
+        var height: Float = 0
         
         let location = recognizer.location(in: self)
-        
-        if let entity = self.entity(at: location) as? ModelEntity {
-            
-            if entity.physicsBody.self?.mode == .dynamic {
-                // Start moving
-                entity.physicsBody.self?.mode = .kinematic
-                entity.transform.translation.y += 0.01
+        //print(focusEntity?.position)
+        /*
+        let frameSize: CGPoint = CGPoint(x: UIScreen.main.bounds.size.width*0.5, y: UIScreen.main.bounds.size.height*0.5)
+        print(frameSize)
+         */
+        if self.placementSettings.selectedModel != nil {
+            if self.placementSettings.selectedModel!.name != "floor" {
+                if let entity = self.entity(at: location) as? ModelEntity {
+                    if self.sceneManager.modelEntities.contains(entity) {
+                        isStacked = true
+                        height = entity.transform.translation.y
+                        print("we stacking")
+                    }
+                }
+                let modelEntity = self.placementSettings.selectedModel?.modelEntity
+                if let result = self.raycast(from: location, allowing: .existingPlaneGeometry, alignment: .horizontal).first {
+                    let arAnchor = ARAnchor(transform: result.worldTransform)
+                let clonedEntity = modelEntity?.clone(recursive: true)
+                clonedEntity?.generateCollisionShapes(recursive: true)
+                if let collisionComponent = clonedEntity?.components[CollisionComponent.self] as? CollisionComponent {
+                    clonedEntity?.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil , mode: .dynamic)
+                }
+                self.installGestures(for: clonedEntity!).forEach { entityGesture in
+                    entityGesture.addTarget(self, action: #selector(self.transformObject(_:)))
+                }
+                self.sceneManager.modelEntities.append(clonedEntity!)
+                let anchorEntity = AnchorEntity(plane: .any)
+                anchorEntity.addChild(clonedEntity!)
+                    if isStacked {
+                        clonedEntity?.transform.translation.y += 0.03 + height
+                    }
+                clonedEntity?.transform.translation.y += 0.03
+                anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
+                anchorEntity.anchoring = AnchoringComponent(arAnchor)
+                self.scene.addAnchor(anchorEntity)
+                self.session.add(anchor: arAnchor)
+                }
+                /*
+                let children = self.placementSettings.selectedModel?.childs
+                for chd in children ?? [] {
+                    let result = self.raycast(from: location, allowing: .existingPlaneGeometry, alignment: .horizontal).first
+                    let arAnchor = ARAnchor(transform: result!.worldTransform)
+                    let chdClone = chd.modelEntity?.clone(recursive: true)
+                    chdClone?.generateCollisionShapes(recursive: true)
+                    if let collisionComponent = chdClone?.components[CollisionComponent.self] as? CollisionComponent {
+                        chdClone?.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil , mode: .dynamic)
+                    }
+                    self.installGestures(for: chdClone!).forEach { entityGesture in
+                        entityGesture.addTarget(self, action: #selector(self.transformObject(_:)))
+                    }
+                    
+                    let chdAnchorEntity = AnchorEntity(plane: .any)
+                    chdAnchorEntity.synchronization?.ownershipTransferMode = .autoAccept
+                    chdAnchorEntity.anchoring = AnchoringComponent(arAnchor)
+                    self.scene.addAnchor(chdAnchorEntity)
+                    self.session.add(anchor: arAnchor)
+                    
+                }*/
+                
+                
+                // 3. Create an anchorEntity and add clonedEntity to the anchorEntity
             } else {
-                // Finished moving
-                entity.physicsBody.self?.mode = .dynamic
+                let floor = self.placementSettings.selectedModel!.modelEntity?.clone(recursive: true)
+                if let result = self.raycast(from: location, allowing: .existingPlaneGeometry, alignment: .horizontal).first {
+                    let arAnchor = ARAnchor(transform: result.worldTransform)
+                    floor?.generateCollisionShapes(recursive: true)
+                    if let collisionComponent = floor?.components[CollisionComponent.self] as? CollisionComponent {
+                        floor?.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 0, material: nil, mode: .static)
+                        floor?.components[ModelComponent.self] = nil // make the floor invisible
+                    }
+                    
+                    floor?.transform.translation.y += -50
+                    let anchorEntity = AnchorEntity(plane: .any)
+                    anchorEntity.addChild(floor!)
+                    anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
+                        anchorEntity.anchoring = AnchoringComponent(arAnchor)
+                    self.scene.addAnchor(anchorEntity)
+                    self.session.add(anchor: arAnchor)
+                    print("added floor")
+                    
+                    sceneManager.floor = anchorEntity
+                }
             }
         }
         
-        
+        else if let entity = self.entity(at: location) as? ModelEntity {
+            if !entity.isOwner {
+                entity.requestOwnership { result in
+                    if result == .granted {
+                        print("entity ownership being transferred")
+                        /*if entity.physicsBody.self?.mode == .dynamic {
+                            // Start moving
+                            entity.physicsBody.self?.mode = .kinematic
+                            entity.transform.translation.y += 0.01
+                        } else {
+                            // Finished moving
+                            entity.physicsBody.self?.mode = .dynamic
+                        }*/
+                    }
+                    
+                }
+            }
+            if !lockedEntities.contains(entity) {
+                if entity.physicsBody.self?.mode == .dynamic {
+                    // Start moving
+                    print("to kinematic")
+                    entity.physicsBody.self?.mode = .kinematic
+                    entity.transform.translation.y += 0.01
+                } else {
+                    // Finished moving
+                    print("to dynamic")
+                    entity.physicsBody.self?.mode = .dynamic
+                }
+            }
+        }
     }
     
     
+}
+
+extension CustomARView: MultipeerHelperDelegate {
+    
+    func shouldSendJoinRequest(_ peer: MCPeerID, with discoveryInfo: [String : String]?) -> Bool {
+        if CustomARView.checkPeerToken(with: discoveryInfo) {
+            return true
+        }
+        print("incompatible peer!")
+        return false
+    }
+    
+    func setupMultipeer() {
+        multipeerHelp = MultipeerHelper(
+            serviceName: "helper-test",
+            sessionType: .both,
+            delegate: self
+        )
+        
+        // MARK: - Setting RealityKit Synchronization
+        
+        guard let syncService = multipeerHelp.syncService else {
+            fatalError("could not create multipeerHelp.syncService")
+        }
+        self.scene.synchronizationService = syncService
+    }
+    
+    func receivedData(_ data: Data, _ peer: MCPeerID) {
+        print(String(data: data, encoding: .unicode) ?? "Data is not a unicode string")
+    }
+    
+    func peerJoined(_ peer: MCPeerID) {
+        print("new peer has joined:")
+    }
 }

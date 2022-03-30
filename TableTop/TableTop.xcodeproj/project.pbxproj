@@ -7,12 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F2A677B27D411B800F292FD /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A677A27D411B800F292FD /* MultipeerSession.swift */; };
-		6F2A677D27D411D800F292FD /* MessageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A677C27D411D800F292FD /* MessageLabel.swift */; };
-		6F2A677F27D411F500F292FD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A677E27D411F500F292FD /* Utilities.swift */; };
-		6F2A678127D4121300F292FD /* CustomARView+CoachingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A678027D4121300F292FD /* CustomARView+CoachingOverlay.swift */; };
-		C5037D0527C599A700EE9549 /* Black Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0327C599A700EE9549 /* Black Piece.usdz */; };
-		C5037D0627C599A700EE9549 /* Red Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D0427C599A700EE9549 /* Red Piece.usdz */; };
+		87BFE33627D7335000FC9FD2 /* JSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BFE33527D7335000FC9FD2 /* JSONData.swift */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
 		C5037D4F27C7024D00EE9549 /* check.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* check.usdz */; };
 		C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */; };
@@ -40,6 +35,10 @@
 		C5461C5227C973A0000197B0 /* Red_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4627C973A0000197B0 /* Red_2.usdz */; };
 		C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4727C973A0000197B0 /* Red_5.usdz */; };
 		C5461C5427C973A0000197B0 /* Red_10.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5461C4827C973A0000197B0 /* Red_10.usdz */; };
+		C55E64B327D792B000EC5DE7 /* MultipeerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = C55E64B227D792B000EC5DE7 /* MultipeerHelper */; };
+		C55E64B827D7C3EE00EC5DE7 /* Black_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */; };
+		C55E64BA27D7C42A00EC5DE7 /* Red_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */; };
+		C55E64BC27D7DFC900EC5DE7 /* FloorPlacementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E64BB27D7DFC800EC5DE7 /* FloorPlacementView.swift */; };
 		C5AB175C27CE362400C85228 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AB175B27CE362400C85228 /* ZoomView.swift */; };
 		C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798727A95AA700E24F1D /* BrowseView.swift */; };
 		C5E6798A27A95CC100E24F1D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798927A95CC100E24F1D /* Model.swift */; };
@@ -82,12 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6F2A677A27D411B800F292FD /* MultipeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
-		6F2A677C27D411D800F292FD /* MessageLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLabel.swift; sourceTree = "<group>"; };
-		6F2A677E27D411F500F292FD /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		6F2A678027D4121300F292FD /* CustomARView+CoachingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomARView+CoachingOverlay.swift"; sourceTree = "<group>"; };
-		C5037D0327C599A700EE9549 /* Black Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Black Piece.usdz"; sourceTree = "<group>"; };
-		C5037D0427C599A700EE9549 /* Red Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Red Piece.usdz"; sourceTree = "<group>"; };
+		87BFE33527D7335000FC9FD2 /* JSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONData.swift; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
 		C5037D4E27C7024D00EE9549 /* check.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = check.usdz; sourceTree = "<group>"; };
 		C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Board.usdz"; sourceTree = "<group>"; };
@@ -115,6 +109,10 @@
 		C5461C4627C973A0000197B0 /* Red_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_2.usdz; sourceTree = "<group>"; };
 		C5461C4727C973A0000197B0 /* Red_5.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_5.usdz; sourceTree = "<group>"; };
 		C5461C4827C973A0000197B0 /* Red_10.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_10.usdz; sourceTree = "<group>"; };
+		C55E64B627D79E5600EC5DE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_Piece.usdz; sourceTree = "<group>"; };
+		C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_Piece.usdz; sourceTree = "<group>"; };
+		C55E64BB27D7DFC800EC5DE7 /* FloorPlacementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorPlacementView.swift; sourceTree = "<group>"; };
 		C5AB175B27CE362400C85228 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
 		C5E6798727A95AA700E24F1D /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		C5E6798927A95CC100E24F1D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -146,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C55E64B327D792B000EC5DE7 /* MultipeerHelper in Frameworks */,
 				C5F7D38C27AB4D850052FA59 /* FocusEntity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,11 +197,13 @@
 		C5EE084827A24DA200C3D9F6 /* TableTop */ = {
 			isa = PBXGroup;
 			children = (
+				C55E64B627D79E5600EC5DE7 /* Info.plist */,
 				C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */,
 				C5EE084B27A24DA200C3D9F6 /* ContentView.swift */,
 				C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */,
 				C5EE087627A950E000C3D9F6 /* ControlView.swift */,
 				C5E6798727A95AA700E24F1D /* BrowseView.swift */,
+				87BFE33527D7335000FC9FD2 /* JSONData.swift */,
 				C5F7D38827AB4A7C0052FA59 /* PlacementView.swift */,
 				C5F7D39627AE41D60052FA59 /* SettingsView.swift */,
 				C5F7D39427AE40890052FA59 /* SessionSettings.swift */,
@@ -214,10 +215,7 @@
 				C5037D0727C5A27900EE9549 /* Models */,
 				C5EE087327A94FC700C3D9F6 /* 3D Assets */,
 				C5EE084F27A24DA300C3D9F6 /* Preview Content */,
-				6F2A677A27D411B800F292FD /* MultipeerSession.swift */,
-				6F2A677C27D411D800F292FD /* MessageLabel.swift */,
-				6F2A677E27D411F500F292FD /* Utilities.swift */,
-				6F2A678027D4121300F292FD /* CustomARView+CoachingOverlay.swift */,
+				C55E64BB27D7DFC800EC5DE7 /* FloorPlacementView.swift */,
 			);
 			path = TableTop;
 			sourceTree = "<group>";
@@ -250,14 +248,14 @@
 		C5EE087327A94FC700C3D9F6 /* 3D Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */,
+				C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */,
 				C5037D4E27C7024D00EE9549 /* check.usdz */,
 				C5F7D39327AB73C90052FA59 /* Set */,
 				C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */,
 				C5F7D38427AB48410052FA59 /* Goku.usdz */,
 				C5EE087427A9500A00C3D9F6 /* Chess Set.usdz */,
 				C5E6798B27A9611B00E24F1D /* Checkers.usdz */,
-				C5037D0327C599A700EE9549 /* Black Piece.usdz */,
-				C5037D0427C599A700EE9549 /* Red Piece.usdz */,
 			);
 			path = "3D Assets";
 			sourceTree = "<group>";
@@ -312,6 +310,7 @@
 			name = TableTop;
 			packageProductDependencies = (
 				C5F7D38B27AB4D850052FA59 /* FocusEntity */,
+				C55E64B227D792B000EC5DE7 /* MultipeerHelper */,
 			);
 			productName = TableTop;
 			productReference = C5EE084627A24DA200C3D9F6 /* TableTop.app */;
@@ -387,6 +386,7 @@
 			mainGroup = C5EE083D27A24DA200C3D9F6;
 			packageReferences = (
 				C5F7D38A27AB4D850052FA59 /* XCRemoteSwiftPackageReference "FocusEntity" */,
+				C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */,
 			);
 			productRefGroup = C5EE084727A24DA200C3D9F6 /* Products */;
 			projectDirPath = "";
@@ -410,13 +410,13 @@
 				C5037D6727C7224C00EE9549 /* Black_8.usdz in Resources */,
 				C5037D5C27C70A3C00EE9549 /* Black_6.usdz in Resources */,
 				C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */,
+				C55E64B827D7C3EE00EC5DE7 /* Black_Piece.usdz in Resources */,
 				C5461C4E27C973A0000197B0 /* Red_8.usdz in Resources */,
 				C5037D6627C7224C00EE9549 /* Black_9.usdz in Resources */,
 				C5461C4F27C973A0000197B0 /* Red_4.usdz in Resources */,
+				C55E64BA27D7C42A00EC5DE7 /* Red_Piece.usdz in Resources */,
 				C5037D6527C7224C00EE9549 /* Black_11.usdz in Resources */,
 				C5461C5427C973A0000197B0 /* Red_10.usdz in Resources */,
-				C5037D0627C599A700EE9549 /* Red Piece.usdz in Resources */,
-				C5037D0527C599A700EE9549 /* Black Piece.usdz in Resources */,
 				C5461C4C27C973A0000197B0 /* Red_3.usdz in Resources */,
 				C5EE087527A9500A00C3D9F6 /* Chess Set.usdz in Resources */,
 				C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */,
@@ -467,13 +467,11 @@
 				C5AB175C27CE362400C85228 /* ZoomView.swift in Sources */,
 				C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */,
 				C5E6798A27A95CC100E24F1D /* Model.swift in Sources */,
+				87BFE33627D7335000FC9FD2 /* JSONData.swift in Sources */,
 				C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */,
-				6F2A677F27D411F500F292FD /* Utilities.swift in Sources */,
-				6F2A677B27D411B800F292FD /* MultipeerSession.swift in Sources */,
-				6F2A678127D4121300F292FD /* CustomARView+CoachingOverlay.swift in Sources */,
-				6F2A677D27D411D800F292FD /* MessageLabel.swift in Sources */,
 				C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */,
 				C5EE084C27A24DA200C3D9F6 /* ContentView.swift in Sources */,
+				C55E64BC27D7DFC900EC5DE7 /* FloorPlacementView.swift in Sources */,
 				C5EE087727A950E000C3D9F6 /* ControlView.swift in Sources */,
 				C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */,
 				C5F7D38E27AB4DA80052FA59 /* CustomARView.swift in Sources */,
@@ -639,10 +637,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
+				DEVELOPMENT_TEAM = VNG6J3P3MV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TableTop/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To use Augmented Reality, this app needs access to your camera.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This application synchronises with other iOS devices on the same network.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -654,7 +654,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.ucdavis.cs.ecs193a.w22.TableTop2nh;
+				PRODUCT_BUNDLE_IDENTIFIER = JetTesting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -673,7 +673,9 @@
 				DEVELOPMENT_TEAM = VNG6J3P3MV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TableTop/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To use Augmented Reality, this app needs access to your camera.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This application synchronises with other iOS devices on the same network.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -685,7 +687,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.ucdavis.cs.ecs193a.w22.TableTop2;
+				PRODUCT_BUNDLE_IDENTIFIER = JetTesting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -811,6 +813,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/MultipeerHelper";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		C5F7D38A27AB4D850052FA59 /* XCRemoteSwiftPackageReference "FocusEntity" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/maxxfrazer/FocusEntity";
@@ -822,6 +832,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C55E64B227D792B000EC5DE7 /* MultipeerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */;
+			productName = MultipeerHelper;
+		};
 		C5F7D38B27AB4D850052FA59 /* FocusEntity */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C5F7D38A27AB4D850052FA59 /* XCRemoteSwiftPackageReference "FocusEntity" */;

@@ -9,6 +9,15 @@
           "revision": "615af712434dcf0e4800909f6291d6a6a088b754",
           "version": "2.2.4"
         }
+      },
+      {
+        "package": "MultipeerHelper",
+        "repositoryURL": "https://github.com/maxxfrazer/MultipeerHelper",
+        "state": {
+          "branch": "main",
+          "revision": "ea73ccdcbc34f967a5b7df10674eae7ea52aa803",
+          "version": null
+        }
       }
     ]
   },
