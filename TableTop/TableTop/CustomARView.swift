@@ -240,6 +240,7 @@ extension CustomARView {
         print("LongPressed")
 
         let location = sender.location(in: self)
+        print(lockedEntities)
         if let entity = self.entity(at: location) as? ModelEntity {
             if sender.state == .began {
                 /*
@@ -253,7 +254,7 @@ extension CustomARView {
                 }*/
                 if lockedEntities.contains(entity) {
                     entity.physicsBody?.mode = .dynamic
-                    entity.transform.translation.y += 0.01
+                    entity.transform.translation.y += 0.005
                     for i in lockedEntities.indices {
                         if lockedEntities[i] == entity {
                             lockedEntities.remove(at: i)
@@ -261,7 +262,9 @@ extension CustomARView {
                     }
                 } else {
                     entity.physicsBody.self?.mode = .static
-                    entity.transform.translation.y += -0.01
+                    entity.transform.translation.y += -0.005
+                    //let recognizerIndex = gestureRecognizers?.firstIndex(of: sender)
+                    //gestureRecognizers?.remove(at: recognizerIndex!)
                     print("locking entity")
                     lockedEntities.append(entity)
                 }
