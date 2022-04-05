@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6FE378E227FD00CF00B599B2 /* CustomARView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE378E127FD00CF00B599B2 /* CustomARView+Extension.swift */; };
 		87BFE33627D7335000FC9FD2 /* JSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BFE33527D7335000FC9FD2 /* JSONData.swift */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
 		C5037D4F27C7024D00EE9549 /* check.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* check.usdz */; };
@@ -82,6 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6FE378E127FD00CF00B599B2 /* CustomARView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomARView+Extension.swift"; sourceTree = "<group>"; };
 		87BFE33527D7335000FC9FD2 /* JSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONData.swift; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
 		C5037D4E27C7024D00EE9549 /* check.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = check.usdz; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			children = (
 				C55E64B627D79E5600EC5DE7 /* Info.plist */,
 				C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */,
+				6FE378E127FD00CF00B599B2 /* CustomARView+Extension.swift */,
 				C5EE084B27A24DA200C3D9F6 /* ContentView.swift */,
 				C5823A5F27FCFDCE00BEF3E1 /* ARViewContainer.swift */,
 				C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */,
@@ -477,6 +480,7 @@
 				C5EE084C27A24DA200C3D9F6 /* ContentView.swift in Sources */,
 				C55E64BC27D7DFC900EC5DE7 /* FloorPlacementView.swift in Sources */,
 				C5EE087727A950E000C3D9F6 /* ControlView.swift in Sources */,
+				6FE378E227FD00CF00B599B2 /* CustomARView+Extension.swift in Sources */,
 				C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */,
 				C5F7D38E27AB4DA80052FA59 /* CustomARView.swift in Sources */,
 				C5F7D38927AB4A7C0052FA59 /* PlacementView.swift in Sources */,
@@ -641,7 +645,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = VNG6J3P3MV;
+				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -658,7 +662,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JetTesting;
+				PRODUCT_BUNDLE_IDENTIFIER = JetTesting.nh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
