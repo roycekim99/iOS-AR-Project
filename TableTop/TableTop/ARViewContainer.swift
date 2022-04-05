@@ -18,30 +18,6 @@ struct ARViewContainer: UIViewRepresentable {
         
         let arView = CustomARView(frame: .zero, sessionSettings: sessionSettings, zoom: zoom, sceneManager: sceneManager, placementSettings: placementSettings)
         
-        // Add floor so that models do not fall infinitely on the floor
-        // Change so that there is a floor every entity
-        // Or change so that you scan an area before playing to determine where floor is
-        /*
-        print(arView.scene.anchors.count)
-        if arView.scene.anchors.count < 3 {
-            let floor = ModelEntity(mesh: .generateBox(size: [1000, 100, 1000]), materials: [SimpleMaterial()])
-            floor.generateCollisionShapes(recursive: true)
-            if let collisionComponent = floor.components[CollisionComponent.self] as? CollisionComponent {
-                floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 0, material: nil, mode: .static)
-                floor.components[ModelComponent.self] = nil // make the floor invisible
-            }
-            
-            floor.transform.translation.y += -50
-            let anchorEntity = AnchorEntity(plane: .any)
-            anchorEntity.addChild(floor)
-            anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
-            arView.scene.addAnchor(anchorEntity)
-            //arView.session.add(anchor: anchorEntity)
-            print("added floor")
-            
-            sceneManager.floor = anchorEntity
-        }*/
-        
         // Subscribe to SceneEvents.Update
         // Check every frame for updates from the scene if object is placed, deleted, moved, etc.
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, { (event) in
