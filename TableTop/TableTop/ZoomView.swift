@@ -19,7 +19,6 @@ class ZoomView: ObservableObject {
     
     @Published var changed: Bool = false {
         willSet(newValue) {
-            //print("coolio")
         }
     }
     

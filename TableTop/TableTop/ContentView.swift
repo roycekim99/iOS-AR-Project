@@ -67,7 +67,6 @@ struct ARViewContainer: UIViewRepresentable {
             sceneManager.floor = anchorEntity
         }*/
         
-        
         // Subscribe to SceneEvents.Update
         // Check every frame for updates from the scene if object is placed, deleted, moved, etc.
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, { (event) in
@@ -148,19 +147,6 @@ struct ARViewContainer: UIViewRepresentable {
         anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
         // 4. Add the achorEntity to the arView.scene
         arView.scene.addAnchor(anchorEntity)
-        
-        //let arAnchor = ARAnchor(transform: pos)
-        //sceneManager.floor.addChild(anchorEntity, preservingWorldTransform: true)
-        
-        //print(anchorEntity.position)
-        //print(arView.focusEntity?.position ?? SIMD3<Float>(0,0,0))
-        let focus = arView.focusEntity?.transform.translation
-        let test = SIMD4<Float>(focus!.x, focus!.y, focus!.z, 1)
-        
-        let blah = simd_float4x4.init(diagonal: test)
-        //print(blah)
-        
-        
         
         print("Added modelEntity to scene.")
     }
