@@ -4,6 +4,10 @@
 //
 //  Created by Jet Aung on 4/7/22.
 //
+/*
+Abstract:
+Allows the changing of model physics mode depending on the gesture
+ */
 
 import RealityKit
 import ARKit
