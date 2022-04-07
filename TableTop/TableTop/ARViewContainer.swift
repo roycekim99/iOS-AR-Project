@@ -41,7 +41,6 @@ struct ARViewContainer: UIViewRepresentable {
                 self.place(modelEntity, in: arView)
                 // After creating children variable to Model
                 for chd in confirmedModel.childs {
-                    //chd.asyncLoadModelEntity()
                     print(chd.name)
                     self.place(chd.modelEntity!, in: arView)
                 }
@@ -66,7 +65,6 @@ struct ARViewContainer: UIViewRepresentable {
         anchorEntity.addChild(floor)
         anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
         arView.scene.addAnchor(anchorEntity)
-        //arView.session.add(anchor: anchorEntity)
         print("added floor")
         
         sceneManager.floor = anchorEntity

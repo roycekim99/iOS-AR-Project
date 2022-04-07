@@ -4,6 +4,9 @@
 //
 //  Created by Jet Aung on 2/1/22.
 //
+/*
+ UI for browsing models
+ */
 
 import SwiftUI
 

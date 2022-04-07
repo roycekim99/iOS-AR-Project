@@ -29,65 +29,56 @@ extension CustomARView {
     }
     
     @objc func transformObject(_ sender: UIGestureRecognizer) {
-        
-        //if self.zoom.ZoomEnabled {
-            if let transformGesture = sender as? EntityTranslationGestureRecognizer {
-                //print(startPos)
-                var endPos: SIMD3<Float>
-                var difference: SIMD3<Float>
-                if self.zoom.ZoomEnabled {
+        if let transformGesture = sender as? EntityTranslationGestureRecognizer {
+            var endPos: SIMD3<Float>
+            var difference: SIMD3<Float>
+            if self.zoom.ZoomEnabled {
 
-                    if self.objectMoved == nil {
-                        self.objectMoved = transformGesture.entity!
-                    } else if (transformGesture.entity! != self.objectMoved) {
-                        return
-                    }
-                }
-                switch transformGesture.state {
-                case .began:
-                    print("Started Moving")
-                    
-                    startPos = transformGesture.entity!.position
-                    
-                    
-                    
-                    ///
-                    if self.zoom.ZoomEnabled {
-
-                        for ent in self.sceneManager.modelEntities {
-                            if (ent != transformGesture.entity!) {
-                                self.anchorMap[ent] = ent.parent as? AnchorEntity
-                                
-                                ent.setParent(transformGesture.entity, preservingWorldTransform: true)
-                            }
-                        }
-                    }
-                case .ended:
-                    print(self.anchorMap.count)
-                    endPos = transformGesture.entity!.position
-                    difference = endPos - startPos
-                    print("Start: \(startPos)")
-                    print("End: \(endPos)")
-                    print("Difference \(difference)")
-                    
-                    
-                    if self.zoom.ZoomEnabled {
-
-                        for ent in self.sceneManager.modelEntities {
-                            if (ent != transformGesture.entity!) {
-                                ent.setParent(self.anchorMap[ent], preservingWorldTransform: true)
-                            }
-                        }
-                    }
-                    self.anchorMap.removeAll()
-                    print("Stopped Moving")
-                    self.objectMoved = nil
-                default:
+                if self.objectMoved == nil {
+                    self.objectMoved = transformGesture.entity!
+                } else if (transformGesture.entity! != self.objectMoved) {
                     return
                 }
             }
-        //}
-        
+            switch transformGesture.state {
+            case .began:
+                print("Started Moving")
+                
+                startPos = transformGesture.entity!.position
+                
+                if self.zoom.ZoomEnabled {
+                    for ent in self.sceneManager.modelEntities {
+                        if (ent != transformGesture.entity!) {
+                            self.anchorMap[ent] = ent.parent as? AnchorEntity
+                            
+                            ent.setParent(transformGesture.entity, preservingWorldTransform: true)
+                        }
+                    }
+                }
+            case .ended:
+                print(self.anchorMap.count)
+                endPos = transformGesture.entity!.position
+                difference = endPos - startPos
+                print("Start: \(startPos)")
+                print("End: \(endPos)")
+                print("Difference \(difference)")
+                
+                
+                if self.zoom.ZoomEnabled {
+
+                    for ent in self.sceneManager.modelEntities {
+                        if (ent != transformGesture.entity!) {
+                            ent.setParent(self.anchorMap[ent], preservingWorldTransform: true)
+                        }
+                    }
+                }
+                self.anchorMap.removeAll()
+                print("Stopped Moving")
+                self.objectMoved = nil
+            default:
+                return
+            }
+        }
     }
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer) {
@@ -96,16 +87,8 @@ extension CustomARView {
         let location = sender.location(in: self)
         print(lockedEntities)
         if let entity = self.entity(at: location) as? ModelEntity {
+            print("model here")
             if sender.state == .began {
-                /*
-                if entity.physicsBody?.mode != .static {
-                    entity.physicsBody?.mode = .static
-                    print("Set to static.")
-                    
-                } else {
-                    entity.physicsBody?.mode = .dynamic
-                    print("Set to dynamic")
-                }*/
                 if lockedEntities.contains(entity) {
                     entity.physicsBody?.mode = .dynamic
                     entity.transform.translation.y += 0.005
@@ -117,8 +100,8 @@ extension CustomARView {
                 } else {
                     entity.physicsBody.self?.mode = .static
                     entity.transform.translation.y += -0.005
-                    //let recognizerIndex = gestureRecognizers?.firstIndex(of: sender)
-                    //gestureRecognizers?.remove(at: recognizerIndex!)
+                    let recognizerIndex = gestureRecognizers?.firstIndex(of: sender)
+                    gestureRecognizers?.remove(at: recognizerIndex!)
                     print("locking entity")
                     lockedEntities.append(entity)
                 }
