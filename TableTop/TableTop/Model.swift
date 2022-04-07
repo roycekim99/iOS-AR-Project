@@ -81,7 +81,6 @@ class Model {
             
         } else {
             self.modelEntity = ModelEntity(mesh: .generateBox(size: [1000, 100, 1000]), materials: [SimpleMaterial()])
-            //self.modelEntity?.transform.translation.y += -50
         }
     }
 }

@@ -37,13 +37,9 @@ class CustomARView: ARView, ARSessionDelegate{
     
     required init(frame frameRect: CGRect, sessionSettings: SessionSettings, zoom: ZoomView, sceneManager: SceneManager, placementSettings: PlacementSettings) {
         self.sessionSettings = sessionSettings
-        
         self.zoom = zoom
-        
         self.sceneManager = sceneManager
-        
         self.startPos = SIMD3<Float>(0,0,0)
-        
         self.placementSettings = placementSettings
 
         super.init(frame: frameRect)
@@ -51,16 +47,11 @@ class CustomARView: ARView, ARSessionDelegate{
         focusEntity = FocusEntity(on: self, focus: .classic)
                 
         configure()
-        
         setupMultipeer()
         
         self.initializeSettings()
-        
         self.setupSubscribers()
-        
         self.moveObject()
-        
-        
     }
     
     required init(frame frameRect: CGRect) {
@@ -91,6 +82,7 @@ class CustomARView: ARView, ARSessionDelegate{
         self.updateLidarDebug(isEnabled: sessionSettings.isLidarDebugEnabled)
         self.updateMultiuser(isEnabled: sessionSettings.isMultiuserEnabled)
     }
+    
     // Set up subscribers to state variables
     private func setupSubscribers() {
         self.peopleOcclusionCancellable = sessionSettings.$isPeopleOcclusionEnabled.sink { [weak self] isEnabled in
@@ -110,14 +102,14 @@ class CustomARView: ARView, ARSessionDelegate{
         }
     }
     
-    // Add functionality for people/object occlusion and lidar visualization
-    
+    // Adds functionality for people/object occlusion and lidar visualization
     private func updatePeopleOcclusion(isEnabled: Bool) {
         print("\(#file): isPeopleOcclusionEnabled is now \(isEnabled)")
         
         guard ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) else {
             return
         }
+        
         guard let configuration = self.session.configuration as? ARWorldTrackingConfiguration else {
             return
         }
@@ -151,9 +143,8 @@ class CustomARView: ARView, ARSessionDelegate{
         }
     }
     
-    // Not implemented. Copied from Reality School playlist. Will probably remove
+    // Not implemented yet, use for toggling multiplayer
     private func updateMultiuser(isEnabled: Bool) {
         print("\(#file): isMultiuserEnabled is now \(isEnabled)")
     }
 }
-

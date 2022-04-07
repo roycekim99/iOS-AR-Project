@@ -21,7 +21,6 @@ struct ControlView: View {
     
     var body: some View {
         VStack {
-            
             ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled)
             
             Spacer()
@@ -99,7 +98,6 @@ struct ZoomButton: View {
             .cornerRadius(8.0)
         }
         .padding(.leading, 20)
-        
     }
 }
 

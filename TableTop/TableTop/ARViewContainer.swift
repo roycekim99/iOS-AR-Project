@@ -77,7 +77,7 @@ struct ARViewContainer: UIViewRepresentable {
             arView.multipeerHelp.sendToAllPeers(myData, reliably: true)
         }
         
-        // 1. Clone modelEntity. This creates an identical copy of modelEntty and references the same model. This also allows us to have multple models of the same asset in our scene.
+        // 1. Clone modelEntity. This creates an identical copy of modelEntity and references the same model. This also allows us to have multiple models of the same asset in our scene.
         let clonedEntity = modelEntity.clone(recursive: true)
         
         // 2. Enable gestures.
@@ -85,15 +85,19 @@ struct ARViewContainer: UIViewRepresentable {
         if let collisionComponent = clonedEntity.components[CollisionComponent.self] as? CollisionComponent {
             clonedEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil , mode:  .dynamic)
         }
+        
         arView.installGestures(for: clonedEntity).forEach { entityGesture in
             entityGesture.addTarget(arView, action: #selector(CustomARView.transformObject(_:)))
         }
+        
         self.sceneManager.modelEntities.append(clonedEntity)
+        
         // 3. Create an anchorEntity and add clonedEntity to the anchorEntity
         let anchorEntity = AnchorEntity(plane: .any)
         anchorEntity.addChild(clonedEntity)
         
         anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
+        
         // 4. Add the achorEntity to the arView.scene
         arView.scene.addAnchor(anchorEntity)
         
@@ -102,9 +106,7 @@ struct ARViewContainer: UIViewRepresentable {
     
     private func place(inputJSON: JSONData, _ arView: CustomARView){
         let nameFromJSON = inputJSON.modelName
-        
         let requestedEntity = self.sceneManager.modelEntities.filter({$0.name == nameFromJSON })
-        
         place(requestedEntity.first!, in: arView)
     }
     
@@ -121,5 +123,4 @@ struct ARViewContainer: UIViewRepresentable {
             }
         }
     }
-    
 }

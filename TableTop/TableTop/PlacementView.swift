@@ -13,7 +13,6 @@ struct PlacementView: View {
     // View to place object
     var body: some View {
         HStack {
-            
             Spacer()
             
             PlacementButton(systemIconName: "xmark.circle.fill") {
@@ -41,7 +40,6 @@ struct PlacementButton: View {
     let action: () -> Void
     
     var body: some View {
-        
         Button(action: {
             self.action()
         }) {
@@ -52,5 +50,4 @@ struct PlacementButton: View {
         }
         .frame(width: 75, height: 75)
     }
-    
 }
