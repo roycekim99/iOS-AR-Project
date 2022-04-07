@@ -4,6 +4,10 @@
 //
 //  Created by Jet Aung on 2/2/22.
 //
+/*
+ Abstract:
+ Implements FocusEntity for object placement, people/object occlusion, and lidar visualization
+ */
 import RealityKit
 import ARKit
 import FocusEntity
@@ -12,8 +16,7 @@ import MultipeerHelper
 import MultipeerConnectivity
 import Combine
 
-// CustomARView: Implements FocusEntity for object placement, people/object occlusion, lidar visualization, and tap response functionality
-class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserViewControllerDelegate*/{
+class CustomARView: ARView, ARSessionDelegate{
     
     var multipeerHelp: MultipeerHelper!
     
@@ -27,11 +30,6 @@ class CustomARView: ARView, ARSessionDelegate/*, MCSessionDelegate, MCBrowserVie
     var placementSettings: PlacementSettings
     var lockedEntities = [ModelEntity]()
     
-    /*
-    var peerID: MCPeerID!
-    var mcSession: MCSession!
-    var mcAdvertiser: MCAdvertiserAssistant!
-    */
     private var peopleOcclusionCancellable: AnyCancellable?
     private var objectOcclusionCancellable: AnyCancellable?
     private var lidarDebugCancellable: AnyCancellable?
