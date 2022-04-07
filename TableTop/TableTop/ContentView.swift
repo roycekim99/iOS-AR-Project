@@ -48,5 +48,3 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(SceneManager())
     }
 }
-
-

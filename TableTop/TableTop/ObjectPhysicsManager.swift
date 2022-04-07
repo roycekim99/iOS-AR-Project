@@ -43,15 +43,13 @@ extension CustomARView {
                         return
                     }
                 }
+                
                 switch transformGesture.state {
                 case .began:
                     print("Started Moving")
                     
                     startPos = transformGesture.entity!.position
                     
-                    
-                    
-                    ///
                     if self.zoom.ZoomEnabled {
 
                         for ent in self.sceneManager.modelEntities {
@@ -87,7 +85,6 @@ extension CustomARView {
                 }
             }
         //}
-        
     }
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer) {
@@ -97,15 +94,6 @@ extension CustomARView {
         print(lockedEntities)
         if let entity = self.entity(at: location) as? ModelEntity {
             if sender.state == .began {
-                /*
-                if entity.physicsBody?.mode != .static {
-                    entity.physicsBody?.mode = .static
-                    print("Set to static.")
-                    
-                } else {
-                    entity.physicsBody?.mode = .dynamic
-                    print("Set to dynamic")
-                }*/
                 if lockedEntities.contains(entity) {
                     entity.physicsBody?.mode = .dynamic
                     entity.transform.translation.y += 0.005

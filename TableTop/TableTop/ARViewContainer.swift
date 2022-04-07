@@ -15,15 +15,12 @@ struct ARViewContainer: UIViewRepresentable {
     @EnvironmentObject var sceneManager: SceneManager
     
     func makeUIView(context: Context) -> CustomARView {
-        
         let arView = CustomARView(frame: .zero, sessionSettings: sessionSettings, zoom: zoom, sceneManager: sceneManager, placementSettings: placementSettings)
         
         // Subscribe to SceneEvents.Update
         // Check every frame for updates from the scene if object is placed, deleted, moved, etc.
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, { (event) in
-            
             self.updateScene(for: arView)
-            
         })
         
         return arView
@@ -41,7 +38,6 @@ struct ARViewContainer: UIViewRepresentable {
                 self.place(modelEntity, in: arView)
                 // After creating children variable to Model
                 for chd in confirmedModel.childs {
-                    //chd.asyncLoadModelEntity()
                     print(chd.name)
                     self.place(chd.modelEntity!, in: arView)
                 }
@@ -66,7 +62,7 @@ struct ARViewContainer: UIViewRepresentable {
         anchorEntity.addChild(floor)
         anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
         arView.scene.addAnchor(anchorEntity)
-        //arView.session.add(anchor: anchorEntity)
+
         print("added floor")
         
         sceneManager.floor = anchorEntity
@@ -79,7 +75,7 @@ struct ARViewContainer: UIViewRepresentable {
             arView.multipeerHelp.sendToAllPeers(myData, reliably: true)
         }
         
-        // 1. Clone modelEntity. This creates an identical copy of modelEntty and references the same model. This also allows us to have multple models of the same asset in our scene.
+        // 1. Clone modelEntity. This creates an identical copy of modelEntity and references the same model. This also allows us to have multiple models of the same asset in our scene.
         let clonedEntity = modelEntity.clone(recursive: true)
         
         // 2. Enable gestures.
@@ -87,15 +83,19 @@ struct ARViewContainer: UIViewRepresentable {
         if let collisionComponent = clonedEntity.components[CollisionComponent.self] as? CollisionComponent {
             clonedEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil , mode:  .dynamic)
         }
+        
         arView.installGestures(for: clonedEntity).forEach { entityGesture in
             entityGesture.addTarget(arView, action: #selector(CustomARView.transformObject(_:)))
         }
+        
         self.sceneManager.modelEntities.append(clonedEntity)
+        
         // 3. Create an anchorEntity and add clonedEntity to the anchorEntity
         let anchorEntity = AnchorEntity(plane: .any)
         anchorEntity.addChild(clonedEntity)
         
         anchorEntity.synchronization?.ownershipTransferMode = .autoAccept
+        
         // 4. Add the achorEntity to the arView.scene
         arView.scene.addAnchor(anchorEntity)
         
@@ -104,9 +104,7 @@ struct ARViewContainer: UIViewRepresentable {
     
     private func place(inputJSON: JSONData, _ arView: CustomARView){
         let nameFromJSON = inputJSON.modelName
-        
         let requestedEntity = self.sceneManager.modelEntities.filter({$0.name == nameFromJSON })
-        
         place(requestedEntity.first!, in: arView)
     }
     
@@ -123,5 +121,4 @@ struct ARViewContainer: UIViewRepresentable {
             }
         }
     }
-    
 }
