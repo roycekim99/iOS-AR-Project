@@ -12,7 +12,7 @@ struct TableTopApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
+            ControlView()
         }
     }
 }

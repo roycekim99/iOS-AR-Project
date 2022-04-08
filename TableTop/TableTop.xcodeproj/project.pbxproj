@@ -14,6 +14,9 @@
 		874D6D8027FFD19300E7DBF4 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */; };
 		874D6D8227FFD1A100E7DBF4 /* ModelLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */; };
 		874D6D8427FFD1B000E7DBF4 /* MultiuserHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8327FFD1B000E7DBF4 /* MultiuserHandler.swift */; };
+		874D6D8627FFD34200E7DBF4 /* PlaceConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8527FFD34200E7DBF4 /* PlaceConfirmView.swift */; };
+		874D6D8827FFD34F00E7DBF4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8727FFD34F00E7DBF4 /* SettingsView.swift */; };
+		874D6D8A27FFD35A00E7DBF4 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8927FFD35A00E7DBF4 /* ZoomView.swift */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
 		C5037D4F27C7024D00EE9549 /* check.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* check.usdz */; };
 		C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */; };
@@ -82,6 +85,9 @@
 		874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLibrary.swift; sourceTree = "<group>"; };
 		874D6D8327FFD1B000E7DBF4 /* MultiuserHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiuserHandler.swift; sourceTree = "<group>"; };
+		874D6D8527FFD34200E7DBF4 /* PlaceConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceConfirmView.swift; sourceTree = "<group>"; };
+		874D6D8727FFD34F00E7DBF4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		874D6D8927FFD35A00E7DBF4 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
 		C5037D4E27C7024D00EE9549 /* check.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = check.usdz; sourceTree = "<group>"; };
 		C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Board.usdz"; sourceTree = "<group>"; };
@@ -159,6 +165,9 @@
 			children = (
 				874D6D7927FFD15400E7DBF4 /* ControlView.swift */,
 				874D6D7D27FFD17700E7DBF4 /* BrowseView.swift */,
+				874D6D8527FFD34200E7DBF4 /* PlaceConfirmView.swift */,
+				874D6D8727FFD34F00E7DBF4 /* SettingsView.swift */,
+				874D6D8927FFD35A00E7DBF4 /* ZoomView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -453,6 +462,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				874D6D7C27FFD16000E7DBF4 /* Model.swift in Sources */,
+				874D6D8A27FFD35A00E7DBF4 /* ZoomView.swift in Sources */,
+				874D6D8627FFD34200E7DBF4 /* PlaceConfirmView.swift in Sources */,
 				874D6D8427FFD1B000E7DBF4 /* MultiuserHandler.swift in Sources */,
 				874D6D7A27FFD15400E7DBF4 /* ControlView.swift in Sources */,
 				874D6D7827FFD12400E7DBF4 /* ARSceneManager.swift in Sources */,
@@ -461,6 +472,7 @@
 				C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */,
 				874D6D7E27FFD17700E7DBF4 /* BrowseView.swift in Sources */,
 				C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */,
+				874D6D8827FFD34F00E7DBF4 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
