@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6FE378E227FD00CF00B599B2 /* CustomARView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE378E127FD00CF00B599B2 /* CustomARView+Extension.swift */; };
-		87BFE33627D7335000FC9FD2 /* JSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BFE33527D7335000FC9FD2 /* JSONData.swift */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
 		C5037D4F27C7024D00EE9549 /* check.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* check.usdz */; };
 		C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */; };
@@ -40,30 +38,17 @@
 		C55E64B827D7C3EE00EC5DE7 /* Black_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */; };
 		C55E64BA27D7C42A00EC5DE7 /* Red_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */; };
 		C55E64BC27D7DFC900EC5DE7 /* FloorPlacementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E64BB27D7DFC800EC5DE7 /* FloorPlacementView.swift */; };
-		C5823A6027FCFDCE00BEF3E1 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5823A5F27FCFDCE00BEF3E1 /* ARViewContainer.swift */; };
-		C5823A6227FF9C8E00BEF3E1 /* ObjectPhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5823A6127FF9C8E00BEF3E1 /* ObjectPhysicsManager.swift */; };
-		C5AB175C27CE362400C85228 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AB175B27CE362400C85228 /* ZoomView.swift */; };
-		C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798727A95AA700E24F1D /* BrowseView.swift */; };
-		C5E6798A27A95CC100E24F1D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E6798927A95CC100E24F1D /* Model.swift */; };
 		C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Checkers.usdz */; };
 		C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */; };
-		C5EE084C27A24DA200C3D9F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE084B27A24DA200C3D9F6 /* ContentView.swift */; };
 		C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */; };
 		C5EE085127A24DA300C3D9F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5EE085027A24DA300C3D9F6 /* Preview Assets.xcassets */; };
 		C5EE085B27A24DA400C3D9F6 /* TableTopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE085A27A24DA400C3D9F6 /* TableTopTests.swift */; };
 		C5EE086527A24DA400C3D9F6 /* TableTopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE086427A24DA400C3D9F6 /* TableTopUITests.swift */; };
 		C5EE086727A24DA400C3D9F6 /* TableTopUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE086627A24DA400C3D9F6 /* TableTopUITestsLaunchTests.swift */; };
 		C5EE087527A9500A00C3D9F6 /* Chess Set.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5EE087427A9500A00C3D9F6 /* Chess Set.usdz */; };
-		C5EE087727A950E000C3D9F6 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE087627A950E000C3D9F6 /* ControlView.swift */; };
 		C5F7D38527AB48410052FA59 /* Goku.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5F7D38427AB48410052FA59 /* Goku.usdz */; };
-		C5F7D38727AB48F90052FA59 /* PlacementSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D38627AB48F90052FA59 /* PlacementSettings.swift */; };
-		C5F7D38927AB4A7C0052FA59 /* PlacementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D38827AB4A7C0052FA59 /* PlacementView.swift */; };
 		C5F7D38C27AB4D850052FA59 /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = C5F7D38B27AB4D850052FA59 /* FocusEntity */; };
-		C5F7D38E27AB4DA80052FA59 /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */; };
-		C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */; };
 		C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */; };
-		C5F7D39527AE40890052FA59 /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D39427AE40890052FA59 /* SessionSettings.swift */; };
-		C5F7D39727AE41D60052FA59 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7D39627AE41D60052FA59 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +69,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6FE378E127FD00CF00B599B2 /* CustomARView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomARView+Extension.swift"; sourceTree = "<group>"; };
-		87BFE33527D7335000FC9FD2 /* JSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONData.swift; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
 		C5037D4E27C7024D00EE9549 /* check.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = check.usdz; sourceTree = "<group>"; };
 		C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Board.usdz"; sourceTree = "<group>"; };
@@ -117,15 +100,9 @@
 		C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_Piece.usdz; sourceTree = "<group>"; };
 		C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_Piece.usdz; sourceTree = "<group>"; };
 		C55E64BB27D7DFC800EC5DE7 /* FloorPlacementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorPlacementView.swift; sourceTree = "<group>"; };
-		C5823A5F27FCFDCE00BEF3E1 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
-		C5823A6127FF9C8E00BEF3E1 /* ObjectPhysicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectPhysicsManager.swift; sourceTree = "<group>"; };
-		C5AB175B27CE362400C85228 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
-		C5E6798727A95AA700E24F1D /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
-		C5E6798927A95CC100E24F1D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C5E6798B27A9611B00E24F1D /* Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Checkers.usdz; sourceTree = "<group>"; };
 		C5EE084627A24DA200C3D9F6 /* TableTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopApp.swift; sourceTree = "<group>"; };
-		C5EE084B27A24DA200C3D9F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5EE085027A24DA300C3D9F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C5EE085627A24DA400C3D9F6 /* TableTopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableTopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,15 +111,8 @@
 		C5EE086427A24DA400C3D9F6 /* TableTopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopUITests.swift; sourceTree = "<group>"; };
 		C5EE086627A24DA400C3D9F6 /* TableTopUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C5EE087427A9500A00C3D9F6 /* Chess Set.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Chess Set.usdz"; sourceTree = "<group>"; };
-		C5EE087627A950E000C3D9F6 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
 		C5F7D38427AB48410052FA59 /* Goku.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Goku.usdz; sourceTree = "<group>"; };
-		C5F7D38627AB48F90052FA59 /* PlacementSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementSettings.swift; sourceTree = "<group>"; };
-		C5F7D38827AB4A7C0052FA59 /* PlacementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementView.swift; sourceTree = "<group>"; };
-		C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
-		C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Goku_Drip.usdz; sourceTree = "<group>"; };
-		C5F7D39427AE40890052FA59 /* SessionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSettings.swift; sourceTree = "<group>"; };
-		C5F7D39627AE41D60052FA59 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,21 +175,6 @@
 			children = (
 				C55E64B627D79E5600EC5DE7 /* Info.plist */,
 				C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */,
-				6FE378E127FD00CF00B599B2 /* CustomARView+Extension.swift */,
-				C5EE084B27A24DA200C3D9F6 /* ContentView.swift */,
-				C5823A5F27FCFDCE00BEF3E1 /* ARViewContainer.swift */,
-				C5F7D38D27AB4DA80052FA59 /* CustomARView.swift */,
-				C5823A6127FF9C8E00BEF3E1 /* ObjectPhysicsManager.swift */,
-				C5EE087627A950E000C3D9F6 /* ControlView.swift */,
-				C5E6798727A95AA700E24F1D /* BrowseView.swift */,
-				87BFE33527D7335000FC9FD2 /* JSONData.swift */,
-				C5F7D38827AB4A7C0052FA59 /* PlacementView.swift */,
-				C5F7D39627AE41D60052FA59 /* SettingsView.swift */,
-				C5F7D39427AE40890052FA59 /* SessionSettings.swift */,
-				C5E6798927A95CC100E24F1D /* Model.swift */,
-				C5F7D38F27AB56A40052FA59 /* View+Extensions.swift */,
-				C5F7D38627AB48F90052FA59 /* PlacementSettings.swift */,
-				C5AB175B27CE362400C85228 /* ZoomView.swift */,
 				C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */,
 				C5037D0727C5A27900EE9549 /* Models */,
 				C5EE087327A94FC700C3D9F6 /* 3D Assets */,
@@ -471,24 +426,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5F7D38727AB48F90052FA59 /* PlacementSettings.swift in Sources */,
-				C5823A6027FCFDCE00BEF3E1 /* ARViewContainer.swift in Sources */,
-				C5823A6227FF9C8E00BEF3E1 /* ObjectPhysicsManager.swift in Sources */,
-				C5F7D39527AE40890052FA59 /* SessionSettings.swift in Sources */,
-				C5AB175C27CE362400C85228 /* ZoomView.swift in Sources */,
-				C5F7D39027AB56A40052FA59 /* View+Extensions.swift in Sources */,
-				C5E6798A27A95CC100E24F1D /* Model.swift in Sources */,
-				87BFE33627D7335000FC9FD2 /* JSONData.swift in Sources */,
-				C5E6798827A95AA700E24F1D /* BrowseView.swift in Sources */,
 				C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */,
-				C5EE084C27A24DA200C3D9F6 /* ContentView.swift in Sources */,
 				C55E64BC27D7DFC900EC5DE7 /* FloorPlacementView.swift in Sources */,
-				C5EE087727A950E000C3D9F6 /* ControlView.swift in Sources */,
-				6FE378E227FD00CF00B599B2 /* CustomARView+Extension.swift in Sources */,
 				C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */,
-				C5F7D38E27AB4DA80052FA59 /* CustomARView.swift in Sources */,
-				C5F7D38927AB4A7C0052FA59 /* PlacementView.swift in Sources */,
-				C5F7D39727AE41D60052FA59 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
