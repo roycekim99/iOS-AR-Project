@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		874D6D7827FFD12400E7DBF4 /* ARSceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */; };
+		874D6D7A27FFD15400E7DBF4 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7927FFD15400E7DBF4 /* ControlView.swift */; };
+		874D6D7C27FFD16000E7DBF4 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7B27FFD16000E7DBF4 /* Model.swift */; };
+		874D6D7E27FFD17700E7DBF4 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7D27FFD17700E7DBF4 /* BrowseView.swift */; };
+		874D6D8027FFD19300E7DBF4 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */; };
+		874D6D8227FFD1A100E7DBF4 /* ModelLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */; };
+		874D6D8427FFD1B000E7DBF4 /* MultiuserHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8327FFD1B000E7DBF4 /* MultiuserHandler.swift */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
 		C5037D4F27C7024D00EE9549 /* check.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* check.usdz */; };
 		C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */; };
@@ -37,7 +44,6 @@
 		C55E64B327D792B000EC5DE7 /* MultipeerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = C55E64B227D792B000EC5DE7 /* MultipeerHelper */; };
 		C55E64B827D7C3EE00EC5DE7 /* Black_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */; };
 		C55E64BA27D7C42A00EC5DE7 /* Red_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */; };
-		C55E64BC27D7DFC900EC5DE7 /* FloorPlacementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E64BB27D7DFC800EC5DE7 /* FloorPlacementView.swift */; };
 		C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Checkers.usdz */; };
 		C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */; };
 		C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */; };
@@ -69,6 +75,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneManager.swift; sourceTree = "<group>"; };
+		874D6D7927FFD15400E7DBF4 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
+		874D6D7B27FFD16000E7DBF4 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		874D6D7D27FFD17700E7DBF4 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
+		874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLibrary.swift; sourceTree = "<group>"; };
+		874D6D8327FFD1B000E7DBF4 /* MultiuserHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiuserHandler.swift; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
 		C5037D4E27C7024D00EE9549 /* check.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = check.usdz; sourceTree = "<group>"; };
 		C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Board.usdz"; sourceTree = "<group>"; };
@@ -99,7 +112,6 @@
 		C55E64B627D79E5600EC5DE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_Piece.usdz; sourceTree = "<group>"; };
 		C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_Piece.usdz; sourceTree = "<group>"; };
-		C55E64BB27D7DFC800EC5DE7 /* FloorPlacementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorPlacementView.swift; sourceTree = "<group>"; };
 		C5E6798B27A9611B00E24F1D /* Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Checkers.usdz; sourceTree = "<group>"; };
 		C5EE084627A24DA200C3D9F6 /* TableTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopApp.swift; sourceTree = "<group>"; };
@@ -142,6 +154,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		874D6D7627FFD0F900E7DBF4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				874D6D7927FFD15400E7DBF4 /* ControlView.swift */,
+				874D6D7D27FFD17700E7DBF4 /* BrowseView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		C5037D0727C5A27900EE9549 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,10 +197,15 @@
 				C55E64B627D79E5600EC5DE7 /* Info.plist */,
 				C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */,
 				C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */,
+				874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */,
+				874D6D8327FFD1B000E7DBF4 /* MultiuserHandler.swift */,
+				874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */,
+				874D6D7B27FFD16000E7DBF4 /* Model.swift */,
+				874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */,
+				874D6D7627FFD0F900E7DBF4 /* UI */,
 				C5037D0727C5A27900EE9549 /* Models */,
 				C5EE087327A94FC700C3D9F6 /* 3D Assets */,
 				C5EE084F27A24DA300C3D9F6 /* Preview Content */,
-				C55E64BB27D7DFC800EC5DE7 /* FloorPlacementView.swift */,
 			);
 			path = TableTop;
 			sourceTree = "<group>";
@@ -426,8 +452,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				874D6D7C27FFD16000E7DBF4 /* Model.swift in Sources */,
+				874D6D8427FFD1B000E7DBF4 /* MultiuserHandler.swift in Sources */,
+				874D6D7A27FFD15400E7DBF4 /* ControlView.swift in Sources */,
+				874D6D7827FFD12400E7DBF4 /* ARSceneManager.swift in Sources */,
+				874D6D8227FFD1A100E7DBF4 /* ModelLibrary.swift in Sources */,
+				874D6D8027FFD19300E7DBF4 /* ModelManager.swift in Sources */,
 				C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */,
-				C55E64BC27D7DFC900EC5DE7 /* FloorPlacementView.swift in Sources */,
+				874D6D7E27FFD17700E7DBF4 /* BrowseView.swift in Sources */,
 				C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
