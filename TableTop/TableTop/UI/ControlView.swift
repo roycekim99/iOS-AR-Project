@@ -44,6 +44,7 @@ struct DefaultView: View {
         VStack {
         
             ControlTopBar(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled)
+//            ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled)
             
             Spacer()
             
@@ -58,19 +59,17 @@ struct DefaultView: View {
 struct ControlTopBar: View {
     @Binding var isControlsVisible: Bool
     @Binding var isZoomEnabled: Bool
-    
+
     var body: some View {
         HStack {
-            
             if self.isControlsVisible{
                 ZoomButton(isZoomEnabled: $isZoomEnabled)
             }
-            
+
             Spacer()
-            
+
             ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible)
-            
-            
+
         }
         .padding(.top, 45)
     }
@@ -78,11 +77,13 @@ struct ControlTopBar: View {
 
 struct ControlVisibilityToggleButton: View {
     @Binding var isControlsVisible: Bool
-    
+
+//    var padding = 100
+
     var body: some View {
         ZStack {
             Color.black.opacity(0.25)
-            
+
             Button(action: {
                 print("Control Visibility Toggle Button Pressed.")
                 self.isControlsVisible.toggle()
@@ -92,22 +93,88 @@ struct ControlVisibilityToggleButton: View {
                     .foregroundColor(.white)
                     .buttonStyle(PlainButtonStyle())
             }
-            
+
         }
         .frame(width: 50, height: 50)
         .cornerRadius(8.0)
         .padding(.trailing, 100)
-        
     }
 }
 
+//struct ControlVisibilityToggleButton: View {
+//    @Binding var isControlsVisible: Bool
+//    @Binding var isZoomEnabled: Bool
+//
+//    var body: some View {
+//        HStack {
+//
+//            if self.isControlsVisible {
+//                ZoomButton(isZoomEnabled: $isZoomEnabled)
+//            }
+//
+//            Spacer()
+//
+//            ZStack {
+//
+//                Color.black.opacity(0.25)
+//
+//                Button(action: {
+//                    print("Control Visibility Toggle Button Pressed.")
+//                    self.isControlsVisible.toggle()
+//                }) {
+//                    Image(systemName: self.isControlsVisible ? "rectangle" : "slider.horizontal.below.rectangle")
+//                        .font(.system(size: 25))
+//                        .foregroundColor(.white)
+//                        .buttonStyle(PlainButtonStyle())
+//                }
+//            }
+//            .frame(width: 50, height: 50)
+//            .cornerRadius(8.0)
+//        }
+//        .padding(.top, 45)
+//        .padding(.trailing, 20)
+//    }
+//}
+//
+//struct ZoomButton: View {
+//    @Binding var isZoomEnabled: Bool
+////    @EnvironmentObject var zoomView: ZoomView
+////    @EnvironmentObject var sceneManager: SceneManager
+//    var arView = ARViewContainer()
+//
+//    var body: some View {
+//        HStack {
+//            ZStack {
+//                Color.black.opacity(0.25)
+//
+//                Button(action: {
+//                    print("Zoom Button Pressed.")
+//
+////                    self.isZoomEnabled.toggle()
+////                    self.zoomView.ZoomEnabled = self.isZoomEnabled
+////                    self.arView.moveAll(check: &self.isZoomEnabled, modelEntities: self.sceneManager.modelEntities)
+//
+//                }) {
+//                    Image(systemName: self.isZoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
+//                        .font(.system(size: 25))
+//                        .foregroundColor(.white)
+//                        .buttonStyle(PlainButtonStyle())
+//                }
+//            }
+//            .frame(width: 50, height: 50)
+//            .cornerRadius(8.0)
+//        }
+//        .padding(.leading, 20)
+//    }
+//}
+
 struct ZoomButton: View {
     @Binding var isZoomEnabled: Bool
-    
+
     var body: some View {
         ZStack {
             Color.black.opacity(0.25)
-            
+
             Button(action: {
                 print("Zoom Button Pressed.")
                 self.isZoomEnabled.toggle()
@@ -124,9 +191,16 @@ struct ZoomButton: View {
     }
 }
 
+
 struct ControlBottomBar: View {
+//    @EnvironmentObject var placementSettings: PlacementSettings
+    
     var body: some View {
         HStack {
+//            MostRecentlyPlacedButton().hidden(self.placementSettings.recentlyPlaced.isEmpty)
+            Spacer()
+            MostRecentlyPlacedButton()
+                        
             Spacer()
             
 //             Browse Button
@@ -164,6 +238,32 @@ struct ControlButton: View {
                 .buttonStyle(PlainButtonStyle())
         }
         .frame(width: 50, height: 50)
+    }
+}
+
+struct MostRecentlyPlacedButton: View {
+//    @EnvironmentObject var placementSettings: PlacementSettings
+    
+    var body: some View {
+        Button(action: {
+            print("Most Recently Placed button pressed")
+//            self.placementSettings.selectedModel = self.placementSettings.recentlyPlaced.last
+        }) {
+//            if let mostRecentlyPlacedModel = self.placementSettings.recentlyPlaced.last {
+//                Image(uiImage: mostRecentlyPlacedModel.thumbnail)
+//                    .resizable()
+//                    .frame(width: 46)
+//                    .aspectRatio(1/1, contentMode: .fit)
+//            } else {
+                Image(systemName: "clock.fill")
+                    .font(.system(size: 35))
+                    .foregroundColor(.white)
+                    .buttonStyle(PlainButtonStyle())
+//            }
+        }
+        .frame(width: 50, height: 50)
+        .background(Color.white)
+        .cornerRadius(8.0)
     }
 }
 
