@@ -9,6 +9,7 @@ import SwiftUI
 import RealityKit
 import Combine
 
+
 // TODO: uncomment position after figuring out how to get position
 class Model {
     var name: String
