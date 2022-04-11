@@ -16,7 +16,7 @@ struct BrowseView: View {
             NavigationView {
                 ScrollView(showsIndicators: false) {
                     // Gridviews for thumbnails
-//                    RecentsGrid(showBrowse: $showBrowse)
+                    RecentsGrid(showBrowse: $showBrowse)
                     ModelsByCategoryGrid(showBrowse: $showBrowse)
                 }
                 .navigationBarTitle(Text("Browse"), displayMode: .large)
