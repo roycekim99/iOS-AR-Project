@@ -52,36 +52,35 @@ struct ModelsByCategoryGrid: View {
     }
 }
 
-// TODO: implement recentsGrid beased on user's selection of objects
-//struct RecentsGrid: View {
-//    @EnvironmentObject var placementSettings: PlacementSettings
-//    @Binding var showBrowse: Bool
-//
-//    var body: some View {
-//        if !self.placementSettings.recentlyPlaced.isEmpty {
-//            // create a horitzontalGrid for recentlyPlacedbject
-//            HorizontalGrid(showBrowse: $showBrowse, title: "Recents", items: getRecentsUniqueOrdered())
-//        }
-//    }
-//
-//    func getRecentsUniqueOrdered() -> [Model] {
-//        var recentsUniqueOrderedArray: [Model] = []
-//        var modelNameSet: Set<String> = []
-//
-//        for model in self.placementSettings.recentlyPlaced.reversed() {
-//            if !modelNameSet.contains(model.name) {
-//                recentsUniqueOrderedArray.append(model)
-//                modelNameSet.insert(model.name)
-//            }
-//        }
-//
-//        return recentsUniqueOrderedArray
-//    }
-//}
+struct RecentsGrid: View {
+    @EnvironmentObject var placementSettings: PlacementSettings
+    @Binding var showBrowse: Bool
+
+    var body: some View {
+        if !self.placementSettings.recentlyPlaced.isEmpty {
+            // create a horitzontalGrid for recentlyPlacedbject
+            HorizontalGrid(showBrowse: $showBrowse, title: "Recents", items: getRecentsUniqueOrdered())
+        }
+    }
+
+    func getRecentsUniqueOrdered() -> [Model] {
+        var recentsUniqueOrderedArray: [Model] = []
+        var modelNameSet: Set<String> = []
+
+        for model in self.placementSettings.recentlyPlaced.reversed() {
+            if !modelNameSet.contains(model.name) {
+                recentsUniqueOrderedArray.append(model)
+                modelNameSet.insert(model.name)
+            }
+        }
+
+        return recentsUniqueOrderedArray
+    }
+}
 
 // one horizontalGrid
 struct HorizontalGrid: View {
-//    @EnvironmentObject var placementSettings: PlacementSettings
+    @EnvironmentObject var placementSettings: PlacementSettings
     @Binding var showBrowse: Bool
     
     private let gridItemLayout = [GridItem(.fixed(150))]
@@ -102,16 +101,21 @@ struct HorizontalGrid: View {
                 LazyHGrid(rows: gridItemLayout, spacing: 30) {
                     ForEach(0..<items.count) {index in
                         let model = items[index]
+                        // TODO: get id -- need to implement model library
+                        // let id = items[index].id
                         
                         // TODO: implement code for handling user interaction -- load model entity
                         ItemButton(model: model) {
+                            // load model from modellibrary using id
+                            
+                            
                             // Load model and their children asynchronously
 //                            model.asyncLoadModelEntity()
 //                            for chd in model.childs {
 //                                chd.asyncLoadModelEntity()
 //                                    print(chd.name)
 //                                }
-//                          self.placementSettings.selectedModel = model
+                            self.placementSettings.selectedModel = model
                             print("BrowseView: selected \(model.name) for placement.")
                             self.showBrowse = false
                         }

@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct TableTopApp: App {
+    @StateObject var placementSettings = PlacementSettings()
     
     var body: some Scene {
         WindowGroup {
             ControlView()
+                .environmentObject(placementSettings)
         }
     }
 }

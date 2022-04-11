@@ -11,27 +11,25 @@ import ARKit
 
 //show default UI
 struct ControlView: View {
-//    @EnvironmentObject var placementSettings: PlacementSettings
+    @EnvironmentObject var placementSettings: PlacementSettings
     @State private var isControlsVisible: Bool = true
     @State private var isZoomEnabled: Bool = false
     @State private var showbrowse: Bool = false
     
     var body: some View {
-            ZStack(alignment: .bottom) {
-                ARViewContainer()
+        ZStack(alignment: .bottom) {
+            ARViewContainer()
                 
-                //TODO: update 
-                // If no model is selected for placement, show default UI
-//                if self.placementSettings.selectedModel == nil {
-//                    DefaultView(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled, showBrowse: $showbrowse )
-//                } else {
-//                    // Show placement view
-//                    PlaceConfirmView()
-//                }
-                
+//          If no model is selected for placement, show default UI
+            if self.placementSettings.selectedModel == nil {
                 DefaultView(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled, showBrowse: $showbrowse )
+            } else {
+                // Show placement view
+                PlaceConfirmView()
             }
-            .edgesIgnoringSafeArea(.all)
+                
+        }
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
@@ -90,9 +88,7 @@ struct ControlTopBar: View {
 
 struct ControlVisibilityToggleButton: View {
     @Binding var isControlsVisible: Bool
-
-//    var padding = 100
-
+    
     var body: some View {
         ZStack {
             Color.black.opacity(0.25)
@@ -203,16 +199,16 @@ struct ZoomButton: View {
         .padding(.leading, 100)
     }
 }
-
-// TODO: need to update 
+ 
 struct ControlBottomBar: View {
-//    @EnvironmentObject var placementSettings: PlacementSettings
+    @EnvironmentObject var placementSettings: PlacementSettings
     @Binding var showBrowse: Bool
     
     var body: some View {
         HStack {
-//            MostRecentlyPlacedButton().hidden(self.placementSettings.recentlyPlaced.isEmpty)
+
             Spacer()
+            
             MostRecentlyPlacedButton()
                         
             Spacer()
@@ -258,26 +254,25 @@ struct ControlButton: View {
     }
 }
 
-// TODO: need to update
 struct MostRecentlyPlacedButton: View {
-//    @EnvironmentObject var placementSettings: PlacementSettings
+    @EnvironmentObject var placementSettings: PlacementSettings
     
     var body: some View {
         Button(action: {
             print("Most Recently Placed button pressed")
-//            self.placementSettings.selectedModel = self.placementSettings.recentlyPlaced.last
+            self.placementSettings.selectedModel = self.placementSettings.recentlyPlaced.last
         }) {
-//            if let mostRecentlyPlacedModel = self.placementSettings.recentlyPlaced.last {
-//                Image(uiImage: mostRecentlyPlacedModel.thumbnail)
-//                    .resizable()
-//                    .frame(width: 46)
-//                    .aspectRatio(1/1, contentMode: .fit)
-//            } else {
+            if let mostRecentlyPlacedModel = self.placementSettings.recentlyPlaced.last {
+                Image(uiImage: mostRecentlyPlacedModel.thumbnail)
+                    .resizable()
+                    .frame(width: 46)
+                    .aspectRatio(1/1, contentMode: .fit)
+            } else {
                 Image(systemName: "clock.fill")
                     .font(.system(size: 35))
                     .foregroundColor(.white)
                     .buttonStyle(PlainButtonStyle())
-//            }
+            }
         }
         .frame(width: 50, height: 50)
         .background(Color.white)
@@ -289,5 +284,6 @@ struct MostRecentlyPlacedButton: View {
 struct ControlView_Previews: PreviewProvider{
     static var previews: some View{
         ControlView()
+            .environmentObject(PlacementSettings())
     }
 }

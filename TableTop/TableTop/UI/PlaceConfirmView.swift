@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-// TODO: update
-
 struct PlaceConfirmView: View {
-//    @EnvironmentObject var placementSettings: placementSettings
+    @EnvironmentObject var placementSettings: PlacementSettings
         
         // View to place object
         var body: some View {
@@ -19,7 +17,7 @@ struct PlaceConfirmView: View {
                 
                 PlacementButton(systemIconName: "xmark.circle.fill") {
                     print("Cancel Placement Button pressed.")
-//                    self.placementSettings.selectedModel = nil
+                    self.placementSettings.selectedModel = nil
                 }
                 
                 Spacer()
@@ -27,9 +25,9 @@ struct PlaceConfirmView: View {
                 PlacementButton(systemIconName: "checkmark.circle.fill") {
                     print("Confirm Placement button pressed.")
                     
-//                    self.placementSettings.confirmedModel = self.placementSettings.selectedModel
-//
-//                    self.placementSettings.selectedModel = nil
+                    self.placementSettings.confirmedModel = self.placementSettings.selectedModel
+                    
+                    self.placementSettings.selectedModel = nil
                 }
                 Spacer()
             }
