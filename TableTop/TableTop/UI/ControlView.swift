@@ -11,6 +11,7 @@ import ARKit
 
 //show default UI
 struct ControlView: View {
+//    @EnvironmentObject var placementSettings: PlacementSettings
     @State private var isControlsVisible: Bool = true
     @State private var isZoomEnabled: Bool = false
     @State private var showbrowse: Bool = false
@@ -18,6 +19,16 @@ struct ControlView: View {
     var body: some View {
             ZStack(alignment: .bottom) {
                 ARViewContainer()
+                
+                //TODO: update 
+                // If no model is selected for placement, show default UI
+//                if self.placementSettings.selectedModel == nil {
+//                    DefaultView(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled, showBrowse: $showbrowse )
+//                } else {
+//                    // Show placement view
+//                    PlaceConfirmView()
+//                }
+                
                 DefaultView(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled, showBrowse: $showbrowse )
             }
             .edgesIgnoringSafeArea(.all)
