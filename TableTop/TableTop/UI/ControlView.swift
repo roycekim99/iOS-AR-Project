@@ -13,11 +13,12 @@ import ARKit
 struct ControlView: View {
     @State private var isControlsVisible: Bool = true
     @State private var isZoomEnabled: Bool = false
+    @State private var showbrowse: Bool = false
     
     var body: some View {
             ZStack(alignment: .bottom) {
                 ARViewContainer()
-                DefaultView(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled)
+                DefaultView(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled, showBrowse: $showbrowse )
             }
             .edgesIgnoringSafeArea(.all)
     }
@@ -39,6 +40,7 @@ struct ARViewContainer: UIViewRepresentable {
 struct DefaultView: View {
     @Binding var isControlsVisible: Bool
     @Binding var isZoomEnabled: Bool
+    @Binding var showBrowse: Bool
     
     var body: some View {
         VStack {
@@ -49,7 +51,7 @@ struct DefaultView: View {
             Spacer()
             
             if isControlsVisible {
-                ControlBottomBar()
+                ControlBottomBar(showBrowse: $showBrowse)
             }
 
         }
@@ -191,9 +193,10 @@ struct ZoomButton: View {
     }
 }
 
-
+// TODO: need to update 
 struct ControlBottomBar: View {
 //    @EnvironmentObject var placementSettings: PlacementSettings
+    @Binding var showBrowse: Bool
     
     var body: some View {
         HStack {
@@ -206,6 +209,9 @@ struct ControlBottomBar: View {
 //             Browse Button
             ControlButton(systemIconName: "square.grid.2x2") {
                 print("Browse button pressed")
+                self.showBrowse.toggle()
+            }.sheet(isPresented: $showBrowse) {
+                BrowseView(showBrowse: $showBrowse)
             }
             
             Spacer()
@@ -241,6 +247,7 @@ struct ControlButton: View {
     }
 }
 
+// TODO: need to update
 struct MostRecentlyPlacedButton: View {
 //    @EnvironmentObject var placementSettings: PlacementSettings
     
