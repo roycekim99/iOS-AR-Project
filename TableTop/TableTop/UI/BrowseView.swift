@@ -101,12 +101,11 @@ struct HorizontalGrid: View {
                 LazyHGrid(rows: gridItemLayout, spacing: 30) {
                     ForEach(0..<items.count) {index in
                         let model = items[index]
-                        // TODO: get id -- need to implement model library
-                        // let id = items[index].id
+                        let id = items[index].assetID
                         
                         // TODO: implement code for handling user interaction -- load model entity
                         ItemButton(model: model) {
-                            // load model from modellibrary using id
+                            // maybe use id for placement
                             
                             
                             // Load model and their children asynchronously
@@ -116,6 +115,7 @@ struct HorizontalGrid: View {
 //                                    print(chd.name)
 //                                }
                             self.placementSettings.selectedModel = model
+                            self.placementSettings.selectedModelID = id
                             print("BrowseView: selected \(model.name) for placement.")
                             self.showBrowse = false
                         }
@@ -158,4 +158,3 @@ struct Separator: View {
             .padding(.vertical, 10)
     }
 }
-

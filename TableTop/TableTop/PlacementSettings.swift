@@ -18,6 +18,12 @@ class PlacementSettings: ObservableObject {
         }
     }
     
+    @Published var selectedModelID: Int? {
+        willSet(newValue) {
+            print("Setting selectedModelID to \(String(describing: newValue))")
+        }
+    }
+    
     // When the user taps confirm  in PlacementView, the value of selectedModel is assigned to confirmedModel
     @Published var confirmedModel: Model? {
         willSet(newValue) {
@@ -32,8 +38,21 @@ class PlacementSettings: ObservableObject {
         }
     }
     
+    // get id of the obejct and use it to pull the asset later on
+    @Published var confirmedModelID: Int? {
+        willSet(newValue) {
+            guard let id = newValue else {
+                print("no id")
+                return
+            }
+            
+            self.recentlyPlacedID.append(id)
+        }
+    }
+    
     // This property retains a record of placed models in the scene. The last element in the array is the most recently placed model.
     @Published var recentlyPlaced: [Model] = []
+    @Published var recentlyPlacedID: [Int] = []
     
     // This property retains teh cancellable object for our SceneEvents.Update subscriber
     var sceneObserver: Cancellable?

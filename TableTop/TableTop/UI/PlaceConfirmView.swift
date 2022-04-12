@@ -27,7 +27,11 @@ struct PlaceConfirmView: View {
                     
                     self.placementSettings.confirmedModel = self.placementSettings.selectedModel
                     
+                    // record id only when the object is comfirmed
+                    self.placementSettings.confirmedModelID = self.placementSettings.selectedModelID
+                    
                     self.placementSettings.selectedModel = nil
+                    self.placementSettings.selectedModelID = nil
                 }
                 Spacer()
             }
