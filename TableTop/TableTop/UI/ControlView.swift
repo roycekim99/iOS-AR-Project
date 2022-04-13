@@ -14,7 +14,8 @@ struct ControlView: View {
     @EnvironmentObject var placementSettings: PlacementSettings
     @State private var isControlsVisible: Bool = true
     @State private var isZoomEnabled: Bool = false
-    @State private var showbrowse: Bool = false
+    @State private var showBrowse: Bool = false
+    @State private var showSettings: Bool = false
     @State private var isFloorPlaced: Bool = false
     
     var body: some View {
@@ -23,7 +24,7 @@ struct ControlView: View {
                 
 //          If no model is selected for placement, show default UI
             if self.placementSettings.selectedModel == nil {
-                DefaultView(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled, showBrowse: $showbrowse )
+                DefaultView(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled, showBrowse: $showBrowse, showSettings: $showSettings )
             } else {
                 // Show placement view
                 PlaceConfirmView()
@@ -38,6 +39,7 @@ struct DefaultView: View {
     @Binding var isControlsVisible: Bool
     @Binding var isZoomEnabled: Bool
     @Binding var showBrowse: Bool
+    @Binding var showSettings: Bool
     
     var body: some View {
         VStack {
@@ -48,7 +50,7 @@ struct DefaultView: View {
             Spacer()
             
             if isControlsVisible {
-                ControlBottomBar(showBrowse: $showBrowse)
+                ControlBottomBar(showBrowse: $showBrowse, showSettings: $showSettings)
             }
 
         }
@@ -191,6 +193,7 @@ struct ZoomButton: View {
 struct ControlBottomBar: View {
     @EnvironmentObject var placementSettings: PlacementSettings
     @Binding var showBrowse: Bool
+    @Binding var showSettings: Bool
     
     var body: some View {
         HStack {
@@ -214,6 +217,9 @@ struct ControlBottomBar: View {
             // Settings Button
             ControlButton(systemIconName: "slider.horizontal.3") {
                 print("Settings button pressed")
+                self.showSettings.toggle()
+            }.sheet(isPresented: $showSettings) {
+                SettingsView(showSettings: $showSettings)
             }
             
             Spacer()
@@ -273,5 +279,6 @@ struct ControlView_Previews: PreviewProvider{
     static var previews: some View{
         ControlView()
             .environmentObject(PlacementSettings())
+            .environmentObject(SessionSettings())
     }
 }
