@@ -44,9 +44,6 @@ struct ARSceneManager: UIViewRepresentable {
                     print(chd.name)
                     self.place(for: chd, in: arView)
                 }
-                    
-                //self.placementSettings.confirmedModel = nil
-    //            self.placementSettings.confirmedModelID = nil
             }
             self.placementSettings.confirmedModel = nil
 
@@ -76,8 +73,7 @@ struct ARSceneManager: UIViewRepresentable {
     
     // fun place floor in arview container
     private func placeFloor(in arView: ARView) {
-        let floor = ModelEntity(mesh: .generateBox(size: [1000, 100, 1000]), materials: [SimpleMaterial()])
-        floor.transform.translation.y += -50
+        let floor = ModelEntity(mesh: .generatePlane(width: 100, depth: 100), materials: [SimpleMaterial()])
         floor.generateCollisionShapes(recursive: true)
         floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(massProperties: .default, material: nil, mode: .static)
         floor.components[ModelComponent.self] = nil
@@ -91,9 +87,3 @@ struct ARSceneManager: UIViewRepresentable {
     }
     
 }
-
-
-
-
-
-
