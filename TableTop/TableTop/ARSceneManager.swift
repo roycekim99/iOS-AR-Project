@@ -56,6 +56,7 @@ struct ARSceneManager: UIViewRepresentable {
         
         modelEntity.generateCollisionShapes(recursive: true)
         
+        // Set physics and mass
         if let collisionComponent = modelEntity.components[CollisionComponent.self] as? CollisionComponent {
             modelEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil, mode: .dynamic)
         }
