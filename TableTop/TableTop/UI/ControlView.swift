@@ -18,7 +18,7 @@ struct ControlView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            ARViewContainer()
+            ARSceneManager()
                 
 //          If no model is selected for placement, show default UI
             if self.placementSettings.selectedModel == nil {
@@ -31,19 +31,6 @@ struct ControlView: View {
         }
         .edgesIgnoringSafeArea(.all)
     }
-}
-
-// UIViewRepresentable converts UIKit view to SwiftUI
-// RealityKit view is UIKit view
-struct ARViewContainer: UIViewRepresentable {
-    // very basic makeUIView function
-    // may need to modify later
-    func makeUIView(context: Context) -> ARView {
-        let arView = ARView(frame: .zero)
-        return arView
-    }
-    
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
 }
 
 struct DefaultView: View {
