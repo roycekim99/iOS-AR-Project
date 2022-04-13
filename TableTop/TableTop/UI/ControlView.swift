@@ -15,7 +15,6 @@ struct ControlView: View {
     @State private var isControlsVisible: Bool = true
     @State private var isZoomEnabled: Bool = false
     @State private var showbrowse: Bool = false
-    @State private var isFloorPlaced: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
