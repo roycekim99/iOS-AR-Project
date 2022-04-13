@@ -11,6 +11,39 @@
 		188FB3E02806D7450091A185 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188FB3DC2806D7450091A185 /* Utilities.swift */; };
 		188FB3E12806D7450091A185 /* MessageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188FB3DD2806D7450091A185 /* MessageLabel.swift */; };
 		188FB3E22806D7450091A185 /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188FB3DE2806D7450091A185 /* MultipeerSession.swift */; };
+		188FB410280706020091A185 /* B_Rook_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3EE280706000091A185 /* B_Rook_2.usdz */; };
+		188FB411280706020091A185 /* B_Pawn_7.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3EF280706000091A185 /* B_Pawn_7.usdz */; };
+		188FB412280706020091A185 /* B_Pawn_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F0280706000091A185 /* B_Pawn_1.usdz */; };
+		188FB413280706020091A185 /* B_Pawn_3.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F1280706000091A185 /* B_Pawn_3.usdz */; };
+		188FB414280706020091A185 /* B_Knight_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F2280706000091A185 /* B_Knight_2.usdz */; };
+		188FB415280706020091A185 /* W_Rook_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F3280706000091A185 /* W_Rook_2.usdz */; };
+		188FB416280706020091A185 /* W_Bishop_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F4280706000091A185 /* W_Bishop_1.usdz */; };
+		188FB417280706020091A185 /* W_Pawn_3.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F5280706000091A185 /* W_Pawn_3.usdz */; };
+		188FB418280706020091A185 /* B_Bishop_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F6280706000091A185 /* B_Bishop_2.usdz */; };
+		188FB419280706020091A185 /* W_Pawn_5.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F7280706000091A185 /* W_Pawn_5.usdz */; };
+		188FB41A280706020091A185 /* B_Pawn_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F8280706000091A185 /* B_Pawn_2.usdz */; };
+		188FB41B280706020091A185 /* B_Rook_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F9280706000091A185 /* B_Rook_1.usdz */; };
+		188FB41C280706020091A185 /* W_Pawn_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3FA280706010091A185 /* W_Pawn_2.usdz */; };
+		188FB41D280706020091A185 /* B_Pawn_5.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3FB280706010091A185 /* B_Pawn_5.usdz */; };
+		188FB41E280706020091A185 /* W_Pawn_4.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3FC280706010091A185 /* W_Pawn_4.usdz */; };
+		188FB41F280706020091A185 /* B_Pawn_8.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3FD280706010091A185 /* B_Pawn_8.usdz */; };
+		188FB420280706020091A185 /* W_Rook_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3FE280706010091A185 /* W_Rook_1.usdz */; };
+		188FB422280706020091A185 /* B_Knight_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB400280706010091A185 /* B_Knight_1.usdz */; };
+		188FB423280706020091A185 /* W_Pawn_7.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB401280706010091A185 /* W_Pawn_7.usdz */; };
+		188FB424280706020091A185 /* W_Knight_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB402280706010091A185 /* W_Knight_2.usdz */; };
+		188FB425280706020091A185 /* W_Pawn_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB403280706010091A185 /* W_Pawn_1.usdz */; };
+		188FB426280706020091A185 /* B_King.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB404280706010091A185 /* B_King.usdz */; };
+		188FB427280706020091A185 /* W_Bishop_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB405280706010091A185 /* W_Bishop_2.usdz */; };
+		188FB428280706020091A185 /* Chess Board.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB406280706010091A185 /* Chess Board.usdz */; };
+		188FB429280706020091A185 /* W_Queen.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB407280706010091A185 /* W_Queen.usdz */; };
+		188FB42A280706020091A185 /* B_Queen.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB408280706020091A185 /* B_Queen.usdz */; };
+		188FB42B280706020091A185 /* W_Knight_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB409280706020091A185 /* W_Knight_1.usdz */; };
+		188FB42C280706020091A185 /* W_Pawn_8.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40A280706020091A185 /* W_Pawn_8.usdz */; };
+		188FB42D280706020091A185 /* W_King.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40B280706020091A185 /* W_King.usdz */; };
+		188FB42E280706020091A185 /* B_Pawn_6.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40C280706020091A185 /* B_Pawn_6.usdz */; };
+		188FB42F280706020091A185 /* B_Bishop_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40D280706020091A185 /* B_Bishop_1.usdz */; };
+		188FB430280706020091A185 /* W_Pawn_6.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40E280706020091A185 /* W_Pawn_6.usdz */; };
+		188FB431280706020091A185 /* B_Pawn_4.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40F280706020091A185 /* B_Pawn_4.usdz */; };
 		6FC701CD2804E037009E1D98 /* PlacementSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC701CC2804E037009E1D98 /* PlacementSettings.swift */; };
 		874D6D7827FFD12400E7DBF4 /* ARSceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */; };
 		874D6D7A27FFD15400E7DBF4 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7927FFD15400E7DBF4 /* ControlView.swift */; };
@@ -23,7 +56,7 @@
 		874D6D8827FFD34F00E7DBF4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8727FFD34F00E7DBF4 /* SettingsView.swift */; };
 		874D6D8A27FFD35A00E7DBF4 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8927FFD35A00E7DBF4 /* ZoomView.swift */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
-		C5037D4F27C7024D00EE9549 /* check.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* check.usdz */; };
+		C5037D4F27C7024D00EE9549 /* Modern Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* Modern Checkers.usdz */; };
 		C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */; };
 		C5037D5827C70A3C00EE9549 /* Black_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5127C70A3B00EE9549 /* Black_2.usdz */; };
 		C5037D5927C70A3C00EE9549 /* Black_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D5227C70A3C00EE9549 /* Black_1.usdz */; };
@@ -53,17 +86,17 @@
 		C55E64B827D7C3EE00EC5DE7 /* Black_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */; };
 		C55E64BA27D7C42A00EC5DE7 /* Red_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */; };
 		C5823A6428067BF400BEF3E1 /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5823A6328067BF400BEF3E1 /* CustomARView.swift */; };
-		C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Checkers.usdz */; };
+		C5E6798C27A9611B00E24F1D /* Vintage Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Vintage Checkers.usdz */; };
 		C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */; };
 		C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */; };
 		C5EE085127A24DA300C3D9F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5EE085027A24DA300C3D9F6 /* Preview Assets.xcassets */; };
 		C5EE085B27A24DA400C3D9F6 /* TableTopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE085A27A24DA400C3D9F6 /* TableTopTests.swift */; };
 		C5EE086527A24DA400C3D9F6 /* TableTopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE086427A24DA400C3D9F6 /* TableTopUITests.swift */; };
 		C5EE086727A24DA400C3D9F6 /* TableTopUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE086627A24DA400C3D9F6 /* TableTopUITestsLaunchTests.swift */; };
-		C5EE087527A9500A00C3D9F6 /* Chess Set.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5EE087427A9500A00C3D9F6 /* Chess Set.usdz */; };
+		C5EE087527A9500A00C3D9F6 /* Chess.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5EE087427A9500A00C3D9F6 /* Chess.usdz */; };
 		C5F7D38527AB48410052FA59 /* Goku.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5F7D38427AB48410052FA59 /* Goku.usdz */; };
 		C5F7D38C27AB4D850052FA59 /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = C5F7D38B27AB4D850052FA59 /* FocusEntity */; };
-		C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */; };
+		C5F7D39227AB6B8C0052FA59 /* Drip Goku.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5F7D39127AB6B8C0052FA59 /* Drip Goku.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +121,39 @@
 		188FB3DC2806D7450091A185 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = TableTop/Utilities.swift; sourceTree = SOURCE_ROOT; };
 		188FB3DD2806D7450091A185 /* MessageLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageLabel.swift; path = TableTop/MessageLabel.swift; sourceTree = SOURCE_ROOT; };
 		188FB3DE2806D7450091A185 /* MultipeerSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerSession.swift; path = TableTop/MultipeerSession.swift; sourceTree = SOURCE_ROOT; };
+		188FB3EE280706000091A185 /* B_Rook_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Rook_2.usdz; sourceTree = "<group>"; };
+		188FB3EF280706000091A185 /* B_Pawn_7.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_7.usdz; sourceTree = "<group>"; };
+		188FB3F0280706000091A185 /* B_Pawn_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_1.usdz; sourceTree = "<group>"; };
+		188FB3F1280706000091A185 /* B_Pawn_3.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_3.usdz; sourceTree = "<group>"; };
+		188FB3F2280706000091A185 /* B_Knight_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Knight_2.usdz; sourceTree = "<group>"; };
+		188FB3F3280706000091A185 /* W_Rook_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Rook_2.usdz; sourceTree = "<group>"; };
+		188FB3F4280706000091A185 /* W_Bishop_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Bishop_1.usdz; sourceTree = "<group>"; };
+		188FB3F5280706000091A185 /* W_Pawn_3.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_3.usdz; sourceTree = "<group>"; };
+		188FB3F6280706000091A185 /* B_Bishop_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Bishop_2.usdz; sourceTree = "<group>"; };
+		188FB3F7280706000091A185 /* W_Pawn_5.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_5.usdz; sourceTree = "<group>"; };
+		188FB3F8280706000091A185 /* B_Pawn_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_2.usdz; sourceTree = "<group>"; };
+		188FB3F9280706000091A185 /* B_Rook_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Rook_1.usdz; sourceTree = "<group>"; };
+		188FB3FA280706010091A185 /* W_Pawn_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_2.usdz; sourceTree = "<group>"; };
+		188FB3FB280706010091A185 /* B_Pawn_5.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_5.usdz; sourceTree = "<group>"; };
+		188FB3FC280706010091A185 /* W_Pawn_4.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_4.usdz; sourceTree = "<group>"; };
+		188FB3FD280706010091A185 /* B_Pawn_8.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_8.usdz; sourceTree = "<group>"; };
+		188FB3FE280706010091A185 /* W_Rook_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Rook_1.usdz; sourceTree = "<group>"; };
+		188FB400280706010091A185 /* B_Knight_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Knight_1.usdz; sourceTree = "<group>"; };
+		188FB401280706010091A185 /* W_Pawn_7.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_7.usdz; sourceTree = "<group>"; };
+		188FB402280706010091A185 /* W_Knight_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Knight_2.usdz; sourceTree = "<group>"; };
+		188FB403280706010091A185 /* W_Pawn_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_1.usdz; sourceTree = "<group>"; };
+		188FB404280706010091A185 /* B_King.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_King.usdz; sourceTree = "<group>"; };
+		188FB405280706010091A185 /* W_Bishop_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Bishop_2.usdz; sourceTree = "<group>"; };
+		188FB406280706010091A185 /* Chess Board.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Chess Board.usdz"; sourceTree = "<group>"; };
+		188FB407280706010091A185 /* W_Queen.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Queen.usdz; sourceTree = "<group>"; };
+		188FB408280706020091A185 /* B_Queen.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Queen.usdz; sourceTree = "<group>"; };
+		188FB409280706020091A185 /* W_Knight_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Knight_1.usdz; sourceTree = "<group>"; };
+		188FB40A280706020091A185 /* W_Pawn_8.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_8.usdz; sourceTree = "<group>"; };
+		188FB40B280706020091A185 /* W_King.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_King.usdz; sourceTree = "<group>"; };
+		188FB40C280706020091A185 /* B_Pawn_6.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_6.usdz; sourceTree = "<group>"; };
+		188FB40D280706020091A185 /* B_Bishop_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Bishop_1.usdz; sourceTree = "<group>"; };
+		188FB40E280706020091A185 /* W_Pawn_6.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_6.usdz; sourceTree = "<group>"; };
+		188FB40F280706020091A185 /* B_Pawn_4.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_4.usdz; sourceTree = "<group>"; };
 		6FC701CC2804E037009E1D98 /* PlacementSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementSettings.swift; sourceTree = "<group>"; };
 		874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneManager.swift; sourceTree = "<group>"; };
 		874D6D7927FFD15400E7DBF4 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
@@ -100,7 +166,7 @@
 		874D6D8727FFD34F00E7DBF4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		874D6D8927FFD35A00E7DBF4 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
-		C5037D4E27C7024D00EE9549 /* check.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = check.usdz; sourceTree = "<group>"; };
+		C5037D4E27C7024D00EE9549 /* Modern Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Modern Checkers.usdz"; sourceTree = "<group>"; };
 		C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Board.usdz"; sourceTree = "<group>"; };
 		C5037D5127C70A3B00EE9549 /* Black_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_2.usdz; sourceTree = "<group>"; };
 		C5037D5227C70A3C00EE9549 /* Black_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_1.usdz; sourceTree = "<group>"; };
@@ -130,7 +196,7 @@
 		C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_Piece.usdz; sourceTree = "<group>"; };
 		C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_Piece.usdz; sourceTree = "<group>"; };
 		C5823A6328067BF400BEF3E1 /* CustomARView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
-		C5E6798B27A9611B00E24F1D /* Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Checkers.usdz; sourceTree = "<group>"; };
+		C5E6798B27A9611B00E24F1D /* Vintage Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Vintage Checkers.usdz"; sourceTree = "<group>"; };
 		C5EE084627A24DA200C3D9F6 /* TableTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopApp.swift; sourceTree = "<group>"; };
 		C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -140,9 +206,9 @@
 		C5EE086027A24DA400C3D9F6 /* TableTopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableTopUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5EE086427A24DA400C3D9F6 /* TableTopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopUITests.swift; sourceTree = "<group>"; };
 		C5EE086627A24DA400C3D9F6 /* TableTopUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C5EE087427A9500A00C3D9F6 /* Chess Set.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Chess Set.usdz"; sourceTree = "<group>"; };
+		C5EE087427A9500A00C3D9F6 /* Chess.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Chess.usdz; sourceTree = "<group>"; };
 		C5F7D38427AB48410052FA59 /* Goku.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Goku.usdz; sourceTree = "<group>"; };
-		C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Goku_Drip.usdz; sourceTree = "<group>"; };
+		C5F7D39127AB6B8C0052FA59 /* Drip Goku.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Drip Goku.usdz"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +247,74 @@
 				188FB3DC2806D7450091A185 /* Utilities.swift */,
 			);
 			path = "Extra Files";
+			sourceTree = "<group>";
+		};
+		188FB3E62806E5110091A185 /* Figures */ = {
+			isa = PBXGroup;
+			children = (
+				C5F7D39127AB6B8C0052FA59 /* Drip Goku.usdz */,
+				C5F7D38427AB48410052FA59 /* Goku.usdz */,
+			);
+			path = Figures;
+			sourceTree = "<group>";
+		};
+		188FB3E72806E7410091A185 /* Pieces */ = {
+			isa = PBXGroup;
+			children = (
+				C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */,
+				C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */,
+			);
+			path = Pieces;
+			sourceTree = "<group>";
+		};
+		188FB3E92806E8770091A185 /* Set Model */ = {
+			isa = PBXGroup;
+			children = (
+				C5EE087427A9500A00C3D9F6 /* Chess.usdz */,
+				C5037D4E27C7024D00EE9549 /* Modern Checkers.usdz */,
+				C5E6798B27A9611B00E24F1D /* Vintage Checkers.usdz */,
+			);
+			path = "Set Model";
+			sourceTree = "<group>";
+		};
+		188FB3ED280705BE0091A185 /* Chess */ = {
+			isa = PBXGroup;
+			children = (
+				188FB40D280706020091A185 /* B_Bishop_1.usdz */,
+				188FB3F6280706000091A185 /* B_Bishop_2.usdz */,
+				188FB404280706010091A185 /* B_King.usdz */,
+				188FB400280706010091A185 /* B_Knight_1.usdz */,
+				188FB3F2280706000091A185 /* B_Knight_2.usdz */,
+				188FB3F0280706000091A185 /* B_Pawn_1.usdz */,
+				188FB3F8280706000091A185 /* B_Pawn_2.usdz */,
+				188FB3F1280706000091A185 /* B_Pawn_3.usdz */,
+				188FB40F280706020091A185 /* B_Pawn_4.usdz */,
+				188FB3FB280706010091A185 /* B_Pawn_5.usdz */,
+				188FB40C280706020091A185 /* B_Pawn_6.usdz */,
+				188FB3EF280706000091A185 /* B_Pawn_7.usdz */,
+				188FB3FD280706010091A185 /* B_Pawn_8.usdz */,
+				188FB408280706020091A185 /* B_Queen.usdz */,
+				188FB3F9280706000091A185 /* B_Rook_1.usdz */,
+				188FB3EE280706000091A185 /* B_Rook_2.usdz */,
+				188FB406280706010091A185 /* Chess Board.usdz */,
+				188FB3F4280706000091A185 /* W_Bishop_1.usdz */,
+				188FB405280706010091A185 /* W_Bishop_2.usdz */,
+				188FB40B280706020091A185 /* W_King.usdz */,
+				188FB409280706020091A185 /* W_Knight_1.usdz */,
+				188FB402280706010091A185 /* W_Knight_2.usdz */,
+				188FB403280706010091A185 /* W_Pawn_1.usdz */,
+				188FB3FA280706010091A185 /* W_Pawn_2.usdz */,
+				188FB3F5280706000091A185 /* W_Pawn_3.usdz */,
+				188FB3FC280706010091A185 /* W_Pawn_4.usdz */,
+				188FB3F7280706000091A185 /* W_Pawn_5.usdz */,
+				188FB40E280706020091A185 /* W_Pawn_6.usdz */,
+				188FB401280706010091A185 /* W_Pawn_7.usdz */,
+				188FB40A280706020091A185 /* W_Pawn_8.usdz */,
+				188FB407280706010091A185 /* W_Queen.usdz */,
+				188FB3FE280706010091A185 /* W_Rook_1.usdz */,
+				188FB3F3280706000091A185 /* W_Rook_2.usdz */,
+			);
+			path = Chess;
 			sourceTree = "<group>";
 		};
 		874D6D7627FFD0F900E7DBF4 /* UI */ = {
@@ -273,33 +407,18 @@
 		C5EE087327A94FC700C3D9F6 /* 3D Assets */ = {
 			isa = PBXGroup;
 			children = (
-				C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */,
-				C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */,
-				C5037D4E27C7024D00EE9549 /* check.usdz */,
-				C5F7D39327AB73C90052FA59 /* Set */,
-				C5F7D39127AB6B8C0052FA59 /* Goku_Drip.usdz */,
-				C5F7D38427AB48410052FA59 /* Goku.usdz */,
-				C5EE087427A9500A00C3D9F6 /* Chess Set.usdz */,
-				C5E6798B27A9611B00E24F1D /* Checkers.usdz */,
+				188FB3ED280705BE0091A185 /* Chess */,
+				188FB3E62806E5110091A185 /* Figures */,
+				C5F7D39327AB73C90052FA59 /* Modern Checker Set */,
+				188FB3E72806E7410091A185 /* Pieces */,
+				188FB3E92806E8770091A185 /* Set Model */,
 			);
 			path = "3D Assets";
 			sourceTree = "<group>";
 		};
-		C5F7D39327AB73C90052FA59 /* Set */ = {
+		C5F7D39327AB73C90052FA59 /* Modern Checker Set */ = {
 			isa = PBXGroup;
 			children = (
-				C5461C4127C973A0000197B0 /* Red_1.usdz */,
-				C5461C4627C973A0000197B0 /* Red_2.usdz */,
-				C5461C4027C973A0000197B0 /* Red_3.usdz */,
-				C5461C4327C973A0000197B0 /* Red_4.usdz */,
-				C5461C4727C973A0000197B0 /* Red_5.usdz */,
-				C5461C3D27C973A0000197B0 /* Red_6.usdz */,
-				C5461C3F27C973A0000197B0 /* Red_7.usdz */,
-				C5461C4227C973A0000197B0 /* Red_8.usdz */,
-				C5461C4527C973A0000197B0 /* Red_9.usdz */,
-				C5461C4827C973A0000197B0 /* Red_10.usdz */,
-				C5461C3E27C973A0000197B0 /* Red_11.usdz */,
-				C5461C4427C973A0000197B0 /* Red_12.usdz */,
 				C5037D5227C70A3C00EE9549 /* Black_1.usdz */,
 				C5037D5127C70A3B00EE9549 /* Black_2.usdz */,
 				C5037D5627C70A3C00EE9549 /* Black_3.usdz */,
@@ -313,8 +432,20 @@
 				C5037D5F27C7224B00EE9549 /* Black_11.usdz */,
 				C5037D5E27C7224B00EE9549 /* Black_12.usdz */,
 				C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */,
+				C5461C4127C973A0000197B0 /* Red_1.usdz */,
+				C5461C4627C973A0000197B0 /* Red_2.usdz */,
+				C5461C4027C973A0000197B0 /* Red_3.usdz */,
+				C5461C4327C973A0000197B0 /* Red_4.usdz */,
+				C5461C4727C973A0000197B0 /* Red_5.usdz */,
+				C5461C3D27C973A0000197B0 /* Red_6.usdz */,
+				C5461C3F27C973A0000197B0 /* Red_7.usdz */,
+				C5461C4227C973A0000197B0 /* Red_8.usdz */,
+				C5461C4527C973A0000197B0 /* Red_9.usdz */,
+				C5461C4827C973A0000197B0 /* Red_10.usdz */,
+				C5461C3E27C973A0000197B0 /* Red_11.usdz */,
+				C5461C4427C973A0000197B0 /* Red_12.usdz */,
 			);
-			path = Set;
+			path = "Modern Checker Set";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,40 +560,73 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188FB426280706020091A185 /* B_King.usdz in Resources */,
 				C5037D6427C7224C00EE9549 /* Black_12.usdz in Resources */,
+				188FB419280706020091A185 /* W_Pawn_5.usdz in Resources */,
 				C5037D5B27C70A3C00EE9549 /* Black_4.usdz in Resources */,
 				C5EE085127A24DA300C3D9F6 /* Preview Assets.xcassets in Resources */,
 				C5037D6727C7224C00EE9549 /* Black_8.usdz in Resources */,
 				C5037D5C27C70A3C00EE9549 /* Black_6.usdz in Resources */,
-				C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */,
+				C5E6798C27A9611B00E24F1D /* Vintage Checkers.usdz in Resources */,
+				188FB429280706020091A185 /* W_Queen.usdz in Resources */,
 				C55E64B827D7C3EE00EC5DE7 /* Black_Piece.usdz in Resources */,
+				188FB41C280706020091A185 /* W_Pawn_2.usdz in Resources */,
+				188FB423280706020091A185 /* W_Pawn_7.usdz in Resources */,
 				C5461C4E27C973A0000197B0 /* Red_8.usdz in Resources */,
 				C5037D6627C7224C00EE9549 /* Black_9.usdz in Resources */,
 				C5461C4F27C973A0000197B0 /* Red_4.usdz in Resources */,
 				C55E64BA27D7C42A00EC5DE7 /* Red_Piece.usdz in Resources */,
 				C5037D6527C7224C00EE9549 /* Black_11.usdz in Resources */,
+				188FB414280706020091A185 /* B_Knight_2.usdz in Resources */,
+				188FB42B280706020091A185 /* W_Knight_1.usdz in Resources */,
 				C5461C5427C973A0000197B0 /* Red_10.usdz in Resources */,
+				188FB412280706020091A185 /* B_Pawn_1.usdz in Resources */,
+				188FB416280706020091A185 /* W_Bishop_1.usdz in Resources */,
+				188FB413280706020091A185 /* B_Pawn_3.usdz in Resources */,
 				C5461C4C27C973A0000197B0 /* Red_3.usdz in Resources */,
-				C5EE087527A9500A00C3D9F6 /* Chess Set.usdz in Resources */,
+				C5EE087527A9500A00C3D9F6 /* Chess.usdz in Resources */,
 				C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */,
+				188FB41B280706020091A185 /* B_Rook_1.usdz in Resources */,
+				188FB415280706020091A185 /* W_Rook_2.usdz in Resources */,
 				C5461C4D27C973A0000197B0 /* Red_1.usdz in Resources */,
+				188FB418280706020091A185 /* B_Bishop_2.usdz in Resources */,
 				C5037D5927C70A3C00EE9549 /* Black_1.usdz in Resources */,
+				188FB420280706020091A185 /* W_Rook_1.usdz in Resources */,
 				C5461C5127C973A0000197B0 /* Red_9.usdz in Resources */,
 				C5037D6927C7224C00EE9549 /* Black_10.usdz in Resources */,
+				188FB42A280706020091A185 /* B_Queen.usdz in Resources */,
 				C5037D6827C7224C00EE9549 /* Black_7.usdz in Resources */,
+				188FB424280706020091A185 /* W_Knight_2.usdz in Resources */,
 				C5037D5D27C70A3C00EE9549 /* Black_3.usdz in Resources */,
+				188FB431280706020091A185 /* B_Pawn_4.usdz in Resources */,
+				188FB417280706020091A185 /* W_Pawn_3.usdz in Resources */,
+				188FB41E280706020091A185 /* W_Pawn_4.usdz in Resources */,
 				C5037D5A27C70A3C00EE9549 /* Black_5.usdz in Resources */,
+				188FB427280706020091A185 /* W_Bishop_2.usdz in Resources */,
 				C5461C5027C973A0000197B0 /* Red_12.usdz in Resources */,
+				188FB42E280706020091A185 /* B_Pawn_6.usdz in Resources */,
 				C5037D5827C70A3C00EE9549 /* Black_2.usdz in Resources */,
+				188FB430280706020091A185 /* W_Pawn_6.usdz in Resources */,
+				188FB42C280706020091A185 /* W_Pawn_8.usdz in Resources */,
 				C5461C5227C973A0000197B0 /* Red_2.usdz in Resources */,
+				188FB411280706020091A185 /* B_Pawn_7.usdz in Resources */,
 				C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */,
-				C5037D4F27C7024D00EE9549 /* check.usdz in Resources */,
-				C5F7D39227AB6B8C0052FA59 /* Goku_Drip.usdz in Resources */,
+				188FB41F280706020091A185 /* B_Pawn_8.usdz in Resources */,
+				C5037D4F27C7024D00EE9549 /* Modern Checkers.usdz in Resources */,
+				188FB425280706020091A185 /* W_Pawn_1.usdz in Resources */,
+				C5F7D39227AB6B8C0052FA59 /* Drip Goku.usdz in Resources */,
+				188FB428280706020091A185 /* Chess Board.usdz in Resources */,
+				188FB422280706020091A185 /* B_Knight_1.usdz in Resources */,
 				C5037D5727C70A3C00EE9549 /* Checkers Board.usdz in Resources */,
 				C5461C4927C973A0000197B0 /* Red_6.usdz in Resources */,
 				C5461C4B27C973A0000197B0 /* Red_7.usdz in Resources */,
 				C5461C4A27C973A0000197B0 /* Red_11.usdz in Resources */,
+				188FB41D280706020091A185 /* B_Pawn_5.usdz in Resources */,
 				C5F7D38527AB48410052FA59 /* Goku.usdz in Resources */,
+				188FB410280706020091A185 /* B_Rook_2.usdz in Resources */,
+				188FB42F280706020091A185 /* B_Bishop_1.usdz in Resources */,
+				188FB42D280706020091A185 /* W_King.usdz in Resources */,
+				188FB41A280706020091A185 /* B_Pawn_2.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

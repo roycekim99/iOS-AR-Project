@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "W_King.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

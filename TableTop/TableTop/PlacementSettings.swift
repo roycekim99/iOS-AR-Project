@@ -28,7 +28,7 @@ class PlacementSettings: ObservableObject {
         }
     }
     
-    // When the user taps confirm  in PlacementView, the value of selectedModel is assigned to confirmedModel
+    // When the user taps confirm in PlacementView, the value of selectedModel is assigned to confirmedModel
     @Published var confirmedModel: Model? {
         willSet(newValue) {
             guard let model = newValue else {

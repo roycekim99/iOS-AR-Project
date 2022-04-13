@@ -5,6 +5,7 @@ Abstract:
 Methods on the main view controller for conforming to the ARCoachingOverlayViewDelegate protocol.
 */
 
+/*
 import UIKit
 import ARKit
 
@@ -42,3 +43,4 @@ extension CustomARView: ARCoachingOverlayViewDelegate {
             ])
     }
 }
+*/
