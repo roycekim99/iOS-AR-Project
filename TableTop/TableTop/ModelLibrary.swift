@@ -39,7 +39,7 @@ enum ModelCategory: CaseIterable {
 
 class ModelLibrary {
     
-    // holds an array of model entities
+    // Holds an array of model entities
     static var currentAssets: [Model] = []
     
     static var loadedModelEntities = [Int: ModelEntity]()
@@ -75,7 +75,6 @@ class ModelLibrary {
                 ModelLibrary.loadedModelEntities[model.assetID]?.scale *= model.scaleCompensation
                 self.cancellable?.cancel()
                 print("model has been loaded")
-                
             })
     }
     

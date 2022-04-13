@@ -26,4 +26,3 @@ class ZoomView: ObservableObject {
         return ZoomEnabled
     }
 }
-
