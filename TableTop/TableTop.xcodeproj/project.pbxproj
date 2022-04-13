@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		188FB3DF2806D7450091A185 /* CustomARView+CoachingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188FB3DB2806D7450091A185 /* CustomARView+CoachingOverlay.swift */; };
-		188FB3E02806D7450091A185 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188FB3DC2806D7450091A185 /* Utilities.swift */; };
-		188FB3E12806D7450091A185 /* MessageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188FB3DD2806D7450091A185 /* MessageLabel.swift */; };
-		188FB3E22806D7450091A185 /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188FB3DE2806D7450091A185 /* MultipeerSession.swift */; };
 		188FB410280706020091A185 /* B_Rook_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3EE280706000091A185 /* B_Rook_2.usdz */; };
 		188FB411280706020091A185 /* B_Pawn_7.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3EF280706000091A185 /* B_Pawn_7.usdz */; };
 		188FB412280706020091A185 /* B_Pawn_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F0280706000091A185 /* B_Pawn_1.usdz */; };
@@ -117,10 +113,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		188FB3DB2806D7450091A185 /* CustomARView+CoachingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CustomARView+CoachingOverlay.swift"; path = "TableTop/CustomARView+CoachingOverlay.swift"; sourceTree = SOURCE_ROOT; };
-		188FB3DC2806D7450091A185 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = TableTop/Utilities.swift; sourceTree = SOURCE_ROOT; };
-		188FB3DD2806D7450091A185 /* MessageLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageLabel.swift; path = TableTop/MessageLabel.swift; sourceTree = SOURCE_ROOT; };
-		188FB3DE2806D7450091A185 /* MultipeerSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerSession.swift; path = TableTop/MultipeerSession.swift; sourceTree = SOURCE_ROOT; };
 		188FB3EE280706000091A185 /* B_Rook_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Rook_2.usdz; sourceTree = "<group>"; };
 		188FB3EF280706000091A185 /* B_Pawn_7.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_7.usdz; sourceTree = "<group>"; };
 		188FB3F0280706000091A185 /* B_Pawn_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_1.usdz; sourceTree = "<group>"; };
@@ -238,17 +230,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		188FB3DA2806D6C20091A185 /* Extra Files */ = {
-			isa = PBXGroup;
-			children = (
-				188FB3DB2806D7450091A185 /* CustomARView+CoachingOverlay.swift */,
-				188FB3DD2806D7450091A185 /* MessageLabel.swift */,
-				188FB3DE2806D7450091A185 /* MultipeerSession.swift */,
-				188FB3DC2806D7450091A185 /* Utilities.swift */,
-			);
-			path = "Extra Files";
-			sourceTree = "<group>";
-		};
 		188FB3E62806E5110091A185 /* Figures */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,10 +350,10 @@
 				874D6D7B27FFD16000E7DBF4 /* Model.swift */,
 				874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */,
 				C5823A6328067BF400BEF3E1 /* CustomARView.swift */,
-				C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */,
 				874D6D7627FFD0F900E7DBF4 /* UI */,
-				C5037D0727C5A27900EE9549 /* Models */,
+				C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */,
 				C5EE087327A94FC700C3D9F6 /* 3D Assets */,
+				C5037D0727C5A27900EE9549 /* Models */,
 				C5EE084F27A24DA300C3D9F6 /* Preview Content */,
 			);
 			path = TableTop;
