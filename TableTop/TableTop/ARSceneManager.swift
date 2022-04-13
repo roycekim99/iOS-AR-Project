@@ -58,7 +58,11 @@ struct ARSceneManager: UIViewRepresentable {
         let modelEntity = ModelLibrary().getModelEntity(for: model)
         
         modelEntity.generateCollisionShapes(recursive: true)
-        modelEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(massProperties: .default, material: nil, mode: .dynamic)
+        
+        if let collisionComponent = modelEntity.components[CollisionComponent.self] as? CollisionComponent {
+            modelEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil, mode: .dynamic)
+        }
+        
         arView.installGestures([.translation, .rotation] ,for: modelEntity)
 
         let anchorEntity = AnchorEntity(plane: .any)
@@ -72,7 +76,8 @@ struct ARSceneManager: UIViewRepresentable {
     
     // fun place floor in arview container
     private func placeFloor(in arView: ARView) {
-        let floor = ModelEntity(mesh: .generatePlane(width: 1, depth: 1), materials: [SimpleMaterial()])
+        let floor = ModelEntity(mesh: .generateBox(size: [1000, 100, 1000]), materials: [SimpleMaterial()])
+        floor.transform.translation.y += -50
         floor.generateCollisionShapes(recursive: true)
         floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(massProperties: .default, material: nil, mode: .static)
         floor.components[ModelComponent.self] = nil
