@@ -22,7 +22,7 @@ class CustomARView: ARView {
         focusEntity = FocusEntity(on: self, focus: .classic)
         
         configure()
-        self.moveObject()
+        self.handleObject()
     }
     
     @MainActor @objc required dynamic init?(coder decoder: NSCoder) {
