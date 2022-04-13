@@ -44,7 +44,7 @@ struct ModelsByCategoryGrid: View {
             ForEach(ModelCategory.allCases, id: \.self) { category in
                 
                 // Only display grid if category contains items
-                if let modelsByCategory = models.get(category: category) {
+                if let modelsByCategory = models.getCategory(category: category) {
                     HorizontalGrid(showBrowse: $showBrowse, title: category.label, items: modelsByCategory)
                 }
             }
@@ -103,20 +103,24 @@ struct HorizontalGrid: View {
                         let model = items[index]
                         let id = items[index].assetID
                         
-                        // TODO: implement code for handling user interaction -- load model entity
                         ItemButton(model: model) {
-                            // maybe use id for placement
+                            // befor loading, check if the model has already been loaded
+                            if ModelLibrary.loadedModelEntities[id] == nil {
+                                ModelLibrary().loadModelEntity(for: model)
+//                                model.loadModelEntity()
+                                for chd in model.childs {
+                                    if ModelLibrary.loadedModelEntities[chd.assetID] == nil {
+                                        ModelLibrary().loadModelEntity(for: chd)
+//                                        model.loadModelEntity()
+                                    }
+                                }
+                            }
                             
-                            
-                            // Load model and their children asynchronously
-//                            model.asyncLoadModelEntity()
-//                            for chd in model.childs {
-//                                chd.asyncLoadModelEntity()
-//                                    print(chd.name)
-//                                }
                             self.placementSettings.selectedModel = model
-                            self.placementSettings.selectedModelID = id
+//                            self.placementSettings.selectedModelID = id
+                            
                             print("BrowseView: selected \(model.name) for placement.")
+                            
                             self.showBrowse = false
                         }
                     }
@@ -132,7 +136,6 @@ struct HorizontalGrid: View {
 
 struct ItemButton: View {
     
-    //TODO: update depends on which class we want to implement load model entity function in
     let model: Model
     
     let action: () -> Void
