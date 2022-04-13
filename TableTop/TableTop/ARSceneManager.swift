@@ -64,7 +64,9 @@ struct ARSceneManager: UIViewRepresentable {
             modelEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil, mode: .dynamic)
         }
         
-        arView.installGestures([.translation, .rotation] ,for: modelEntity)
+        arView.installGestures(.all, for: modelEntity).forEach { entityGesture in
+            entityGesture.addTarget(arView, action: #selector(CustomARView.handleTranslation(sender:)))
+        }
 
         let anchorEntity = AnchorEntity(plane: .any)
         anchorEntity.addChild(modelEntity)
