@@ -95,7 +95,7 @@ struct ControlVisibilityToggleButton: View {
         }
         .frame(width: 50, height: 50)
         .cornerRadius(8.0)
-        .padding(.trailing, 100)
+        .padding(.trailing, 20)
     }
 }
 
@@ -185,7 +185,7 @@ struct ZoomButton: View {
         }
         .frame(width: 50, height: 50)
         .cornerRadius(8.0)
-        .padding(.leading, 100)
+        .padding(.leading, 20)
     }
 }
  
@@ -196,8 +196,6 @@ struct ControlBottomBar: View {
     
     var body: some View {
         HStack {
-
-            Spacer()
             
             MostRecentlyPlacedButton()
                         
@@ -220,11 +218,9 @@ struct ControlBottomBar: View {
             }.sheet(isPresented: $showSettings) {
                 SettingsView(showSettings: $showSettings)
             }
-            
-            Spacer()
-            
+                        
         }
-        .frame(minWidth: 500)
+        .frame(maxWidth: 500)
         .padding(30)
         .background(Color.black.opacity(0.25))
     }
