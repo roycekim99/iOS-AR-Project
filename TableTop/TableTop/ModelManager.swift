@@ -11,7 +11,7 @@ import SwiftUI
 
 extension CustomARView {
     
-    func moveObject() {
+    func handleObject() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         self.addGestureRecognizer(tapGesture)
     }
