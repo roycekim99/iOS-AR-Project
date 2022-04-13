@@ -48,6 +48,7 @@
 		C55E64B327D792B000EC5DE7 /* MultipeerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = C55E64B227D792B000EC5DE7 /* MultipeerHelper */; };
 		C55E64B827D7C3EE00EC5DE7 /* Black_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */; };
 		C55E64BA27D7C42A00EC5DE7 /* Red_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */; };
+		C5823A6428067BF400BEF3E1 /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5823A6328067BF400BEF3E1 /* CustomARView.swift */; };
 		C5E6798C27A9611B00E24F1D /* Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Checkers.usdz */; };
 		C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */; };
 		C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */; };
@@ -120,6 +121,7 @@
 		C55E64B627D79E5600EC5DE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_Piece.usdz; sourceTree = "<group>"; };
 		C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_Piece.usdz; sourceTree = "<group>"; };
+		C5823A6328067BF400BEF3E1 /* CustomARView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
 		C5E6798B27A9611B00E24F1D /* Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Checkers.usdz; sourceTree = "<group>"; };
 		C5EE084627A24DA200C3D9F6 /* TableTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopApp.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */,
 				874D6D7B27FFD16000E7DBF4 /* Model.swift */,
 				874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */,
+				C5823A6328067BF400BEF3E1 /* CustomARView.swift */,
 				874D6D7627FFD0F900E7DBF4 /* UI */,
 				C5037D0727C5A27900EE9549 /* Models */,
 				C5EE087327A94FC700C3D9F6 /* 3D Assets */,
@@ -476,6 +479,7 @@
 				C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */,
 				874D6D7E27FFD17700E7DBF4 /* BrowseView.swift in Sources */,
 				C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */,
+				C5823A6428067BF400BEF3E1 /* CustomARView.swift in Sources */,
 				874D6D8827FFD34F00E7DBF4 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,7 +641,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
+				DEVELOPMENT_TEAM = VNG6J3P3MV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -654,7 +658,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JetTest.nh;
+				PRODUCT_BUNDLE_IDENTIFIER = JetTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -670,7 +674,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
+				DEVELOPMENT_TEAM = VNG6J3P3MV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -687,7 +691,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JetTest.nh;
+				PRODUCT_BUNDLE_IDENTIFIER = JetTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
