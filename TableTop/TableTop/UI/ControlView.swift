@@ -43,7 +43,7 @@ struct DefaultView: View {
     var body: some View {
         VStack {
         
-            ControlTopBar(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled)
+            ControlTopBar(isControlsVisible: $isControlsVisible)
 //            ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled)
             
             Spacer()
@@ -58,12 +58,12 @@ struct DefaultView: View {
 
 struct ControlTopBar: View {
     @Binding var isControlsVisible: Bool
-    @Binding var isZoomEnabled: Bool
 
     var body: some View {
         HStack {
             if self.isControlsVisible{
-                ZoomButton(isZoomEnabled: $isZoomEnabled)
+                ZoomButton()
+                    .environmentObject(ZoomView())
             }
 
             Spacer()
@@ -167,7 +167,7 @@ struct ControlVisibilityToggleButton: View {
 //}
 
 struct ZoomButton: View {
-    @Binding var isZoomEnabled: Bool
+    @EnvironmentObject var zoomView: ZoomView
 
     var body: some View {
         ZStack {
@@ -175,9 +175,9 @@ struct ZoomButton: View {
 
             Button(action: {
                 print("Zoom Button Pressed.")
-                self.isZoomEnabled.toggle()
+                self.zoomView.ZoomEnabled.toggle()
             }) {
-                Image(systemName: self.isZoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
+                Image(systemName: self.zoomView.ZoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
                     .font(.system(size: 25))
                     .foregroundColor(.white)
                     .buttonStyle(PlainButtonStyle())
@@ -190,7 +190,7 @@ struct ZoomButton: View {
 }
  
 struct ControlBottomBar: View {
-    @EnvironmentObject var placementSettings: PlacementSettings
+    //@EnvironmentObject var placementSettings: PlacementSettings
     @Binding var showBrowse: Bool
     @Binding var showSettings: Bool
     
