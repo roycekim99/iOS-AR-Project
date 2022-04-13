@@ -28,7 +28,7 @@ extension CustomARView {
                 print("to kinematic")
                 entity.physicsBody.self?.mode = .kinematic
                 entity.transform.translation.y += 0.01
-            } else {
+            } else if entity.physicsBody.self?.mode == .kinematic {
                 print("to dynamic")
                 entity.physicsBody.self?.mode = .dynamic
             }
