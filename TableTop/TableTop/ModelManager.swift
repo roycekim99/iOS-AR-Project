@@ -10,6 +10,9 @@ import ARKit
 import SwiftUI
 
 extension CustomARView {
+    struct Holder {
+        static var anchorMap = [ModelEntity:AnchorEntity]()
+    }
     
     func handleObject() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
@@ -29,6 +32,20 @@ extension CustomARView {
                 print("to dynamic")
                 entity.physicsBody.self?.mode = .dynamic
             }
+        }
+    }
+    
+    @objc func handleTranslation(sender: EntityTranslationGestureRecognizer) {
+        
+        
+        
+        switch sender.state {
+        case .began:
+            print("Started Moving")
+        case .ended:
+            print("Stopped Moving")
+        default:
+            return
         }
     }
 }
