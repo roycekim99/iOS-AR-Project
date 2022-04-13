@@ -31,19 +31,25 @@ struct ARSceneManager: UIViewRepresentable {
     
     private func updateScene(for arView: CustomARView) {
         arView.focusEntity?.isEnabled = self.placementSettings.selectedModel != nil
-            
+        
         // Add model to scene if confirmed for placement
         if let confirmedModel = self.placementSettings.confirmedModel {
-            self.place(for : confirmedModel, in: arView)
             
-            for chd in confirmedModel.childs {
-                print(chd.name)
-                self.place(for: chd, in: arView)
+            if confirmedModel.name == "floor" {
+                self.placeFloor(in: arView)
+            } else {
+                self.place(for : confirmedModel, in: arView)
+                
+                for chd in confirmedModel.childs {
+                    print(chd.name)
+                    self.place(for: chd, in: arView)
+                }
+                    
+                //self.placementSettings.confirmedModel = nil
+    //            self.placementSettings.confirmedModelID = nil
             }
-                
             self.placementSettings.confirmedModel = nil
-//            self.placementSettings.confirmedModelID = nil
-                
+
         }
     }
     
@@ -52,6 +58,7 @@ struct ARSceneManager: UIViewRepresentable {
         let modelEntity = ModelLibrary().getModelEntity(for: model)
         
         modelEntity.generateCollisionShapes(recursive: true)
+        modelEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(massProperties: .default, material: nil, mode: .dynamic)
         arView.installGestures([.translation, .rotation] ,for: modelEntity)
 
         let anchorEntity = AnchorEntity(plane: .any)
@@ -64,7 +71,19 @@ struct ARSceneManager: UIViewRepresentable {
     }
     
     // fun place floor in arview container
-    
+    private func placeFloor(in arView: ARView) {
+        let floor = ModelEntity(mesh: .generatePlane(width: 1, depth: 1), materials: [SimpleMaterial()])
+        floor.generateCollisionShapes(recursive: true)
+        floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(massProperties: .default, material: nil, mode: .static)
+        floor.components[ModelComponent.self] = nil
+        
+        let anchorEntity = AnchorEntity(plane: .horizontal)
+        anchorEntity.addChild(floor)
+        
+        arView.scene.addAnchor(anchorEntity)
+        
+        print("added floor")
+    }
     
 }
 

@@ -18,6 +18,10 @@ class PlacementSettings: ObservableObject {
         }
     }
     
+    init() {
+        self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
+    }
+    
     @Published var selectedModelID: Int? {
         willSet(newValue) {
             print("Setting selectedModelID to \(String(describing: newValue))")
