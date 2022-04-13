@@ -16,10 +16,14 @@ import SwiftUI
 struct ARSceneManager: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     
+    // List containing currently active models
+    // TODO: Logic for keeping this list updated? 
+    static var activeModels: [Model] = []
+    
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero)
         
-        // subscribe to sceneEvents.update
+        // Subscribe to sceneEvents.update
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, {(event) in
            updateScene(for: arView)
         })
@@ -40,13 +44,12 @@ struct ARSceneManager: UIViewRepresentable {
             } else {
                 self.place(for : confirmedModel, in: arView)
                 
-                for chd in confirmedModel.childs {
-                    print(chd.name)
-                    self.place(for: chd, in: arView)
+                for child in confirmedModel.childs {
+                    print(child.name)
+                    self.place(for: child, in: arView)
                 }
             }
             self.placementSettings.confirmedModel = nil
-
         }
     }
     
@@ -67,7 +70,7 @@ struct ARSceneManager: UIViewRepresentable {
         anchorEntity.addChild(modelEntity)
 
         arView.scene.addAnchor(anchorEntity)
-        
+        ARSceneManager.activeModels.append(model)
         print("added modelEntity")
         
     }
@@ -86,5 +89,4 @@ struct ARSceneManager: UIViewRepresentable {
         
         print("added floor")
     }
-    
 }

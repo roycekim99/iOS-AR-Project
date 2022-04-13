@@ -42,11 +42,11 @@ class PlacementSettings: ObservableObject {
         }
     }
     
-    // get id of the obejct and use it to pull the asset later on
+    // Get ID of the object and use it to pull the asset later on
     @Published var confirmedModelID: Int? {
         willSet(newValue) {
             guard let id = newValue else {
-                print("no id")
+                print("confirmedModel has no ID")
                 return
             }
             
@@ -58,6 +58,6 @@ class PlacementSettings: ObservableObject {
     @Published var recentlyPlaced: [Model] = []
     @Published var recentlyPlacedID: [Int] = []
     
-    // This property retains teh cancellable object for our SceneEvents.Update subscriber
+    // This property retains the cancellable object for our SceneEvents. Update subscriber
     var sceneObserver: Cancellable?
 }

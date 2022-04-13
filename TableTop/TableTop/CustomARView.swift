@@ -36,6 +36,3 @@ class CustomARView: ARView {
     }
     
 }
-
-
-
