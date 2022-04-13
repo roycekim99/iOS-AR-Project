@@ -18,7 +18,7 @@ struct ARSceneManager: UIViewRepresentable {
     
     // List containing currently active models
     // TODO: Logic for keeping this list updated? 
-    static var activeModels: [Model] = []
+    static var activeModels: [ModelEntity] = []
     
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero)
@@ -72,7 +72,7 @@ struct ARSceneManager: UIViewRepresentable {
         anchorEntity.addChild(modelEntity)
 
         arView.scene.addAnchor(anchorEntity)
-        ARSceneManager.activeModels.append(model)
+        ARSceneManager.activeModels.append(modelEntity)
         print("added modelEntity")
         
     }
