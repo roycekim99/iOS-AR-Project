@@ -13,7 +13,6 @@ import ARKit
 struct ControlView: View {
     @EnvironmentObject var placementSettings: PlacementSettings
     @State private var isControlsVisible: Bool = true
-    @State private var isZoomEnabled: Bool = false
     @State private var showBrowse: Bool = false
     @State private var showSettings: Bool = false
     
@@ -23,7 +22,7 @@ struct ControlView: View {
                 
 //          If no model is selected for placement, show default UI
             if self.placementSettings.selectedModel == nil {
-                DefaultView(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled, showBrowse: $showBrowse, showSettings: $showSettings )
+                DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings )
             } else {
                 // Show placement view
                 PlaceConfirmView()
@@ -36,7 +35,6 @@ struct ControlView: View {
 
 struct DefaultView: View {
     @Binding var isControlsVisible: Bool
-    @Binding var isZoomEnabled: Bool
     @Binding var showBrowse: Bool
     @Binding var showSettings: Bool
     
@@ -44,7 +42,6 @@ struct DefaultView: View {
         VStack {
         
             ControlTopBar(isControlsVisible: $isControlsVisible)
-//            ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible, isZoomEnabled: $isZoomEnabled)
             
             Spacer()
             
@@ -99,73 +96,6 @@ struct ControlVisibilityToggleButton: View {
     }
 }
 
-//struct ControlVisibilityToggleButton: View {
-//    @Binding var isControlsVisible: Bool
-//    @Binding var isZoomEnabled: Bool
-//
-//    var body: some View {
-//        HStack {
-//
-//            if self.isControlsVisible {
-//                ZoomButton(isZoomEnabled: $isZoomEnabled)
-//            }
-//
-//            Spacer()
-//
-//            ZStack {
-//
-//                Color.black.opacity(0.25)
-//
-//                Button(action: {
-//                    print("Control Visibility Toggle Button Pressed.")
-//                    self.isControlsVisible.toggle()
-//                }) {
-//                    Image(systemName: self.isControlsVisible ? "rectangle" : "slider.horizontal.below.rectangle")
-//                        .font(.system(size: 25))
-//                        .foregroundColor(.white)
-//                        .buttonStyle(PlainButtonStyle())
-//                }
-//            }
-//            .frame(width: 50, height: 50)
-//            .cornerRadius(8.0)
-//        }
-//        .padding(.top, 45)
-//        .padding(.trailing, 20)
-//    }
-//}
-//
-//struct ZoomButton: View {
-//    @Binding var isZoomEnabled: Bool
-////    @EnvironmentObject var zoomView: ZoomView
-////    @EnvironmentObject var sceneManager: SceneManager
-//    var arView = ARViewContainer()
-//
-//    var body: some View {
-//        HStack {
-//            ZStack {
-//                Color.black.opacity(0.25)
-//
-//                Button(action: {
-//                    print("Zoom Button Pressed.")
-//
-////                    self.isZoomEnabled.toggle()
-////                    self.zoomView.ZoomEnabled = self.isZoomEnabled
-////                    self.arView.moveAll(check: &self.isZoomEnabled, modelEntities: self.sceneManager.modelEntities)
-//
-//                }) {
-//                    Image(systemName: self.isZoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
-//                        .font(.system(size: 25))
-//                        .foregroundColor(.white)
-//                        .buttonStyle(PlainButtonStyle())
-//                }
-//            }
-//            .frame(width: 50, height: 50)
-//            .cornerRadius(8.0)
-//        }
-//        .padding(.leading, 20)
-//    }
-//}
-
 struct ZoomButton: View {
     @EnvironmentObject var zoomView: ZoomView
 
@@ -176,6 +106,7 @@ struct ZoomButton: View {
             Button(action: {
                 print("Zoom Button Pressed.")
                 self.zoomView.ZoomEnabled.toggle()
+                CustomARView.moveAll(check: &self.zoomView.ZoomEnabled, modelEntities: ARSceneManager.activeModels)
             }) {
                 Image(systemName: self.zoomView.ZoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
                     .font(.system(size: 25))
@@ -190,7 +121,6 @@ struct ZoomButton: View {
 }
  
 struct ControlBottomBar: View {
-    //@EnvironmentObject var placementSettings: PlacementSettings
     @Binding var showBrowse: Bool
     @Binding var showSettings: Bool
     
@@ -201,7 +131,7 @@ struct ControlBottomBar: View {
                         
             Spacer()
             
-//             Browse Button
+            // Browse Button
             ControlButton(systemIconName: "square.grid.2x2") {
                 print("Browse button pressed")
                 self.showBrowse.toggle()
