@@ -15,13 +15,15 @@ import SwiftUI
 // RealityKit view is UIKit view
 struct ARSceneManager: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
+    @EnvironmentObject var deletionManager: DeletionManager
     
     // List containing currently active models
     // TODO: Logic for keeping this list updated? 
     static var activeModels: [ModelEntity] = []
+    static var anchorEntities: [AnchorEntity] = []
     
     func makeUIView(context: Context) -> CustomARView {
-        let arView = CustomARView(frame: .zero)
+        let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
         
         // Subscribe to sceneEvents.update
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, {(event) in
@@ -73,6 +75,7 @@ struct ARSceneManager: UIViewRepresentable {
 
         arView.scene.addAnchor(anchorEntity)
         ARSceneManager.activeModels.append(modelEntity)
+        ARSceneManager.anchorEntities.append(anchorEntity)
         print("added modelEntity")
         
     }

@@ -14,6 +14,7 @@ extension CustomARView {
         static var anchorMap = [ModelEntity:AnchorEntity]()
         static var objectMoved: Entity? = nil
         static var zoomEnabled = false
+        static var deletionEnabled = false
     }
     
     func handleObject() {
@@ -23,6 +24,14 @@ extension CustomARView {
     
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         
+        if (!Holder.deletionEnabled && !Holder.zoomEnabled) {
+            handlePhysics(recognizer: recognizer)
+        } else {
+            handleDeletion(recognizer: recognizer)
+        }
+    }
+    
+    func handlePhysics(recognizer:UITapGestureRecognizer) {
         let location = recognizer.location(in: self)
         
         if let entity = self.entity(at: location) as? ModelEntity {
@@ -39,17 +48,31 @@ extension CustomARView {
         }
     }
     
-    static func moveAll(check: inout Bool, modelEntities: [ModelEntity]) {
+    func handleDeletion(recognizer:UITapGestureRecognizer) {
+        let location = recognizer.location(in: self)
+        
+        if let entity = self.entity(at: location) as? ModelEntity {
+            if (ARSceneManager.activeModels.contains(entity)) {
+            deletionManager.entitySelectedForDeletion = entity
+            }
+        }
+    }
+    
+    static func moveAll(check: Bool, modelEntities: [ModelEntity]) {
         for ent in modelEntities {
             if check {
                 ent.physicsBody?.mode = .kinematic
                 ent.transform.translation.y += 0.01
-                Holder.zoomEnabled = true
             } else {
                 ent.transform.translation.y += -0.01
                 ent.physicsBody?.mode = .dynamic
-                Holder.zoomEnabled = false
             }
+        }
+    }
+    
+    static func resetAll(modelEntities: [ModelEntity]) {
+        for ent in modelEntities {
+            ent.physicsBody?.mode = .dynamic
         }
     }
     

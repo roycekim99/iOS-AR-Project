@@ -12,20 +12,25 @@ import ARKit
 //show default UI
 struct ControlView: View {
     @EnvironmentObject var placementSettings: PlacementSettings
+    @EnvironmentObject var deletionManager: DeletionManager
     @State private var isControlsVisible: Bool = true
     @State private var showBrowse: Bool = false
     @State private var showSettings: Bool = false
+    @State private var zoomEnabled: Bool = false
+    @State private var deleteEnabled: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
             ARSceneManager()
                 
 //          If no model is selected for placement, show default UI
-            if self.placementSettings.selectedModel == nil {
-                DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings )
-            } else {
+            if self.placementSettings.selectedModel != nil {
                 // Show placement view
                 PlaceConfirmView()
+            } else if self.deleteEnabled {
+                DeletionView(deleteEnabled: $deleteEnabled)
+            } else {
+                DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled)
             }
                 
         }
@@ -37,15 +42,17 @@ struct DefaultView: View {
     @Binding var isControlsVisible: Bool
     @Binding var showBrowse: Bool
     @Binding var showSettings: Bool
+    @Binding var zoomEnabled: Bool
+    @Binding var deleteEnabled: Bool
     
     var body: some View {
         VStack {
         
-            ControlTopBar(isControlsVisible: $isControlsVisible)
+            ControlTopBar(isControlsVisible: $isControlsVisible, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled)
             
             Spacer()
             
-            if isControlsVisible {
+            if (isControlsVisible && !zoomEnabled){
                 ControlBottomBar(showBrowse: $showBrowse, showSettings: $showSettings)
             }
 
@@ -55,20 +62,29 @@ struct DefaultView: View {
 
 struct ControlTopBar: View {
     @Binding var isControlsVisible: Bool
+    @Binding var zoomEnabled: Bool
+    @Binding var deleteEnabled: Bool
 
     var body: some View {
         HStack {
-            if self.isControlsVisible{
-                ZoomButton()
+            if isControlsVisible{
+                ZoomButton(zoomEnabled: $zoomEnabled)
                     .environmentObject(ZoomView())
             }
 
             Spacer()
-
-            ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible)
-
+            if !zoomEnabled {
+                ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible)
+            }
         }
         .padding(.top, 45)
+        
+        HStack {
+            Spacer()
+            if (isControlsVisible && !zoomEnabled){
+                DeletionButton(deleteEnabled: $deleteEnabled).environmentObject(DeletionManager())
+            }
+        }
     }
 }
 
@@ -96,8 +112,35 @@ struct ControlVisibilityToggleButton: View {
     }
 }
 
+struct DeletionButton: View {
+    @EnvironmentObject var deletion: DeletionManager
+    @Binding var deleteEnabled: Bool
+    
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.25)
+            
+            Button(action: {
+                print("Deletion Button Pressed.")
+                self.deleteEnabled.toggle()
+                self.deletion.DeletionEnabled = self.deleteEnabled
+                CustomARView.resetAll(modelEntities: ARSceneManager.activeModels)
+            }) {
+                Image(systemName: self.deleteEnabled ? "trash.fill" : "trash")
+                    .font(.system(size: 25))
+                    .foregroundColor(.white)
+                    .buttonStyle(PlainButtonStyle())
+            }
+        }
+        .frame(width: 50, height: 50)
+        .cornerRadius(8.0)
+        .padding(.trailing, 20)
+    }
+}
+
 struct ZoomButton: View {
     @EnvironmentObject var zoomView: ZoomView
+    @Binding var zoomEnabled: Bool
 
     var body: some View {
         ZStack {
@@ -105,10 +148,13 @@ struct ZoomButton: View {
 
             Button(action: {
                 print("Zoom Button Pressed.")
-                self.zoomView.ZoomEnabled.toggle()
-                CustomARView.moveAll(check: &self.zoomView.ZoomEnabled, modelEntities: ARSceneManager.activeModels)
+                self.zoomEnabled.toggle()
+                //zoomView.ZoomEnabled.toggle()
+                //zoomEnabled = zoomView.ZoomEnabled
+                self.zoomView.ZoomEnabled = self.zoomEnabled
+                CustomARView.moveAll(check: self.zoomView.ZoomEnabled, modelEntities: ARSceneManager.activeModels)
             }) {
-                Image(systemName: self.zoomView.ZoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
+                Image(systemName: self.zoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
                     .font(.system(size: 25))
                     .foregroundColor(.white)
                     .buttonStyle(PlainButtonStyle())
@@ -205,5 +251,6 @@ struct ControlView_Previews: PreviewProvider{
         ControlView()
             .environmentObject(PlacementSettings())
             .environmentObject(SessionSettings())
+            .environmentObject(DeletionManager())
     }
 }
