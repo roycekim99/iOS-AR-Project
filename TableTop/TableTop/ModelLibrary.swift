@@ -54,6 +54,16 @@ class ModelLibrary {
         // add instances to currentAssets
     }
     
+    // ModelEntity.setPosition(relativeTo: ) may also be useful
+    func getRelativePosition(from model: ModelEntity, to origin: Entity) -> SIMD3<Float> {
+//        print("relative position \(model.position(relativeTo: origin))")
+        return model.position(relativeTo: origin)
+    }
+    
+    
+    
+    // TODO: fix this bug here -- taking too long to load
+    
     // load model entity and store in loadModelEntities
     func loadModelEntity(for model: Model) {
         

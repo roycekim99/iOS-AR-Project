@@ -62,6 +62,7 @@ struct ARSceneManager: UIViewRepresentable {
        
         let modelEntity = ModelLibrary().getModelEntity(for: model)
         
+//        testing if setPosition works
 //        print("hard coding to test get realtive position")
 //        modelEntity.setPosition(SIMD3<Float>(0.008482501, 0.0, 0.00525086), relativeTo: ARSceneManager.originPoint[0])
         
