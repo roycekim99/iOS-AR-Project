@@ -117,7 +117,7 @@ struct HorizontalGrid: View {
                             }
                             
                             self.placementSettings.selectedModel = model
-//                            self.placementSettings.selectedModelID = id
+                            self.placementSettings.selectedModelID = id
                             
                             print("BrowseView: selected \(model.name) for placement.")
                             

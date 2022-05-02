@@ -9,18 +9,26 @@ import SwiftUI
 
 struct PlaceConfirmView: View {
     @EnvironmentObject var placementSettings: PlacementSettings
+    var isOriginPoint = false
+    
+    init(isOrigin: Bool){
+        self.isOriginPoint = isOrigin
+    }
     
     // View to place object
     var body: some View {
         HStack {
             Spacer()
             
-            PlacementButton(systemIconName: "xmark.circle.fill") {
-                print("Cancel Placement Button pressed.")
-                self.placementSettings.selectedModel = nil
+            if isOriginPoint == false {
+                PlacementButton(systemIconName: "xmark.circle.fill") {
+                    print("Cancel Placement Button pressed.")
+                    self.placementSettings.selectedModel = nil
+                }
+                
+                Spacer()
             }
             
-            Spacer()
             
             PlacementButton(systemIconName: "checkmark.circle.fill") {
                 print("Confirm Placement button pressed.")

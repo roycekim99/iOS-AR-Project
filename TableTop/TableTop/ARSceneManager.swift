@@ -17,6 +17,8 @@ struct ARSceneManager: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
     
+    static var originPoint: [Entity]  = []
+    
     // List containing currently active models
     // TODO: Logic for keeping this list updated? 
     static var activeModels: [ModelEntity] = []
@@ -42,7 +44,7 @@ struct ARSceneManager: UIViewRepresentable {
         if let confirmedModel = self.placementSettings.confirmedModel {
             
             if confirmedModel.name == "floor" {
-                self.placeFloor(in: arView)
+                self.placeFloor(in: arView, for: self.placementSettings.originfloor!)
             } else {
                 self.place(for : confirmedModel, in: arView)
                 
@@ -52,12 +54,16 @@ struct ARSceneManager: UIViewRepresentable {
                 }
             }
             self.placementSettings.confirmedModel = nil
+            self.placementSettings.originfloor = false
         }
     }
     
     private func place(for model: Model, in arView: ARView){
        
         let modelEntity = ModelLibrary().getModelEntity(for: model)
+        
+//        print("hard coding to test get realtive position")
+//        modelEntity.setPosition(SIMD3<Float>(0.008482501, 0.0, 0.00525086), relativeTo: ARSceneManager.originPoint[0])
         
         modelEntity.generateCollisionShapes(recursive: true)
         
@@ -78,10 +84,13 @@ struct ARSceneManager: UIViewRepresentable {
         ARSceneManager.anchorEntities.append(anchorEntity)
         print("added modelEntity")
         
+        //testing is getrelativepostiion works
+//        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
+        
     }
     
     // fun place floor in arview container
-    private func placeFloor(in arView: ARView) {
+    private func placeFloor(in arView: ARView, for setOrigin: Bool) {
         let floor = ModelEntity(mesh: .generatePlane(width: 100, depth: 100), materials: [SimpleMaterial()])
         floor.generateCollisionShapes(recursive: true)
         floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(massProperties: .default, material: nil, mode: .static)
@@ -91,6 +100,12 @@ struct ARSceneManager: UIViewRepresentable {
         anchorEntity.addChild(floor)
         
         arView.scene.addAnchor(anchorEntity)
+        
+        // set origion point
+        if setOrigin == true {
+            ARSceneManager.originPoint.append(floor)
+            print("set origin point")
+        }
         
         print("added floor")
     }

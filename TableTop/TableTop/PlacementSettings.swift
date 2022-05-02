@@ -11,6 +11,18 @@ import Combine
 
 class PlacementSettings: ObservableObject {
     
+    //     forces the user to place floor when the app is launched
+    init() {
+        self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
+        self.originfloor = true
+    }
+    
+    @Published var originfloor: Bool? {
+        willSet(newValue){
+            print("setting origin point")
+        }
+    }
+    
     // When the user selects a model in BrowseView, this property is set.
     @Published var selectedModel: Model? {
         willSet(newValue) {
@@ -18,10 +30,7 @@ class PlacementSettings: ObservableObject {
         }
     }
     
-    init() {
-        self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
-    }
-    
+
     @Published var selectedModelID: Int? {
         willSet(newValue) {
             print("Setting selectedModelID to \(String(describing: newValue))")
@@ -46,10 +55,12 @@ class PlacementSettings: ObservableObject {
     @Published var confirmedModelID: Int? {
         willSet(newValue) {
             guard let id = newValue else {
-                print("confirmedModel has no ID")
+                print("confirmedModel ID is not set")
                 return
             }
             
+            print("confirmedModel ID \(id)")
+
             self.recentlyPlacedID.append(id)
         }
     }
