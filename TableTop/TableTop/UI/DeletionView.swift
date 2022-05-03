@@ -79,7 +79,26 @@ struct DeletionView: View {
             
             Spacer()
             
-            DeleteButton(systemIconName: "clear.fill") {
+//            DeleteButton(systemIconName: "clear.fill") {
+//                print("Delete All button pressed.")
+//
+//                for anchorEntity in ARSceneManager.anchorEntities {
+//                    print("Deleting anchorEntity with id: \(String(describing: anchorEntity.anchorIdentifier))")
+//                    anchorEntity.removeFromParent()
+//                    anchorEntity.children.removeAll()
+//                }
+//                ARSceneManager.activeModels.removeAll()
+//                ARSceneManager.anchorEntities.removeAll()
+//            }
+//
+//            Spacer()
+        }
+        .padding(.bottom, 45)
+        
+        HStack {
+            Spacer()
+            
+            DeleteAll() {
                 print("Delete All button pressed.")
                 
                 for anchorEntity in ARSceneManager.anchorEntities {
@@ -92,9 +111,8 @@ struct DeletionView: View {
             }
             
             Spacer()
-            
         }
-        .padding(.bottom, 30)
+        .padding(.bottom, 20)
     }
 }
 
@@ -113,4 +131,21 @@ struct DeleteButton: View {
         }
         .frame(width: 75, height: 75)
     }
+}
+
+struct DeleteAll: View {
+    let action: () -> Void
+    
+    var body: some View {
+        Button("Delete All", action: {
+            self.action()
+        })
+        .font(.system(size: 16, weight: .semibold, design: .default))
+        .foregroundColor(.white)
+        .buttonStyle(.bordered)
+        .tint(.black)
+        .frame(maxWidth: 200)
+        //.background(Color.black)
+    }
+    
 }
