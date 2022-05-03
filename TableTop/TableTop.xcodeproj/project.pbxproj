@@ -40,6 +40,8 @@
 		188FB42F280706020091A185 /* B_Bishop_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40D280706020091A185 /* B_Bishop_1.usdz */; };
 		188FB430280706020091A185 /* W_Pawn_6.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40E280706020091A185 /* W_Pawn_6.usdz */; };
 		188FB431280706020091A185 /* B_Pawn_4.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40F280706020091A185 /* B_Pawn_4.usdz */; };
+		6F5F83A82820C6A200A1E102 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6F5F83A72820C6A200A1E102 /* SocketIO */; };
+		6F5F83AA2820C85800A1E102 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F83A92820C85800A1E102 /* ServiceManager.swift */; };
 		6FC701CD2804E037009E1D98 /* PlacementSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC701CC2804E037009E1D98 /* PlacementSettings.swift */; };
 		874D6D7827FFD12400E7DBF4 /* ARSceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */; };
 		874D6D7A27FFD15400E7DBF4 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7927FFD15400E7DBF4 /* ControlView.swift */; };
@@ -147,6 +149,7 @@
 		188FB40D280706020091A185 /* B_Bishop_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Bishop_1.usdz; sourceTree = "<group>"; };
 		188FB40E280706020091A185 /* W_Pawn_6.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_6.usdz; sourceTree = "<group>"; };
 		188FB40F280706020091A185 /* B_Pawn_4.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_4.usdz; sourceTree = "<group>"; };
+		6F5F83A92820C85800A1E102 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		6FC701CC2804E037009E1D98 /* PlacementSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementSettings.swift; sourceTree = "<group>"; };
 		874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneManager.swift; sourceTree = "<group>"; };
 		874D6D7927FFD15400E7DBF4 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
@@ -212,6 +215,7 @@
 			files = (
 				C55E64B327D792B000EC5DE7 /* MultipeerHelper in Frameworks */,
 				C5F7D38C27AB4D850052FA59 /* FocusEntity in Frameworks */,
+				6F5F83A82820C6A200A1E102 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +352,7 @@
 				C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */,
 				6FC701CC2804E037009E1D98 /* PlacementSettings.swift */,
 				874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */,
+				6F5F83A92820C85800A1E102 /* ServiceManager.swift */,
 				874D6D8327FFD1B000E7DBF4 /* MultiuserHandler.swift */,
 				874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */,
 				874D6D7B27FFD16000E7DBF4 /* Model.swift */,
@@ -450,6 +455,7 @@
 			packageProductDependencies = (
 				C5F7D38B27AB4D850052FA59 /* FocusEntity */,
 				C55E64B227D792B000EC5DE7 /* MultipeerHelper */,
+				6F5F83A72820C6A200A1E102 /* SocketIO */,
 			);
 			productName = TableTop;
 			productReference = C5EE084627A24DA200C3D9F6 /* TableTop.app */;
@@ -526,6 +532,7 @@
 			packageReferences = (
 				C5F7D38A27AB4D850052FA59 /* XCRemoteSwiftPackageReference "FocusEntity" */,
 				C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */,
+				6F5F83A62820C6A200A1E102 /* XCRemoteSwiftPackageReference "socket" */,
 			);
 			productRefGroup = C5EE084727A24DA200C3D9F6 /* Products */;
 			projectDirPath = "";
@@ -645,6 +652,7 @@
 				6FC701CD2804E037009E1D98 /* PlacementSettings.swift in Sources */,
 				C5823A6628102BAD00BEF3E1 /* DeletionView.swift in Sources */,
 				C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */,
+				6F5F83AA2820C85800A1E102 /* ServiceManager.swift in Sources */,
 				874D6D7E27FFD17700E7DBF4 /* BrowseView.swift in Sources */,
 				C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */,
 				C5823A6428067BF400BEF3E1 /* CustomARView.swift in Sources */,
@@ -985,6 +993,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6F5F83A62820C6A200A1E102 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/maxxfrazer/MultipeerHelper";
@@ -1004,6 +1020,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6F5F83A72820C6A200A1E102 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F5F83A62820C6A200A1E102 /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
 		C55E64B227D792B000EC5DE7 /* MultipeerHelper */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */;
