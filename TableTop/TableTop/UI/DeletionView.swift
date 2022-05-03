@@ -61,19 +61,38 @@ struct DeletionView: View {
             DeleteButton(systemIconName: "trash.circle.fill") {
                 print("Confirm Deletion button pressed.")
                 
+                guard let model = self.deletionManager.entitySelectedForDeletion else { return }
                 guard let anchor = self.deletionManager.entitySelectedForDeletion?.anchor else { return }
                 
-                let anchoringIdentifier = anchor.anchorIdentifier
-                if let index = ARSceneManager.anchorEntities.firstIndex(where: { $0.anchorIdentifier == anchoringIdentifier}) {
-                    print("Deleting anchorEntity with id: \(String(describing: anchoringIdentifier))")
-                    ARSceneManager.anchorEntities.remove(at: index)
-                }
                 
+                let anchoringIdentifier = anchor.anchorIdentifier
+                if let anchorIndex = ARSceneManager.anchorEntities.firstIndex(where: { $0.anchorIdentifier == anchoringIdentifier}) {
+                    print("Deleting anchorEntity with id: \(String(describing: anchoringIdentifier))")
+                    ARSceneManager.anchorEntities.remove(at: anchorIndex)
+                }
+                if let modelIndex = ARSceneManager.activeModels.firstIndex(of: model) {
+                    ARSceneManager.activeModels.remove(at: modelIndex)
+                }
                 anchor.removeFromParent()
                 self.deletionManager.entitySelectedForDeletion = nil
             }
             
             Spacer()
+            
+            DeleteButton(systemIconName: "clear.fill") {
+                print("Delete All button pressed.")
+                
+                for anchorEntity in ARSceneManager.anchorEntities {
+                    print("Deleting anchorEntity with id: \(String(describing: anchorEntity.anchorIdentifier))")
+                    anchorEntity.removeFromParent()
+                    anchorEntity.children.removeAll()
+                }
+                ARSceneManager.activeModels.removeAll()
+                ARSceneManager.anchorEntities.removeAll()
+            }
+            
+            Spacer()
+            
         }
         .padding(.bottom, 30)
     }

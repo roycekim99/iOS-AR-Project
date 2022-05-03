@@ -55,7 +55,7 @@ class ModelLibrary {
     }
     
     // ModelEntity.setPosition(relativeTo: ) may also be useful
-    func getRelativePosition(from model: ModelEntity, to origin: Entity) -> SIMD3<Float> {
+    static func getRelativePosition(from model: ModelEntity, to origin: Entity) -> SIMD3<Float> {
 //        print("relative position \(model.position(relativeTo: origin))")
         return model.position(relativeTo: origin)
     }

@@ -26,7 +26,7 @@ extension CustomARView {
         
         if (!Holder.deletionEnabled && !Holder.zoomEnabled) {
             handlePhysics(recognizer: recognizer)
-        } else {
+        } else if (Holder.deletionEnabled && !Holder.zoomEnabled){
             handleDeletion(recognizer: recognizer)
         }
     }
@@ -35,6 +35,7 @@ extension CustomARView {
         let location = recognizer.location(in: self)
         
         if let entity = self.entity(at: location) as? ModelEntity {
+            print(ModelLibrary.getRelativePosition(from: entity, to: ARSceneManager.originPoint[0]))
             if (!Holder.zoomEnabled) {
                 if entity.physicsBody.self?.mode == .dynamic {
                     print("to kinematic")
@@ -73,6 +74,11 @@ extension CustomARView {
     static func resetAll(modelEntities: [ModelEntity]) {
         for ent in modelEntities {
             ent.physicsBody?.mode = .dynamic
+//            for mod in ent.children {
+//                if let modd = mod as? ModelEntity {
+//                    modd.physicsBody?.mode = .dynamic
+//                }
+//            }
         }
     }
     
