@@ -60,14 +60,18 @@ final class ServiceManager: ObservableObject {
         }
     }
     
+    
+    // MARK: - Socket Emits
+    
     // Convert the SharedSession object to a String:Any dictionary
     // Then emit with proper message and data.
-    func socketChanged(position: SharedSessionData) {
-//        let info: [String : Any] = [
-//            "x": Double(position.x),
-//            "y": Double(position.y)
-//        ]
-//        socket?.emit("drawing", info)
+    func emitOnTap(data: SharedSessionData) {
+        let info: [String : Any] = [
+            "objectID": Int(data.ObjectID),
+            "modelName": String(data.modelName),
+            "position": [Double](data.position)
+        ]
+        socket?.emit("onTap", info)
     }
     
     // Call this when ending a session.
@@ -75,6 +79,7 @@ final class ServiceManager: ObservableObject {
         socket?.removeAllHandlers()
     }
 }
+
 
 // This class will help convert data received from the socket events.
 // The listener returns an Arrays of Any, where SocketParser converts
@@ -95,11 +100,14 @@ class SocketParser {
     }
 }
 
+
 // Class to hold information about the game session we want to send/receive from server
 struct SharedSessionData: Codable {
-    var tempVar: Double
-    //positon, model name, Object ID
+    var ObjectID: Int
+    var modelName: String
+    var position: [Double]
 }
+
 
 // Protocol for the controller of the module to receive information of the Socket class.
 // Logic for didReceive will vary per action(onTap, onPlace, transforms, etc.)
