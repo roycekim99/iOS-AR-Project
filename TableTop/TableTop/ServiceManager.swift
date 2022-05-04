@@ -11,22 +11,33 @@ import SocketIO
 final class ServiceManager: ObservableObject {
     // Configure SocketManager with socker server URL and show log on console
     private var manager = SocketManager(socketURL: URL(string: "http://35.161.104.204:3001/")!, config: [.log(true), .compress])
-    weak var delegate: SocketSessionManagerDelegate?
     var socket: SocketIOClient? = nil
     
     init() {
         // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
         self.socket = manager.defaultSocket
         setupSocketEvents()
+        
         socket?.connect()
+        //DEBUG
+        self.testEmission()
     }
     
+    func testEmission(){
+        let testModel = SharedSessionData(ObjectID: 0, modelName: "Test Object", position: [0.1, 0.5])
+        
+        emitOnTap(data: testModel)
+        emitModelPlaced(data: testModel)
+        emitModelTransformed(data: testModel)
+        print("DEBUG:: Debug testEmissions called!!")
+    }
     // Configures the event observers and socket events
     func setupSocketEvents() {
         // Default event
         socket?.on(clientEvent: .connect) { (data, ack) in
             print("Connected")
             self.socket?.emit("NodeJS Server Port", "Hi Node.js server.")
+            //self.testEmission()
         }
         
         // TODO: - Setup events for actions
@@ -64,12 +75,14 @@ final class ServiceManager: ObservableObject {
     // Convert the SharedSession object to a String:Any dictionary
     // Then emit with proper message and data.
     func emitOnTap(data: SharedSessionData) {
+        
         let info: [String : Any] = [
             "objectID": Int(data.ObjectID),
             "modelName": String(data.modelName),
             "position": [Double](data.position)
         ]
-        socket?.emit("model-tapped", info)
+        
+        self.socket?.emit("model-tapped", info)
     }
     
     func emitModelPlaced(data: SharedSessionData){
@@ -78,7 +91,7 @@ final class ServiceManager: ObservableObject {
             "modelName": String(data.modelName),
             "position": [Double](data.position)
         ]
-        socket?.emit("model-placed", info)
+        self.socket?.emit("model-placed", info)
     }
     
     func emitModelTransformed(data: SharedSessionData){
@@ -87,9 +100,16 @@ final class ServiceManager: ObservableObject {
             "modelName": String(data.modelName),
             "position": [Double](data.position)
         ]
-        socket?.emit("model-transformed", info)
+        self.socket?.emit("model-transformed", info)
     }
     
+//    private func getSharedSessionData(from model: Model){
+//        return [String : Any] = [
+//            "objectID": Int(model.assetID),
+//            "modelName": String(model.name),
+//            "position": [0.0,0.0]
+//        ]
+//    }
     // Call this when ending a session.
     func stop() {
         socket?.removeAllHandlers()

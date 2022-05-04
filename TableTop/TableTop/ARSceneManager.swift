@@ -16,11 +16,13 @@ import SwiftUI
 struct ARSceneManager: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
+    @EnvironmentObject var serverServiceManager: ServiceManager
     
     // List containing currently active models
     // TODO: Logic for keeping this list updated? 
     static var activeModels: [ModelEntity] = []
     static var anchorEntities: [AnchorEntity] = []
+    
     
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
@@ -36,6 +38,8 @@ struct ARSceneManager: UIViewRepresentable {
     func updateUIView(_ uiView: CustomARView, context: Context) {}
     
     private func updateScene(for arView: CustomARView) {
+        
+        
         arView.focusEntity?.isEnabled = self.placementSettings.selectedModel != nil
         
         // Add model to scene if confirmed for placement
@@ -45,11 +49,8 @@ struct ARSceneManager: UIViewRepresentable {
                 self.placeFloor(in: arView)
             } else {
                 self.place(for : confirmedModel, in: arView)
-                
-                for child in confirmedModel.childs {
-                    print(child.name)
-                    self.place(for: child, in: arView)
-                }
+                //serverServiceManager.emitModelPlaced(data: confirmedModel)
+
             }
             self.placementSettings.confirmedModel = nil
         }
@@ -76,7 +77,12 @@ struct ARSceneManager: UIViewRepresentable {
         arView.scene.addAnchor(anchorEntity)
         ARSceneManager.activeModels.append(modelEntity)
         ARSceneManager.anchorEntities.append(anchorEntity)
-        print("added modelEntity")
+        
+        for child in model.childs {
+            print(child.name)
+            self.place(for: child, in: arView)
+        }
+        print("DEBUG:: added modelEntity")
         
     }
     
@@ -92,6 +98,6 @@ struct ARSceneManager: UIViewRepresentable {
         
         arView.scene.addAnchor(anchorEntity)
         
-        print("added floor")
+        print("DEBUG::added floor")
     }
 }

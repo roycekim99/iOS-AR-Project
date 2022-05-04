@@ -11,20 +11,28 @@ import Combine
 
 class PlacementSettings: ObservableObject {
     
+    
+    
+    init() {
+            self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
+            self.originfloor = true
+    }
+    
+    @Published var originfloor: Bool? {
+            willSet(newValue){
+                print("DEBUG:: setting origin point")
+            }
+    }
+    
     // When the user selects a model in BrowseView, this property is set.
     @Published var selectedModel: Model? {
         willSet(newValue) {
-            print("Setting selectedModel to \(String(describing: newValue?.name))")
+            print("DEBUG::Setting selectedModel to \(String(describing: newValue?.name))")
         }
     }
-    
-    init() {
-        self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
-    }
-    
     @Published var selectedModelID: Int? {
         willSet(newValue) {
-            print("Setting selectedModelID to \(String(describing: newValue))")
+            print("DEBUG::Setting selectedModelID to \(String(describing: newValue))")
         }
     }
     
@@ -32,13 +40,14 @@ class PlacementSettings: ObservableObject {
     @Published var confirmedModel: Model? {
         willSet(newValue) {
             guard let model = newValue else {
-                print("Clearing confirmedModel:")
+                print("DEBUG::Clearing confirmedModel:")
             return
             }
             
-            print("Setting confirmedModel to \(model.name)")
+            print("DEBUG::Setting confirmedModel to \(model.name)")
             
             self.recentlyPlaced.append(model)
+            // TODO: send socke IO .emitOnPlace
         }
     }
     
@@ -46,7 +55,7 @@ class PlacementSettings: ObservableObject {
     @Published var confirmedModelID: Int? {
         willSet(newValue) {
             guard let id = newValue else {
-                print("confirmedModel has no ID")
+                print("DEBUG::confirmedModel has no ID")
                 return
             }
             

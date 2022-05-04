@@ -18,7 +18,7 @@ class Model {
     var childs: [Model]
     var scaleCompensation: Float
     var assetID: Int
-//    var position: Float
+    var position: [Float]
     
     
     init(name: String, category: ModelCategory, scaleCompensation: Float = 1.0, childs: [Model], assetID: Int) {
@@ -30,4 +30,6 @@ class Model {
         self.assetID = assetID
 //        self.position = position
     }
+    
+    
 }

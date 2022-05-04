@@ -91,9 +91,9 @@ class ModelLibrary {
             print("DEBUG::Model was not loaded prior to cloning. Finished loading")
             let modelEntity = ModelLibrary.loadedModelEntities[model.assetID]
             clonedEntity = modelEntity?.clone(recursive: true)
+            
         }
-        
-        print("DEBUG::Cloned entity is ready")
+        print("DEBUG:: loaded model ID: " + String(model.assetID))
         return clonedEntity!
     }
     
