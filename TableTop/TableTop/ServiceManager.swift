@@ -24,7 +24,7 @@ final class ServiceManager: ObservableObject {
     }
     
     func testEmission(){
-        let testModel = SharedSessionData(ObjectID: 0, modelName: "Test Object", position: [0.1, 0.5])
+        let testModel = SharedSessionData(objectID: 0, modelName: "Test Object", position: [0.1, 0.5])
         
         emitOnTap(data: testModel)
         emitModelPlaced(data: testModel)
@@ -37,34 +37,31 @@ final class ServiceManager: ObservableObject {
         socket?.on(clientEvent: .connect) { (data, ack) in
             print("Connected")
             self.socket?.emit("NodeJS Server Port", "Hi Node.js server.")
-            //self.testEmission()
+            self.testEmission()
         }
         
         // TODO: - Setup events for actions
         socket?.on("model-tapped") { (data, ack) in
+            print ("DEBUG:: from server--> model tapped received")
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
-//                let position = CGPoint.init(x: response.x, y: response.y)
-//                self.delegate?.didReceive(point: position)
                 print("DEBUG:: Server requested to tap model: " + response.modelName)
             }
         }
         
         socket?.on("model-placed") { (data, ack) in
+            print ("DEBUG:: from server--> model placed received")
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
-//                let position = CGPoint.init(x: response.x, y: response.y)
-//                self.delegate?.didReceive(point: position)
                 print("DEBUG:: Server requested to place model: " + response.modelName)
             }
         }
         
         socket?.on("model-transformed") { (data, ack) in
+            print ("DEBUG:: from server--> model transform received")
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
-//                let position = CGPoint.init(x: response.x, y: response.y)
-//                self.delegate?.didReceive(point: position)
-                print("DEBUG:: Server requested to move model: " + response.modelName + " || of ID: " + String(response.ObjectID))
+                print("DEBUG:: Server requested to transform model: " + response.modelName)
             }
         }
     }
@@ -77,28 +74,29 @@ final class ServiceManager: ObservableObject {
     func emitOnTap(data: SharedSessionData) {
         
         let info: [String : Any] = [
-            "objectID": Int(data.ObjectID),
+            "objectID": Int(data.objectID),
             "modelName": String(data.modelName),
-            "position": [Double](data.position)
+            "position": [Float](data.position)
         ]
         
         self.socket?.emit("model-tapped", info)
     }
     
     func emitModelPlaced(data: SharedSessionData){
+       
         let info: [String : Any] = [
-            "objectID": Int(data.ObjectID),
+            "objectID": Int(data.objectID),
             "modelName": String(data.modelName),
-            "position": [Double](data.position)
+            "position": [Float](data.position)
         ]
         self.socket?.emit("model-placed", info)
     }
     
     func emitModelTransformed(data: SharedSessionData){
         let info: [String : Any] = [
-            "objectID": Int(data.ObjectID),
+            "objectID": Int(data.objectID),
             "modelName": String(data.modelName),
-            "position": [Double](data.position)
+            "position": [Float](data.position)
         ]
         self.socket?.emit("model-transformed", info)
     }
@@ -122,6 +120,8 @@ final class ServiceManager: ObservableObject {
 // this information to a generic type.
 class SocketParser {
     static func convert<T: Decodable>(data: Any) throws -> T {
+        print ("DEBUG:: convert with regular input")
+
         let jsonData = try JSONSerialization.data(withJSONObject: data)
         let decoder = JSONDecoder()
         return try decoder.decode(T.self, from: jsonData)
@@ -139,8 +139,8 @@ class SocketParser {
 
 // Class to hold information about the game session we want to send/receive from server
 struct SharedSessionData: Codable {
-    var ObjectID: Int
+    var objectID: Int
     var modelName: String
-    var position: [Double]
+    var position: [Float]
 }
 
