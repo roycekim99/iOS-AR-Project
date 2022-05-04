@@ -14,11 +14,9 @@ final class ServiceManager: ObservableObject {
     weak var delegate: SocketSessionManagerDelegate?
     var socket: SocketIOClient? = nil
     
-    init(_ delegate: SocketSessionManagerDelegate) {
-        self.delegate = delegate
+    init() {
         // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
         self.socket = manager.defaultSocket
-        
         setupSocketEvents()
         socket?.connect()
     }
@@ -32,7 +30,7 @@ final class ServiceManager: ObservableObject {
         }
         
         // TODO: - Setup events for actions
-        socket?.on("onTap") { (data, ack) in
+        socket?.on("model-tapped") { (data, ack) in
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
 //                let position = CGPoint.init(x: response.x, y: response.y)
@@ -41,7 +39,7 @@ final class ServiceManager: ObservableObject {
             }
         }
         
-        socket?.on("onPlace") { (data, ack) in
+        socket?.on("model-placed") { (data, ack) in
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
 //                let position = CGPoint.init(x: response.x, y: response.y)
@@ -50,7 +48,7 @@ final class ServiceManager: ObservableObject {
             }
         }
         
-        socket?.on("onTransform") { (data, ack) in
+        socket?.on("model-transformed") { (data, ack) in
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
 //                let position = CGPoint.init(x: response.x, y: response.y)
@@ -108,10 +106,3 @@ struct SharedSessionData: Codable {
     var position: [Double]
 }
 
-
-// Protocol for the controller of the module to receive information of the Socket class.
-// Logic for didReceive will vary per action(onTap, onPlace, transforms, etc.)
-protocol SocketSessionManagerDelegate: class {
-    func didConnect()
-    func didReceive(gameSession: SharedSessionData)
-}
