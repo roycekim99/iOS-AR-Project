@@ -35,7 +35,7 @@ final class ServiceManager: ObservableObject {
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
 //                let position = CGPoint.init(x: response.x, y: response.y)
 //                self.delegate?.didReceive(point: position)
-                print("DEBUG:: ")
+                print("DEBUG:: Server requested to tap model: " + response.modelName)
             }
         }
         
@@ -44,7 +44,7 @@ final class ServiceManager: ObservableObject {
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
 //                let position = CGPoint.init(x: response.x, y: response.y)
 //                self.delegate?.didReceive(point: position)
-                print("DEBUG:: ")
+                print("DEBUG:: Server requested to place model: " + response.modelName)
             }
         }
         
@@ -53,7 +53,7 @@ final class ServiceManager: ObservableObject {
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
 //                let position = CGPoint.init(x: response.x, y: response.y)
 //                self.delegate?.didReceive(point: position)
-                print("DEBUG:: ")
+                print("DEBUG:: Server requested to move model: " + response.modelName + " || of ID: " + String(response.ObjectID))
             }
         }
     }
@@ -69,7 +69,25 @@ final class ServiceManager: ObservableObject {
             "modelName": String(data.modelName),
             "position": [Double](data.position)
         ]
-        socket?.emit("onTap", info)
+        socket?.emit("model-tapped", info)
+    }
+    
+    func emitModelPlaced(data: SharedSessionData){
+        let info: [String : Any] = [
+            "objectID": Int(data.ObjectID),
+            "modelName": String(data.modelName),
+            "position": [Double](data.position)
+        ]
+        socket?.emit("model-placed", info)
+    }
+    
+    func emitModelTransformed(data: SharedSessionData){
+        let info: [String : Any] = [
+            "objectID": Int(data.ObjectID),
+            "modelName": String(data.modelName),
+            "position": [Double](data.position)
+        ]
+        socket?.emit("model-transformed", info)
     }
     
     // Call this when ending a session.
