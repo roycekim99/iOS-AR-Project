@@ -58,7 +58,7 @@ struct ARSceneManager: UIViewRepresentable {
         }
     }
     
-    private func place(for model: Model, in arView: ARView){
+    private func place(for model: Model, in arView: ARView) {
        
         let modelEntity = ModelLibrary().getModelEntity(for: model)
         

@@ -40,6 +40,18 @@
 		188FB42F280706020091A185 /* B_Bishop_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40D280706020091A185 /* B_Bishop_1.usdz */; };
 		188FB430280706020091A185 /* W_Pawn_6.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40E280706020091A185 /* W_Pawn_6.usdz */; };
 		188FB431280706020091A185 /* B_Pawn_4.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB40F280706020091A185 /* B_Pawn_4.usdz */; };
+		18AC4552282297D400EC0EBA /* B_Pawn.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC454A282297D300EC0EBA /* B_Pawn.usdz */; };
+		18AC4553282297D400EC0EBA /* W_Pawn.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC454B282297D300EC0EBA /* W_Pawn.usdz */; };
+		18AC4555282297D400EC0EBA /* B_Rook.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC454D282297D300EC0EBA /* B_Rook.usdz */; };
+		18AC4556282297D400EC0EBA /* W_Bishop.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC454E282297D300EC0EBA /* W_Bishop.usdz */; };
+		18AC4557282297D400EC0EBA /* W_Knight.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC454F282297D300EC0EBA /* W_Knight.usdz */; };
+		18AC4558282297D400EC0EBA /* B_Knight.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC4550282297D300EC0EBA /* B_Knight.usdz */; };
+		18AC4559282297D400EC0EBA /* W_Rook.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC4551282297D400EC0EBA /* W_Rook.usdz */; };
+		18AC455E28229B7F00EC0EBA /* White_Queen.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC455A28229B7F00EC0EBA /* White_Queen.usdz */; };
+		18AC455F28229B7F00EC0EBA /* White_King.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC455B28229B7F00EC0EBA /* White_King.usdz */; };
+		18AC456028229B7F00EC0EBA /* Black_Queen.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC455C28229B7F00EC0EBA /* Black_Queen.usdz */; };
+		18AC456128229B7F00EC0EBA /* Black_King.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC455D28229B7F00EC0EBA /* Black_King.usdz */; };
+		18AC45632822A50E00EC0EBA /* B_Bishop.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18AC45622822A50E00EC0EBA /* B_Bishop.usdz */; };
 		6FC701CD2804E037009E1D98 /* PlacementSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC701CC2804E037009E1D98 /* PlacementSettings.swift */; };
 		874D6D7827FFD12400E7DBF4 /* ARSceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */; };
 		874D6D7A27FFD15400E7DBF4 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7927FFD15400E7DBF4 /* ControlView.swift */; };
@@ -147,6 +159,18 @@
 		188FB40D280706020091A185 /* B_Bishop_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Bishop_1.usdz; sourceTree = "<group>"; };
 		188FB40E280706020091A185 /* W_Pawn_6.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn_6.usdz; sourceTree = "<group>"; };
 		188FB40F280706020091A185 /* B_Pawn_4.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_4.usdz; sourceTree = "<group>"; };
+		18AC454A282297D300EC0EBA /* B_Pawn.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn.usdz; sourceTree = "<group>"; };
+		18AC454B282297D300EC0EBA /* W_Pawn.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Pawn.usdz; sourceTree = "<group>"; };
+		18AC454D282297D300EC0EBA /* B_Rook.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Rook.usdz; sourceTree = "<group>"; };
+		18AC454E282297D300EC0EBA /* W_Bishop.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Bishop.usdz; sourceTree = "<group>"; };
+		18AC454F282297D300EC0EBA /* W_Knight.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Knight.usdz; sourceTree = "<group>"; };
+		18AC4550282297D300EC0EBA /* B_Knight.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Knight.usdz; sourceTree = "<group>"; };
+		18AC4551282297D400EC0EBA /* W_Rook.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = W_Rook.usdz; sourceTree = "<group>"; };
+		18AC455A28229B7F00EC0EBA /* White_Queen.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = White_Queen.usdz; sourceTree = "<group>"; };
+		18AC455B28229B7F00EC0EBA /* White_King.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = White_King.usdz; sourceTree = "<group>"; };
+		18AC455C28229B7F00EC0EBA /* Black_Queen.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_Queen.usdz; sourceTree = "<group>"; };
+		18AC455D28229B7F00EC0EBA /* Black_King.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Black_King.usdz; sourceTree = "<group>"; };
+		18AC45622822A50E00EC0EBA /* B_Bishop.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Bishop.usdz; sourceTree = "<group>"; };
 		6FC701CC2804E037009E1D98 /* PlacementSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementSettings.swift; sourceTree = "<group>"; };
 		874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneManager.swift; sourceTree = "<group>"; };
 		874D6D7927FFD15400E7DBF4 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
@@ -246,6 +270,18 @@
 			children = (
 				C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */,
 				C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */,
+				18AC45622822A50E00EC0EBA /* B_Bishop.usdz */,
+				18AC4550282297D300EC0EBA /* B_Knight.usdz */,
+				18AC454A282297D300EC0EBA /* B_Pawn.usdz */,
+				18AC454D282297D300EC0EBA /* B_Rook.usdz */,
+				18AC455D28229B7F00EC0EBA /* Black_King.usdz */,
+				18AC455C28229B7F00EC0EBA /* Black_Queen.usdz */,
+				18AC454E282297D300EC0EBA /* W_Bishop.usdz */,
+				18AC454F282297D300EC0EBA /* W_Knight.usdz */,
+				18AC454B282297D300EC0EBA /* W_Pawn.usdz */,
+				18AC4551282297D400EC0EBA /* W_Rook.usdz */,
+				18AC455B28229B7F00EC0EBA /* White_King.usdz */,
+				18AC455A28229B7F00EC0EBA /* White_Queen.usdz */,
 			);
 			path = Pieces;
 			sourceTree = "<group>";
@@ -552,30 +588,40 @@
 				C5037D5C27C70A3C00EE9549 /* Black_6.usdz in Resources */,
 				C5E6798C27A9611B00E24F1D /* Vintage Checkers.usdz in Resources */,
 				188FB429280706020091A185 /* W_Queen.usdz in Resources */,
+				18AC4559282297D400EC0EBA /* W_Rook.usdz in Resources */,
+				18AC456028229B7F00EC0EBA /* Black_Queen.usdz in Resources */,
 				C55E64B827D7C3EE00EC5DE7 /* Black_Piece.usdz in Resources */,
+				18AC4557282297D400EC0EBA /* W_Knight.usdz in Resources */,
 				188FB41C280706020091A185 /* W_Pawn_2.usdz in Resources */,
 				188FB423280706020091A185 /* W_Pawn_7.usdz in Resources */,
 				C5461C4E27C973A0000197B0 /* Red_8.usdz in Resources */,
 				C5037D6627C7224C00EE9549 /* Black_9.usdz in Resources */,
+				18AC4556282297D400EC0EBA /* W_Bishop.usdz in Resources */,
 				C5461C4F27C973A0000197B0 /* Red_4.usdz in Resources */,
 				C55E64BA27D7C42A00EC5DE7 /* Red_Piece.usdz in Resources */,
 				C5037D6527C7224C00EE9549 /* Black_11.usdz in Resources */,
 				188FB414280706020091A185 /* B_Knight_2.usdz in Resources */,
 				188FB42B280706020091A185 /* W_Knight_1.usdz in Resources */,
+				18AC45632822A50E00EC0EBA /* B_Bishop.usdz in Resources */,
 				C5461C5427C973A0000197B0 /* Red_10.usdz in Resources */,
 				188FB412280706020091A185 /* B_Pawn_1.usdz in Resources */,
 				188FB416280706020091A185 /* W_Bishop_1.usdz in Resources */,
 				188FB413280706020091A185 /* B_Pawn_3.usdz in Resources */,
 				C5461C4C27C973A0000197B0 /* Red_3.usdz in Resources */,
 				C5EE087527A9500A00C3D9F6 /* Chess.usdz in Resources */,
+				18AC455F28229B7F00EC0EBA /* White_King.usdz in Resources */,
 				C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */,
 				188FB41B280706020091A185 /* B_Rook_1.usdz in Resources */,
 				188FB415280706020091A185 /* W_Rook_2.usdz in Resources */,
 				C5461C4D27C973A0000197B0 /* Red_1.usdz in Resources */,
 				188FB418280706020091A185 /* B_Bishop_2.usdz in Resources */,
 				C5037D5927C70A3C00EE9549 /* Black_1.usdz in Resources */,
+				18AC455E28229B7F00EC0EBA /* White_Queen.usdz in Resources */,
+				18AC4558282297D400EC0EBA /* B_Knight.usdz in Resources */,
 				188FB420280706020091A185 /* W_Rook_1.usdz in Resources */,
 				C5461C5127C973A0000197B0 /* Red_9.usdz in Resources */,
+				18AC4553282297D400EC0EBA /* W_Pawn.usdz in Resources */,
+				18AC4555282297D400EC0EBA /* B_Rook.usdz in Resources */,
 				C5037D6927C7224C00EE9549 /* Black_10.usdz in Resources */,
 				188FB42A280706020091A185 /* B_Queen.usdz in Resources */,
 				C5037D6827C7224C00EE9549 /* Black_7.usdz in Resources */,
@@ -587,6 +633,8 @@
 				C5037D5A27C70A3C00EE9549 /* Black_5.usdz in Resources */,
 				188FB427280706020091A185 /* W_Bishop_2.usdz in Resources */,
 				C5461C5027C973A0000197B0 /* Red_12.usdz in Resources */,
+				18AC456128229B7F00EC0EBA /* Black_King.usdz in Resources */,
+				18AC4552282297D400EC0EBA /* B_Pawn.usdz in Resources */,
 				188FB42E280706020091A185 /* B_Pawn_6.usdz in Resources */,
 				C5037D5827C70A3C00EE9549 /* Black_2.usdz in Resources */,
 				188FB430280706020091A185 /* W_Pawn_6.usdz in Resources */,
@@ -809,7 +857,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = VNG6J3P3MV;
+				DEVELOPMENT_TEAM = Y3A8CRT877;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -826,7 +874,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JetAung;
+				PRODUCT_BUNDLE_IDENTIFIER = JetAung1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -842,7 +890,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = VNG6J3P3MV;
+				DEVELOPMENT_TEAM = Y3A8CRT877;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -859,7 +907,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JetAung;
+				PRODUCT_BUNDLE_IDENTIFIER = JetAung1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
