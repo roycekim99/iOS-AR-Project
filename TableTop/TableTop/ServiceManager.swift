@@ -5,25 +5,18 @@
 //  Created by Nueton Huynh on 5/2/22.
 //
 
-import Foundation
 import SwiftUI
 import SocketIO
 
 final class ServiceManager: ObservableObject {
-    weak var delegate: SocketSessionManagerDelegate?
-    
     // Configure SocketManager with socker server URL and show log on console
     private var manager = SocketManager(socketURL: URL(string: "http://35.161.104.204:3001/")!, config: [.log(true), .compress])
-    
+    weak var delegate: SocketSessionManagerDelegate?
     var socket: SocketIOClient? = nil
-
-    @Published var messages = [String]()
-    
     
     init(_ delegate: SocketSessionManagerDelegate) {
         self.delegate = delegate
-        // Initialize the socket (a SocketIOClient) variable, used to emit
-        // and listen to events.
+        // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
         self.socket = manager.defaultSocket
         
         setupSocketEvents()
@@ -38,24 +31,33 @@ final class ServiceManager: ObservableObject {
             self.socket?.emit("NodeJS Server Port", "Hi Node.js server.")
         }
         
-        // Custom event
-        socket?.on("iOS Client Port") { [weak self] (data, ack) in
-            if let data = data[0] as? [String: String],
-            let rawMessage = data["msg"] {
-                DispatchQueue.main.async {
-                    self?.messages.append(rawMessage)
-                }
-            }
-        }
-        // TODO: - Setup events for actions here like this???????
-//        socket?.on("drawing") { (data, ack) in
-//            guard let dataInfo = data.first else { return }
-//            if let response: SocketPosition = try? SocketParser.convert(data: dataInfo) {
+        // TODO: - Setup events for actions
+        socket?.on("onTap") { (data, ack) in
+            guard let dataInfo = data.first else { return }
+            if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
 //                let position = CGPoint.init(x: response.x, y: response.y)
 //                self.delegate?.didReceive(point: position)
-//            }
-//        }
-
+                print("DEBUG:: ")
+            }
+        }
+        
+        socket?.on("onPlace") { (data, ack) in
+            guard let dataInfo = data.first else { return }
+            if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
+//                let position = CGPoint.init(x: response.x, y: response.y)
+//                self.delegate?.didReceive(point: position)
+                print("DEBUG:: ")
+            }
+        }
+        
+        socket?.on("onTransform") { (data, ack) in
+            guard let dataInfo = data.first else { return }
+            if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
+//                let position = CGPoint.init(x: response.x, y: response.y)
+//                self.delegate?.didReceive(point: position)
+                print("DEBUG:: ")
+            }
+        }
     }
     
     // Convert the SharedSession object to a String:Any dictionary
