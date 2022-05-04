@@ -28,8 +28,10 @@ class Model {
         self.scaleCompensation = scaleCompensation
         self.childs = childs
         self.assetID = assetID
-//        self.position = position
+        self.position = [0.0,0.0]
     }
+    
+    //func updatePosition(pos)
     
     
 }
