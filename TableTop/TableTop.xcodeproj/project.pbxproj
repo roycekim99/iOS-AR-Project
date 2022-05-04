@@ -49,7 +49,6 @@
 		874D6D7E27FFD17700E7DBF4 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7D27FFD17700E7DBF4 /* BrowseView.swift */; };
 		874D6D8027FFD19300E7DBF4 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */; };
 		874D6D8227FFD1A100E7DBF4 /* ModelLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */; };
-		874D6D8427FFD1B000E7DBF4 /* MultiuserHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8327FFD1B000E7DBF4 /* MultiuserHandler.swift */; };
 		874D6D8627FFD34200E7DBF4 /* PlaceConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8527FFD34200E7DBF4 /* PlaceConfirmView.swift */; };
 		874D6D8827FFD34F00E7DBF4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8727FFD34F00E7DBF4 /* SettingsView.swift */; };
 		874D6D8A27FFD35A00E7DBF4 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8927FFD35A00E7DBF4 /* ZoomView.swift */; };
@@ -157,7 +156,6 @@
 		874D6D7D27FFD17700E7DBF4 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLibrary.swift; sourceTree = "<group>"; };
-		874D6D8327FFD1B000E7DBF4 /* MultiuserHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiuserHandler.swift; sourceTree = "<group>"; };
 		874D6D8527FFD34200E7DBF4 /* PlaceConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceConfirmView.swift; sourceTree = "<group>"; };
 		874D6D8727FFD34F00E7DBF4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		874D6D8927FFD35A00E7DBF4 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
@@ -353,7 +351,6 @@
 				6FC701CC2804E037009E1D98 /* PlacementSettings.swift */,
 				874D6D7727FFD12400E7DBF4 /* ARSceneManager.swift */,
 				6F5F83A92820C85800A1E102 /* ServiceManager.swift */,
-				874D6D8327FFD1B000E7DBF4 /* MultiuserHandler.swift */,
 				874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */,
 				874D6D7B27FFD16000E7DBF4 /* Model.swift */,
 				874D6D7F27FFD19300E7DBF4 /* ModelManager.swift */,
@@ -644,7 +641,6 @@
 				874D6D7C27FFD16000E7DBF4 /* Model.swift in Sources */,
 				874D6D8A27FFD35A00E7DBF4 /* ZoomView.swift in Sources */,
 				874D6D8627FFD34200E7DBF4 /* PlaceConfirmView.swift in Sources */,
-				874D6D8427FFD1B000E7DBF4 /* MultiuserHandler.swift in Sources */,
 				874D6D7A27FFD15400E7DBF4 /* ControlView.swift in Sources */,
 				874D6D7827FFD12400E7DBF4 /* ARSceneManager.swift in Sources */,
 				874D6D8227FFD1A100E7DBF4 /* ModelLibrary.swift in Sources */,
@@ -817,7 +813,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = VNG6J3P3MV;
+				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -850,7 +846,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = VNG6J3P3MV;
+				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
