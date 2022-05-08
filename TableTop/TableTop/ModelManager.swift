@@ -9,6 +9,7 @@ import RealityKit
 import ARKit
 import SwiftUI
 
+<<<<<<< Updated upstream
 extension CustomARView {
     struct Holder {
         static var anchorMap = [ModelEntity:AnchorEntity]()
@@ -30,6 +31,9 @@ extension CustomARView {
             handleDeletion(recognizer: recognizer)
         }
     }
+=======
+extension FocusEntityARView {
+>>>>>>> Stashed changes
     
     func handlePhysics(recognizer:UITapGestureRecognizer) {
         let location = recognizer.location(in: self)
@@ -53,7 +57,7 @@ extension CustomARView {
         let location = recognizer.location(in: self)
         
         if let entity = self.entity(at: location) as? ModelEntity {
-            if (ARSceneManager.activeModels.contains(entity)) {
+            if (ARSceneContainer.activeModels.contains(entity)) {
             deletionManager.entitySelectedForDeletion = entity
             }
         }
@@ -100,7 +104,7 @@ extension CustomARView {
                 
                 if (Holder.zoomEnabled) {
                     print("DEBUG:: zoooom")
-                    for ent in ARSceneManager.activeModels {
+                    for ent in ARSceneContainer.activeModels {
                         if (ent != modEnt!) {
                             Holder.anchorMap[ent] = ent.parent as? AnchorEntity
                             ent.setParent(modEnt, preservingWorldTransform: true)
@@ -112,7 +116,7 @@ extension CustomARView {
                 print(Holder.anchorMap.count)
                 
                 if (Holder.zoomEnabled) {
-                    for ent in ARSceneManager.activeModels {
+                    for ent in ARSceneContainer.activeModels {
                         if (ent != modEnt!) {
                             ent.setParent(Holder.anchorMap[ent], preservingWorldTransform: true)
                         }

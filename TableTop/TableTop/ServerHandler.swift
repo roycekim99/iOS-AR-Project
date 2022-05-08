@@ -8,7 +8,7 @@
 import SwiftUI
 import SocketIO
 
-final class ServiceManager: ObservableObject {
+final class ServerHandler: ObservableObject {
     // Configure SocketManager with socker server URL and show log on console
     private var manager = SocketManager(socketURL: URL(string: "http://35.161.104.204:3001/")!, config: [.log(true), .compress])
     var socket: SocketIOClient? = nil
@@ -23,6 +23,7 @@ final class ServiceManager: ObservableObject {
         self.testEmission()
     }
     
+    //DEBUG
     func testEmission(){
         let testModel = SharedSessionData(objectID: 0, modelName: "Test Object", position: [0.1, 0.5])
         

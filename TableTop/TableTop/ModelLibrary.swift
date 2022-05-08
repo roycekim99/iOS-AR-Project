@@ -81,8 +81,8 @@ class ModelLibrary {
                 }
             } , receiveValue: { modelEntity in
                 
-                ModelLibrary.loadedModelEntities[model.assetID] = modelEntity
-                ModelLibrary.loadedModelEntities[model.assetID]?.scale *= model.scaleCompensation
+                ModelLibrary.loadedModelEntities[model.asset_UID] = modelEntity
+                ModelLibrary.loadedModelEntities[model.asset_UID]?.scale *= model.scaleCompensation
                 self.cancellable?.cancel()
                 print("DEBUG:: model has been loaded")
             })
@@ -93,17 +93,17 @@ class ModelLibrary {
         
         let clonedEntity: ModelEntity?
         
-        if let modelEntity = ModelLibrary.loadedModelEntities[model.assetID] {
+        if let modelEntity = ModelLibrary.loadedModelEntities[model.asset_UID] {
             clonedEntity = modelEntity.clone(recursive: true)
         }  else {
             // load model
             loadModelToClone(for: model)
             print("DEBUG::Model was not loaded prior to cloning. Finished loading")
-            let modelEntity = ModelLibrary.loadedModelEntities[model.assetID]
+            let modelEntity = ModelLibrary.loadedModelEntities[model.asset_UID]
             clonedEntity = modelEntity?.clone(recursive: true)
             
         }
-        print("DEBUG:: loaded model ID: " + String(model.assetID))
+        print("DEBUG:: loaded model ID: " + String(model.asset_UID))
         return clonedEntity!
     }
     

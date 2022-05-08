@@ -11,7 +11,8 @@ struct TableTopApp: App {
     @StateObject var placementSettings = PlacementSettings()
     @StateObject var sessionSettings = SessionSettings()
     @StateObject var deletionManager = DeletionManager()
-    @StateObject var serverServiceManager = ServiceManager()
+    
+    @StateObject var serverServiceManager = ServerHandler()
     
     var body: some Scene {
         WindowGroup {

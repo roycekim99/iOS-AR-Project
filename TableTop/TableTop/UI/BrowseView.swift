@@ -101,7 +101,7 @@ struct HorizontalGrid: View {
                 LazyHGrid(rows: gridItemLayout, spacing: 30) {
                     ForEach(0..<items.count) {index in
                         let model = items[index]
-                        let id = items[index].assetID
+                        let id = items[index].asset_UID
                         
                         ItemButton(model: model) {
                             // befor loading, check if the model has already been loaded
@@ -109,7 +109,7 @@ struct HorizontalGrid: View {
                                 ModelLibrary().loadModelToClone(for: model)
 //                                model.loadModelEntity()
                                 for chd in model.childs {
-                                    if ModelLibrary.loadedModelEntities[chd.assetID] == nil {
+                                    if ModelLibrary.loadedModelEntities[chd.asset_UID] == nil {
                                         ModelLibrary().loadModelToClone(for: chd)
 //                                        model.loadModelEntity()
                                     }

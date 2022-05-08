@@ -11,21 +11,21 @@ import RealityKit
 class DeletionManager: ObservableObject {
     @Published var DeletionEnabled: Bool = false {
         willSet(newValue) {
-            print("Setting Deletion Enabled to \(String(describing: newValue.description))")
-            CustomARView.Holder.deletionEnabled = newValue
+            print("DEBUG:: Setting Deletion Enabled to \(String(describing: newValue.description))")
+            FocusEntityARView.Holder.deletionEnabled = newValue
         }
     }
     
     @Published var entitySelectedForDeletion: ModelEntity? = nil {
         willSet(newValue) {
             if self.entitySelectedForDeletion == nil, let newlySelectedModelEntity = newValue {
-                print("Selecting new entitySelectedForDeletion, no prior selection.")
+                print("DEBUG:: Selecting new entitySelectedForDeletion, no prior selection.")
                 
                 // Highlight newlySelectedModelEntity
                 let component = ModelDebugOptionsComponent(visualizationMode: .lightingDiffuse)
                 newlySelectedModelEntity.modelDebugOptions = component
             } else if let previouslySelectedModelEntity = self.entitySelectedForDeletion, let newlySelectedModelEntity = newValue {
-                print("Selecting new entitySelectedForDeletion, had a prior selection.")
+                print("DEBUG:: Selecting new entitySelectedForDeletion, had a prior selection.")
                 
                 // Un-highlight previouslySelectedModelEntity
                 previouslySelectedModelEntity.modelDebugOptions = nil
@@ -34,7 +34,7 @@ class DeletionManager: ObservableObject {
                 let component = ModelDebugOptionsComponent(visualizationMode: .lightingDiffuse)
                 newlySelectedModelEntity.modelDebugOptions = component
             } else if newValue == nil {
-                print("Clearing entitySelectedForDeletion.")
+                print("DEBUG:: Clearing entitySelectedForDeletion.")
                 
                 self.entitySelectedForDeletion?.modelDebugOptions = nil
             }
@@ -66,12 +66,18 @@ struct DeletionView: View {
                 
                 
                 let anchoringIdentifier = anchor.anchorIdentifier
+<<<<<<< Updated upstream
                 if let anchorIndex = ARSceneManager.anchorEntities.firstIndex(where: { $0.anchorIdentifier == anchoringIdentifier}) {
                     print("Deleting anchorEntity with id: \(String(describing: anchoringIdentifier))")
                     ARSceneManager.anchorEntities.remove(at: anchorIndex)
                 }
                 if let modelIndex = ARSceneManager.activeModels.firstIndex(of: model) {
                     ARSceneManager.activeModels.remove(at: modelIndex)
+=======
+                if let index = ARSceneContainer.anchorEntities.firstIndex(where: { $0.anchorIdentifier == anchoringIdentifier}) {
+                    print("Deleting anchorEntity with id: \(String(describing: anchoringIdentifier))")
+                    ARSceneContainer.anchorEntities.remove(at: index)
+>>>>>>> Stashed changes
                 }
                 anchor.removeFromParent()
                 self.deletionManager.entitySelectedForDeletion = nil

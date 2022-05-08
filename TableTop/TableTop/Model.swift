@@ -14,11 +14,12 @@ import Combine
 class Model {
     var name: String
     var category: ModelCategory
-    var thumbnail: UIImage
     var childs: [Model]
+    var asset_UID: Int  //TODO: UID
     var scaleCompensation: Float
-    var assetID: Int
-    var position: [Float]
+    var position: SIMD3<Float>
+    var thumbnail: UIImage
+
     
     
     init(name: String, category: ModelCategory, scaleCompensation: Float = 1.0, childs: [Model], assetID: Int) {
@@ -27,8 +28,8 @@ class Model {
         self.thumbnail = UIImage(named: name) ?? UIImage(systemName: "photo")!
         self.scaleCompensation = scaleCompensation
         self.childs = childs
-        self.assetID = assetID
-        self.position = [0.0,0.0]
+        self.asset_UID = assetID
+        self.position = SIMD3<Float>()
     }
     
     //func updatePosition(pos)

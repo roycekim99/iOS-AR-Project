@@ -13,19 +13,30 @@ import SwiftUI
 
 // UIViewRepresentable converts UIKit view to SwiftUI
 // RealityKit view is UIKit view
-struct ARSceneManager: UIViewRepresentable {
+struct ARSceneContainer: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
+<<<<<<< Updated upstream:TableTop/TableTop/ARSceneManager.swift
     
     static var originPoint: [Entity]  = []
+=======
+    @EnvironmentObject var serverServiceManager: ServerHandler
+    
+>>>>>>> Stashed changes:TableTop/TableTop/ARSceneContainer.swift
     
     // List containing currently active models
-    // TODO: Logic for keeping this list updated? 
+    // TODO: Logic for keeping this list updated?
+    
     static var activeModels: [ModelEntity] = []
     static var anchorEntities: [AnchorEntity] = []
     
+<<<<<<< Updated upstream:TableTop/TableTop/ARSceneManager.swift
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
+=======
+    func makeUIView(context: Context) -> FocusEntityARView {
+        let arView = FocusEntityARView(frame: .zero, deletionManager: deletionManager)
+>>>>>>> Stashed changes:TableTop/TableTop/ARSceneContainer.swift
         
         // Subscribe to sceneEvents.update
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, {(event) in
@@ -35,9 +46,13 @@ struct ARSceneManager: UIViewRepresentable {
         return arView
     }
     
-    func updateUIView(_ uiView: CustomARView, context: Context) {}
+    func updateUIView(_ uiView: FocusEntityARView, context: Context) {}
     
+<<<<<<< Updated upstream:TableTop/TableTop/ARSceneManager.swift
     private func updateScene(for arView: CustomARView) {
+=======
+    private func updateScene(for arView: FocusEntityARView) {
+>>>>>>> Stashed changes:TableTop/TableTop/ARSceneContainer.swift
         arView.focusEntity?.isEnabled = self.placementSettings.selectedModel != nil
         
         // Add model to scene if confirmed for placement
@@ -74,16 +89,21 @@ struct ARSceneManager: UIViewRepresentable {
         }
         
         arView.installGestures(.all, for: modelEntity).forEach { entityGesture in
-            entityGesture.addTarget(arView, action: #selector(CustomARView.handleTranslation(sender:)))
+            entityGesture.addTarget(arView, action: #selector(FocusEntityARView.handleTranslation(sender:)))
         }
 
         let anchorEntity = AnchorEntity(plane: .any)
         anchorEntity.addChild(modelEntity)
 
         arView.scene.addAnchor(anchorEntity)
+<<<<<<< Updated upstream:TableTop/TableTop/ARSceneManager.swift
         ARSceneManager.activeModels.append(modelEntity)
         ARSceneManager.anchorEntities.append(anchorEntity)
         print("added modelEntity")
+=======
+        ARSceneContainer.activeModels.append(modelEntity)
+        ARSceneContainer.anchorEntities.append(anchorEntity)
+>>>>>>> Stashed changes:TableTop/TableTop/ARSceneContainer.swift
         
         //testing is getrelativepostiion works
 //        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])

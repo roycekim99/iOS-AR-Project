@@ -11,8 +11,6 @@ import Combine
 
 class PlacementSettings: ObservableObject {
     
-    
-    
     init() {
             self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
             self.originfloor = true
@@ -30,6 +28,7 @@ class PlacementSettings: ObservableObject {
             print("DEBUG::Setting selectedModel to \(String(describing: newValue?.name))")
         }
     }
+    
     @Published var selectedModelID: Int? {
         willSet(newValue) {
             print("DEBUG::Setting selectedModelID to \(String(describing: newValue))")

@@ -9,10 +9,11 @@ import SwiftUI
 import RealityKit
 import ARKit
 
-//show default UI
+// MARK: ControlView_Main
 struct ControlView: View {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
+    
     @State private var isControlsVisible: Bool = true
     @State private var showBrowse: Bool = false
     @State private var showSettings: Bool = false
@@ -21,7 +22,7 @@ struct ControlView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            ARSceneManager()
+            ARSceneContainer()
                 
 //          If no model is selected for placement, show default UI
             if self.placementSettings.selectedModel != nil {
@@ -38,6 +39,7 @@ struct ControlView: View {
     }
 }
 
+// MARK: Default View
 struct DefaultView: View {
     @Binding var isControlsVisible: Bool
     @Binding var showBrowse: Bool
@@ -60,6 +62,17 @@ struct DefaultView: View {
     }
 }
 
+// MARK: ControlView_Previews
+struct ControlView_Previews: PreviewProvider{
+    static var previews: some View{
+        ControlView()
+            .environmentObject(PlacementSettings())
+            .environmentObject(SessionSettings())
+            .environmentObject(DeletionManager())
+    }
+}
+
+// MARK: ControlTopBar
 struct ControlTopBar: View {
     @Binding var isControlsVisible: Bool
     @Binding var zoomEnabled: Bool
@@ -88,6 +101,7 @@ struct ControlTopBar: View {
     }
 }
 
+// MARK: ControlVisibilityToggleButton
 struct ControlVisibilityToggleButton: View {
     @Binding var isControlsVisible: Bool
     
@@ -112,6 +126,7 @@ struct ControlVisibilityToggleButton: View {
     }
 }
 
+// MARK: DelectionButton
 struct DeletionButton: View {
     @EnvironmentObject var deletion: DeletionManager
     @Binding var deleteEnabled: Bool
@@ -124,7 +139,7 @@ struct DeletionButton: View {
                 print("Deletion Button Pressed.")
                 self.deleteEnabled.toggle()
                 self.deletion.DeletionEnabled = self.deleteEnabled
-                CustomARView.resetAll(modelEntities: ARSceneManager.activeModels)
+                FocusEntityARView.resetAll(modelEntities: ARSceneContainer.activeModels)
             }) {
                 Image(systemName: self.deleteEnabled ? "trash.fill" : "trash")
                     .font(.system(size: 25))
@@ -138,6 +153,7 @@ struct DeletionButton: View {
     }
 }
 
+// MARK: ZoomButton
 struct ZoomButton: View {
     @EnvironmentObject var zoomView: ZoomView
     @Binding var zoomEnabled: Bool
@@ -152,7 +168,7 @@ struct ZoomButton: View {
                 //zoomView.ZoomEnabled.toggle()
                 //zoomEnabled = zoomView.ZoomEnabled
                 self.zoomView.ZoomEnabled = self.zoomEnabled
-                CustomARView.moveAll(check: self.zoomView.ZoomEnabled, modelEntities: ARSceneManager.activeModels)
+                FocusEntityARView.moveAll(check: self.zoomView.ZoomEnabled, modelEntities: ARSceneContainer.activeModels)
             }) {
                 Image(systemName: self.zoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
                     .font(.system(size: 25))
@@ -166,6 +182,7 @@ struct ZoomButton: View {
     }
 }
  
+// MARK: Control Bottom Bar
 struct ControlBottomBar: View {
     @Binding var showBrowse: Bool
     @Binding var showSettings: Bool
@@ -202,6 +219,7 @@ struct ControlBottomBar: View {
     }
 }
 
+// MARK: Control Button
 struct ControlButton: View {
     let systemIconName: String
     let action: () -> Void
@@ -219,12 +237,13 @@ struct ControlButton: View {
     }
 }
 
+// MARK: Most Recently Placed Button
 struct MostRecentlyPlacedButton: View {
     @EnvironmentObject var placementSettings: PlacementSettings
     
     var body: some View {
         Button(action: {
-            print("Most Recently Placed button pressed")
+            print("DEGBU::Most Recently Placed button pressed")
             self.placementSettings.selectedModel = self.placementSettings.recentlyPlaced.last
         }) {
             if let mostRecentlyPlacedModel = self.placementSettings.recentlyPlaced.last {
@@ -245,12 +264,3 @@ struct MostRecentlyPlacedButton: View {
     }
 }
 
-
-struct ControlView_Previews: PreviewProvider{
-    static var previews: some View{
-        ControlView()
-            .environmentObject(PlacementSettings())
-            .environmentObject(SessionSettings())
-            .environmentObject(DeletionManager())
-    }
-}
