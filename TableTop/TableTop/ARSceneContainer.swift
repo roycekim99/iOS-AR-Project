@@ -56,15 +56,14 @@ struct ARSceneContainer: UIViewRepresentable {
     private func place(for model: Model, in arView: ARView) {
        
         //DEBUG
-        print("DEBUG:: place started! active models: \(ModelManagerTester.getInstance().activeModels.count)")
+        print("DEBUG:: place started for \(model.name)! active models: \(ModelManagerTester.getInstance().activeModels.count)")
         print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.avilableAssets.count)")
         
         var selectedClonedModel = ModelLibrary().getModelCloned(from: model)
-        
         //DEBUG
         print("DEBUG:: ARSC|| About to add gestures")
         arView.installGestures(.all, for: selectedClonedModel.getModelEntity()).forEach { entityGesture in
-            entityGesture.addTarget(arView, action: #selector(ModelManagerTester.getInstance().handleTranslation(sender:)))
+            entityGesture.addTarget(arView, action: #selector(ModelManagerTester.getInstance().handleTranslation(_ :)))
         }
         
         //DEBUG
@@ -77,14 +76,16 @@ struct ARSceneContainer: UIViewRepresentable {
         
         arView.scene.addAnchor(anchorEntity)
 
-        print("DEBUG:: Cloned model: \(selectedClonedModel.name)")
+        print("DEBUG:: ARSC|| Cloned model: \(selectedClonedModel.name)")
 
-        for child in model.childs {
+        for child in selectedClonedModel.childs {
             print("DEBUG:: going thorugh childred for \(selectedClonedModel.name)..." + child.name)
             self.place(for: child, in: arView)
         }
         //testing is getrelativepostiion works
 //        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
+        
+        ModelManagerTester.getInstance().addActiveModel(modelID: selectedClonedModel.getModelUID(), model: selectedClonedModel)
         
         //DEBUG
         print("DEBUG:: ARSC||| place ending! active models: \(ModelManagerTester.getInstance().activeModels.count)")

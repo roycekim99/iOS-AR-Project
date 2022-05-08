@@ -45,8 +45,6 @@ class ModelManagerTester{
     
     func setARView(targetView: ARView){
         self.targetARView = targetView
-        //DEBUG
-        print("DEBUG:: MMT|| current targetView: \(self.targetARView)")
     }
     
     func setDeletionmanager(deletionManager: DeletionManager){
@@ -75,51 +73,52 @@ class ModelManagerTester{
         }
     }
     
-    @objc func handleTranslation(sender: UIGestureRecognizer) {
+    @objc func handleTranslation(_ sender: UIGestureRecognizer) {
         
         //DEBUG
         print("DEBUG:: MMT|| STARTED TRANSLATION!!")
-        if let gesture = sender as? EntityTranslationGestureRecognizer {
-            
-            let targetModelEntity = gesture.entity
+        guard let gesture = sender as? EntityTranslationGestureRecognizer else { return }
         
-            if self.objectMoved == nil {
-                self.objectMoved = targetModelEntity
-            } else if (targetModelEntity != self.objectMoved) {
-                return
-            }
-            
-            switch gesture.state {
-            case .began:
-                print("DEBUG::Started Moving")
-                
-                if (self.zoomEnabled) {
-                    print("DEBUG:: zoooom")
-                    for (_,modelObj) in self.activeModels {
-                        let modelEntity = modelObj.getModelEntity()
-                        if (modelEntity != targetModelEntity!) {
-                            modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
-                        }
-                    }
-                }
-            case .ended:
-                print("DEBUG::Stopped Moving")
-                
-                if (self.zoomEnabled) {
-                    for (_,modelObj) in self.activeModels {
-                        let modelEntity = modelObj.getModelEntity()
-                        if (modelEntity != targetModelEntity!) {
-                            modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
-                        }
-                    }
-                }
-                //self.anchorMap.removeAll()
-                self.objectMoved = nil
-                    
-            default:
-                return
-            }
+        let targetModelEntity = gesture.entity
+        
+    
+        if self.objectMoved == nil {
+            self.objectMoved = targetModelEntity
+        } else if (targetModelEntity != self.objectMoved) {
+            return
         }
+            
+        switch gesture.state {
+        case .began:
+            print("DEBUG::Started Moving")
+            
+            if (self.zoomEnabled) {
+                print("DEBUG:: zoooom")
+                for (_,modelObj) in self.activeModels {
+                    let modelEntity = modelObj.getModelEntity()
+                    if (modelEntity != targetModelEntity!) {
+                        modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
+                    }
+                }
+            }
+        case .ended:
+            print("DEBUG::Stopped Moving")
+            
+            if (self.zoomEnabled) {
+                for (_,modelObj) in self.activeModels {
+                    let modelEntity = modelObj.getModelEntity()
+                    if (modelEntity != targetModelEntity!) {
+                        modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
+                    }
+                }
+            }
+            //self.anchorMap.removeAll()
+            self.objectMoved = nil
+                
+        default:
+            return
+        }
+        
     }
     
     func moveAll(check: Bool){

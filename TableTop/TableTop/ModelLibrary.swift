@@ -82,14 +82,12 @@ class ModelLibrary {
     
     // clone model entity and return this entity to be placed into the scene
     func getModelCloned(from model: Model) -> Model {
+        let clonedModel = Model(from:model)
         
         var clonedModelEntity: ModelEntity?
         
         if let modelLoadedAlready = ModelLibrary.loadedModels[model.model_uid] {
             clonedModelEntity = modelLoadedAlready.clone(recursive: true)
-            
-            print("DEBUG:: original ID: \(model.getModelEntity().id )|| new: \(clonedModelEntity?.id)")
-            
         }  else {
             // load model
             loadModelToClone(for: model)
@@ -102,7 +100,8 @@ class ModelLibrary {
         //DEBUG
         print("DEBUG:: ML|| loaded: \(ModelLibrary.loadedModels.count)")
         
-        print("DEBUG:: loaded model ID: " + String(model.model_uid))
+        print("DEBUG:: ML|| loaded model ID: " + String(model.model_uid))
+        print("DEBUG:: original ID: \(model.getModelEntity().id )|| new: \(clonedModelEntity?.id)")
         
         
 //        testing if setPosition works
@@ -116,7 +115,6 @@ class ModelLibrary {
             clonedModelEntity!.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil, mode: .dynamic)
         }
         
-        let clonedModel = Model(from:model)
         let newID = deviceName + "_" + String(clonedModel.getModelEntity().id)
         
         clonedModel.setModelID(to: newID)
