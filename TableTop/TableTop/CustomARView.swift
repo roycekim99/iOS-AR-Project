@@ -28,12 +28,12 @@ class CustomARView: ARView {
     
     private func configure() {
         focusEntity = FocusEntity(on: self, focus: .classic)
-        ModelManagerTester.getInstance().setARView(targetView: self)
+        ModelManager.getInstance().setARView(targetView: self)
         
         //DEBUG
         print("DEBUG:: CARV|| view using \(self)")
         
-        ModelManagerTester.getInstance().setDeletionmanager(deletionManager: deletionManager)
+        ModelManager.getInstance().setDeletionmanager(deletionManager: deletionManager)
         
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = [.horizontal, .vertical]
@@ -64,9 +64,9 @@ class CustomARView: ARView {
         //DEBUG
         print("DEBUG:: CARV|| handling tap")
         if (!Holder.deletionEnabled && !Holder.zoomEnabled) {
-            ModelManagerTester.getInstance().handlePhysics(recognizer: recognizer, zoomIsEnabled: Holder.zoomEnabled)
+            ModelManager.getInstance().handlePhysics(recognizer: recognizer, zoomIsEnabled: Holder.zoomEnabled)
         } else {
-            ModelManagerTester.getInstance().handleDeleteion(recognizer: recognizer)
+            ModelManager.getInstance().handleDeleteion(recognizer: recognizer)
         }
     }
     

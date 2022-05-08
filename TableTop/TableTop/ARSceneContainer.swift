@@ -45,7 +45,7 @@ struct ARSceneContainer: UIViewRepresentable {
                 //DEBUG
                 print("DEBUG:: ARSC|| confiemd model: \(confirmedModel.name)")
                 self.place(for : confirmedModel, in: arView)
-                ModelManagerTester.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
+                ModelManager.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
 
             }
             self.placementSettings.confirmedModel = nil
@@ -56,14 +56,14 @@ struct ARSceneContainer: UIViewRepresentable {
     private func place(for model: Model, in arView: ARView) {
        
         //DEBUG
-        print("DEBUG:: place started for \(model.name)! active models: \(ModelManagerTester.getInstance().activeModels.count)")
+        print("DEBUG:: place started for \(model.name)! active models: \(ModelManager.getInstance().activeModels.count)")
         print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.avilableAssets.count)")
         
         var selectedClonedModel = ModelLibrary().getModelCloned(from: model)
         //DEBUG
         print("DEBUG:: ARSC|| About to add gestures")
         arView.installGestures(.all, for: selectedClonedModel.getModelEntity()).forEach { entityGesture in
-            entityGesture.addTarget(arView, action: #selector(ModelManagerTester.getInstance().handleTranslation(_ :)))
+            entityGesture.addTarget(arView, action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
         }
         
         //DEBUG
@@ -85,11 +85,11 @@ struct ARSceneContainer: UIViewRepresentable {
         //testing is getrelativepostiion works
 //        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
         
-        ModelManagerTester.getInstance().addActiveModel(modelID: selectedClonedModel.getModelUID(), model: selectedClonedModel)
+        ModelManager.getInstance().addActiveModel(modelID: selectedClonedModel.getModelUID(), model: selectedClonedModel)
         
         //DEBUG
-        print("DEBUG:: ARSC||| place ending! active models: \(ModelManagerTester.getInstance().activeModels.count)")
-        for modelInstance in ModelManagerTester.getInstance().activeModels {
+        print("DEBUG:: ARSC||| place ending! active models: \(ModelManager.getInstance().activeModels.count)")
+        for modelInstance in ModelManager.getInstance().activeModels {
             print("DEBUG:: ARSC||| place ENDED! active model name: \(modelInstance.value.name)")
         }
     }

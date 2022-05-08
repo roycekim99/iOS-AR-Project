@@ -72,10 +72,10 @@ struct DeletionView: View {
                 
                 let anchoringIdentifier = anchorSelectedToDelete.anchorIdentifier
                 
-                if let modelForDeletion = ModelManagerTester.getInstance().activeModels.first(where: {$0.value.getAnchorEntity().anchorIdentifier == anchoringIdentifier}){
+                if let modelForDeletion = ModelManager.getInstance().activeModels.first(where: {$0.value.getAnchorEntity().anchorIdentifier == anchoringIdentifier}){
                     print("DEBUG:: found anchor to delete!")
                     
-                    ModelManagerTester.getInstance().activeModels.removeValue(forKey: modelForDeletion.key)
+                    ModelManager.getInstance().activeModels.removeValue(forKey: modelForDeletion.key)
                 }
                 
                 anchorSelectedToDelete.removeFromParent()
@@ -93,7 +93,7 @@ struct DeletionView: View {
             DeleteAll() {
                 print("Delete All button pressed.")
                 
-                for (_,model) in ModelManagerTester.getInstance().activeModels {
+                for (_,model) in ModelManager.getInstance().activeModels {
                     let anchorEntity = model.getAnchorEntity()
                     print("Deleting anchorEntity with id: \(String(describing: anchorEntity.anchorIdentifier))")
                     
@@ -102,7 +102,7 @@ struct DeletionView: View {
                 }
                 
                 //TODO: might not need
-                ModelManagerTester.getInstance().activeModels.removeAll()
+                ModelManager.getInstance().activeModels.removeAll()
             }
             
             Spacer()

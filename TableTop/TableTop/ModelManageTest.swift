@@ -9,8 +9,8 @@ import RealityKit
 import ARKit
 import SwiftUI
 
-class ModelManagerTester{
-    private static var MMInstance = ModelManagerTester()
+class ModelManager{
+    private static var MMInstance = ModelManager()
     
     var objectMoved: Entity? = nil
     var zoomEnabled = false
@@ -39,7 +39,7 @@ class ModelManagerTester{
         print("DEBUG:: ModelManager lazily setup...")
     }
     
-    static func getInstance() -> ModelManagerTester{
+    static func getInstance() -> ModelManager{
         return MMInstance
     }
     
