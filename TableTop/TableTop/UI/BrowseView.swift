@@ -45,7 +45,7 @@ struct ModelsByCategoryGrid: View {
                 
                 // Only display grid if category contains items
                 if let modelsByCategory = models.getCategory(category: category) {
-                    HorizontalGrid(showBrowse: $showBrowse, title: category.label, items: modelsByCategory)
+                    HorizontalGrid(showBrowse: $showBrowse, title: category.label, modelLibrary: modelsByCategory)
                 }
             }
         }
@@ -59,7 +59,7 @@ struct RecentsGrid: View {
     var body: some View {
         if !self.placementSettings.recentlyPlaced.isEmpty {
             // create a horitzontalGrid for recentlyPlacedbject
-            HorizontalGrid(showBrowse: $showBrowse, title: "Recents", items: getRecentsUniqueOrdered())
+            HorizontalGrid(showBrowse: $showBrowse, title: "Recents", modelLibrary: getRecentsUniqueOrdered())
         }
     }
 
@@ -85,7 +85,7 @@ struct HorizontalGrid: View {
     
     private let gridItemLayout = [GridItem(.fixed(150))]
     var title: String
-    var items: [Model]
+    var modelLibrary: [Model]
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -99,29 +99,18 @@ struct HorizontalGrid: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: gridItemLayout, spacing: 30) {
-                    ForEach(0..<items.count) {index in
-                        let model = items[index]
-                        let id = items[index].asset_UID
+                    
+                    ForEach(0..<modelLibrary.count){ index in
+                        let modelAtIndex = modelLibrary[index]
                         
-                        ItemButton(model: model) {
-                            // befor loading, check if the model has already been loaded
-                            if ModelLibrary.loadedModelEntities[id] == nil {
-                                ModelLibrary().loadModelToClone(for: model)
-//                                model.loadModelEntity()
-                                for chd in model.childs {
-                                    if ModelLibrary.loadedModelEntities[chd.asset_UID] == nil {
-                                        ModelLibrary().loadModelToClone(for: chd)
-//                                        model.loadModelEntity()
-                                    }
-                                }
-                            }
-                            
-                            self.placementSettings.selectedModel = model
-                            self.placementSettings.selectedModelID = id
-                            
-                            print("BrowseView: selected \(model.name) for placement.")
-                            
+                        ItemButton(model: modelAtIndex){
+                            self.loadIfNotLoaded(model: modelAtIndex)
+                        
+                            self.placementSettings.selectedModel = modelAtIndex
+                            self.placementSettings.selectedModelID = modelAtIndex.getModelUID()
+                            print("DEBUG::BrowseView: selected \(modelAtIndex.name) for placement.")
                             self.showBrowse = false
+
                         }
                     }
                 }
@@ -132,6 +121,17 @@ struct HorizontalGrid: View {
         
     }
     
+    private func loadIfNotLoaded(model: Model){
+        if ModelLibrary.loadedModels[model.getModelUID()] == nil{
+            ModelLibrary().loadModelToClone(for: model)
+            
+            for childModel in model.childs {
+                if ModelLibrary.loadedModels[childModel.getModelUID()] == nil {
+                    ModelLibrary().loadModelToClone(for: childModel)
+                }
+            }
+        }
+    }
 }
 
 struct ItemButton: View {
@@ -152,6 +152,8 @@ struct ItemButton: View {
                 .cornerRadius(8.0)
         }
     }
+    
+    
 }
 
 struct Separator: View {

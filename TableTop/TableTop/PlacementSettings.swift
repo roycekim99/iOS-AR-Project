@@ -29,7 +29,7 @@ class PlacementSettings: ObservableObject {
         }
     }
     
-    @Published var selectedModelID: Int? {
+    @Published var selectedModelID: String? {
         willSet(newValue) {
             print("DEBUG::Setting selectedModelID to \(String(describing: newValue))")
         }
@@ -51,7 +51,7 @@ class PlacementSettings: ObservableObject {
     }
     
     // Get ID of the object and use it to pull the asset later on
-    @Published var confirmedModelID: Int? {
+    @Published var confirmedModelID: String? {
         willSet(newValue) {
             guard let id = newValue else {
                 print("DEBUG::confirmedModel has no ID")
@@ -64,7 +64,7 @@ class PlacementSettings: ObservableObject {
     
     // This property retains a record of placed models in the scene. The last element in the array is the most recently placed model.
     @Published var recentlyPlaced: [Model] = []
-    @Published var recentlyPlacedID: [Int] = []
+    @Published var recentlyPlacedID: [String] = []
     
     // This property retains the cancellable object for our SceneEvents. Update subscriber
     var sceneObserver: Cancellable?

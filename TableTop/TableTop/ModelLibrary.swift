@@ -7,6 +7,7 @@
 
 import RealityKit
 import Combine
+import UIKit
 
 enum ModelCategory: CaseIterable {
     case test
@@ -36,17 +37,15 @@ enum ModelCategory: CaseIterable {
     }
 }
 
-
 class ModelLibrary {
+    var deviceName = UIDevice.current.identifierForVendor?.uuidString ?? ""
     
     // Holds an array of model entities
-    static var currentAssets: [Model] = []
-    
-    static var loadedModelEntities = [Int: ModelEntity]()
+    static var avilableAssets: [Model] = []
+    static var loadedModels = [String: ModelEntity]()
     
     private var cancellable: AnyCancellable? = nil
     
-
     func downloadAssest(){
         // call server getAPI
         // get json files and model manager to unpack json files
@@ -54,62 +53,88 @@ class ModelLibrary {
         // add instances to currentAssets
     }
     
-    // ModelEntity.setPosition(relativeTo: ) may also be useful
-    static func getRelativePosition(from model: ModelEntity, to origin: Entity) -> SIMD3<Float> {
-//        print("relative position \(model.position(relativeTo: origin))")
-        return model.position(relativeTo: origin)
-    }
-    
-    
-    
     // TODO: fix this bug here -- taking too long to load
-    
     // load model entity and store in loadModelEntities
     func loadModelToClone(for model: Model) {
-        
         let fileName = model.name + ".usdz"
         
         cancellable = ModelEntity.loadModelAsync(named: fileName)
             .sink(receiveCompletion:{ loadCompletion in
                 
                 switch loadCompletion {
+                        
                 case .failure(let error): print("DEBUG::Unable to load modelEntity for \(fileName). Error \(error.localizedDescription)")
                     self.cancellable?.cancel()
+                        
                 case .finished:
-                    self.cancellable?.cancel()
                     break
                 }
             } , receiveValue: { modelEntity in
                 
-                ModelLibrary.loadedModelEntities[model.asset_UID] = modelEntity
-                ModelLibrary.loadedModelEntities[model.asset_UID]?.scale *= model.scaleCompensation
+                
+                ModelLibrary.loadedModels[model.model_uid] = modelEntity
+                ModelLibrary.loadedModels[model.model_uid]?.scale *= model.scaleCompensation
                 self.cancellable?.cancel()
+                
                 print("DEBUG:: model has been loaded")
             })
     }
     
     // clone model entity and return this entity to be placed into the scene
-    func getModelEntity(for model: Model) -> ModelEntity {
+    func getModelCloned(from model: Model) -> Model {
         
-        let clonedEntity: ModelEntity?
+        var clonedModelEntity: ModelEntity?
         
-        if let modelEntity = ModelLibrary.loadedModelEntities[model.asset_UID] {
-            clonedEntity = modelEntity.clone(recursive: true)
+        if let modelLoadedAlready = ModelLibrary.loadedModels[model.model_uid] {
+            clonedModelEntity = modelLoadedAlready.clone(recursive: true)
+            
+            print("DEBUG:: original ID: \(model.getModelEntity().id )|| new: \(clonedModelEntity?.id)")
+            
         }  else {
             // load model
             loadModelToClone(for: model)
-            print("DEBUG::Model was not loaded prior to cloning. Finished loading")
-            let modelEntity = ModelLibrary.loadedModelEntities[model.asset_UID]
-            clonedEntity = modelEntity?.clone(recursive: true)
             
+            print("DEBUG:: Model was not loaded prior to cloning. Finished loading")
+            
+            let selectedModelEntity = ModelLibrary.loadedModels[model.model_uid]
+            clonedModelEntity = selectedModelEntity?.clone(recursive: true)
         }
-        print("DEBUG:: loaded model ID: " + String(model.asset_UID))
-        return clonedEntity!
+        //DEBUG
+        print("DEBUG:: ML|| loaded: \(ModelLibrary.loadedModels.count)")
+        
+        print("DEBUG:: loaded model ID: " + String(model.model_uid))
+        
+        
+//        testing if setPosition works
+//        print("hard coding to test get realtive position")
+//        modelEntity.setPosition(SIMD3<Float>(0.008482501, 0.0, 0.00525086), relativeTo: ARSceneManager.originPoint[0])
+        
+        clonedModelEntity!.generateCollisionShapes(recursive: true)
+        
+        // Set physics and mass
+        if let collisionComponent = clonedModelEntity!.components[CollisionComponent.self] as? CollisionComponent {
+            clonedModelEntity!.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil, mode: .dynamic)
+        }
+        
+        let clonedModel = Model(from:model)
+        let newID = deviceName + "_" + String(clonedModel.getModelEntity().id)
+        
+        clonedModel.setModelID(to: newID)
+        clonedModel.setModelEntity(&clonedModelEntity!)
+
+        return clonedModel
     }
     
     // return categories for displaying in browseview
     func getCategory(category: ModelCategory) -> [Model] {
-        return ModelLibrary.currentAssets.filter( {$0.category == category})
+        return ModelLibrary.avilableAssets.filter( {$0.category == category})
+    }
+    
+    private func configureUIDPerModel(){
+        for modelObj in ModelLibrary.avilableAssets {
+            let newID = deviceName + "_" + String(modelObj.getModelEntity().id)
+            modelObj.setModelID(to: newID)
+        }
     }
     
     // TODO: only for testing purpose. get rid of it after finishing download function 
@@ -183,14 +208,14 @@ class ModelLibrary {
         
         let chessBoard = Model(name: "Chess Board", category: .set, scaleCompensation: 2/10000, childs: [bBishop1, bBishop2, bKing, bKnight1, bKnight2, bPawn1, bPawn2, bPawn3, bPawn4, bPawn5, bPawn6, bPawn7, bPawn8, bQueen, bRook1, bRook2, wBishop1, wBishop2, wKing, wKnight1, wKnight2, wPawn1, wPawn2, wPawn3, wPawn4, wPawn5, wPawn6, wPawn7, wPawn8, wQueen, wRook1, wRook2], assetID: 58)
         
-        ModelLibrary.currentAssets += [checkersBoard, chessBoard]
+        ModelLibrary.avilableAssets += [checkersBoard, chessBoard]
         
                         // Set Models
         let chess = Model(name: "Chess", category: .board, scaleCompensation: 2/10000, childs: [], assetID: 59)
         let modernCheckers = Model(name: "Modern Checkers", category: .board, scaleCompensation: 1/2, childs: [], assetID: 60)
         let vintageCheckers = Model(name: "Vintage Checkers", category: .board, scaleCompensation: 1/5000, childs: [], assetID: 61)
         
-        ModelLibrary.currentAssets += [chess, modernCheckers, vintageCheckers, floor]
+        ModelLibrary.avilableAssets += [chess, modernCheckers, vintageCheckers, floor]
         
                        // Pieces
         // Checkers
@@ -212,13 +237,15 @@ class ModelLibrary {
         let whiteKing = Model(name: "White_King", category: .pieces, scaleCompensation: 2/10000, childs: [], assetID: 74)
         let whiteQueen = Model(name: "White_Queen", category: .pieces, scaleCompensation: 2/10000, childs: [], assetID: 75)
         
-        ModelLibrary.currentAssets += [blackCheckersPiece, redCheckersPiece, bBishop, bKnight, bPawn, bRook, blackKing, blackQueen, wBishop, wKnight, wPawn, wRook, whiteKing, whiteQueen]
+        ModelLibrary.avilableAssets += [blackCheckersPiece, redCheckersPiece, bBishop, bKnight, bPawn, bRook, blackKing, blackQueen, wBishop, wKnight, wPawn, wRook, whiteKing, whiteQueen]
         
                        // Figures
         let dripGoku = Model(name: "Drip Goku", category: .figures, scaleCompensation: 1/1500, childs: [], assetID: 76)
         let goku = Model(name: "Goku", category: .figures, scaleCompensation: 1/500, childs: [], assetID: 77)
         
-        ModelLibrary.currentAssets += [dripGoku, goku]
+        ModelLibrary.avilableAssets += [dripGoku, goku]
+        
+        self.configureUIDPerModel()
         
     }
 }

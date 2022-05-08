@@ -14,7 +14,7 @@ class ZoomView: ObservableObject {
     @Published var ZoomEnabled: Bool = false {
         willSet(newValue) {
             print("Setting Zoom Enabled to \(String(describing: newValue.description))")
-            FocusEntityARView.Holder.zoomEnabled = newValue
+            CustomARView.Holder.zoomEnabled = newValue
         }
     }
     

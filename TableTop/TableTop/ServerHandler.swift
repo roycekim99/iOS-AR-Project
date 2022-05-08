@@ -7,11 +7,15 @@
 
 import SwiftUI
 import SocketIO
+import UIKit
+
 
 final class ServerHandler: ObservableObject {
     // Configure SocketManager with socker server URL and show log on console
     private var manager = SocketManager(socketURL: URL(string: "http://35.161.104.204:3001/")!, config: [.log(true), .compress])
     var socket: SocketIOClient? = nil
+    
+    let client_userName = UIDevice.current.identifierForVendor?.uuidString ?? "" + "_test user"
     
     init() {
         // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
@@ -37,7 +41,7 @@ final class ServerHandler: ObservableObject {
         // Default event
         socket?.on(clientEvent: .connect) { (data, ack) in
             print("Connected")
-            self.socket?.emit("New player joined", "NHUYA")
+            self.socket?.emit("New player joined", self.client_userName)
             self.testEmission()
         }
         

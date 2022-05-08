@@ -12,8 +12,7 @@ import ARKit
 import FocusEntity
 import SwiftUI
 
-class FocusEntityARView: ARView {
-    var activeModelManager = ModelManagerTester()
+class CustomARView: ARView {
     
     // MARK: FocusEntity -Start-
     var focusEntity: FocusEntity?
@@ -29,7 +28,12 @@ class FocusEntityARView: ARView {
     
     private func configure() {
         focusEntity = FocusEntity(on: self, focus: .classic)
-        activeModelManager = ModelManagerTester(target: self, deletionManager: self.deletionManager)
+        ModelManagerTester.getInstance().setARView(targetView: self)
+        
+        //DEBUG
+        print("DEBUG:: CARV|| view using \(self)")
+        
+        ModelManagerTester.getInstance().setDeletionmanager(deletionManager: deletionManager)
         
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = [.horizontal, .vertical]
@@ -48,17 +52,21 @@ class FocusEntityARView: ARView {
     }
     
     func configureTapGestureRecognizer() {
+        
+        //DEBUG
+        print("DEBUG:: CARV|| handling tap recognizer")
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         
         self.addGestureRecognizer(tapGesture)
     }
     
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
-        
+        //DEBUG
+        print("DEBUG:: CARV|| handling tap")
         if (!Holder.deletionEnabled && !Holder.zoomEnabled) {
-            handlePhysics(recognizer: recognizer)
+            ModelManagerTester.getInstance().handlePhysics(recognizer: recognizer, zoomIsEnabled: Holder.zoomEnabled)
         } else {
-            handleDeletion(recognizer: recognizer)
+            ModelManagerTester.getInstance().handleDeleteion(recognizer: recognizer)
         }
     }
     

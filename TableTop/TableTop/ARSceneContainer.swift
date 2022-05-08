@@ -16,27 +16,12 @@ import SwiftUI
 struct ARSceneContainer: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
-<<<<<<< Updated upstream:TableTop/TableTop/ARSceneManager.swift
-    
-    static var originPoint: [Entity]  = []
-=======
     @EnvironmentObject var serverServiceManager: ServerHandler
+
+    static var originPoint: [Entity]  = []
     
->>>>>>> Stashed changes:TableTop/TableTop/ARSceneContainer.swift
-    
-    // List containing currently active models
-    // TODO: Logic for keeping this list updated?
-    
-    static var activeModels: [ModelEntity] = []
-    static var anchorEntities: [AnchorEntity] = []
-    
-<<<<<<< Updated upstream:TableTop/TableTop/ARSceneManager.swift
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
-=======
-    func makeUIView(context: Context) -> FocusEntityARView {
-        let arView = FocusEntityARView(frame: .zero, deletionManager: deletionManager)
->>>>>>> Stashed changes:TableTop/TableTop/ARSceneContainer.swift
         
         // Subscribe to sceneEvents.update
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, {(event) in
@@ -46,13 +31,9 @@ struct ARSceneContainer: UIViewRepresentable {
         return arView
     }
     
-    func updateUIView(_ uiView: FocusEntityARView, context: Context) {}
+    func updateUIView(_ uiView: CustomARView, context: Context) {}
     
-<<<<<<< Updated upstream:TableTop/TableTop/ARSceneManager.swift
     private func updateScene(for arView: CustomARView) {
-=======
-    private func updateScene(for arView: FocusEntityARView) {
->>>>>>> Stashed changes:TableTop/TableTop/ARSceneContainer.swift
         arView.focusEntity?.isEnabled = self.placementSettings.selectedModel != nil
         
         // Add model to scene if confirmed for placement
@@ -61,12 +42,11 @@ struct ARSceneContainer: UIViewRepresentable {
             if confirmedModel.name == "floor" {
                 self.placeFloor(in: arView, for: self.placementSettings.originfloor!)
             } else {
+                //DEBUG
+                print("DEBUG:: ARSC|| confiemd model: \(confirmedModel.name)")
                 self.place(for : confirmedModel, in: arView)
-                
-                for child in confirmedModel.childs {
-                    print(child.name)
-                    self.place(for: child, in: arView)
-                }
+                ModelManagerTester.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
+
             }
             self.placementSettings.confirmedModel = nil
             self.placementSettings.originfloor = false
@@ -75,39 +55,42 @@ struct ARSceneContainer: UIViewRepresentable {
     
     private func place(for model: Model, in arView: ARView) {
        
-        let modelEntity = ModelLibrary().getModelEntity(for: model)
+        //DEBUG
+        print("DEBUG:: place started! active models: \(ModelManagerTester.getInstance().activeModels.count)")
+        print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.avilableAssets.count)")
         
-//        testing if setPosition works
-//        print("hard coding to test get realtive position")
-//        modelEntity.setPosition(SIMD3<Float>(0.008482501, 0.0, 0.00525086), relativeTo: ARSceneManager.originPoint[0])
+        var selectedClonedModel = ModelLibrary().getModelCloned(from: model)
         
-        modelEntity.generateCollisionShapes(recursive: true)
-        
-        // Set physics and mass
-        if let collisionComponent = modelEntity.components[CollisionComponent.self] as? CollisionComponent {
-            modelEntity.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil, mode: .dynamic)
+        //DEBUG
+        print("DEBUG:: ARSC|| About to add gestures")
+        arView.installGestures(.all, for: selectedClonedModel.getModelEntity()).forEach { entityGesture in
+            entityGesture.addTarget(arView, action: #selector(ModelManagerTester.getInstance().handleTranslation(sender:)))
         }
         
-        arView.installGestures(.all, for: modelEntity).forEach { entityGesture in
-            entityGesture.addTarget(arView, action: #selector(FocusEntityARView.handleTranslation(sender:)))
-        }
+        //DEBUG
+        print("DEBUG:: ARSC|| added translation gestures")
 
-        let anchorEntity = AnchorEntity(plane: .any)
-        anchorEntity.addChild(modelEntity)
-
+        // anchor based on focus entity
+        var anchorEntity = AnchorEntity(plane: .any)
+        anchorEntity.addChild(selectedClonedModel.getModelEntity())
+        selectedClonedModel.setAnchorEntity(&anchorEntity)
+        
         arView.scene.addAnchor(anchorEntity)
-<<<<<<< Updated upstream:TableTop/TableTop/ARSceneManager.swift
-        ARSceneManager.activeModels.append(modelEntity)
-        ARSceneManager.anchorEntities.append(anchorEntity)
-        print("added modelEntity")
-=======
-        ARSceneContainer.activeModels.append(modelEntity)
-        ARSceneContainer.anchorEntities.append(anchorEntity)
->>>>>>> Stashed changes:TableTop/TableTop/ARSceneContainer.swift
-        
+
+        print("DEBUG:: Cloned model: \(selectedClonedModel.name)")
+
+        for child in model.childs {
+            print("DEBUG:: going thorugh childred for \(selectedClonedModel.name)..." + child.name)
+            self.place(for: child, in: arView)
+        }
         //testing is getrelativepostiion works
 //        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
         
+        //DEBUG
+        print("DEBUG:: ARSC||| place ending! active models: \(ModelManagerTester.getInstance().activeModels.count)")
+        for modelInstance in ModelManagerTester.getInstance().activeModels {
+            print("DEBUG:: ARSC||| place ENDED! active model name: \(modelInstance.value.name)")
+        }
     }
     
     // fun place floor in arview container
@@ -124,7 +107,7 @@ struct ARSceneContainer: UIViewRepresentable {
         
         // set origion point
         if setOrigin == true {
-            ARSceneManager.originPoint.append(floor)
+            ARSceneContainer.originPoint.append(floor)
             print("set origin point")
         }
         

@@ -139,7 +139,7 @@ struct DeletionButton: View {
                 print("Deletion Button Pressed.")
                 self.deleteEnabled.toggle()
                 self.deletion.DeletionEnabled = self.deleteEnabled
-                FocusEntityARView.resetAll(modelEntities: ARSceneContainer.activeModels)
+                ModelManagerTester.getInstance().resetAll()
             }) {
                 Image(systemName: self.deleteEnabled ? "trash.fill" : "trash")
                     .font(.system(size: 25))
@@ -168,7 +168,7 @@ struct ZoomButton: View {
                 //zoomView.ZoomEnabled.toggle()
                 //zoomEnabled = zoomView.ZoomEnabled
                 self.zoomView.ZoomEnabled = self.zoomEnabled
-                FocusEntityARView.moveAll(check: self.zoomView.ZoomEnabled, modelEntities: ARSceneContainer.activeModels)
+                ModelManagerTester.getInstance().moveAll(check: self.zoomView.ZoomEnabled)
             }) {
                 Image(systemName: self.zoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
                     .font(.system(size: 25))
