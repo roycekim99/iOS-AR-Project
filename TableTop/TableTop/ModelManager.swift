@@ -96,10 +96,10 @@ extension CustomARView {
             
             switch gesture.state {
             case .began:
-                print("Started Moving")
+                print("DEBUG::Started Moving")
                 
                 if (Holder.zoomEnabled) {
-                    print("zoooom")
+                    print("DEBUG:: zoooom")
                     for ent in ARSceneManager.activeModels {
                         if (ent != modEnt!) {
                             Holder.anchorMap[ent] = ent.parent as? AnchorEntity
@@ -108,7 +108,7 @@ extension CustomARView {
                     }
                 }
             case .ended:
-                print("Stopped Moving")
+                print("DEBUG::Stopped Moving")
                 print(Holder.anchorMap.count)
                 
                 if (Holder.zoomEnabled) {

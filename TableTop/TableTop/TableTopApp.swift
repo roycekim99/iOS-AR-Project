@@ -3,7 +3,6 @@
 //  TableTop
 //
 //  Created by Jet Aung on 1/26/22.
-//
 
 import SwiftUI
 
@@ -12,6 +11,7 @@ struct TableTopApp: App {
     @StateObject var placementSettings = PlacementSettings()
     @StateObject var sessionSettings = SessionSettings()
     @StateObject var deletionManager = DeletionManager()
+    @StateObject var serverServiceManager = ServiceManager()
     
     var body: some Scene {
         WindowGroup {

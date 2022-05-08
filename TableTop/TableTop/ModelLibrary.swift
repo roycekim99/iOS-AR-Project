@@ -65,7 +65,7 @@ class ModelLibrary {
     // TODO: fix this bug here -- taking too long to load
     
     // load model entity and store in loadModelEntities
-    func loadModelEntity(for model: Model) {
+    func loadModelToClone(for model: Model) {
         
         let fileName = model.name + ".usdz"
         
@@ -73,7 +73,7 @@ class ModelLibrary {
             .sink(receiveCompletion:{ loadCompletion in
                 
                 switch loadCompletion {
-                case .failure(let error): print("Unable to load modelEntity for \(fileName). Error \(error.localizedDescription)")
+                case .failure(let error): print("DEBUG::Unable to load modelEntity for \(fileName). Error \(error.localizedDescription)")
                     self.cancellable?.cancel()
                 case .finished:
                     self.cancellable?.cancel()
@@ -84,7 +84,7 @@ class ModelLibrary {
                 ModelLibrary.loadedModelEntities[model.assetID] = modelEntity
                 ModelLibrary.loadedModelEntities[model.assetID]?.scale *= model.scaleCompensation
                 self.cancellable?.cancel()
-                print("model has been loaded")
+                print("DEBUG:: model has been loaded")
             })
     }
     
@@ -97,13 +97,13 @@ class ModelLibrary {
             clonedEntity = modelEntity.clone(recursive: true)
         }  else {
             // load model
-            loadModelEntity(for: model)
-            print("Model was not loaded prior to cloning. Finished loading")
+            loadModelToClone(for: model)
+            print("DEBUG::Model was not loaded prior to cloning. Finished loading")
             let modelEntity = ModelLibrary.loadedModelEntities[model.assetID]
             clonedEntity = modelEntity?.clone(recursive: true)
+            
         }
-        
-        print("Cloned entity is ready")
+        print("DEBUG:: loaded model ID: " + String(model.assetID))
         return clonedEntity!
     }
     

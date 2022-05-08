@@ -106,11 +106,11 @@ struct HorizontalGrid: View {
                         ItemButton(model: model) {
                             // befor loading, check if the model has already been loaded
                             if ModelLibrary.loadedModelEntities[id] == nil {
-                                ModelLibrary().loadModelEntity(for: model)
+                                ModelLibrary().loadModelToClone(for: model)
 //                                model.loadModelEntity()
                                 for chd in model.childs {
                                     if ModelLibrary.loadedModelEntities[chd.assetID] == nil {
-                                        ModelLibrary().loadModelEntity(for: chd)
+                                        ModelLibrary().loadModelToClone(for: chd)
 //                                        model.loadModelEntity()
                                     }
                                 }
