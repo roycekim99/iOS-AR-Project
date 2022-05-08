@@ -18,21 +18,31 @@ struct ControlView: View {
     @State private var showSettings: Bool = false
     @State private var zoomEnabled: Bool = false
     @State private var deleteEnabled: Bool = false
+    @State private var showHomeView = true
+    
     
     var body: some View {
+      
         ZStack(alignment: .bottom) {
-            ARSceneManager()
-                
-//          If no model is selected for placement, show default UI
-            if self.placementSettings.selectedModel != nil {
-                // Show placement view
-                PlaceConfirmView(isOrigin: self.placementSettings.originfloor!)
-            } else if self.deleteEnabled {
-                DeletionView(deleteEnabled: $deleteEnabled)
+            if self.showHomeView {
+                HomeScreen(showHomeView: $showHomeView)
             } else {
-                DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled)
-            }
+                ARSceneManager()
                 
+                // If no model is selected for placement, show default UI
+                if self.placementSettings.selectedModel != nil {
+                    // Show placement view
+                    PlaceConfirmView(isOrigin: self.placementSettings.originfloor!)
+                } else if self.deleteEnabled {
+                    DeletionView(deleteEnabled: $deleteEnabled)
+                } else {
+                    DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled)
+                }
+                
+            }
+            
+            
+            
         }
         .edgesIgnoringSafeArea(.all)
     }

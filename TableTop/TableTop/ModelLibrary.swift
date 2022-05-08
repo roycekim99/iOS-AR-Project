@@ -42,6 +42,8 @@ class ModelLibrary {
     // Holds an array of model entities
     static var currentAssets: [Model] = []
     
+    static var username = ""
+    
     static var loadedModelEntities = [Int: ModelEntity]()
     
     private var cancellable: AnyCancellable? = nil
@@ -59,7 +61,6 @@ class ModelLibrary {
 //        print("relative position \(model.position(relativeTo: origin))")
         return model.position(relativeTo: origin)
     }
-    
     
     
     // TODO: fix this bug here -- taking too long to load
@@ -105,6 +106,7 @@ class ModelLibrary {
         
         print("Cloned entity is ready")
         return clonedEntity!
+        // return model
     }
     
     // return categories for displaying in browseview
