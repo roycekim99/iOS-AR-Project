@@ -36,7 +36,7 @@ final class ServiceManager: ObservableObject {
         // Default event
         socket?.on(clientEvent: .connect) { (data, ack) in
             print("Connected")
-            self.socket?.emit("NodeJS Server Port", "Hi Node.js server.")
+            self.socket?.emit("New player joined", "NHUYA")
             self.testEmission()
         }
         
