@@ -35,11 +35,12 @@ struct HomeScreen: View {
             .textFieldStyle(CustomInputBox())
             
             Buttons(text: "Next", fontStyle: "title2") {
-                // action: store the username somewhere by calling the setfunction
                 
-                ModelLibrary.username = self.userName
-                self.showStartView.toggle()
-                
+                if self.userName.count > 0 {
+                    ModelLibrary.username = self.userName
+                    self.showStartView.toggle()
+                }
+        
             }.fullScreenCover (isPresented: $showStartView){
                 StartView(showStartView: $showStartView, showHomeView: $showHomeView)
             }
@@ -58,9 +59,12 @@ struct HomeScreen: View {
 }
 
 struct CustomInputBox: TextFieldStyle {
+//    @ScaledMetric var size: CGFloat = 1
+//    @ScaledMetric var height = 60
+    
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .frame(width: 500, height: 60)
+            .frame(width: UIScreen.main.bounds.width * 0.8, height:UIScreen.main.bounds.height * 0.05 )
             .font(.custom("Open Scans", size: 20))
             .background(Color.gray.opacity(0.5))
             .cornerRadius(9)
@@ -265,7 +269,8 @@ struct Buttons: View {
             }
 
         }
-        .frame(width: 300, height: 30)
+        .frame(width: UIScreen.main.bounds.width * 0.4 , height: UIScreen.main.bounds.width * 0.1)
+        .background(Color.red)
         .padding(30)
 
     }
