@@ -41,7 +41,7 @@ class ModelLibrary {
     var deviceName = UIDevice.current.identifierForVendor?.uuidString ?? ""
     
     // Holds an array of model entities
-    static var avilableAssets: [Model] = []
+    static var availableAssets: [Model] = []
     static var loadedModels = [String: ModelEntity]()
     
     private var cancellable: AnyCancellable? = nil
@@ -125,11 +125,13 @@ class ModelLibrary {
     
     // return categories for displaying in browseview
     func getCategory(category: ModelCategory) -> [Model] {
-        return ModelLibrary.avilableAssets.filter( {$0.category == category})
+        //DEBUG
+        print("DEBUG:: ML|| Library size: \(ModelLibrary.availableAssets.count)")
+        return ModelLibrary.availableAssets.filter( {$0.category == category})
     }
     
     private func configureUIDPerModel(){
-        for modelObj in ModelLibrary.avilableAssets {
+        for modelObj in ModelLibrary.availableAssets {
             let newID = deviceName + "_" + String(modelObj.getModelEntity().id)
             modelObj.setModelID(to: newID)
         }
@@ -206,14 +208,14 @@ class ModelLibrary {
         
         let chessBoard = Model(name: "Chess Board", category: .set, scaleCompensation: 2/10000, childs: [bBishop1, bBishop2, bKing, bKnight1, bKnight2, bPawn1, bPawn2, bPawn3, bPawn4, bPawn5, bPawn6, bPawn7, bPawn8, bQueen, bRook1, bRook2, wBishop1, wBishop2, wKing, wKnight1, wKnight2, wPawn1, wPawn2, wPawn3, wPawn4, wPawn5, wPawn6, wPawn7, wPawn8, wQueen, wRook1, wRook2], assetID: 58)
         
-        ModelLibrary.avilableAssets += [checkersBoard, chessBoard]
+        ModelLibrary.availableAssets += [checkersBoard, chessBoard]
         
                         // Set Models
         let chess = Model(name: "Chess", category: .board, scaleCompensation: 2/10000, childs: [], assetID: 59)
         let modernCheckers = Model(name: "Modern Checkers", category: .board, scaleCompensation: 1/2, childs: [], assetID: 60)
         let vintageCheckers = Model(name: "Vintage Checkers", category: .board, scaleCompensation: 1/5000, childs: [], assetID: 61)
         
-        ModelLibrary.avilableAssets += [chess, modernCheckers, vintageCheckers, floor]
+        ModelLibrary.availableAssets += [chess, modernCheckers, vintageCheckers, floor]
         
                        // Pieces
         // Checkers
@@ -235,13 +237,13 @@ class ModelLibrary {
         let whiteKing = Model(name: "White_King", category: .pieces, scaleCompensation: 2/10000, childs: [], assetID: 74)
         let whiteQueen = Model(name: "White_Queen", category: .pieces, scaleCompensation: 2/10000, childs: [], assetID: 75)
         
-        ModelLibrary.avilableAssets += [blackCheckersPiece, redCheckersPiece, bBishop, bKnight, bPawn, bRook, blackKing, blackQueen, wBishop, wKnight, wPawn, wRook, whiteKing, whiteQueen]
+        ModelLibrary.availableAssets += [blackCheckersPiece, redCheckersPiece, bBishop, bKnight, bPawn, bRook, blackKing, blackQueen, wBishop, wKnight, wPawn, wRook, whiteKing, whiteQueen]
         
                        // Figures
         let dripGoku = Model(name: "Drip Goku", category: .figures, scaleCompensation: 1/1500, childs: [], assetID: 76)
         let goku = Model(name: "Goku", category: .figures, scaleCompensation: 1/500, childs: [], assetID: 77)
         
-        ModelLibrary.avilableAssets += [dripGoku, goku]
+        ModelLibrary.availableAssets += [dripGoku, goku]
         
         self.configureUIDPerModel()
         

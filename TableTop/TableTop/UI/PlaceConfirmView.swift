@@ -22,7 +22,7 @@ struct PlaceConfirmView: View {
             
             if isOriginPoint == false {
                 PlacementButton(systemIconName: "xmark.circle.fill") {
-                    print("Cancel Placement Button pressed.")
+                    print("DEBUG:: Cancel Placement Button pressed.")
                     self.placementSettings.selectedModel = nil
                 }
                 
@@ -31,7 +31,7 @@ struct PlaceConfirmView: View {
             
             
             PlacementButton(systemIconName: "checkmark.circle.fill") {
-                print("Confirm Placement button pressed.")
+                print("DEBUG:: Confirm Placement button pressed.")
                 
                 self.placementSettings.confirmedModel = self.placementSettings.selectedModel
                 

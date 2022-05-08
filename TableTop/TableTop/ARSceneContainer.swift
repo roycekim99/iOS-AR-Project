@@ -57,17 +57,13 @@ struct ARSceneContainer: UIViewRepresentable {
        
         //DEBUG
         print("DEBUG:: place started for \(model.name)! active models: \(ModelManager.getInstance().activeModels.count)")
-        print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.avilableAssets.count)")
+        print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.availableAssets.count)")
         
         var selectedClonedModel = ModelLibrary().getModelCloned(from: model)
-        //DEBUG
-        print("DEBUG:: ARSC|| About to add gestures")
         arView.installGestures(.all, for: selectedClonedModel.getModelEntity()).forEach { entityGesture in
             entityGesture.addTarget(arView, action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
         }
         
-        //DEBUG
-        print("DEBUG:: ARSC|| added translation gestures")
 
         // anchor based on focus entity
         var anchorEntity = AnchorEntity(plane: .any)

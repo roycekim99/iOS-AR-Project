@@ -42,7 +42,6 @@ struct ModelsByCategoryGrid: View {
         VStack {
             // multiple horizontalGrid based on categories
             ForEach(ModelCategory.allCases, id: \.self) { category in
-                
                 // Only display grid if category contains items
                 if let modelsByCategory = models.getCategory(category: category) {
                     HorizontalGrid(showBrowse: $showBrowse, title: category.label, modelLibrary: modelsByCategory)

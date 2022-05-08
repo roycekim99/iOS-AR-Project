@@ -91,11 +91,11 @@ struct DeletionView: View {
             Spacer()
             
             DeleteAll() {
-                print("Delete All button pressed.")
+                print("DEBUG:: Delete All button pressed.")
                 
                 for (_,model) in ModelManager.getInstance().activeModels {
                     let anchorEntity = model.getAnchorEntity()
-                    print("Deleting anchorEntity with id: \(String(describing: anchorEntity.anchorIdentifier))")
+                    print("DEBUG:: Deleting anchorEntity with id: \(model.name)")
                     
                     anchorEntity.removeFromParent()
                     anchorEntity.children.removeAll()

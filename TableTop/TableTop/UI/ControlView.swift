@@ -243,7 +243,7 @@ struct MostRecentlyPlacedButton: View {
     
     var body: some View {
         Button(action: {
-            print("DEGBU::Most Recently Placed button pressed")
+            print("DEBUG::Most Recently Placed button pressed")
             self.placementSettings.selectedModel = self.placementSettings.recentlyPlaced.last
         }) {
             if let mostRecentlyPlacedModel = self.placementSettings.recentlyPlaced.last {
