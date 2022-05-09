@@ -64,10 +64,7 @@ struct DeletionView: View {
                 guard let model = self.deletionManager.entitySelectedForDeletion else { return }
                 guard let anchor = self.deletionManager.entitySelectedForDeletion?.anchor else { return }
                 
-                
-                let anchoringIdentifier = anchor.anchorIdentifier
-                if let anchorIndex = ARSceneManager.anchorEntities.firstIndex(where: { $0.anchorIdentifier == anchoringIdentifier}) {
-                    print("Deleting anchorEntity with id: \(String(describing: anchoringIdentifier))")
+                if let anchorIndex = ARSceneManager.anchorEntities.firstIndex(of: anchor as! AnchorEntity) {
                     ARSceneManager.anchorEntities.remove(at: anchorIndex)
                 }
                 if let modelIndex = ARSceneManager.activeModels.firstIndex(of: model) {
