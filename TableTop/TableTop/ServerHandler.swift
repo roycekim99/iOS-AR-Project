@@ -144,8 +144,9 @@ class SocketParser {
 
 // Class to hold information about the game session we want to send/receive from server
 struct SharedSessionData: Codable {
-    var objectID: Int
+    var objectID: String
     var modelName: String
+//    var position: SIMD3<Float>
     var position: [Float]
 }
 

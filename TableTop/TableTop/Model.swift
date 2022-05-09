@@ -27,7 +27,6 @@ class Model {
         self.category = category
         self.scaleCompensation = scaleCompensation
         self.childs = childs
-        
         self.thumbnail = UIImage(named: name) ?? UIImage(systemName: "photo")!
         self.position = SIMD3<Float>()
         self.model_uid = ""
@@ -94,9 +93,5 @@ class Model {
         return self.anchorEntity.position(relativeTo: origin)
     }
     
-    
-    
     //func updatePosition(pos)
-    
-    
 }

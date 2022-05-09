@@ -10,6 +10,11 @@ import RealityKit
 import Combine
 
 class PlacementSettings: ObservableObject {
+    // This property retains the cancellable object for our SceneEvents. Update subscriber
+    var sceneObserver: Cancellable?
+    // This property retains a record of placed models in the scene. The last element in the array is the most recently placed model.
+    @Published var recentlyPlaced: [Model] = []
+    @Published var recentlyPlacedID: [String] = []
     
     init() {
             self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
@@ -61,11 +66,4 @@ class PlacementSettings: ObservableObject {
             self.recentlyPlacedID.append(id)
         }
     }
-    
-    // This property retains a record of placed models in the scene. The last element in the array is the most recently placed model.
-    @Published var recentlyPlaced: [Model] = []
-    @Published var recentlyPlacedID: [String] = []
-    
-    // This property retains the cancellable object for our SceneEvents. Update subscriber
-    var sceneObserver: Cancellable?
 }

@@ -46,15 +46,9 @@ class ModelLibrary {
     
     private var cancellable: AnyCancellable? = nil
     
-    func downloadAssest(){
-        // call server getAPI
-        // get json files and model manager to unpack json files
-        // then create model instances
-        // add instances to currentAssets
-    }
     
     // TODO: fix this bug here -- taking too long to load
-    // load model entity and store in loadModelEntities
+    // load model entity and store in loadModels
     func loadModelToClone(for model: Model) {
         let fileName = model.name + ".usdz"
         
@@ -71,7 +65,6 @@ class ModelLibrary {
                 }
             } , receiveValue: { modelEntity in
                 
-                
                 ModelLibrary.loadedModels[model.model_uid] = modelEntity
                 ModelLibrary.loadedModels[model.model_uid]?.scale *= model.scaleCompensation
                 self.cancellable?.cancel()
@@ -81,6 +74,9 @@ class ModelLibrary {
     }
     
     // clone model entity and return this entity to be placed into the scene
+    // Returns a Model(deep copy).
+    // Important to keep in mind that this cloned model uses the anchor position from
+    // the tap gesture.
     func getModelCloned(from model: Model) -> Model {
         let clonedModel = Model(from:model)
         

@@ -41,12 +41,16 @@ struct ARSceneContainer: UIViewRepresentable {
             
             if confirmedModel.name == "floor" {
                 self.placeFloor(in: arView, for: self.placementSettings.originfloor!)
-            } else {
+            }
+            else {
                 //DEBUG
-                print("DEBUG:: ARSC|| confiemd model: \(confirmedModel.name)")
+                print("DEBUG:: ARSC|| confirmed model: \(confirmedModel.name)")
                 self.place(for : confirmedModel, in: arView)
                 ModelManager.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
-
+                
+                var dataToEmit = SharedSessionData(objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
+                
+                serverServiceManager.emitModelPlaced(data: dataToEmit)
             }
             self.placementSettings.confirmedModel = nil
             self.placementSettings.originfloor = false
@@ -75,7 +79,7 @@ struct ARSceneContainer: UIViewRepresentable {
         print("DEBUG:: ARSC|| Cloned model: \(selectedClonedModel.name)")
 
         for child in selectedClonedModel.childs {
-            print("DEBUG:: going thorugh childred for \(selectedClonedModel.name)..." + child.name)
+            print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
             self.place(for: child, in: arView)
         }
         //testing is getrelativepostiion works
