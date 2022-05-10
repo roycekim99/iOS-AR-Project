@@ -13,6 +13,7 @@ import ARKit
 struct ControlView: View {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
+    @EnvironmentObject var serverServiceManager: ServerHandler
     
     @State private var isControlsVisible: Bool = true
     @State private var showBrowse: Bool = false
@@ -69,6 +70,7 @@ struct ControlView_Previews: PreviewProvider{
             .environmentObject(PlacementSettings())
             .environmentObject(SessionSettings())
             .environmentObject(DeletionManager())
+            .environmentObject(ServerHandler())
     }
 }
 

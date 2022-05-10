@@ -20,6 +20,8 @@ struct TableTopApp: App {
                 .environmentObject(placementSettings)
                 .environmentObject(sessionSettings)
                 .environmentObject(deletionManager)
+                .environmentObject(serverServiceManager)
+            
         }
     }
 }

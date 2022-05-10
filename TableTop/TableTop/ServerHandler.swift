@@ -29,7 +29,7 @@ final class ServerHandler: ObservableObject {
     
     //DEBUG
     func testEmission(){
-        let testModel = SharedSessionData(objectID: 0, modelName: "Test Object", position: [0.1, 0.5])
+        let testModel = SharedSessionData(objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
         
         emitOnTap(data: testModel)
         emitModelPlaced(data: testModel)
@@ -57,6 +57,10 @@ final class ServerHandler: ObservableObject {
         socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: from server--> model placed received")
             guard let dataInfo = data.first else { return }
+            
+            print("DEBUG:: Printing data: ", data)
+            print("DEBUG:: Printing dataInfo: ", dataInfo)
+            
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
                 print("DEBUG:: Server requested to place model: " + response.modelName)
             }
@@ -128,7 +132,11 @@ class SocketParser {
         print ("DEBUG:: convert with regular input")
 
         let jsonData = try JSONSerialization.data(withJSONObject: data)
+        print("DEBUG:: Printing jsonData", jsonData)
         let decoder = JSONDecoder()
+        
+        print("DEBUG:: decoded data?")
+        
         return try decoder.decode(T.self, from: jsonData)
     }
 
