@@ -14,7 +14,7 @@ struct HomeScreen: View {
     @State private var showStartView = false
     @Binding var showHomeView: Bool
     
-    let limit = 15
+    let limit = 10
 
     var body: some View {
         VStack {
@@ -25,7 +25,7 @@ struct HomeScreen: View {
             Text("Please create a username before starting the game")
                 .padding(10)
             
-            Text("Limited 15 characters")
+            Text("Limited to 10 characters")
                 .padding(5)
             
             HStack{
