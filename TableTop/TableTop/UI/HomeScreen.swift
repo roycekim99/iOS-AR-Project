@@ -9,13 +9,38 @@ import SwiftUI
 import Combine
 
 struct HomeScreen: View {
-    @State var userName = ""
-//    @Binding var showStartView: Bool
     @State private var showStartView = false
     @Binding var showHomeScreen: Bool
+    @State var userName = ""
     
-    let limit = 10
+    var body: some View {
+        ZStack {
+//            UserNameView(showStartView: $showStartView)
+//
+//            if !showStartView {
+//                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
+//                    .hidden()
+//            } else {
+//                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
+//            }
+            if showStartView {
+                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
 
+            } else {
+                UserNameView(userName: $userName, showStartView: $showStartView)
+            }
+            
+        }
+        
+    }
+}
+
+// MARK: SUerNameView: first homescreen asks for username
+struct UserNameView: View {
+    let limit = 10
+    @Binding var userName: String
+    @Binding var showStartView: Bool
+    
     var body: some View {
         VStack {
             Image("T")
@@ -43,40 +68,23 @@ struct HomeScreen: View {
                     self.showStartView.toggle()
                 }
         
-            }.fullScreenCover (isPresented: $showStartView){
-                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
             }
             .padding(30)
             .padding(.bottom, 50)
-        
-            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.opacity(0.8))
-        
     }
-
+    
     func limitText(_ limit: Int) {
         if userName.count > limit {
             userName = String(userName.prefix(limit))
         }
     }
-}
-
-struct CustomInputBox: TextFieldStyle {
-//    @ScaledMetric var size: CGFloat = 1
-//    @ScaledMetric var height = 60
     
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-            .frame(width: UIScreen.main.bounds.width * 0.8, height:UIScreen.main.bounds.height * 0.05 )
-            .padding(5)
-            .font(.custom("Open Scans", size: 20))
-            .background(Color.gray.opacity(0.5))
-            .cornerRadius(9)
-    }
 }
 
+// MARK: secodn homescreen -- show game menu
 struct StartView: View {
     @Binding var showStartView: Bool
 //    @State private var showArView = false
@@ -109,8 +117,8 @@ struct StartView: View {
                     Buttons(text: "Start Game", fontStyle: "title"){
                         self.showHomeScreen.toggle()
                     }
-                    .background(Color.black)
 
+                    
                     // button for instructions
                     Buttons(text: "How to Play", fontStyle: "title" ){
                         self.showHowTo.toggle()
@@ -118,17 +126,15 @@ struct StartView: View {
                     .sheet(isPresented: $showHowTo){
                         HowToView(showHowto: $showHowTo)
                     }
-                    .background(Color.black)
-
+                    
                     //button for joining a game
                     Buttons(text: "Join a Game", fontStyle: "title" ){
                         self.showJoin.toggle()
                     }
                     .sheet(isPresented: $showJoin){
-                        JoinView(showJoin: $showJoin)
+                        JoinView(showJoin: $showJoin, showHomeScreen: $showHomeScreen)
                     }
-                    .background(Color.black)
-
+            
                     // button for about
                     Buttons(text: "About", fontStyle: "title"){
                         self.showAbout.toggle()
@@ -137,7 +143,7 @@ struct StartView: View {
                     .sheet(isPresented: $showAbout){
                         AboutView(showAbout: $showAbout)
                     }
-                    .background(Color.black)
+                    
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -155,13 +161,11 @@ struct StartView: View {
 
 }
 
+// MARK: how to play view
 struct HowToView: View {
     @Binding var showHowto: Bool
     var body: some View {
         VStack {
-            Buttons(text: "Done", fontStyle: "title2"){
-                self.showHowto.toggle()
-            }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
                     ForEach(0..<4) {i in
@@ -169,10 +173,13 @@ struct HowToView: View {
                             .padding(10)
                     }
                 }
-//                .background(Color.red)
+                
             }
-//            .frame(width: 400, height: 600)
+            Buttons(text: "Done", fontStyle: "title2"){
+                self.showHowto.toggle()
+            }
         }
+       
     }
 }
 
@@ -190,64 +197,61 @@ struct cardView: View {
     }
 }
 
+// MARK: about view
 struct AboutView: View {
     @Binding var showAbout: Bool
 //    @Binding var showStartView: Bool
     
     var body: some View {
-        
-//        NavigationView {
-            VStack{
-                Buttons(text: "Back", fontStyle:"title2" ){
-                    self.showAbout.toggle()
-                }
+        VStack{
+            VStack {
                 Text("this is the about page")
             }
-
-//        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .navigationTitle("About")
-        .navigationBarItems(leading:
-            Button(action: {
-            self.showAbout.toggle()
-        }){
-            Text("back").bold()
+            .frame(width: 400, height: 600)
+            
+            Buttons(text: "Back", fontStyle:"title2" ){
+                self.showAbout.toggle()
+            }
         }
-        )
-
     }
 }
 
+// MARK: Join a game
 struct JoinView: View {
     @Binding var showJoin: Bool
+    @Binding var showHomeScreen: Bool
     @State var sessionID = ""
     let limit = 10
     
     var body: some View {
-//        NavigationView {
-            VStack {
-                Text("Enter the session ID you want to join")
-                    .padding()
-                
-                HStack{
-                    TextField("Session ID", text: $sessionID)
-                        .onReceive(Just(sessionID)){
-                            _ in limitText(limit)
-                        }
-                }
-                .textFieldStyle(CustomInputBox())
-                
-                Buttons(text: "Join", fontStyle: "title2"){
-                    // start arview
-                }
-                
-                Buttons(text: "cancel", fontStyle:"title2" ){
-                    self.showJoin.toggle()
-                }
-                
-                
+
+        VStack {
+            Text("Enter the session ID you want to join")
+                .padding()
+            
+            HStack{
+                TextField("Session ID", text: $sessionID)
+                    .onReceive(Just(sessionID)){
+                        _ in limitText(limit)
+                    }
             }
-//        }
+            .textFieldStyle(CustomInputBox())
+            
+            Buttons(text: "Join", fontStyle: "title2"){
+                // start arview
+                self.showHomeScreen.toggle()
+            }
+            .padding(.top, 10)
+            .padding(10)
+            
+            Buttons(text: "cancel", fontStyle:"title2" ){
+                self.showJoin.toggle()
+            }
+            .padding(10)
+            
+            
+        }
+
         
 }
     
@@ -259,13 +263,22 @@ struct JoinView: View {
     
 }
 
+struct CustomInputBox: TextFieldStyle {
+    
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .frame(width: UIScreen.main.bounds.width * 0.8, height:UIScreen.main.bounds.height * 0.05 )
+            .padding(5)
+            .font(.custom("Open Scans", size: 20))
+            .background(Color.gray.opacity(0.5))
+            .cornerRadius(9)
+    }
+}
+
 
 struct Buttons: View {
-
     let text: String
-
     let fontStyle: String
-
     let action: () -> Void
 
     var body: some View {
