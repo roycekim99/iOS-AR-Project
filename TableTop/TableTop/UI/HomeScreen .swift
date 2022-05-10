@@ -18,13 +18,15 @@ struct HomeScreen: View {
 
     var body: some View {
         VStack {
-            Text("LOGO")
-                .padding(100)
+            Image("T")
+                .resizable()
+                .frame(width: 400, height: 400)
             
             Text("Please create a username before starting the game")
                 .padding(10)
             
             Text("Limited 15 characters")
+                .padding(5)
             
             HStack{
                 TextField("Username", text: $userName)
@@ -44,6 +46,8 @@ struct HomeScreen: View {
             }.fullScreenCover (isPresented: $showStartView){
                 StartView(showStartView: $showStartView, showHomeView: $showHomeView)
             }
+            .padding(.bottom, 50)
+        
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -65,10 +69,10 @@ struct CustomInputBox: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .frame(width: UIScreen.main.bounds.width * 0.8, height:UIScreen.main.bounds.height * 0.05 )
+            .padding(5)
             .font(.custom("Open Scans", size: 20))
             .background(Color.gray.opacity(0.5))
             .cornerRadius(9)
-            .padding(.bottom, 70)
     }
 }
 
@@ -269,8 +273,9 @@ struct Buttons: View {
             }
 
         }
-        .frame(width: UIScreen.main.bounds.width * 0.4 , height: UIScreen.main.bounds.width * 0.1)
-        .background(Color.red)
+        .frame(width: UIScreen.main.bounds.width * 0.8 , height: UIScreen.main.bounds.width * 0.1)
+        .background(Color.white)
+        .cornerRadius(9)
         .padding(30)
 
     }
