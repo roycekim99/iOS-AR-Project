@@ -46,6 +46,7 @@ struct HomeScreen: View {
             }.fullScreenCover (isPresented: $showStartView){
                 StartView(showStartView: $showStartView, showHomeView: $showHomeView)
             }
+            .padding(30)
             .padding(.bottom, 50)
         
             
@@ -86,10 +87,22 @@ struct StartView: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 200) {
-                Text("Welcome, \(ModelLibrary.username)")
-                    .bold()
-                    .font(.system(size: 40))
+            VStack {
+                VStack {
+                    Image("T")
+                        .resizable()
+                        .frame(width: 250, height: 250)
+                        
+                }
+//                .padding(.bottom, 50)
+                
+                VStack {
+                    Text("Welcome, \(ModelLibrary.username)")
+                        .bold()
+                        .font(.system(size: 40))
+                       
+                }
+                .padding(.bottom, 80)
 
                 VStack(spacing: 30){
                     // button for starting the game
@@ -126,11 +139,9 @@ struct StartView: View {
                     }
                     .background(Color.black)
                 }
-
-
-
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.bottom, 100)
             .background(Color.black.opacity(0.8))
             .navigationBarItems(leading:
                 Button(action: {
@@ -276,7 +287,6 @@ struct Buttons: View {
         .frame(width: UIScreen.main.bounds.width * 0.8 , height: UIScreen.main.bounds.width * 0.1)
         .background(Color.white)
         .cornerRadius(9)
-        .padding(30)
 
     }
 }
