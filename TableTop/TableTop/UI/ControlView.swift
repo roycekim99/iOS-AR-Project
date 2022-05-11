@@ -299,7 +299,7 @@ struct ControlBottomBar: View {
 // MARK: PlayerListview
 struct PlayerListView: View {
     @Binding var showPlayerList: Bool
-    @StateObject var players = PlayerList()
+//    @StateObject var players = PlayerList()
     
 //    let names = ["hfaje", "thoea hjka", "fhefewafe", "fnekfnefd", "bcndnvf", "mcsoj", "ndjnia", "njedknei", "mnkfeogkg", "gdkmeklnk"]
     

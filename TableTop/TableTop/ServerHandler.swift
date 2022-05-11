@@ -72,7 +72,7 @@ final class ServerHandler {
 
         
         // TODO: - Setup events for actions
-        socket?.on("model-tapped") { (data, ack) in
+            self.socket?.on("model-tapped") { (data, ack) in
             print ("DEBUG:: from server--> model tapped received")
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
@@ -80,11 +80,11 @@ final class ServerHandler {
             }
             // Call function here to display the message
         }
-        socket?.on("playerbase-updated") { (data, ack) in
+            self.socket?.on("playerbase-updated") { (data, ack) in
             //TODO: called on player disconnect or connect
         }
 
-        socket?.on("model-placed") { (data, ack) in
+            self.socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: FROM SERVER -> model placed received")
             guard let dataInfo = data.first else { return }
 
@@ -93,20 +93,20 @@ final class ServerHandler {
             let tempSharedSessionData = SharedSessionData(
                 modelUID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
-                position: dataDict["position"]! as! SIMD3<Float>)
+                position: dataDict["position"]! as! [Float])
             
             print("DEBUG:: SH tempSharedSesssionDAta: ", tempSharedSessionData.position)
 
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName){
-                
-                ModelManager.getInstance().place(for: foundModel, reqPos: tempSharedSessionData.position)
+                let reqPosSIMD3 = SIMD3<Float>(tempSharedSessionData.position)
+                ModelManager.getInstance().place(for: foundModel, reqPos: reqPosSIMD3)
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
             }
             print("DEBUG:: tempSharedSessionData: ", tempSharedSessionData)
         }
         
-        socket?.on("model-transformed") { (data, ack) in
+            self.socket?.on("model-transformed") { (data, ack) in
             print ("DEBUG:: from server--> model transform received")
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
@@ -195,9 +195,11 @@ class SocketParser {
 struct SharedSessionData: Codable {
     var modelUID: String
     var modelName: String
-    var position: SIMD3<Float>
+    var position: [Float]
 }
 
+    
 class PlayerList: ObservableObject {
     @Published var playerNames = [String]()
+}
 }

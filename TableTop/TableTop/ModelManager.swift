@@ -139,7 +139,10 @@ class ModelManager{
             print(finalRelativePos)
             
             //EMIT
-            let emissionData = SharedSessionData(modelUID: model.model_uid, modelName: model.name, position: finalRelativePos)
+            let emissionData = SharedSessionData(
+                modelUID: model.model_uid,
+                modelName: model.name,
+                position: [finalRelativePos.x, finalRelativePos.y, finalRelativePos.z])
             
             ServerHandler.getInstance().emitModelTransformed(data: emissionData)
 
@@ -182,7 +185,7 @@ class ModelManager{
             let dataToEmit = SharedSessionData(
                 modelUID: selectedClonedModel.model_uid,
                 modelName: selectedClonedModel.name,
-                position: relativePos)
+                position: [relativePos.x, relativePos.y, relativePos.z])
 
             ServerHandler.getInstance().emitModelPlaced(data: dataToEmit)
             

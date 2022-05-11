@@ -256,6 +256,5 @@ class ModelLibrary {
         ModelLibrary.availableAssets += [dripGoku, goku]
         
         self.configureUIDPerModel()
-        
     }
 }
