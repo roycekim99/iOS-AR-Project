@@ -21,7 +21,7 @@ final class ServerHandler {
     var client_userName = UIDevice.current.identifierForVendor?.uuidString ?? ""
     
     init() {
-                // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
+        // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
         print("DEBUG:: ServerHandler|| INIT!!!")
         self.socket = manager.defaultSocket
         setupSocketEvents()
