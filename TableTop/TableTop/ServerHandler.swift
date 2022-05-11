@@ -27,20 +27,19 @@ final class ServerHandler {
         setupSocketEvents()
         
         socket?.connect()
-        //DEBUG
-        self.testEmission()
+        setUserName(newName: ModelLibrary.username)
     }
     
     // MARK: DEBUG
-    func testEmission(){
-//        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
-        let testModel = SharedSessionData(modelUID: "Test ID", modelName: "Test Object", position: SIMD3<Float>())
-        
-        emitOnTap(data: testModel)
-        emitModelPlaced(data: testModel)
-        emitModelTransformed(data: testModel)
-        print("DEBUG:: Debug testEmissions called!!")
-    }
+//    func testEmission(){
+////        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
+//        let testModel = SharedSessionData(modelUID: "Test ID", modelName: "Test Object", position: SIMD3<Float>())
+//
+//        emitOnTap(data: testModel)
+//        emitModelPlaced(data: testModel)
+//        emitModelTransformed(data: testModel)
+//        print("DEBUG:: Debug testEmissions called!!")
+//    }
     
     func setUserName(newName: String){
         self.userName = newName
@@ -67,7 +66,10 @@ final class ServerHandler {
         
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
-        }
+
+            guard let dataInfo = data.first else { return }
+            
+
         
         // TODO: - Setup events for actions
         socket?.on("model-tapped") { (data, ack) in
