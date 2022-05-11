@@ -111,11 +111,6 @@ class ModelManager{
             
         switch gesture.state {
         case .began:
-            let modelRequested = getModelFromActive(reqModelEnt: targetModelEntity!)
-                print("DEBUG:: MM|| \(modelRequested?.name) has pos: \(modelRequested!.getRelativePosition(origin: ARSceneContainer.originPoint))")
-                
-                let originalModel = ModelLibrary().getModelWithName(modelName: modelRequested!.name)
-                print("DEBUG:: MM|| originModel pos: \(originalModel!.getRelativePosition(origin: ARSceneContainer.originPoint))")
             
             print("DEBUG::Started Moving")
                 
@@ -136,7 +131,7 @@ class ModelManager{
             let model = getModelType(modEnt: targetModelEntity as! ModelEntity)
             
             print(model.name)
-            print(Model.getRelativePosition(from: targetModelEntity as! ModelEntity, to: ARSceneContainer.originPoint[0]))
+            print(Model.getRelativePosition(from: targetModelEntity as! ModelEntity, to: ARSceneContainer.originPoint))
             
             if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {
