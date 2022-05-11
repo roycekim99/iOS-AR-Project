@@ -18,7 +18,7 @@ final class ServerHandler: ObservableObject {
     let client_userName = UIDevice.current.identifierForVendor?.uuidString ?? "" + "_test user"
     
     init() {
-        // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
+                // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
         self.socket = manager.defaultSocket
         setupSocketEvents()
         
@@ -27,7 +27,7 @@ final class ServerHandler: ObservableObject {
         self.testEmission()
     }
     
-    //DEBUG
+    // MARK: DEBUG
     func testEmission(){
 //        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
         let testModel = SharedSessionData(objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
@@ -37,6 +37,8 @@ final class ServerHandler: ObservableObject {
         emitModelTransformed(data: testModel)
         print("DEBUG:: Debug testEmissions called!!")
     }
+    
+    // MARK: SETUP LISTENERS
     // Configures the event observers and socket events
     func setupSocketEvents() {
         // Default event
@@ -59,15 +61,22 @@ final class ServerHandler: ObservableObject {
         socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: FROM SERVER -> model placed received")
             guard let dataInfo = data.first else { return }
-            
+
             let dataDict = dataInfo as! [String: Any]
-            
+
             let tempSharedSessionData = SharedSessionData(
+
 //                username: dataDict["username"]! as! String,
+
                 objectID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
                 position: dataDict["position"]! as! [Float])
-            
+
+            if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName){
+                ModelManager.getInstance().place(for: foundModel)
+            } else {
+                print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
+            }
             print("DEBUG:: tempSharedSessionData: ", tempSharedSessionData)
         }
         
@@ -81,7 +90,7 @@ final class ServerHandler: ObservableObject {
     }
     
     
-    // MARK: - Socket Emits
+    // MARK: SETUP SENDERS
     
     // Convert the SharedSession object to a String:Any dictionary
     // Then emit with proper message and data.
@@ -156,7 +165,11 @@ class SocketParser {
 
 // Class to hold information about the game session we want to send/receive from server
 struct SharedSessionData: Codable {
+<<<<<<< HEAD
 //    var username: String
+=======
+    //var username: String
+>>>>>>> 2d6c1a1e43166ee41acd9ed8aae60dfbe11abf27
     var objectID: String
     var modelName: String
 //    var position: SIMD3<Float>

@@ -42,7 +42,7 @@ class ModelLibrary {
     
     // Holds an array of model entities
     static var availableAssets: [Model] = []
-    static var loadedModels = [String: ModelEntity]()
+    static var loadedModels = [String: ModelEntity]()   //Name:modelEntity()
     static var username = ""
     
     private var cancellable: AnyCancellable? = nil
@@ -73,6 +73,7 @@ class ModelLibrary {
                 print("DEBUG:: model has been loaded")
             })
     }
+    
     
     // clone model entity and return this entity to be placed into the scene
     // Returns a Model(deep copy).
@@ -127,12 +128,24 @@ class ModelLibrary {
         return ModelLibrary.availableAssets.filter( {$0.category == category})
     }
     
+    func getModelWithName(modelName: String) -> Model?{
+        for modelObj in ModelLibrary.availableAssets {
+            if(modelObj.name == modelName){
+                return modelObj
+            }
+        }
+        return nil
+    }
+    
     private func configureUIDPerModel(){
         for modelObj in ModelLibrary.availableAssets {
             let newID = deviceName + "_" + String(modelObj.getModelEntity().id)
             modelObj.setModelID(to: newID)
         }
     }
+    
+   
+    
     
     // TODO: only for testing purpose. get rid of it after finishing download function 
     init() {

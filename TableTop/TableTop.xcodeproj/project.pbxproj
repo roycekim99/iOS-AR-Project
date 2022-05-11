@@ -821,7 +821,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
+=======
+				DEVELOPMENT_TEAM = 92MSYPJ969;
+>>>>>>> 2d6c1a1e43166ee41acd9ed8aae60dfbe11abf27
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -838,7 +842,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = JetAunh;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = royceServerTest;
+>>>>>>> 2d6c1a1e43166ee41acd9ed8aae60dfbe11abf27
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -855,7 +863,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
+=======
+				DEVELOPMENT_TEAM = 92MSYPJ969;
+>>>>>>> 2d6c1a1e43166ee41acd9ed8aae60dfbe11abf27
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -872,7 +884,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = JetAunh;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = royceServerTest;
+>>>>>>> 2d6c1a1e43166ee41acd9ed8aae60dfbe11abf27
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
