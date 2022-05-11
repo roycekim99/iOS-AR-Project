@@ -67,7 +67,6 @@ final class ServerHandler {
         
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
-
             guard let dataInfo = data.first else { return }
         }
 
@@ -100,16 +99,19 @@ final class ServerHandler {
             let tempSharedSessionData = SharedSessionData(
                 modelUID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
-                positionX: dataDict["positionX"] as! Float,
-                positionY: dataDict["positionY"] as! Float,
-                positionZ: dataDict["positionZ"] as! Float)
+                positionX: (dataDict["positionX"] as! NSNumber).floatValue,
+                positionY: (dataDict["positionY"] as! NSNumber).floatValue,
+                positionZ: (dataDict["positionZ"] as! NSNumber).floatValue)
             
                 let positionArr = [tempSharedSessionData.positionX,
                                    tempSharedSessionData.positionY,
                                    tempSharedSessionData.positionZ]
 
-            if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName){
+            print("DEBUG:: SH modelName ->>>>", tempSharedSessionData.modelName)
+            
+            if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName) {
                 let reqPosSIMD3 = SIMD3<Float>(positionArr)
+                print("DEBUG:: SH INSIDE OF IF FOUNDMODEL")
                 ModelManager.getInstance().place(for: foundModel, reqPos: reqPosSIMD3)
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
