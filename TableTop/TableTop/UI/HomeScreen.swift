@@ -8,51 +8,52 @@
 import SwiftUI
 import Combine
 
-struct HomeScreen: View {
-    @State private var showStartView = false
-    @Binding var showHomeScreen: Bool
-    @State var userName = ""
-    
-    var body: some View {
-        ZStack {
-//            UserNameView(showStartView: $showStartView)
+//struct HomeScreen: View {
+//    @State private var showStartView = false
+//    @Binding var showHomeScreen: Bool
+//    @State var userName = ""
 //
-//            if !showStartView {
+//    var body: some View {
+//        ZStack {
+////            UserNameView(showStartView: $showStartView)
+////
+////            if !showStartView {
+////                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
+////                    .hidden()
+////            } else {
+////                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
+////            }
+//            if showStartView {
 //                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
-//                    .hidden()
+//
 //            } else {
-//                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
+//                UserNameView(userName: $userName, showStartView: $showStartView)
 //            }
-            if showStartView {
-                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
+//
+//        }
+//
+//    }
+//}
 
-            } else {
-                UserNameView(userName: $userName, showStartView: $showStartView)
-            }
-            
-        }
-        
-    }
-}
-
-// MARK: SUerNameView: first homescreen asks for username
+// MARK: UserNameView: first homescreen asks for username
 struct UserNameView: View {
     let limit = 10
     @Binding var userName: String
     @Binding var showStartView: Bool
-    
+    @Binding var showUsernameView: Bool
+
     var body: some View {
         VStack {
             Image("T")
                 .resizable()
                 .frame(width: 400, height: 400)
-            
+
             Text("Please create a username before starting the game")
                 .padding(10)
-            
+
             Text("Limited to 10 characters")
                 .padding(5)
-            
+
             HStack{
                 TextField("Username", text: $userName)
                     .onReceive(Just(userName)){
@@ -60,14 +61,15 @@ struct UserNameView: View {
                     }
             }
             .textFieldStyle(CustomInputBox())
-            
+
             Buttons(text: "Next", fontStyle: "title2") {
-                
+
                 if self.userName.count > 0 {
                     ModelLibrary.username = self.userName
+                    self.showUsernameView.toggle()
                     self.showStartView.toggle()
                 }
-        
+
             }
             .padding(30)
             .padding(.bottom, 50)
@@ -75,20 +77,18 @@ struct UserNameView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.opacity(0.8))
     }
-    
+
     func limitText(_ limit: Int) {
         if userName.count > limit {
             userName = String(userName.prefix(limit))
         }
     }
-    
+
 }
 
-// MARK: secodn homescreen -- show game menu
+// MARK: Second homescreen -- show game menu
 struct StartView: View {
     @Binding var showStartView: Bool
-//    @State private var showArView = false
-    @Binding var showHomeScreen: Bool
     @State private var showAbout = false
     @State private var showJoin = false
     @State private var showHowTo = false
@@ -115,7 +115,7 @@ struct StartView: View {
                 VStack(spacing: 30){
                     // button for starting the game
                     Buttons(text: "Start Game", fontStyle: "title"){
-                        self.showHomeScreen.toggle()
+                        self.showStartView.toggle()
                     }
 
                     
@@ -132,7 +132,7 @@ struct StartView: View {
                         self.showJoin.toggle()
                     }
                     .sheet(isPresented: $showJoin){
-                        JoinView(showJoin: $showJoin, showHomeScreen: $showHomeScreen)
+                        JoinView(showJoin: $showJoin, showStartView: $showStartView)
                     }
             
                     // button for about
@@ -219,7 +219,7 @@ struct AboutView: View {
 // MARK: Join a game
 struct JoinView: View {
     @Binding var showJoin: Bool
-    @Binding var showHomeScreen: Bool
+    @Binding var showStartView: Bool
     @State var sessionID = ""
     let limit = 10
     
@@ -239,7 +239,7 @@ struct JoinView: View {
             
             Buttons(text: "Join", fontStyle: "title2"){
                 // start arview
-                self.showHomeScreen.toggle()
+                self.showStartView.toggle()
             }
             .padding(.top, 10)
             .padding(10)
@@ -264,7 +264,7 @@ struct JoinView: View {
 }
 
 struct CustomInputBox: TextFieldStyle {
-    
+
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .frame(width: UIScreen.main.bounds.width * 0.8, height:UIScreen.main.bounds.height * 0.05 )
