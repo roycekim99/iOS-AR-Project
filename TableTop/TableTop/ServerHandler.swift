@@ -68,7 +68,7 @@ final class ServerHandler {
         
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
-            guard let dataInfo = data.first else { return }
+//            guard let dataInfo = data.first else { return } // TODO: HANDLE LATER
             self.socket?.emit("playerList-req", " ")
         }
 
@@ -123,16 +123,11 @@ final class ServerHandler {
         self.socket?.on("playerList-req") { (data, ack) in
             print("DEBUG:: SH PLAYER || FROM SERVER -> received new list of users")
 
-            guard let playerNames = data.first else {return}
-            
-            print("DEBUG:: SH PLAYER || playerNames: ", playerNames)
-            
-            if let playerListData: PlayerConnectionsFromServer = try? SocketParser.convert(data: playerNames) {
-                PlayerList().playerNames = playerListData.playerNames
-                print("DEBUG:: SH PLAYER || list looks like: \(playerListData.playerNames)")
-            }
+            guard let playerNames = data.first as? String else {return}
+            print("DEBUG:: SH PLAYER || playerNames: ", playerNames.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
+            print("DEBUG:: SH PLAYER || playerNames: ", type(of: playerNames))
+//            print("DEBUG:: SH PLAYER || playerNames: ", playerNames.)
         }
-
     }
     
     
@@ -237,4 +232,3 @@ struct PlayerConnectionsFromServer: Codable {
 class PlayerList: ObservableObject {
     @Published var playerNames = [String]()
 }
-
