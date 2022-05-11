@@ -18,7 +18,7 @@ struct ARSceneContainer: UIViewRepresentable {
     @EnvironmentObject var deletionManager: DeletionManager
     @EnvironmentObject var serverServiceManager: ServerHandler
 
-    static var originPoint: [Entity]  = []
+    static var originPoint = AnchorEntity()
     
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
@@ -45,11 +45,17 @@ struct ARSceneContainer: UIViewRepresentable {
             else {
                 //DEBUG
                 print("DEBUG:: ARSC|| confirmed model: \(confirmedModel.name)")
-                self.place(for : confirmedModel, in: arView)
+                ModelManager.getInstance().place(for : confirmedModel, reqPos: nil)
                 ModelManager.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
                 
+                // Getting origin data
+//                ModelManager.
+                
                 // NH - Not sure if this is the best place to emit model placement call
-                let dataToEmit = SharedSessionData(username: ModelLibrary.username, objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
+
+//                let dataToEmit = SharedSessionData(username: ModelLibrary.username, objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
+                let dataToEmit = SharedSessionData(objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
+
                 serverServiceManager.emitModelPlaced(data: dataToEmit)
                 
             }
@@ -58,43 +64,6 @@ struct ARSceneContainer: UIViewRepresentable {
         }
     }
     
-    private func place(for model: Model, in arView: ARView) {
-       
-        //DEBUG
-        print("DEBUG:: place started for \(model.name)! active models: \(ModelManager.getInstance().activeModels.count)")
-        print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.availableAssets.count)")
-        
-        let selectedClonedModel = ModelLibrary().getModelCloned(from: model)
-        
-        arView.installGestures(.all, for: selectedClonedModel.getModelEntity()).forEach { entityGesture in
-            entityGesture.addTarget(ModelManager.getInstance(), action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
-        }
-        
-
-        // anchor based on focus entity
-        var anchorEntity = AnchorEntity(plane: .any)
-        anchorEntity.addChild(selectedClonedModel.getModelEntity())
-        selectedClonedModel.setAnchorEntity(&anchorEntity)
-        
-        arView.scene.addAnchor(anchorEntity)
-
-        print("DEBUG:: ARSC|| Cloned model: \(selectedClonedModel.name)")
-
-        for child in selectedClonedModel.childs {
-            //print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
-            self.place(for: child, in: arView)
-        }
-        //testing is getrelativepostiion works
-//        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
-        
-        ModelManager.getInstance().addActiveModel(modelID: selectedClonedModel.getModelUID(), model: selectedClonedModel)
-        
-        //DEBUG
-        print("DEBUG:: ARSC||| place ending! active models: \(ModelManager.getInstance().activeModels.count)")
-        for modelInstance in ModelManager.getInstance().activeModels {
-            print("DEBUG:: ARSC||| place ENDED! active model name: \(modelInstance.value.name)")
-        }
-    }
     
     // fun place floor in arview container
     private func placeFloor(in arView: ARView, for setOrigin: Bool) {
@@ -110,11 +79,10 @@ struct ARSceneContainer: UIViewRepresentable {
         
         // set origion point
         if setOrigin == true {
-            ARSceneContainer.originPoint.append(floor)
-            ModelManager.getInstance().addFloorModel(floor: floor)
-            print("set origin point")
+            ARSceneContainer.originPoint = anchorEntity
+            print("DEBUG:: ARSC|| set origin point")
         }
         
-        print("added floor")
+        print("DEBUG:: ARSC|| added floor")
     }
 }

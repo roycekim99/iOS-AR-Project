@@ -93,5 +93,7 @@ class Model {
         return model.position(relativeTo: origin)
     }
     
-    //func updatePosition(pos)
+    func getRelativePositionToNil() -> SIMD3<Float>{
+        return self.anchorEntity.position(relativeTo: nil)
+    }
 }

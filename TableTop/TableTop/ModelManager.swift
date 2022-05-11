@@ -22,13 +22,17 @@ class ModelManager{
     var activeModels = [String: Model]()
     var floorModel: ModelEntity? = nil
     
+    // Temp way to initialize an AnchorEntity(wanted to set to nil but can't)
+    // Actual floor will be set when user is forced to set their floor, which is their origin
+    var floorAnchor: AnchorEntity = AnchorEntity(.face)
+    
     var targetARView: ARView
     var deletionManager: DeletionManager
     
     private init(target: ARView, deletionManager: DeletionManager){
         self.targetARView = target
         self.deletionManager = deletionManager
-        
+
         //DEBUG
         print("DEBUG:: ModelManager properly set up!!!")
     }
@@ -45,7 +49,6 @@ class ModelManager{
     static func getInstance() -> ModelManager{
         return MMInstance
     }
-        
     
     
     func clearActiveModels() {
@@ -70,6 +73,10 @@ class ModelManager{
         self.floorModel = floor
     }
     
+    func addFloorAnchor(anchor: AnchorEntity) {
+        self.floorAnchor = anchor
+    }
+    
     func handlePhysics(recognizer:UITapGestureRecognizer, zoomIsEnabled: Bool) {
         let location = recognizer.location(in: self.targetARView)
         
@@ -85,7 +92,6 @@ class ModelManager{
         
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity {
             self.deletionManager.entitySelectedForDeletion = selectedModel
-            
         }
     }
     
@@ -94,7 +100,7 @@ class ModelManager{
         //print("DEBUG:: MMT|| STARTED TRANSLATION!!")
         guard let gesture = sender as? EntityTranslationGestureRecognizer else { return }
         
-        let targetModelEntity = gesture.entity
+        let targetModelEntity = gesture.entity as? ModelEntity
         
     
         if self.objectMoved == nil {
@@ -105,6 +111,12 @@ class ModelManager{
             
         switch gesture.state {
         case .began:
+            let modelRequested = getModelFromActive(reqModelEnt: targetModelEntity!)
+                print("DEBUG:: MM|| \(modelRequested?.name) has pos: \(modelRequested!.getRelativePosition(origin: ARSceneContainer.originPoint))")
+                
+                let originalModel = ModelLibrary().getModelWithName(modelName: modelRequested!.name)
+                print("DEBUG:: MM|| originModel pos: \(originalModel!.getRelativePosition(origin: ARSceneContainer.originPoint))")
+            
             print("DEBUG::Started Moving")
                 
             if (CustomARView.Holder.zoomEnabled) {
@@ -141,6 +153,49 @@ class ModelManager{
             return
         }
         
+    }
+    
+    
+    func place(for model: Model, reqPos posRequested: SIMD3<Float>?) {
+        //DEBUG
+        print("DEBUG:: place started for \(model.name)! active models: \(ModelManager.getInstance().activeModels.count)")
+        print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.availableAssets.count)")
+        
+        let selectedClonedModel = ModelLibrary().getModelCloned(from: model)
+        
+        targetARView.installGestures(.all, for: selectedClonedModel.getModelEntity()).forEach { entityGesture in
+            entityGesture.addTarget(ModelManager.getInstance(), action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
+        }
+        
+        var anchorEntity: AnchorEntity
+        if (posRequested == nil){
+            // anchor based on focus entity
+            anchorEntity = AnchorEntity(plane: .any)
+        }   else {
+            anchorEntity = AnchorEntity(world: posRequested!)
+        }
+        
+        anchorEntity.addChild(selectedClonedModel.getModelEntity())
+        selectedClonedModel.setAnchorEntity(&anchorEntity)
+        
+        targetARView.scene.addAnchor(anchorEntity)
+
+        print("DEBUG:: ARSC|| Cloned model: \(selectedClonedModel.name)")
+
+        for child in selectedClonedModel.childs {
+            //print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
+            self.place(for: child, reqPos: nil)
+        }
+        //testing is getrelativepostiion works
+//        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
+        
+        ModelManager.getInstance().addActiveModel(modelID: selectedClonedModel.getModelUID(), model: selectedClonedModel)
+        
+        //DEBUG
+        print("DEBUG:: ARSC||| place ending! active models: \(ModelManager.getInstance().activeModels.count)")
+        for modelInstance in ModelManager.getInstance().activeModels {
+            print("DEBUG:: ARSC||| place ENDED! active model name: \(modelInstance.value.name)")
+        }
     }
     
     func moveAll(check: Bool){
@@ -190,6 +245,18 @@ class ModelManager{
         return model as! Model
     }
        
+    private func getModelFromActive(reqModelEnt: Entity) -> Model?{
+        //1. look through active
+            // make sure
         
+        for (_, modelObj) in ModelManager.getInstance().activeModels {
+            if( modelObj.getModelEntity() == reqModelEnt){
+                return modelObj
+            }
+        }
+        
+        return nil
+        
+    }
 }
 
