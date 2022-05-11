@@ -299,15 +299,16 @@ struct ControlBottomBar: View {
 // MARK: PlayerListview
 struct PlayerListView: View {
     @Binding var showPlayerList: Bool
+    @StateObject var players = PlayerList()
     
-    let names = ["hfaje", "thoea hjka", "fhefewafe", "fnekfnefd", "bcndnvf", "mcsoj", "ndjnia", "njedknei", "mnkfeogkg", "gdkmeklnk"]
+//    let names = ["hfaje", "thoea hjka", "fhefewafe", "fnekfnefd", "bcndnvf", "mcsoj", "ndjnia", "njedknei", "mnkfeogkg", "gdkmeklnk"]
     
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(0..<names.count) { i in
+                ForEach(0..<players.playerNames.count) { i in
                     VStack{
-                        Text(names[i])
+                        Text(players.playerNames[i])
                             .padding(5)
                     }
                     .padding(.leading, 30)
