@@ -49,9 +49,9 @@ struct ARSceneContainer: UIViewRepresentable {
                 ModelManager.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
                 
                 // NH - Not sure if this is the best place to emit model placement call
-                var dataToEmit = SharedSessionData(objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
-                
+                let dataToEmit = SharedSessionData(objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
                 serverServiceManager.emitModelPlaced(data: dataToEmit)
+                
             }
             self.placementSettings.confirmedModel = nil
             self.placementSettings.originfloor = false

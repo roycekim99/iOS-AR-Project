@@ -54,16 +54,18 @@ final class ServerHandler: ObservableObject {
             }
         }
         
-        socket?.on("model-placed") { (data, ack) in
-            print ("DEBUG:: from server--> model placed received")
+        socket?.on("model-placed") { [weak self] (data, ack) in
+            print ("DEBUG:: FROM SERVER -> model placed received")
             guard let dataInfo = data.first else { return }
             
-            print("DEBUG:: Printing data: ", data)
-            print("DEBUG:: Printing dataInfo: ", dataInfo)
+            let dataDict = dataInfo as! [String: Any]
             
-            if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
-                print("DEBUG:: Server requested to place model: " + response.modelName)
-            }
+            let tempSharedSessionData = SharedSessionData(
+                objectID: dataDict["objectID"]! as! String,
+                modelName: dataDict["modelName"]! as! String,
+                position: dataDict["position"]! as! [Float])
+            
+            print("DEBUG:: tempSharedSessionData: ", tempSharedSessionData)
         }
         
         socket?.on("model-transformed") { (data, ack) in
@@ -83,7 +85,7 @@ final class ServerHandler: ObservableObject {
     func emitOnTap(data: SharedSessionData) {
         
         let info: [String : Any] = [
-            "objectID": Int(data.objectID),
+            "objectID": String(data.objectID),
             "modelName": String(data.modelName),
             "position": [Float](data.position)
         ]
@@ -92,18 +94,17 @@ final class ServerHandler: ObservableObject {
     }
     
     func emitModelPlaced(data: SharedSessionData){
-       
         let info: [String : Any] = [
-            "objectID": Int(data.objectID),
+            "objectID": String(data.objectID),
             "modelName": String(data.modelName),
             "position": [Float](data.position)
         ]
-        self.socket?.emit("model-placed", info)
+        socket?.emit("model-placed", info)
     }
     
     func emitModelTransformed(data: SharedSessionData){
         let info: [String : Any] = [
-            "objectID": Int(data.objectID),
+            "objectID": String(data.objectID),
             "modelName": String(data.modelName),
             "position": [Float](data.position)
         ]
