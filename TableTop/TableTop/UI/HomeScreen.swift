@@ -34,6 +34,7 @@ struct UserNameView: View {
                     .onReceive(Just(userName)){
                         _ in limitText(limit)
                     }
+                    .multilineTextAlignment(.center)
             }
             .textFieldStyle(CustomInputBox())
 
@@ -133,12 +134,13 @@ struct StartView: View {
 // MARK: how to play view
 struct HowToView: View {
     @Binding var showHowto: Bool
+    let instructions = Instruction.instructionSet
     var body: some View {
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
-                    ForEach(0..<4) {i in
-                        cardView(showHowto: $showHowto, text: "instruction \(i)")
+                    ForEach(0..<2) {i in
+                        cardView(showHowto: $showHowto,title: instructions[i].title, text: instructions[i].body)
                             .padding(10)
                     }
                 }
@@ -152,13 +154,30 @@ struct HowToView: View {
     }
 }
 
+struct Instruction {
+    var title: String
+    var body: String
+    
+    static let instructionSet: [Instruction] =
+    [
+        Instruction(title: "Starting The Game", body: "This is a body"),
+        Instruction(title: "Placing Models", body: "This is another body")
+    ]
+}
+
 struct cardView: View {
     @Binding var showHowto: Bool
+    let title: String
     let text: String
 
     var body: some View {
         VStack {
+            Text(title).bold()
+            
             Text(text)
+                .padding(.top, 40)
+            
+            Spacer()
         }
         .frame(width: 400, height: 600)
 //        .background(Color.red)
