@@ -73,7 +73,7 @@ final class ServerHandler: ObservableObject {
                 position: dataDict["position"]! as! [Float])
 
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName){
-                ModelManager.getInstance().place(for: foundModel)
+                ModelManager.getInstance().place(for: foundModel, reqPos: nil)
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
             }
@@ -165,11 +165,6 @@ class SocketParser {
 
 // Class to hold information about the game session we want to send/receive from server
 struct SharedSessionData: Codable {
-<<<<<<< HEAD
-//    var username: String
-=======
-    //var username: String
->>>>>>> 2d6c1a1e43166ee41acd9ed8aae60dfbe11abf27
     var objectID: String
     var modelName: String
 //    var position: SIMD3<Float>

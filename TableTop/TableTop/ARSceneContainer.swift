@@ -18,7 +18,7 @@ struct ARSceneContainer: UIViewRepresentable {
     @EnvironmentObject var deletionManager: DeletionManager
     @EnvironmentObject var serverServiceManager: ServerHandler
 
-    static var originPoint: [Entity]  = []
+    static var originPoint = AnchorEntity()
     
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
@@ -45,7 +45,7 @@ struct ARSceneContainer: UIViewRepresentable {
             else {
                 //DEBUG
                 print("DEBUG:: ARSC|| confirmed model: \(confirmedModel.name)")
-                ModelManager.getInstance().place(for : confirmedModel)
+                ModelManager.getInstance().place(for : confirmedModel, reqPos: nil)
                 ModelManager.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
                 
                 // Getting origin data
@@ -79,12 +79,10 @@ struct ARSceneContainer: UIViewRepresentable {
         
         // set origion point
         if setOrigin == true {
-            ARSceneContainer.originPoint.append(floor)
-            ModelManager.getInstance().addFloorModel(floor: floor)
-            ModelManager.getInstance().addFloorAnchor(anchor: anchorEntity)
-            print("set origin point")
+            ARSceneContainer.originPoint = anchorEntity
+            print("DEBUG:: ARSC|| set origin point")
         }
         
-        print("added floor")
+        print("DEBUG:: ARSC|| added floor")
     }
 }

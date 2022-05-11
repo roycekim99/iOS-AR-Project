@@ -49,7 +49,6 @@ class ModelManager{
     static func getInstance() -> ModelManager{
         return MMInstance
     }
-        
     
     func clearActiveModels() {
         print("DEBUG:: activeModels before clearing \(activeModels)")
@@ -77,15 +76,6 @@ class ModelManager{
         self.floorAnchor = anchor
     }
     
-    // NOTE: .position(relativeTo: nil) implies a world space
-    func calcDistBtwnPosAndOrigin(model: Model) -> SIMD3<Float> {
-        var distance: SIMD3<Float> = [0, 0, 0]
-        distance.x = abs(model.getRelativePositionToNil().x - floorAnchor.position(relativeTo: nil).x)
-        distance.y = abs(model.getRelativePositionToNil().y - floorAnchor.position(relativeTo: nil).y)
-        distance.z = abs(model.getRelativePositionToNil().z - floorAnchor.position(relativeTo: nil).z)
-        return distance
-    }
-    
     func handlePhysics(recognizer:UITapGestureRecognizer, zoomIsEnabled: Bool) {
         let location = recognizer.location(in: self.targetARView)
         
@@ -108,7 +98,7 @@ class ModelManager{
         print("DEBUG:: MMT|| STARTED TRANSLATION!!")
         guard let gesture = sender as? EntityTranslationGestureRecognizer else { return }
         
-        let targetModelEntity = gesture.entity
+        let targetModelEntity = gesture.entity as? ModelEntity
         
     
         if self.objectMoved == nil {
@@ -119,6 +109,12 @@ class ModelManager{
             
         switch gesture.state {
         case .began:
+            let modelRequested = getModelFromActive(reqModelEnt: targetModelEntity!)
+                print("DEBUG:: MM|| \(modelRequested?.name) has pos: \(modelRequested!.getRelativePosition(origin: ARSceneContainer.originPoint))")
+                
+                let originalModel = ModelLibrary().getModelWithName(modelName: modelRequested!.name)
+                print("DEBUG:: MM|| originModel pos: \(originalModel!.getRelativePosition(origin: ARSceneContainer.originPoint))")
+            
             print("DEBUG::Started Moving")
                 
             if (CustomARView.Holder.zoomEnabled) {
@@ -154,8 +150,7 @@ class ModelManager{
     }
     
     
-    func place(for model: Model) {
-       
+    func place(for model: Model, reqPos posRequested: SIMD3<Float>?) {
         //DEBUG
         print("DEBUG:: place started for \(model.name)! active models: \(ModelManager.getInstance().activeModels.count)")
         print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.availableAssets.count)")
@@ -166,9 +161,14 @@ class ModelManager{
             entityGesture.addTarget(ModelManager.getInstance(), action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
         }
         
-
-        // anchor based on focus entity
-        var anchorEntity = AnchorEntity(plane: .any)
+        var anchorEntity: AnchorEntity
+        if (posRequested == nil){
+            // anchor based on focus entity
+            anchorEntity = AnchorEntity(plane: .any)
+        }   else {
+            anchorEntity = AnchorEntity(world: posRequested!)
+        }
+        
         anchorEntity.addChild(selectedClonedModel.getModelEntity())
         selectedClonedModel.setAnchorEntity(&anchorEntity)
         
@@ -178,7 +178,7 @@ class ModelManager{
 
         for child in selectedClonedModel.childs {
             //print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
-            self.place(for: child)
+            self.place(for: child, reqPos: nil)
         }
         //testing is getrelativepostiion works
 //        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
@@ -190,10 +190,6 @@ class ModelManager{
         for modelInstance in ModelManager.getInstance().activeModels {
             print("DEBUG:: ARSC||| place ENDED! active model name: \(modelInstance.value.name)")
         }
-    }
-    
-    func placeFromServer(for model: Model, reqPos posRequested: SIMD3<Float>){
-        //TODO
     }
     
     func moveAll(check: Bool){
@@ -209,8 +205,6 @@ class ModelManager{
             }
         }
     }
-    
-    
     
     func resetAll(){
         for (_, modelObj) in activeModels {
@@ -235,8 +229,23 @@ class ModelManager{
         
     }
     
-    
+    // NOTE: .position(relativeTo: nil) implies a world space
+    private func getRelativePositionFromOrigin(for model: Model) -> SIMD3<Float> {
+        return model.getRelativePosition(origin: floorAnchor)
+    }
        
+    private func getModelFromActive(reqModelEnt: Entity) -> Model?{
+        //1. look through active
+            // make sure
         
+        for (_, modelObj) in ModelManager.getInstance().activeModels {
+            if( modelObj.getModelEntity() == reqModelEnt){
+                return modelObj
+            }
+        }
+        
+        return nil
+        
+    }
 }
 

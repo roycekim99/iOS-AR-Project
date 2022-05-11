@@ -89,7 +89,7 @@ class Model {
         return self.model_uid
     }
     
-    func getRelativePosition(origin: Entity) -> SIMD3<Float>{
+    func getRelativePosition(origin: AnchorEntity) -> SIMD3<Float>{
         return self.anchorEntity.position(relativeTo: origin)
     }
     
