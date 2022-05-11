@@ -146,6 +146,7 @@ class ModelManager{
             
             ServerHandler.getInstance().emitModelTransformed(data: emissionData)
 
+
             
             if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {

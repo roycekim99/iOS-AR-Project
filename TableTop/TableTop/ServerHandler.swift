@@ -68,7 +68,7 @@ final class ServerHandler {
             print ("You've been disconnected!")
 
             guard let dataInfo = data.first else { return }
-            
+        }
 
         
         // TODO: - Setup events for actions
@@ -202,4 +202,4 @@ struct SharedSessionData: Codable {
 class PlayerList: ObservableObject {
     @Published var playerNames = [String]()
 }
-}
+
