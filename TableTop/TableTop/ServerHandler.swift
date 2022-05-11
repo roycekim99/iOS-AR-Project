@@ -10,17 +10,19 @@ import SocketIO
 import UIKit
 
 
-final class ServerHandler: ObservableObject {
-    private static var handlerInstance = ServerHandler()
+final class ServerHandler {
+    private static var SHInstane = ServerHandler()
     
     // Configure SocketManager with socker server URL and show log on console
     private var manager = SocketManager(socketURL: URL(string: "http://35.161.104.204:3001/")!, config: [.log(true), .compress])
     var socket: SocketIOClient? = nil
     
-    let client_userName = UIDevice.current.identifierForVendor?.uuidString ?? "" + ModelLibrary.username
+    var userName = ""
+    var client_userName = UIDevice.current.identifierForVendor?.uuidString ?? ""
     
     init() {
                 // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
+        print("DEBUG:: ServerHandler|| INIT!!!")
         self.socket = manager.defaultSocket
         setupSocketEvents()
         
@@ -39,6 +41,20 @@ final class ServerHandler: ObservableObject {
         emitModelTransformed(data: testModel)
         print("DEBUG:: Debug testEmissions called!!")
     }
+    
+    func setUserName(newName: String){
+        self.userName = newName
+        self.client_userName += newName
+    }
+    
+    func getClientUserName() -> String {
+        return self.client_userName
+    }
+    
+    static func getInstance() -> ServerHandler{
+        return SHInstane
+    }
+    
     
     // MARK: SETUP LISTENERS
     // Configures the event observers and socket events
