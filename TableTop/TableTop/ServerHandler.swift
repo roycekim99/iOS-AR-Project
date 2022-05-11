@@ -34,7 +34,7 @@ final class ServerHandler {
     // MARK: DEBUG
     func testEmission(){
 //        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
-        let testModel = SharedSessionData(objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
+        let testModel = SharedSessionData(modelUID: "Test ID", modelName: "Test Object", position: SIMD3<Float>())
         
         emitOnTap(data: testModel)
         emitModelPlaced(data: testModel)
@@ -91,10 +91,7 @@ final class ServerHandler {
             let dataDict = dataInfo as! [String: Any]
 
             let tempSharedSessionData = SharedSessionData(
-
-//                username: dataDict["username"]! as! String,
-
-                objectID: dataDict["objectID"]! as! String,
+                modelUID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
                 position: dataDict["position"]! as! SIMD3<Float>)
 
@@ -123,7 +120,7 @@ final class ServerHandler {
     // Then emit with proper message and data.
     func emitOnTap(data: SharedSessionData) {
         let info: [String : Any] = [
-            "objectID": String(data.objectID),
+            "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
             "position": SIMD3<Float>(data.position)
         ]
@@ -133,7 +130,7 @@ final class ServerHandler {
     
     func emitModelPlaced(data: SharedSessionData){
         let info: [String : Any] = [
-            "objectID": String(data.objectID),
+            "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
             "position": SIMD3<Float>(data.position)
         ]
@@ -142,7 +139,7 @@ final class ServerHandler {
     
     func emitModelTransformed(data: SharedSessionData){
         let info: [String : Any] = [
-            "objectID": String(data.objectID),
+            "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
             "position": SIMD3<Float>(data.position)
         ]
@@ -194,7 +191,7 @@ class SocketParser {
 
 // Class to hold information about the game session we want to send/receive from server
 struct SharedSessionData: Codable {
-    var objectID: String
+    var modelUID: String
     var modelName: String
     var position: SIMD3<Float>
 }
