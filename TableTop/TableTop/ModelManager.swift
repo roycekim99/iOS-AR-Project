@@ -20,6 +20,7 @@ class ModelManager{
     
     // [UID:Model]
     var activeModels = [String: Model]()
+    var floorModel: ModelEntity? = nil
     
     var targetARView: ARView
     var deletionManager: DeletionManager
@@ -64,6 +65,10 @@ class ModelManager{
         self.activeModels[modelID] = model
     }
     
+    func addFloorModel(floor: ModelEntity) {
+        self.floorModel = floor
+    }
+    
     func handlePhysics(recognizer:UITapGestureRecognizer, zoomIsEnabled: Bool) {
         let location = recognizer.location(in: self.targetARView)
         
@@ -83,7 +88,6 @@ class ModelManager{
     }
     
     @objc func handleTranslation(_ sender: UIGestureRecognizer) {
-        
         //DEBUG
         print("DEBUG:: MMT|| STARTED TRANSLATION!!")
         guard let gesture = sender as? EntityTranslationGestureRecognizer else { return }

@@ -29,7 +29,7 @@ final class ServerHandler: ObservableObject {
     
     //DEBUG
     func testEmission(){
-        let testModel = SharedSessionData(objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
+        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
         
         emitOnTap(data: testModel)
         emitModelPlaced(data: testModel)
@@ -52,15 +52,17 @@ final class ServerHandler: ObservableObject {
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
                 print("DEBUG:: Server requested to tap model: " + response.modelName)
             }
+            // Call function here to display the message
         }
         
-        socket?.on("model-placed") { [weak self] (data, ack) in
+        socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: FROM SERVER -> model placed received")
             guard let dataInfo = data.first else { return }
             
             let dataDict = dataInfo as! [String: Any]
             
             let tempSharedSessionData = SharedSessionData(
+                username: dataDict["username"]! as! String,
                 objectID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
                 position: dataDict["position"]! as! [Float])
@@ -153,6 +155,7 @@ class SocketParser {
 
 // Class to hold information about the game session we want to send/receive from server
 struct SharedSessionData: Codable {
+    var username: String
     var objectID: String
     var modelName: String
 //    var position: SIMD3<Float>
