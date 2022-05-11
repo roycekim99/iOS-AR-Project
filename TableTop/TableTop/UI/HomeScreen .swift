@@ -223,7 +223,7 @@ struct cardView: View {
             Spacer()
         }
         .frame(width: 400, height: 600)
-        .background(Color.red)
+        .background(Color.black)
 
     }
 }
