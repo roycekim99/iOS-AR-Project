@@ -67,10 +67,6 @@ final class ServerHandler {
         
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
-            guard let dataInfo = data.first else { return }
-            if let response: SocketUserLeft = try? SocketParser.convert(data: dataInfo) {
-                print("User '\(response.client_username)' left...")
-            }
         }
         
         // TODO: - Setup events for actions
@@ -96,6 +92,8 @@ final class ServerHandler {
                 modelUID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
                 position: dataDict["position"]! as! SIMD3<Float>)
+            
+            print("DEBUG:: SH tempSharedSesssionDAta: ", tempSharedSessionData.position)
 
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName){
                 
