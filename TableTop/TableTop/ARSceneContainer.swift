@@ -49,7 +49,7 @@ struct ARSceneContainer: UIViewRepresentable {
                 ModelManager.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
                 
                 // NH - Not sure if this is the best place to emit model placement call
-                let dataToEmit = SharedSessionData(objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
+                let dataToEmit = SharedSessionData(username: ModelLibrary.username, objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
                 serverServiceManager.emitModelPlaced(data: dataToEmit)
                 
             }
@@ -110,6 +110,7 @@ struct ARSceneContainer: UIViewRepresentable {
         // set origion point
         if setOrigin == true {
             ARSceneContainer.originPoint.append(floor)
+            ModelManager.getInstance().addFloorModel(floor: floor)
             print("set origin point")
         }
         
