@@ -29,7 +29,8 @@ final class ServerHandler: ObservableObject {
     
     //DEBUG
     func testEmission(){
-        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
+//        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
+        let testModel = SharedSessionData(objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
         
         emitOnTap(data: testModel)
         emitModelPlaced(data: testModel)
@@ -62,7 +63,7 @@ final class ServerHandler: ObservableObject {
             let dataDict = dataInfo as! [String: Any]
             
             let tempSharedSessionData = SharedSessionData(
-                username: dataDict["username"]! as! String,
+//                username: dataDict["username"]! as! String,
                 objectID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
                 position: dataDict["position"]! as! [Float])
@@ -155,7 +156,7 @@ class SocketParser {
 
 // Class to hold information about the game session we want to send/receive from server
 struct SharedSessionData: Codable {
-    var username: String
+//    var username: String
     var objectID: String
     var modelName: String
 //    var position: SIMD3<Float>

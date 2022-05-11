@@ -22,13 +22,17 @@ class ModelManager{
     var activeModels = [String: Model]()
     var floorModel: ModelEntity? = nil
     
+    // Temp way to initialize an AnchorEntity(wanted to set to nil but can't)
+    // Actual floor will be set when user is forced to set their floor, which is their origin
+    var floorAnchor: AnchorEntity = AnchorEntity(.face)
+    
     var targetARView: ARView
     var deletionManager: DeletionManager
     
     private init(target: ARView, deletionManager: DeletionManager){
         self.targetARView = target
         self.deletionManager = deletionManager
-        
+
         //DEBUG
         print("DEBUG:: ModelManager properly set up!!!")
     }
@@ -67,6 +71,19 @@ class ModelManager{
     
     func addFloorModel(floor: ModelEntity) {
         self.floorModel = floor
+    }
+    
+    func addFloorAnchor(anchor: AnchorEntity) {
+        self.floorAnchor = anchor
+    }
+    
+    // NOTE: .position(relativeTo: nil) implies a world space
+    func calcDistBtwnPosAndOrigin(model: Model) -> SIMD3<Float> {
+        var distance: SIMD3<Float> = [0, 0, 0]
+        distance.x = abs(model.getRelativePositionToNil().x - floorAnchor.position(relativeTo: nil).x)
+        distance.y = abs(model.getRelativePositionToNil().y - floorAnchor.position(relativeTo: nil).y)
+        distance.z = abs(model.getRelativePositionToNil().z - floorAnchor.position(relativeTo: nil).z)
+        return distance
     }
     
     func handlePhysics(recognizer:UITapGestureRecognizer, zoomIsEnabled: Bool) {
