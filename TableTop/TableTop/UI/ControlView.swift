@@ -29,7 +29,7 @@ struct ControlView: View {
             if self.showUsernameView {
                 UserNameView(userName: $userName, showStartView: $showStartView, showUsernameView: $showUsernameView)
             } else if self.showStartView {
-                StartView(showStartView: $showStartView)
+                StartView(showStartView: $showStartView, showUsernameView: $showUsernameView)
             } else {
                 ARSceneContainer()
                     

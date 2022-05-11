@@ -8,32 +8,6 @@
 import SwiftUI
 import Combine
 
-//struct HomeScreen: View {
-//    @State private var showStartView = false
-//    @Binding var showHomeScreen: Bool
-//    @State var userName = ""
-//
-//    var body: some View {
-//        ZStack {
-////            UserNameView(showStartView: $showStartView)
-////
-////            if !showStartView {
-////                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
-////                    .hidden()
-////            } else {
-////                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
-////            }
-//            if showStartView {
-//                StartView(showStartView: $showStartView, showHomeScreen: $showHomeScreen)
-//
-//            } else {
-//                UserNameView(userName: $userName, showStartView: $showStartView)
-//            }
-//
-//        }
-//
-//    }
-//}
 
 // MARK: UserNameView: first homescreen asks for username
 struct UserNameView: View {
@@ -89,6 +63,7 @@ struct UserNameView: View {
 // MARK: Second homescreen -- show game menu
 struct StartView: View {
     @Binding var showStartView: Bool
+    @Binding var showUsernameView: Bool
     @State private var showAbout = false
     @State private var showJoin = false
     @State private var showHowTo = false
@@ -152,6 +127,7 @@ struct StartView: View {
             .navigationBarItems(leading:
                 Button(action: {
                 self.showStartView.toggle()
+                self.showUsernameView.toggle()
             }){
                 Text("back").bold()
             }
