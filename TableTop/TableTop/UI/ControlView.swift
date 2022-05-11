@@ -311,16 +311,20 @@ struct PlayerListView: View {
                         Text(names[i])
                             .padding(5)
                     }
-                    
+                    .padding(.leading, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
+            
+            .navigationBarTitle(Text("Player List"), displayMode: .inline)
+            .navigationBarItems(leading:
+                Button(action: {
+                self.showPlayerList.toggle()
+            }) {
+                Text("Done").bold()
+            })
         }
-        .navigationBarItems(leading:
-            Button(action: {
-            self.showPlayerList.toggle()
-        }) {
-            Text("Done").bold()
-        })
+        
     }
 }
 
