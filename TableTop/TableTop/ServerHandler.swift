@@ -28,7 +28,7 @@ final class ServerHandler {
         
         socket?.connect()
         self.setUserName(newName: ModelLibrary.username)
-        self.emitRequestForPlayerList()
+//        self.emitRequestForPlayerList()
     }
     
     // MARK: DEBUG
