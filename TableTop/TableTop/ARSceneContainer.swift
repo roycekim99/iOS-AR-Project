@@ -16,8 +16,10 @@ import SwiftUI
 struct ARSceneContainer: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
-
+    var serverHandler = ServerHandler.getInstance()
+    
     static var originPoint = AnchorEntity()
+    
     
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
