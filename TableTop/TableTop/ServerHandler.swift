@@ -117,14 +117,13 @@ final class ServerHandler {
     
     
     // MARK: SETUP SENDERS
-    
     // Convert the SharedSession object to a String:Any dictionary
     // Then emit with proper message and data.
     func emitOnTap(data: SharedSessionData) {
         let info: [String : Any] = [
             "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
-            "position": SIMD3<Float>(data.position)
+            "position": [Float](data.position)
         ]
         
         self.socket?.emit("model-tapped", info)
@@ -134,7 +133,7 @@ final class ServerHandler {
         let info: [String : Any] = [
             "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
-            "position": SIMD3<Float>(data.position)
+            "position": [Float](data.position)
         ]
         socket?.emit("model-placed", info)
     }
@@ -143,11 +142,10 @@ final class ServerHandler {
         let info: [String : Any] = [
             "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
-            "position": SIMD3<Float>(data.position)
+            "position": [Float](data.position)
         ]
         self.socket?.emit("model-transformed", info)
     }
-    
    
     
 //    private func getSharedSessionData(from model: Model){
