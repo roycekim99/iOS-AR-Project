@@ -11,11 +11,13 @@ import UIKit
 
 
 final class ServerHandler: ObservableObject {
+    private static var handlerInstance = ServerHandler()
+    
     // Configure SocketManager with socker server URL and show log on console
     private var manager = SocketManager(socketURL: URL(string: "http://35.161.104.204:3001/")!, config: [.log(true), .compress])
     var socket: SocketIOClient? = nil
     
-    let client_userName = UIDevice.current.identifierForVendor?.uuidString ?? "" + "_test user"
+    let client_userName = UIDevice.current.identifierForVendor?.uuidString ?? "" + ModelLibrary.username
     
     init() {
                 // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
@@ -45,7 +47,12 @@ final class ServerHandler: ObservableObject {
         socket?.on(clientEvent: .connect) { (data, ack) in
             print("Connected")
             self.socket?.emit("New player joined", self.client_userName)
-            self.testEmission()
+        }
+        
+        socket?.on(clientEvent: .disconnect) { (data, ack) in
+            print ("You've been disconnected!")
+            //TODO: set player list to null
+            
         }
         
         // TODO: - Setup events for actions
@@ -57,7 +64,10 @@ final class ServerHandler: ObservableObject {
             }
             // Call function here to display the message
         }
-        
+        socket?.on("playerbase-updated") { (data, ack) in
+            //TODO: called on player disconnect or connect
+        }
+
         socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: FROM SERVER -> model placed received")
             guard let dataInfo = data.first else { return }
@@ -73,7 +83,8 @@ final class ServerHandler: ObservableObject {
                 position: dataDict["position"]! as! SIMD3<Float>)
 
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName){
-                ModelManager.getInstance().place(for: foundModel, reqPos: nil)
+                
+                ModelManager.getInstance().place(for: foundModel, reqPos: tempSharedSessionData.position)
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
             }
@@ -121,6 +132,8 @@ final class ServerHandler: ObservableObject {
         ]
         self.socket?.emit("model-transformed", info)
     }
+    
+   
     
 //    private func getSharedSessionData(from model: Model){
 //        return [String : Any] = [

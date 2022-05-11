@@ -56,7 +56,6 @@ struct ARSceneContainer: UIViewRepresentable {
         }
     }
     
-    
     // fun place floor in arview container
     private func placeFloor(in arView: ARView, for setOrigin: Bool) {
         let floor = ModelEntity(mesh: .generatePlane(width: 100, depth: 100), materials: [SimpleMaterial()])

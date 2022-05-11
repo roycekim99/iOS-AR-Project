@@ -32,7 +32,7 @@ class ModelManager{
     private init(target: ARView, deletionManager: DeletionManager){
         self.targetARView = target
         self.deletionManager = deletionManager
-
+        
         //DEBUG
         print("DEBUG:: ModelManager properly set up!!!")
     }
@@ -49,7 +49,6 @@ class ModelManager{
     static func getInstance() -> ModelManager{
         return MMInstance
     }
-    
     
     func clearActiveModels() {
         print("DEBUG:: activeModels before clearing \(activeModels)")
@@ -128,10 +127,19 @@ class ModelManager{
             }
         case .ended:
             print("DEBUG::Stopped Moving")
-            let model = getModelType(modEnt: targetModelEntity as! ModelEntity)
-            
+                
+            let model = getModelType(modEnt: targetModelEntity!)
+        
+            let finalRelativePos = Model.getRelativePosition(from: targetModelEntity!, to: ARSceneContainer.originPoint)
+           
             print(model.name)
-            print(Model.getRelativePosition(from: targetModelEntity as! ModelEntity, to: ARSceneContainer.originPoint))
+            print(finalRelativePos)
+            
+            //EMIT
+            let emissionData = SharedSessionData(objectID: model.model_uid, modelName: model.name, position: finalRelativePos)
+            
+            serverServiceManager.emitModelTransformed(data: emissionData)
+            
             
             if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {
@@ -142,8 +150,8 @@ class ModelManager{
                 }
             }
             //self.anchorMap.removeAll()
-            self.objectMoved = nil
-                
+            
+            
         default:
             return
         }
@@ -182,11 +190,11 @@ class ModelManager{
         
         targetARView.scene.addAnchor(anchorEntity)
 
-        print("DEBUG:: ARSC|| Cloned model: \(selectedClonedModel.name)")
+        print("DEBUG:: MM || Cloned model: \(selectedClonedModel.name)")
 
         for child in selectedClonedModel.childs {
             //print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
-            self.place(for: child, reqPos: nil)
+            self.place(for: child, reqPos: posRequested)
         }
         //testing is getrelativepostiion works
 //        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
@@ -194,9 +202,9 @@ class ModelManager{
         ModelManager.getInstance().addActiveModel(modelID: selectedClonedModel.getModelUID(), model: selectedClonedModel)
         
         //DEBUG
-        print("DEBUG:: ARSC||| place ending! active models: \(ModelManager.getInstance().activeModels.count)")
+        print("DEBUG:: MM ||| place ending! active models: \(ModelManager.getInstance().activeModels.count)")
         for modelInstance in ModelManager.getInstance().activeModels {
-            print("DEBUG:: ARSC||| place ENDED! active model name: \(modelInstance.value.name)")
+            print("DEBUG:: MM ||| place ENDED! active model name: \(modelInstance.value.name)")
         }
     }
     
