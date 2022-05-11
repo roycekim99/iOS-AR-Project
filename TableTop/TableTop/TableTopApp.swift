@@ -11,16 +11,13 @@ struct TableTopApp: App {
     @StateObject var placementSettings = PlacementSettings()
     @StateObject var sessionSettings = SessionSettings()
     @StateObject var deletionManager = DeletionManager()
-    
-    @StateObject var serverServiceManager = ServerHandler()
-    
+        
     var body: some Scene {
         WindowGroup {
             ControlView()
                 .environmentObject(placementSettings)
                 .environmentObject(sessionSettings)
                 .environmentObject(deletionManager)
-                .environmentObject(serverServiceManager)
             
         }
     }

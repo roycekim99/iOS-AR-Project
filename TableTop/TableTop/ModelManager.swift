@@ -83,6 +83,7 @@ class ModelManager{
             print()
             
             switchPhysicsMode(for: selectedModel, zoomIsEnabled: zoomIsEnabled)
+            //TODO: setup tap function
         }
     }
     
@@ -91,6 +92,8 @@ class ModelManager{
         
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity {
             self.deletionManager.entitySelectedForDeletion = selectedModel
+            
+            //TODO: handle delete
         }
     }
     
@@ -137,9 +140,9 @@ class ModelManager{
             
             //EMIT
             let emissionData = SharedSessionData(modelUID: model.model_uid, modelName: model.name, position: finalRelativePos)
-            // TODO: WAITING FOR SINGLETOn
-//            serverServiceManager.emitModelTransformed(data: emissionData)
             
+            ServerHandler.getInstance().emitModelTransformed(data: emissionData)
+
             
             if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {

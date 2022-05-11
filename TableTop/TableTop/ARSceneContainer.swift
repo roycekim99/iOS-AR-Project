@@ -16,7 +16,6 @@ import SwiftUI
 struct ARSceneContainer: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
-    @EnvironmentObject var serverServiceManager: ServerHandler
 
     static var originPoint = AnchorEntity()
     
@@ -48,8 +47,14 @@ struct ARSceneContainer: UIViewRepresentable {
                 ModelManager.getInstance().place(for : confirmedModel, reqPos: nil)
                 ModelManager.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
                 
-                //Getting origin data
-                //ModelManager.
+                // Getting origin data
+//                ModelManager.
+                
+                // NH - Not sure if this is the best place to emit model placement call
+
+//                let dataToEmit = SharedSessionData(username: ModelLibrary.username, objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
+               
+                
             }
             self.placementSettings.confirmedModel = nil
             self.placementSettings.originfloor = false
