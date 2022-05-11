@@ -195,3 +195,7 @@ struct SharedSessionData: Codable {
     var modelName: String
     var position: SIMD3<Float>
 }
+
+class PlayerList: ObservableObject {
+    @Published var playerNames = [String]()
+}
