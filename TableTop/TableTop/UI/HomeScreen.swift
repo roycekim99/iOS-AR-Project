@@ -75,9 +75,7 @@ struct StartView: View {
                     Image("T")
                         .resizable()
                         .frame(width: 250, height: 250)
-                        
                 }
-//                .padding(.bottom, 50)
                 
                 VStack {
                     Text("Welcome, \(ModelLibrary.username)")
@@ -133,6 +131,8 @@ struct StartView: View {
             }
             )
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .padding()
     }
 
 }
