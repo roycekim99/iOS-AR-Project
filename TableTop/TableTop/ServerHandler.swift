@@ -63,11 +63,13 @@ final class ServerHandler {
         socket?.on(clientEvent: .connect) { (data, ack) in
             print("Connected")
             self.socket?.emit("New player joined", self.client_userName)
+            self.socket?.emit("playerList-req", " ")
         }
         
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
             guard let dataInfo = data.first else { return }
+            self.socket?.emit("playerList-req", " ")
         }
 
         
@@ -119,12 +121,15 @@ final class ServerHandler {
         }
         
         self.socket?.on("playerList-req") { (data, ack) in
-            print("DEBUG:: SH|| FROM SERVER -> received new list of users")
-            
+            print("DEBUG:: SH PLAYER || FROM SERVER -> received new list of users")
+
             guard let playerNames = data.first else {return}
+            
+            print("DEBUG:: SH PLAYER || playerNames: ", playerNames)
+            
             if let playerListData: PlayerConnectionsFromServer = try? SocketParser.convert(data: playerNames) {
                 PlayerList().playerNames = playerListData.playerNames
-                print("DEBUG:: SH|| list looks like: \(playerListData.playerNames)")
+                print("DEBUG:: SH PLAYER || list looks like: \(playerListData.playerNames)")
             }
         }
 
@@ -168,10 +173,10 @@ final class ServerHandler {
         self.socket?.emit("model-transformed", info)
     }
     
-    func emitRequestForPlayerList(){
-        print("DEBUG:: SH|| now asking for player list")
-        socket?.emit("playerList-req", " ")
-    }
+//    func emitRequestForPlayerList(){
+//        print("DEBUG:: SH|| now asking for player list")
+//        socket?.emit("playerList-req", " ")
+//    }
    
     
 //    private func getSharedSessionData(from model: Model){
