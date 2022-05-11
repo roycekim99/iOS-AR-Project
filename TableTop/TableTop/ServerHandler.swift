@@ -57,17 +57,17 @@ final class ServerHandler: ObservableObject {
         
         socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: FROM SERVER -> model placed received")
-            guard let dataInfo = data.first else { return }
-            
-            let dataDict = dataInfo as! [String: Any]
-            
-            let tempSharedSessionData = SharedSessionData(
-                username: dataDict["username"]! as! String,
-                objectID: dataDict["objectID"]! as! String,
-                modelName: dataDict["modelName"]! as! String,
-                position: dataDict["position"]! as! [Float])
-            
-            print("DEBUG:: tempSharedSessionData: ", tempSharedSessionData)
+//            guard let dataInfo = data.first else { return }
+//            
+//            let dataDict = dataInfo as! [String: Any]
+//            
+//            let tempSharedSessionData = SharedSessionData(
+//                username: dataDict["username"]! as! String,
+//                objectID: dataDict["objectID"]! as! String,
+//                modelName: dataDict["modelName"]! as! String,
+//                position: dataDict["position"]! as! [Float])
+//            
+//            print("DEBUG:: tempSharedSessionData: ", tempSharedSessionData)
         }
         
         socket?.on("model-transformed") { (data, ack) in

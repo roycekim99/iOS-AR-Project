@@ -45,7 +45,7 @@ class CustomARView: ARView {
     
     // MARK: Gesture Recognizer
     struct Holder {
-        static var anchorMap = [ModelEntity:AnchorEntity]()
+        static var anchorMap = [String:AnchorEntity]()
         static var objectMoved: Entity? = nil
         static var zoomEnabled = false
         static var deletionEnabled = false

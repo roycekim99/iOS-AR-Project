@@ -64,9 +64,10 @@ struct ARSceneContainer: UIViewRepresentable {
         print("DEBUG:: place started for \(model.name)! active models: \(ModelManager.getInstance().activeModels.count)")
         print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.availableAssets.count)")
         
-        var selectedClonedModel = ModelLibrary().getModelCloned(from: model)
+        let selectedClonedModel = ModelLibrary().getModelCloned(from: model)
+        
         arView.installGestures(.all, for: selectedClonedModel.getModelEntity()).forEach { entityGesture in
-            entityGesture.addTarget(arView, action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
+            entityGesture.addTarget(ModelManager.getInstance(), action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
         }
         
 
@@ -80,7 +81,7 @@ struct ARSceneContainer: UIViewRepresentable {
         print("DEBUG:: ARSC|| Cloned model: \(selectedClonedModel.name)")
 
         for child in selectedClonedModel.childs {
-            print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
+            //print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
             self.place(for: child, in: arView)
         }
         //testing is getrelativepostiion works

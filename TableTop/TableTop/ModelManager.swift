@@ -104,10 +104,13 @@ class ModelManager{
         switch gesture.state {
         case .began:
             print("DEBUG::Started Moving")
-            
+                
             if (CustomARView.Holder.zoomEnabled) {
                 print("DEBUG:: zoooom")
                 for (_,modelObj) in self.activeModels {
+                    //save current child parent relationship
+                    CustomARView.Holder.anchorMap[modelObj.getModelUID()] = modelObj.getModelEntity().parent as? AnchorEntity
+                    
                     let modelEntity = modelObj.getModelEntity()
                     if (modelEntity != targetModelEntity!) {
                         modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
@@ -121,7 +124,7 @@ class ModelManager{
                 for (_,modelObj) in self.activeModels {
                     let modelEntity = modelObj.getModelEntity()
                     if (modelEntity != targetModelEntity!) {
-                        modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
+                        modelEntity.setParent(CustomARView.Holder.anchorMap[modelObj.getModelUID()], preservingWorldTransform: true)
                     }
                 }
             }
