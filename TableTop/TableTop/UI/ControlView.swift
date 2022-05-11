@@ -20,21 +20,30 @@ struct ControlView: View {
     @State private var showSettings: Bool = false
     @State private var zoomEnabled: Bool = false
     @State private var deleteEnabled: Bool = false
+    @State private var showUsernameView = true
+    @State private var showStartView = false
+    @State private var userName = ""
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            ARSceneContainer()
-                
-//          If no model is selected for placement, show default UI
-            if self.placementSettings.selectedModel != nil {
-                // Show placement view
-                PlaceConfirmView(isOrigin: self.placementSettings.originfloor!)
-            } else if self.deleteEnabled {
-                DeletionView(deleteEnabled: $deleteEnabled)
+            if self.showUsernameView {
+                UserNameView(userName: $userName, showStartView: $showStartView, showUsernameView: $showUsernameView)
+            } else if self.showStartView {
+                StartView(showStartView: $showStartView, showUsernameView: $showUsernameView)
             } else {
-                DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled)
+                ARSceneContainer()
+                    
+    //          If no model is selected for placement, show default UI
+                if self.placementSettings.selectedModel != nil {
+                    // Show placement view
+                    PlaceConfirmView(isOrigin: self.placementSettings.originfloor!)
+                } else if self.deleteEnabled {
+                    DeletionView(deleteEnabled: $deleteEnabled)
+                } else {
+                    DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled, showStartView: $showStartView)
+                }
             }
-                
+           
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -47,11 +56,12 @@ struct DefaultView: View {
     @Binding var showSettings: Bool
     @Binding var zoomEnabled: Bool
     @Binding var deleteEnabled: Bool
+    @Binding var showStartView: Bool
     
     var body: some View {
         VStack {
         
-            ControlTopBar(isControlsVisible: $isControlsVisible, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled)
+            ControlTopBar(isControlsVisible: $isControlsVisible, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled, showStartView: $showStartView)
             
             Spacer()
             
@@ -79,27 +89,34 @@ struct ControlTopBar: View {
     @Binding var isControlsVisible: Bool
     @Binding var zoomEnabled: Bool
     @Binding var deleteEnabled: Bool
+    @Binding var showStartView: Bool
 
     var body: some View {
-        HStack {
-            if isControlsVisible{
-                ZoomButton(zoomEnabled: $zoomEnabled)
-                    .environmentObject(ZoomView())
-            }
+        VStack {
+            HStack {
+                if isControlsVisible{
+                    ZoomButton(zoomEnabled: $zoomEnabled)
+                        .environmentObject(ZoomView())
+                }
 
-            Spacer()
-            if !zoomEnabled {
-                ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible)
+                Spacer()
+                if !zoomEnabled {
+                    ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible)
+                }
+            }
+            .padding(.top, 45)
+            
+            HStack {
+                if isControlsVisible {
+                    BackButton(showStartView: $showStartView)
+                }
+                Spacer()
+                if (isControlsVisible && !zoomEnabled){
+                    DeletionButton(deleteEnabled: $deleteEnabled).environmentObject(DeletionManager())
+                }
             }
         }
-        .padding(.top, 45)
-        
-        HStack {
-            Spacer()
-            if (isControlsVisible && !zoomEnabled){
-                DeletionButton(deleteEnabled: $deleteEnabled).environmentObject(DeletionManager())
-            }
-        }
+   
     }
 }
 
@@ -181,6 +198,30 @@ struct ZoomButton: View {
         .frame(width: 50, height: 50)
         .cornerRadius(8.0)
         .padding(.leading, 20)
+    }
+}
+
+struct BackButton: View {
+    @Binding var showStartView: Bool
+    
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.25)
+            
+            Button(action: {
+                print("Back Button Pressed.")
+                self.showStartView.toggle()
+            }) {
+                Image(systemName: "arrowshape.turn.up.left")
+                    .font(.system(size: 25))
+                    .foregroundColor(.white)
+                    .buttonStyle(PlainButtonStyle())
+            }
+        }
+        .frame(width: 50, height: 50)
+        .cornerRadius(8.0)
+        .padding(.leading, 20)
+        
     }
 }
  

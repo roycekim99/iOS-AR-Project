@@ -43,6 +43,7 @@ class ModelLibrary {
     // Holds an array of model entities
     static var availableAssets: [Model] = []
     static var loadedModels = [String: ModelEntity]()
+    static var username = ""
     
     private var cancellable: AnyCancellable? = nil
     
