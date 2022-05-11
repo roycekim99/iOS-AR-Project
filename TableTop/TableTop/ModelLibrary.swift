@@ -68,6 +68,7 @@ class ModelLibrary {
                 
                 ModelLibrary.loadedModels[model.model_uid] = modelEntity
                 ModelLibrary.loadedModels[model.model_uid]?.scale *= model.scaleCompensation
+                
                 self.cancellable?.cancel()
                 
                 print("DEBUG:: model has been loaded")
