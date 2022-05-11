@@ -70,7 +70,7 @@ final class ServerHandler: ObservableObject {
 
                 objectID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
-                position: dataDict["position"]! as! [Float])
+                position: dataDict["position"]! as! SIMD3<Float>)
 
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName){
                 ModelManager.getInstance().place(for: foundModel, reqPos: nil)
@@ -95,11 +95,10 @@ final class ServerHandler: ObservableObject {
     // Convert the SharedSession object to a String:Any dictionary
     // Then emit with proper message and data.
     func emitOnTap(data: SharedSessionData) {
-        
         let info: [String : Any] = [
             "objectID": String(data.objectID),
             "modelName": String(data.modelName),
-            "position": [Float](data.position)
+            "position": SIMD3<Float>(data.position)
         ]
         
         self.socket?.emit("model-tapped", info)
@@ -109,7 +108,7 @@ final class ServerHandler: ObservableObject {
         let info: [String : Any] = [
             "objectID": String(data.objectID),
             "modelName": String(data.modelName),
-            "position": [Float](data.position)
+            "position": SIMD3<Float>(data.position)
         ]
         socket?.emit("model-placed", info)
     }
@@ -118,7 +117,7 @@ final class ServerHandler: ObservableObject {
         let info: [String : Any] = [
             "objectID": String(data.objectID),
             "modelName": String(data.modelName),
-            "position": [Float](data.position)
+            "position": SIMD3<Float>(data.position)
         ]
         self.socket?.emit("model-transformed", info)
     }
@@ -130,6 +129,7 @@ final class ServerHandler: ObservableObject {
 //            "position": [0.0,0.0]
 //        ]
 //    }
+    
     // Call this when ending a session.
     func stop() {
         socket?.removeAllHandlers()
@@ -167,7 +167,5 @@ class SocketParser {
 struct SharedSessionData: Codable {
     var objectID: String
     var modelName: String
-//    var position: SIMD3<Float>
-    var position: [Float]
+    var position: SIMD3<Float>
 }
-
