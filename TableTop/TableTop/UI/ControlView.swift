@@ -102,9 +102,8 @@ struct ControlTopBar: View {
     var body: some View {
         VStack {
             HStack {
-                if isControlsVisible{
-                    ZoomButton(zoomEnabled: $zoomEnabled)
-                        .environmentObject(ZoomView())
+                if isControlsVisible {
+                    BackButton(showStartView: $showStartView)
                 }
 
                 Spacer()
@@ -115,8 +114,9 @@ struct ControlTopBar: View {
             .padding(.top, 45)
             
             HStack {
-                if isControlsVisible {
-                    BackButton(showStartView: $showStartView)
+                if isControlsVisible{
+                    ZoomButton(zoomEnabled: $zoomEnabled)
+                        .environmentObject(ZoomView())
                 }
                 Spacer()
                 if (isControlsVisible && !zoomEnabled){

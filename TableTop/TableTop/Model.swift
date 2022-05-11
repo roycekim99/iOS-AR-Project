@@ -89,8 +89,8 @@ class Model {
         return self.model_uid
     }
     
-    func getRelativePosition(origin: Entity) -> SIMD3<Float>{
-        return self.anchorEntity.position(relativeTo: origin)
+    static func getRelativePosition(from model: ModelEntity, to origin: Entity) -> SIMD3<Float> {
+        return model.position(relativeTo: origin)
     }
     
     //func updatePosition(pos)

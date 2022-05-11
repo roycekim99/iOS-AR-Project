@@ -47,6 +47,7 @@ class ModelManager{
     }
         
     
+    
     func clearActiveModels() {
         print("DEBUG:: activeModels before clearing \(activeModels)")
         activeModels = [String: Model]()
@@ -73,6 +74,7 @@ class ModelManager{
         let location = recognizer.location(in: self.targetARView)
         
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity {
+            print()
             
             switchPhysicsMode(for: selectedModel, zoomIsEnabled: zoomIsEnabled)
         }
@@ -89,7 +91,7 @@ class ModelManager{
     
     @objc func handleTranslation(_ sender: UIGestureRecognizer) {
         //DEBUG
-        print("DEBUG:: MMT|| STARTED TRANSLATION!!")
+        //print("DEBUG:: MMT|| STARTED TRANSLATION!!")
         guard let gesture = sender as? EntityTranslationGestureRecognizer else { return }
         
         let targetModelEntity = gesture.entity
@@ -119,6 +121,10 @@ class ModelManager{
             }
         case .ended:
             print("DEBUG::Stopped Moving")
+            let model = getModelType(modEnt: targetModelEntity as! ModelEntity)
+            
+            print(model.name)
+            print(Model.getRelativePosition(from: targetModelEntity as! ModelEntity, to: ARSceneContainer.originPoint[0]))
             
             if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {
@@ -172,6 +178,16 @@ class ModelManager{
             }
         }
         
+    }
+    
+    private func getModelType(modEnt: ModelEntity) -> Model {
+        var model: AnyObject?
+        for mod in ModelManager.getInstance().activeModels {
+            if (mod.value.modelEntity == modEnt) {
+                model = mod.value
+            }
+        }
+        return model as! Model
     }
        
         
