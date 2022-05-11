@@ -139,7 +139,7 @@ struct HowToView: View {
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
-                    ForEach(0..<2) {i in
+                    ForEach(0..<3) {i in
                         cardView(showHowto: $showHowto,title: instructions[i].title, text: instructions[i].body)
                             .padding(10)
                     }
@@ -161,7 +161,8 @@ struct Instruction {
     static let instructionSet: [Instruction] =
     [
         Instruction(title: "Starting The Game", body: "Select the play area of the game with the displayed grid. Tap on the checkmark when play area is chosen."),
-        Instruction(title: "Placing Models", body: "Click the browse menu on the bottom of the screen to display the available models. After choosing a model to place, a grid will be displayed. Click the checkmark to place the model in the location of the grid. Click the cancel button to return to the model selection screen.")
+        Instruction(title: "Placing Models", body: "Tap the browse menu on the bottom of the screen to display the available models. After choosing a model to place, a grid will be displayed. Click the checkmark to place the model in the location of the grid. Clicking the cancel button will return you to the game."),
+        Instruction(title: "Deleting Models", body: "Tap the trash icon in the top corner to initiate model deletion. Tapping on a model will highlight it and select it for deletion. Click the trash icon to confirm deletion. Furthermore, tapping the \"Delete All\" button will remove all models from the scene. Tapping the cancel button will cancel deletiona and return to the game")
     ]
 }
 
