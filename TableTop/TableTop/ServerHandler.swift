@@ -21,7 +21,7 @@ final class ServerHandler {
     var client_userName = UIDevice.current.identifierForVendor?.uuidString ?? ""
     
     init() {
-                // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
+        // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
         print("DEBUG:: ServerHandler|| INIT!!!")
         self.socket = manager.defaultSocket
         setupSocketEvents()
@@ -67,8 +67,10 @@ final class ServerHandler {
         
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
-            //TODO: set player list to null
-            
+            guard let dataInfo = data.first else { return }
+            if let response: SocketUserLeft = try? SocketParser.convert(data: dataInfo) {
+                print("User '\(response.client_username)' left...")
+            }
         }
         
         // TODO: - Setup events for actions

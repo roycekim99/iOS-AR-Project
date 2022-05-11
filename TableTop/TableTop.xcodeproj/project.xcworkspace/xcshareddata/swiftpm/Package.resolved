@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "focusentity",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maxxfrazer/FocusEntity",
+      "state" : {
+        "revision" : "615af712434dcf0e4800909f6291d6a6a088b754",
+        "version" : "2.2.4"
+      }
+    },
+    {
+      "identity" : "multipeerhelper",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maxxfrazer/MultipeerHelper",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ea73ccdcbc34f967a5b7df10674eae7ea52aa803"
+      }
+    },
+    {
+      "identity" : "socket.io-client-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/socketio/socket.io-client-swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "a1ed825835a2d8c2555938e96557ccc05e4bebf3"
+      }
+    },
+    {
+      "identity" : "starscream",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daltoniam/Starscream",
+      "state" : {
+        "revision" : "df8d82047f6654d8e4b655d1b1525c64e1059d21",
+        "version" : "4.0.4"
+      }
+    }
+  ],
+  "version" : 2
+}
