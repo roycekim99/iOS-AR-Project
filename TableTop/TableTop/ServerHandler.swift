@@ -71,7 +71,6 @@ final class ServerHandler {
         }
 
         
-        // TODO: - Setup events for actions
         self.socket?.on("model-tapped") { (data, ack) in
             print ("DEBUG:: from server--> model tapped received")
             guard let dataInfo = data.first else { return }
@@ -81,15 +80,6 @@ final class ServerHandler {
         // Call function here to display the message
     }
         
-        self.socket?.on("playerbase-updated") { (data, ack) in
-                print("DEBUG:: FROM SERVER -> received new list of users")
-                guard let playerNames = data.first else {return}
-                if let response: UserJoined = try? SocketParser.convert(data: playerNames) {
-                    PlayerList().playerNames = response.playerName
-                    print("DEBUG:: adding user to player list \(response.playerName)")
-                }
-        }
-
         self.socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: FROM SERVER -> model placed received")
             guard let dataInfo = data.first else { return }
@@ -121,11 +111,23 @@ final class ServerHandler {
     
         self.socket?.on("model-transformed") { (data, ack) in
             print ("DEBUG:: from server--> model transform received")
+            
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
                 print("DEBUG:: Server requested to transform model: " + response.modelName)
             }
         }
+        
+        self.socket?.on("playerList-req") { (data, ack) in
+            print("DEBUG:: SH|| FROM SERVER -> received new list of users")
+            
+            guard let playerNames = data.first else {return}
+            if let playerListData: PlayerConnectionsFromServer = try? SocketParser.convert(data: playerNames) {
+                PlayerList().playerNames = playerListData.playerNames
+                print("DEBUG:: SH|| list looks like: \(playerListData.playerNames)")
+            }
+        }
+
     }
     
     
@@ -168,7 +170,7 @@ final class ServerHandler {
     
     func emitRequestForPlayerList(){
         print("DEBUG:: SH|| now asking for player list")
-        self.socket?.emit("playerbase-updated", "")
+        socket?.emit("playerList-req", " ")
     }
    
     
@@ -222,8 +224,8 @@ struct SharedSessionData: Codable {
     var positionZ: Float
 }
 
-struct UserJoined: Codable {
-    var playerName: [String]
+struct PlayerConnectionsFromServer: Codable {
+    var playerNames: [String]
 }
 
     
