@@ -31,19 +31,21 @@ struct HomeScreen: View {
                     .onReceive(Just(userName)){
                         _ in limitText(limit)
                     }
+                    .multilineTextAlignment(.center)
             }
             .textFieldStyle(CustomInputBox())
             
             Buttons(text: "Next", fontStyle: "title2") {
                 
-                if self.userName.count > 0 {
+                //if self.userName.count > 0 {
                     ModelLibrary.username = self.userName
                     self.showStartView.toggle()
-                }
+                //}
         
             }.fullScreenCover (isPresented: $showStartView){
                 StartView(showStartView: $showStartView, showHomeView: $showHomeView)
             }
+            .disabled(self.userName.count < 1)
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -149,9 +151,14 @@ struct HowToView: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
-                    ForEach(0..<4) {i in
-                        cardView(showHowto: $showHowto, text: "instruction \(i)")
+                    /*ForEach(0..<4) {i in
+                        cardView(showHowto: $showHowto, text: "\(i)")
                             .padding(10)
+                    }*/
+                    ForEach(0..<Instruction.instructionSet.count) {i in
+                        cardView(showHowto: $showHowto,
+                                 title: Instruction.instructionSet[i].title,
+                                 text: Instruction.instructionSet[i].body)
                     }
                 }
 //                .background(Color.red)
@@ -161,13 +168,46 @@ struct HowToView: View {
     }
 }
 
+/*struct instructionView: View {
+    @Binding var showHowto: Bool
+    let text: String
+    var body: some View {
+        VStack {
+            Text("Starting the game \(text)")
+        }
+        .frame(width:400, height:600)
+        .background(.red)
+    }
+}*/
+struct Instruction {
+    var title: String
+    var body: String
+    
+    static let instructionSet: [Instruction] =
+    [
+        Instruction(title: "Starting The Game", body: "This is a body"),
+        Instruction(title: "Placing Models", body: "This is another body")
+    ]
+}
+
 struct cardView: View {
     @Binding var showHowto: Bool
+    let title: String
     let text: String
 
     var body: some View {
-        VStack {
+        
+        VStack{
+            Text(title)
+                .padding(.top, 40)
+            
+            Spacer()
+            
             Text(text)
+                .padding(.bottom, 400)
+            
+            Spacer()
+            Spacer()
         }
         .frame(width: 400, height: 600)
         .background(Color.red)
