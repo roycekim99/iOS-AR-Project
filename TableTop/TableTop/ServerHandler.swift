@@ -93,12 +93,16 @@ final class ServerHandler {
             let tempSharedSessionData = SharedSessionData(
                 modelUID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
-                position: dataDict["position"]! as! [Float])
+                positionX: dataDict["positionX"] as! Float,
+                positionY: dataDict["positionY"] as! Float,
+                positionZ: dataDict["positionZ"] as! Float)
             
-            print("DEBUG:: SH tempSharedSesssionDAta: ", tempSharedSessionData.position)
+                let positionArr = [tempSharedSessionData.positionX,
+                                   tempSharedSessionData.positionY,
+                                   tempSharedSessionData.positionZ]
 
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName){
-                let reqPosSIMD3 = SIMD3<Float>(tempSharedSessionData.position)
+                let reqPosSIMD3 = SIMD3<Float>(positionArr)
                 ModelManager.getInstance().place(for: foundModel, reqPos: reqPosSIMD3)
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
@@ -123,7 +127,9 @@ final class ServerHandler {
         let info: [String : Any] = [
             "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
-            "position": [Float](data.position)
+            "position": Float(data.positionX),
+            "position": Float(data.positionY),
+            "position": Float(data.positionZ)
         ]
         
         self.socket?.emit("model-tapped", info)
@@ -133,7 +139,9 @@ final class ServerHandler {
         let info: [String : Any] = [
             "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
-            "position": [Float](data.position)
+            "positionX": Float(data.positionX),
+            "positionY": Float(data.positionY),
+            "positionZ": Float(data.positionZ)
         ]
         socket?.emit("model-placed", info)
     }
@@ -142,7 +150,9 @@ final class ServerHandler {
         let info: [String : Any] = [
             "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
-            "position": [Float](data.position)
+            "positionX": Float(data.positionX),
+            "positionY": Float(data.positionY),
+            "positionZ": Float(data.positionZ)
         ]
         self.socket?.emit("model-transformed", info)
     }
@@ -193,7 +203,9 @@ class SocketParser {
 struct SharedSessionData: Codable {
     var modelUID: String
     var modelName: String
-    var position: [Float]
+    var positionX: Float
+    var positionY: Float
+    var positionZ: Float
 }
 
     
