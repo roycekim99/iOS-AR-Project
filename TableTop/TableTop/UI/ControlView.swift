@@ -22,6 +22,7 @@ struct ControlView: View {
     @State private var deleteEnabled: Bool = false
     @State private var showUsernameView = true
     @State private var showStartView = false
+    @State private var showPlayerList = false
     @State private var userName = ""
     
     var body: some View {
@@ -40,7 +41,7 @@ struct ControlView: View {
                 } else if self.deleteEnabled {
                     DeletionView(deleteEnabled: $deleteEnabled)
                 } else {
-                    DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled, showStartView: $showStartView)
+                    DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled, showStartView: $showStartView, showPlayerList: $showPlayerList)
                 }
             }
            
@@ -57,6 +58,7 @@ struct DefaultView: View {
     @Binding var zoomEnabled: Bool
     @Binding var deleteEnabled: Bool
     @Binding var showStartView: Bool
+    @Binding var showPlayerList: Bool
     
     var body: some View {
         VStack {
@@ -66,7 +68,7 @@ struct DefaultView: View {
             Spacer()
             
             if (isControlsVisible && !zoomEnabled){
-                ControlBottomBar(showBrowse: $showBrowse, showSettings: $showSettings)
+                ControlBottomBar(showBrowse: $showBrowse, showSettings: $showSettings, showPalyerList: $showPlayerList)
             }
 
         }
@@ -203,6 +205,7 @@ struct ZoomButton: View {
 
 struct BackButton: View {
     @Binding var showStartView: Bool
+    @EnvironmentObject var resetManager: ResetManager
     
     var body: some View {
         ZStack {
@@ -229,6 +232,8 @@ struct BackButton: View {
 struct ControlBottomBar: View {
     @Binding var showBrowse: Bool
     @Binding var showSettings: Bool
+    @Binding var showPalyerList: Bool
+
     
     var body: some View {
         HStack {
@@ -254,11 +259,48 @@ struct ControlBottomBar: View {
             }.sheet(isPresented: $showSettings) {
                 SettingsView(showSettings: $showSettings)
             }
+            
+            Spacer()
+            
+            ControlButton(systemIconName: "book") {
+                print("PlayerList button pressed")
+                self.showPalyerList.toggle()
+            }
+            .sheet(isPresented: $showPalyerList) {
+                PlayerListView(showPlayerList: $showPalyerList)
+            }
                         
         }
         .frame(maxWidth: 500)
         .padding(30)
         .background(Color.black.opacity(0.25))
+    }
+}
+
+// MARK: PlayerListview
+struct PlayerListView: View {
+    @Binding var showPlayerList: Bool
+    
+    let names = ["hfaje", "thoea hjka", "fhefewafe", "fnekfnefd", "bcndnvf", "mcsoj", "ndjnia", "njedknei", "mnkfeogkg", "gdkmeklnk"]
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                ForEach(0..<names.count) { i in
+                    VStack{
+                        Text(names[i])
+                            .padding(5)
+                    }
+                    
+                }
+            }
+        }
+        .navigationBarItems(leading:
+            Button(action: {
+            self.showPlayerList.toggle()
+        }) {
+            Text("Done").bold()
+        })
     }
 }
 
