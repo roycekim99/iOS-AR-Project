@@ -136,9 +136,9 @@ class ModelManager{
             print(finalRelativePos)
             
             //EMIT
-            let emissionData = SharedSessionData(objectID: model.model_uid, modelName: model.name, position: finalRelativePos)
-            
-            serverServiceManager.emitModelTransformed(data: emissionData)
+            let emissionData = SharedSessionData(modelUID: model.model_uid, modelName: model.name, position: finalRelativePos)
+            // TODO: WAITING FOR SINGLETOn
+//            serverServiceManager.emitModelTransformed(data: emissionData)
             
             
             if (CustomARView.Holder.zoomEnabled) {
@@ -176,7 +176,7 @@ class ModelManager{
             anchorEntity = AnchorEntity(plane: .any)
 
             let dataToEmit = SharedSessionData(
-                objectID: selectedClonedModel.model_uid,
+                modelUID: selectedClonedModel.model_uid,
                 modelName: selectedClonedModel.name,
                 position: Model.getRelativePosition(from: selectedClonedModel.getModelEntity(), to: ARSceneContainer.originPoint))
 
