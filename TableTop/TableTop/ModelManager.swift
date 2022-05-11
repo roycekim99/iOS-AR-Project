@@ -45,6 +45,13 @@ class ModelManager{
         return MMInstance
     }
     
+    
+    func clearActiveModels() {
+        print("DEBUG:: activeModels before clearing \(activeModels)")
+        activeModels = [String: Model]()
+        print("DEBUG:: reset activeModels \(activeModels)")
+    }
+    
     func setARView(targetView: ARView){
         self.targetARView = targetView
     }

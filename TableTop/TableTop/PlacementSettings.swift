@@ -17,8 +17,12 @@ class PlacementSettings: ObservableObject {
     @Published var recentlyPlacedID: [String] = []
     
     init() {
-            self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
-            self.originfloor = true
+            reset()
+    }
+    
+    func reset() {
+        self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
+        self.originfloor = true
     }
     
     @Published var originfloor: Bool? {

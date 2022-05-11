@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 import ARKit
+//import AlertToast
 
 // MARK: ControlView_Main
 struct ControlView: View {
@@ -20,10 +21,14 @@ struct ControlView: View {
     @State private var showSettings: Bool = false
     @State private var zoomEnabled: Bool = false
     @State private var deleteEnabled: Bool = false
+    @State private var showPlayerList = false
+    
     @State private var showUsernameView = true
     @State private var showStartView = false
-    @State private var showPlayerList = false
     @State private var userName = ""
+    
+    @State private var showMessage = false
+    @State private var message = ""
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -48,6 +53,7 @@ struct ControlView: View {
         }
         .edgesIgnoringSafeArea(.all)
     }
+
 }
 
 // MARK: Default View
@@ -203,9 +209,10 @@ struct ZoomButton: View {
     }
 }
 
+// MARK: from arview back to homescreen
 struct BackButton: View {
     @Binding var showStartView: Bool
-    @EnvironmentObject var resetManager: ResetManager
+    @EnvironmentObject var placementSettings: PlacementSettings
     
     var body: some View {
         ZStack {
@@ -213,6 +220,19 @@ struct BackButton: View {
             
             Button(action: {
                 print("Back Button Pressed.")
+                
+                //remove all model in game
+                for (_,model) in ModelManager.getInstance().activeModels {
+                    let anchorEntity = model.getAnchorEntity()
+                    print("DEBUG:: Deleting anchorEntity with id: \(model.name)")
+                    
+                    anchorEntity.removeFromParent()
+                    anchorEntity.children.removeAll()
+                }
+                
+                ModelManager.getInstance().clearActiveModels()
+                placementSettings.reset()
+                
                 self.showStartView.toggle()
             }) {
                 Image(systemName: "arrowshape.turn.up.left")

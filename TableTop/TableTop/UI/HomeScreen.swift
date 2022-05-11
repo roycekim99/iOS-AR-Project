@@ -8,14 +8,6 @@
 import SwiftUI
 import Combine
 
-class ResetManager: ObservableObject {
-    @Published var ResetEnabled: Bool = false {
-        willSet(newValue) {
-            print("DEBUG:: Setting Deletion Enabled to \(String(describing: newValue.description))")
-            
-        }
-    }
-}
 // MARK: UserNameView: first homescreen asks for username
 struct UserNameView: View {
     let limit = 10
