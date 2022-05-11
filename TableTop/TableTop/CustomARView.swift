@@ -65,7 +65,7 @@ class CustomARView: ARView {
         print("DEBUG:: CARV|| handling tap")
         if (!Holder.deletionEnabled && !Holder.zoomEnabled) {
             ModelManager.getInstance().handlePhysics(recognizer: recognizer, zoomIsEnabled: Holder.zoomEnabled)
-        } else {
+        } else if (Holder.deletionEnabled && !Holder.zoomEnabled){
             ModelManager.getInstance().handleDeleteion(recognizer: recognizer)
         }
     }

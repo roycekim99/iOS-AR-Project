@@ -45,7 +45,7 @@ class ModelManager{
     static func getInstance() -> ModelManager{
         return MMInstance
     }
-    
+        
     
     func clearActiveModels() {
         print("DEBUG:: activeModels before clearing \(activeModels)")
@@ -105,7 +105,7 @@ class ModelManager{
         case .began:
             print("DEBUG::Started Moving")
             
-            if (self.zoomEnabled) {
+            if (CustomARView.Holder.zoomEnabled) {
                 print("DEBUG:: zoooom")
                 for (_,modelObj) in self.activeModels {
                     let modelEntity = modelObj.getModelEntity()
@@ -117,7 +117,7 @@ class ModelManager{
         case .ended:
             print("DEBUG::Stopped Moving")
             
-            if (self.zoomEnabled) {
+            if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {
                     let modelEntity = modelObj.getModelEntity()
                     if (modelEntity != targetModelEntity!) {

@@ -160,8 +160,8 @@ struct Instruction {
     
     static let instructionSet: [Instruction] =
     [
-        Instruction(title: "Starting The Game", body: "This is a body"),
-        Instruction(title: "Placing Models", body: "This is another body")
+        Instruction(title: "Starting The Game", body: "Select the play area of the game with the displayed grid. Tap on the checkmark when play area is chosen."),
+        Instruction(title: "Placing Models", body: "Click the browse menu on the bottom of the screen to display the available models. After choosing a model to place, a grid will be displayed. Click the checkmark to place the model in the location of the grid. Click the cancel button to return to the model selection screen.")
     ]
 }
 
@@ -176,6 +176,7 @@ struct cardView: View {
             
             Text(text)
                 .padding(.top, 40)
+                .multilineTextAlignment(.center)
             
             Spacer()
         }
