@@ -82,6 +82,12 @@ final class ServerHandler {
         }
             self.socket?.on("playerbase-updated") { (data, ack) in
             //TODO: called on player disconnect or connect
+            print("DEBUG:: adding user to player list")
+            guard let playerName = data.first else {return}
+            if let response: UserJoined = try? SocketParser.convert(data: playerName) {
+                PlayerList().playerNames.append(response.playerName)
+                print("DEBUG:: adding user to player list \(response.playerName)")
+            }
         }
 
             self.socket?.on("model-placed") { (data, ack) in
@@ -194,6 +200,10 @@ struct SharedSessionData: Codable {
     var modelUID: String
     var modelName: String
     var position: [Float]
+}
+
+struct UserJoined: Codable {
+    var playerName: String
 }
 
     
