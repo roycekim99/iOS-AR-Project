@@ -8,7 +8,14 @@
 import SwiftUI
 import Combine
 
-
+class ResetManager: ObservableObject {
+    @Published var ResetEnabled: Bool = false {
+        willSet(newValue) {
+            print("DEBUG:: Setting Deletion Enabled to \(String(describing: newValue.description))")
+            
+        }
+    }
+}
 // MARK: UserNameView: first homescreen asks for username
 struct UserNameView: View {
     let limit = 10
@@ -24,9 +31,11 @@ struct UserNameView: View {
 
             Text("Please create a username before starting the game")
                 .padding(10)
+                .foregroundColor(.white)
 
             Text("Limited to 10 characters")
                 .padding(5)
+                .foregroundColor(.white)
 
             HStack{
                 TextField("Username", text: $userName)
@@ -49,7 +58,7 @@ struct UserNameView: View {
             .padding(.bottom, 50)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.opacity(0.8))
+        .background(Color.black)
     }
 
     func limitText(_ limit: Int) {
@@ -69,70 +78,62 @@ struct StartView: View {
     @State private var showHowTo = false
 
     var body: some View {
-        NavigationView {
+        VStack {
             VStack {
-                VStack {
-                    Image("T")
-                        .resizable()
-                        .frame(width: 250, height: 250)
+                Image("T")
+                    .resizable()
+                    .frame(width: 250, height: 250)
+            }
+            
+            VStack {
+                Text("Welcome, \(ModelLibrary.username)")
+                    .bold()
+                    .font(.system(size: 40))
+                    .foregroundColor(.white)
+                
+            }
+            .padding(.bottom, 80)
+            
+            VStack(spacing: 30){
+                // button for starting the game
+                Buttons(text: "Start Game", fontStyle: "title"){
+                    self.showStartView.toggle()
                 }
                 
-                VStack {
-                    Text("Welcome, \(ModelLibrary.username)")
-                        .bold()
-                        .font(.system(size: 40))
-                       
+                // button for instructions
+                Buttons(text: "How to Play", fontStyle: "title" ){
+                    self.showHowTo.toggle()
                 }
-                .padding(.bottom, 80)
-
-                VStack(spacing: 30){
-                    // button for starting the game
-                    Buttons(text: "Start Game", fontStyle: "title"){
-                        self.showStartView.toggle()
-                    }
-
-                    
-                    // button for instructions
-                    Buttons(text: "How to Play", fontStyle: "title" ){
-                        self.showHowTo.toggle()
-                    }
-                    .sheet(isPresented: $showHowTo){
-                        HowToView(showHowto: $showHowTo)
-                    }
-                    
-                    //button for joining a game
-                    Buttons(text: "Join a Game", fontStyle: "title" ){
-                        self.showJoin.toggle()
-                    }
-                    .sheet(isPresented: $showJoin){
-                        JoinView(showJoin: $showJoin, showStartView: $showStartView)
-                    }
-            
-                    // button for about
-                    Buttons(text: "About", fontStyle: "title"){
-                        self.showAbout.toggle()
-
-                    }
-                    .sheet(isPresented: $showAbout){
-                        AboutView(showAbout: $showAbout)
-                    }
+                .sheet(isPresented: $showHowTo){
+                    HowToView(showHowto: $showHowTo)
+                }
+        
+                //button for joining a game
+                Buttons(text: "Join a Game", fontStyle: "title" ){
+                    self.showJoin.toggle()
+                }
+                .sheet(isPresented: $showJoin){
+                    JoinView(showJoin: $showJoin, showStartView: $showStartView)
+                }
+                
+                // button for about
+                Buttons(text: "About", fontStyle: "title"){
+                    self.showAbout.toggle()
                     
                 }
+                .sheet(isPresented: $showAbout){
+                    AboutView(showAbout: $showAbout)
+                }
+                
+                Buttons(text: "Back", fontStyle: "title"){
+                    self.showStartView.toggle()
+                    self.showUsernameView.toggle()
+                }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.bottom, 100)
-            .background(Color.black.opacity(0.8))
-            .navigationBarItems(leading:
-                Button(action: {
-                self.showStartView.toggle()
-                self.showUsernameView.toggle()
-            }){
-                Text("back").bold()
-            }
-            )
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .padding()
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        .padding(.bottom, 100)
+        .background(Color.black)
     }
 
 }
@@ -168,7 +169,7 @@ struct cardView: View {
             Text(text)
         }
         .frame(width: 400, height: 600)
-        .background(Color.red)
+//        .background(Color.red)
 
     }
 }
@@ -246,6 +247,7 @@ struct CustomInputBox: TextFieldStyle {
             .frame(width: UIScreen.main.bounds.width * 0.8, height:UIScreen.main.bounds.height * 0.05 )
             .padding(5)
             .font(.custom("Open Scans", size: 20))
+            .foregroundColor(.white)
             .background(Color.gray.opacity(0.5))
             .cornerRadius(9)
     }
