@@ -122,7 +122,6 @@ final class ServerHandler {
     // Convert the SharedSession object to a String:Any dictionary
     // Then emit with proper message and data.
     func emitOnTap(data: SharedSessionData) {
-        
         let info: [String : Any] = [
             "objectID": String(data.objectID),
             "modelName": String(data.modelName),
@@ -159,6 +158,7 @@ final class ServerHandler {
 //            "position": [0.0,0.0]
 //        ]
 //    }
+    
     // Call this when ending a session.
     func stop() {
         socket?.removeAllHandlers()
@@ -197,6 +197,4 @@ struct SharedSessionData: Codable {
     var objectID: String
     var modelName: String
     var position: SIMD3<Float>
-//    var position: [Float]
 }
-

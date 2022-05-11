@@ -89,6 +89,7 @@ class Model {
         return self.model_uid
     }
     
+    // 
     static func getRelativePosition(from model: ModelEntity, to origin: Entity) -> SIMD3<Float> {
         return model.position(relativeTo: origin)
     }
