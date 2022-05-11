@@ -17,7 +17,7 @@ struct UserNameView: View {
 
     var body: some View {
         VStack {
-            Image("T")
+            Image("Logo")
                 .resizable()
                 .frame(width: 400, height: 400)
 
@@ -72,7 +72,7 @@ struct StartView: View {
     var body: some View {
         VStack {
             VStack {
-                Image("T")
+                Image("Logo")
                     .resizable()
                     .frame(width: 250, height: 250)
             }
