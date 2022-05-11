@@ -21,7 +21,7 @@ final class ServerHandler {
     var client_userName = UIDevice.current.identifierForVendor?.uuidString ?? ""
     
     init() {
-                // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
+        // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
         print("DEBUG:: ServerHandler|| INIT!!!")
         self.socket = manager.defaultSocket
         setupSocketEvents()
@@ -34,7 +34,7 @@ final class ServerHandler {
     // MARK: DEBUG
     func testEmission(){
 //        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
-        let testModel = SharedSessionData(objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
+        let testModel = SharedSessionData(modelUID: "Test ID", modelName: "Test Object", position: SIMD3<Float>())
         
         emitOnTap(data: testModel)
         emitModelPlaced(data: testModel)
@@ -67,8 +67,10 @@ final class ServerHandler {
         
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
-            //TODO: set player list to null
-            
+            guard let dataInfo = data.first else { return }
+            if let response: SocketUserLeft = try? SocketParser.convert(data: dataInfo) {
+                print("User '\(response.client_username)' left...")
+            }
         }
         
         // TODO: - Setup events for actions
@@ -91,10 +93,7 @@ final class ServerHandler {
             let dataDict = dataInfo as! [String: Any]
 
             let tempSharedSessionData = SharedSessionData(
-
-//                username: dataDict["username"]! as! String,
-
-                objectID: dataDict["objectID"]! as! String,
+                modelUID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
                 position: dataDict["position"]! as! SIMD3<Float>)
 
@@ -123,7 +122,7 @@ final class ServerHandler {
     // Then emit with proper message and data.
     func emitOnTap(data: SharedSessionData) {
         let info: [String : Any] = [
-            "objectID": String(data.objectID),
+            "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
             "position": SIMD3<Float>(data.position)
         ]
@@ -133,7 +132,7 @@ final class ServerHandler {
     
     func emitModelPlaced(data: SharedSessionData){
         let info: [String : Any] = [
-            "objectID": String(data.objectID),
+            "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
             "position": SIMD3<Float>(data.position)
         ]
@@ -142,7 +141,7 @@ final class ServerHandler {
     
     func emitModelTransformed(data: SharedSessionData){
         let info: [String : Any] = [
-            "objectID": String(data.objectID),
+            "objectID": String(data.modelUID),
             "modelName": String(data.modelName),
             "position": SIMD3<Float>(data.position)
         ]
@@ -194,7 +193,11 @@ class SocketParser {
 
 // Class to hold information about the game session we want to send/receive from server
 struct SharedSessionData: Codable {
-    var objectID: String
+    var modelUID: String
     var modelName: String
     var position: SIMD3<Float>
+}
+
+class PlayerList: ObservableObject {
+    @Published var playerNames = [String]()
 }
