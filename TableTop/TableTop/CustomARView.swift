@@ -53,8 +53,6 @@ class CustomARView: ARView {
     
     func configureTapGestureRecognizer() {
         
-        //DEBUG
-        print("DEBUG:: CARV|| handling tap recognizer")
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         
         self.addGestureRecognizer(tapGesture)

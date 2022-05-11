@@ -27,7 +27,8 @@ final class ServerHandler {
         setupSocketEvents()
         
         socket?.connect()
-        setUserName(newName: ModelLibrary.username)
+        self.setUserName(newName: ModelLibrary.username)
+        self.emitRequestForPlayerList()
     }
     
     // MARK: DEBUG
@@ -43,7 +44,7 @@ final class ServerHandler {
     
     func setUserName(newName: String){
         self.userName = newName
-        self.client_userName += newName
+        self.client_userName += ":" + newName
     }
     
     func getClientUserName() -> String {
@@ -72,25 +73,25 @@ final class ServerHandler {
 
         
         // TODO: - Setup events for actions
-            self.socket?.on("model-tapped") { (data, ack) in
+        self.socket?.on("model-tapped") { (data, ack) in
             print ("DEBUG:: from server--> model tapped received")
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
                 print("DEBUG:: Server requested to tap model: " + response.modelName)
-            }
-            // Call function here to display the message
         }
-            self.socket?.on("playerbase-updated") { (data, ack) in
-            //TODO: called on player disconnect or connect
-            print("DEBUG:: adding user to player list")
-            guard let playerName = data.first else {return}
-            if let response: UserJoined = try? SocketParser.convert(data: playerName) {
-                PlayerList().playerNames.append(response.playerName)
-                print("DEBUG:: adding user to player list \(response.playerName)")
-            }
+        // Call function here to display the message
+    }
+        
+        self.socket?.on("playerbase-updated") { (data, ack) in
+                print("DEBUG:: FROM SERVER -> received new list of users")
+                guard let playerNames = data.first else {return}
+                if let response: UserJoined = try? SocketParser.convert(data: playerNames) {
+                    PlayerList().playerNames = response.playerName
+                    print("DEBUG:: adding user to player list \(response.playerName)")
+                }
         }
 
-            self.socket?.on("model-placed") { (data, ack) in
+        self.socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: FROM SERVER -> model placed received")
             guard let dataInfo = data.first else { return }
 
@@ -111,8 +112,8 @@ final class ServerHandler {
             }
             print("DEBUG:: tempSharedSessionData: ", tempSharedSessionData)
         }
-        
-            self.socket?.on("model-transformed") { (data, ack) in
+    
+        self.socket?.on("model-transformed") { (data, ack) in
             print ("DEBUG:: from server--> model transform received")
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
@@ -151,6 +152,11 @@ final class ServerHandler {
             "position": [Float](data.position)
         ]
         self.socket?.emit("model-transformed", info)
+    }
+    
+    func emitRequestForPlayerList(){
+        print("DEBUG:: SH|| now asking for player list")
+        self.socket?.emit("playerbase-updated", "")
     }
    
     
@@ -203,7 +209,7 @@ struct SharedSessionData: Codable {
 }
 
 struct UserJoined: Codable {
-    var playerName: String
+    var playerName: [String]
 }
 
     
