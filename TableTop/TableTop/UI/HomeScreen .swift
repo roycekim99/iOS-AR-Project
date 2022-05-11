@@ -14,17 +14,19 @@ struct HomeScreen: View {
     @State private var showStartView = false
     @Binding var showHomeView: Bool
     
-    let limit = 15
+    let limit = 10
 
     var body: some View {
         VStack {
-            Text("LOGO")
-                .padding(100)
+            Image("T")
+                .resizable()
+                .frame(width: 400, height: 400)
             
             Text("Please create a username before starting the game")
                 .padding(10)
             
-            Text("Limited 15 characters")
+            Text("Limited to 10 characters")
+                .padding(5)
             
             HStack{
                 TextField("Username", text: $userName)
@@ -46,7 +48,8 @@ struct HomeScreen: View {
                 StartView(showStartView: $showStartView, showHomeView: $showHomeView)
             }
             .disabled(self.userName.count < 1)
-            
+            .padding(30)
+            .padding(.bottom, 50)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.opacity(0.8))
@@ -67,10 +70,10 @@ struct CustomInputBox: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .frame(width: UIScreen.main.bounds.width * 0.8, height:UIScreen.main.bounds.height * 0.05 )
+            .padding(5)
             .font(.custom("Open Scans", size: 20))
             .background(Color.gray.opacity(0.5))
             .cornerRadius(9)
-            .padding(.bottom, 70)
     }
 }
 
@@ -84,10 +87,22 @@ struct StartView: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 200) {
-                Text("Welcome, \(ModelLibrary.username)")
-                    .bold()
-                    .font(.system(size: 40))
+            VStack {
+                VStack {
+                    Image("T")
+                        .resizable()
+                        .frame(width: 250, height: 250)
+                        
+                }
+//                .padding(.bottom, 50)
+                
+                VStack {
+                    Text("Welcome, \(ModelLibrary.username)")
+                        .bold()
+                        .font(.system(size: 40))
+                       
+                }
+                .padding(.bottom, 80)
 
                 VStack(spacing: 30){
                     // button for starting the game
@@ -124,11 +139,9 @@ struct StartView: View {
                     }
                     .background(Color.black)
                 }
-
-
-
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.bottom, 100)
             .background(Color.black.opacity(0.8))
             .navigationBarItems(leading:
                 Button(action: {
@@ -309,9 +322,9 @@ struct Buttons: View {
             }
 
         }
-        .frame(width: UIScreen.main.bounds.width * 0.4 , height: UIScreen.main.bounds.width * 0.1)
-        .background(Color.red)
-        .padding(30)
+        .frame(width: UIScreen.main.bounds.width * 0.8 , height: UIScreen.main.bounds.width * 0.1)
+        .background(Color.white)
+        .cornerRadius(9)
 
     }
 }
