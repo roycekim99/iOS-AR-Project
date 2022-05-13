@@ -1,10 +1,3 @@
-//
-//  HomeScreen.swift
-//  TableTop
-//
-//  Created by Ashley Li on 5/10/22.
-//
-
 import SwiftUI
 import Combine
 

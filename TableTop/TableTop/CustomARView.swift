@@ -1,11 +1,4 @@
-//
-//  CustomARView.swift
-//  TableTop
-//
-//  Created by Ashley Li on 4/11/22.
-//
-
-// an ARView instance which handles instantiation of a new ARView with a FocusEntity
+// An ARView instance which handles instantiation of a new ARView with a FocusEntity
 
 import RealityKit
 import ARKit
@@ -19,7 +12,6 @@ class CustomARView: ARView {
     var deletionManager: DeletionManager
     
     required init(frame frameRect: CGRect, deletionManager: DeletionManager) {
-        
         self.deletionManager = deletionManager
         super.init(frame: frameRect)
         
@@ -41,7 +33,7 @@ class CustomARView: ARView {
         
         self.configureTapGestureRecognizer()
     }
-
+    
     
     // MARK: Gesture Recognizer
     struct Holder {
@@ -52,7 +44,6 @@ class CustomARView: ARView {
     }
     
     func configureTapGestureRecognizer() {
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         
         self.addGestureRecognizer(tapGesture)

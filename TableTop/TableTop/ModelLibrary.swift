@@ -57,10 +57,10 @@ class ModelLibrary {
             .sink(receiveCompletion:{ loadCompletion in
                 
                 switch loadCompletion {
-                        
+                    
                 case .failure(let error): print("DEBUG::Unable to load modelEntity for \(fileName). Error \(error.localizedDescription)")
                     self.cancellable?.cancel()
-                        
+                    
                 case .finished:
                     break
                 }
@@ -103,9 +103,9 @@ class ModelLibrary {
         print("DEBUG:: original ID: \(model.getModelEntity().id )|| new: \(clonedModelEntity?.id)")
         
         
-//        testing if setPosition works
-//        print("hard coding to test get realtive position")
-//        modelEntity.setPosition(SIMD3<Float>(0.008482501, 0.0, 0.00525086), relativeTo: ARSceneManager.originPoint[0])
+        //        testing if setPosition works
+        //        print("hard coding to test get realtive position")
+        //        modelEntity.setPosition(SIMD3<Float>(0.008482501, 0.0, 0.00525086), relativeTo: ARSceneManager.originPoint[0])
         
         clonedModelEntity!.generateCollisionShapes(recursive: true)
         
@@ -118,7 +118,7 @@ class ModelLibrary {
         
         clonedModel.setModelID(to: newID)
         clonedModel.setModelEntity(&clonedModelEntity!)
-
+        
         return clonedModel
     }
     
@@ -145,12 +145,12 @@ class ModelLibrary {
         }
     }
     
-   
     
     
-    // TODO: only for testing purpose. get rid of it after finishing download function 
+    
+    // TODO: only for testing purpose. get rid of it after finishing download function
     init() {
-                        // Game Sets
+        // Game Sets
         // Modern Checker Set
         let black1 = Model(name: "Black_1", category: .set, scaleCompensation: 1/1, childs: [], assetID: 0)
         let black2 = Model(name: "Black_2", category: .set, scaleCompensation: 1/1, childs: [], assetID: 1)
@@ -221,14 +221,14 @@ class ModelLibrary {
         
         ModelLibrary.availableAssets += [checkersBoard, chessBoard]
         
-                        // Set Models
+        // Set Models
         let chess = Model(name: "Chess", category: .board, scaleCompensation: 2/10000, childs: [], assetID: 59)
         let modernCheckers = Model(name: "Modern Checkers", category: .board, scaleCompensation: 1/2, childs: [], assetID: 60)
         let vintageCheckers = Model(name: "Vintage Checkers", category: .board, scaleCompensation: 1/5000, childs: [], assetID: 61)
         
         ModelLibrary.availableAssets += [chess, modernCheckers, vintageCheckers, floor]
         
-                       // Pieces
+        // Pieces
         // Checkers
         let blackCheckersPiece = Model(name: "Black_Piece", category: .pieces, scaleCompensation: 1/1, childs: [], assetID: 62)
         let redCheckersPiece = Model(name: "Red_Piece", category: .pieces, scaleCompensation: 1/1, childs: [], assetID: 63)
@@ -250,7 +250,7 @@ class ModelLibrary {
         
         ModelLibrary.availableAssets += [blackCheckersPiece, redCheckersPiece, bBishop, bKnight, bPawn, bRook, blackKing, blackQueen, wBishop, wKnight, wPawn, wRook, whiteKing, whiteQueen]
         
-                       // Figures
+        // Figures
         let dripGoku = Model(name: "Drip Goku", category: .figures, scaleCompensation: 1/1500, childs: [], assetID: 76)
         let goku = Model(name: "Goku", category: .figures, scaleCompensation: 1/500, childs: [], assetID: 77)
         

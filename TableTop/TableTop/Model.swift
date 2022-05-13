@@ -1,10 +1,3 @@
-//
-//  Model.swift
-//  TableTop
-//
-//  Created by Royce Kim on 4/7/22.
-//
-
 import SwiftUI
 import RealityKit
 import Combine
@@ -17,11 +10,11 @@ class Model {
     var childs: [Model]
     var anchorEntity = AnchorEntity()
     var modelEntity = ModelEntity()
-    var model_uid: String 
+    var model_uid: String
     var scaleCompensation: Float
     var position: SIMD3<Float>
     var thumbnail: UIImage
-
+    
     init(name: String, category: ModelCategory, scaleCompensation: Float = 1.0, childs: [Model]){
         self.name = name
         self.category = category
@@ -89,7 +82,7 @@ class Model {
         return self.model_uid
     }
     
-    // 
+    //
     static func getRelativePosition(from model: ModelEntity, to origin: Entity) -> SIMD3<Float> {
         return model.position(relativeTo: origin)
     }

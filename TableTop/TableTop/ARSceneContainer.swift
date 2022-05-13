@@ -1,10 +1,3 @@
-//
-//  ARSceneManager.swift
-//  TableTop
-//
-//  Created by Royce Kim on 4/7/22.
-//
-
 import RealityKit
 import ARKit
 import FocusEntity
@@ -16,21 +9,18 @@ import SwiftUI
 struct ARSceneContainer: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
-
+    
     var serverHandler = ServerHandler.getInstance()
-
     
     static var originPoint = AnchorEntity()
-    
     
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
         
         // Subscribe to sceneEvents.update
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, {(event) in
-           updateScene(for: arView)
+            updateScene(for: arView)
         })
-        
         return arView
     }
     
@@ -50,15 +40,6 @@ struct ARSceneContainer: UIViewRepresentable {
                 print("DEBUG:: ARSC|| confirmed model: \(confirmedModel.name)")
                 ModelManager.getInstance().place(for : confirmedModel, reqPos: nil)
                 ModelManager.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
-                
-                // Getting origin data
-//                ModelManager.
-                
-                // NH - Not sure if this is the best place to emit model placement call
-
-//                let dataToEmit = SharedSessionData(username: ModelLibrary.username, objectID: confirmedModel.model_uid, modelName: confirmedModel.name, position: [0.0, 0.0])
-               
-                
             }
             self.placementSettings.confirmedModel = nil
             self.placementSettings.originfloor = false

@@ -1,10 +1,3 @@
-//
-//  DeletionView.swift
-//  TableTop
-//
-//  Created by Jet Aung on 4/20/22.
-//
-
 import SwiftUI
 import RealityKit
 
@@ -73,10 +66,10 @@ struct DeletionView: View {
                 let anchoringIdentifier = anchorSelectedToDelete.anchorIdentifier
                 
                 /*if let modelForDeletion = ModelManager.getInstance().activeModels.first(where: {$0.value.getAnchorEntity().anchorIdentifier == anchoringIdentifier}){
-                    print("DEBUG:: found anchor to delete!")
-                    
-                    ModelManager.getInstance().activeModels.removeValue(forKey: modelForDeletion.key)
-                }*/
+                 print("DEBUG:: found anchor to delete!")
+                 
+                 ModelManager.getInstance().activeModels.removeValue(forKey: modelForDeletion.key)
+                 }*/
                 
                 if let modelForDeletion = ModelManager.getInstance().activeModels.first(where: {$0.value.getAnchorEntity() == anchorSelectedToDelete}){
                     print("DEBUG:: found anchor to delete!")
@@ -88,7 +81,7 @@ struct DeletionView: View {
             }
             
             Spacer()
-
+            
         }
         .padding(.bottom, 45)
         

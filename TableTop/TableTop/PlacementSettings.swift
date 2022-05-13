@@ -1,10 +1,3 @@
-//
-//  PlacementSettings.swift
-//  TableTop
-//
-//  Created by Ashley Li on 4/11/22.
-//
-
 import SwiftUI
 import RealityKit
 import Combine
@@ -17,30 +10,35 @@ class PlacementSettings: ObservableObject {
     @Published var recentlyPlacedID: [String] = []
     
     init() {
-            reset()
+        reset()
     }
     
     func reset() {
-        self.selectedModel = Model(name: "floor", category: .unknown, scaleCompensation: 1/1, childs: [], assetID: 100)
+        self.selectedModel = Model(
+            name: "floor",
+            category: .unknown,
+            scaleCompensation: 1/1,
+            childs: [],
+            assetID: 100)
         self.originfloor = true
     }
     
     @Published var originfloor: Bool? {
-            willSet(newValue){
-                print("DEBUG:: setting origin point")
-            }
+        willSet(newValue){
+            print("DEBUG:: Setting origin point")
+        }
     }
     
     // When the user selects a model in BrowseView, this property is set.
     @Published var selectedModel: Model? {
         willSet(newValue) {
-            print("DEBUG::Setting selectedModel to \(String(describing: newValue?.name))")
+            print("DEBUG:: Setting selectedModel to \(String(describing: newValue?.name))")
         }
     }
     
     @Published var selectedModelID: String? {
         willSet(newValue) {
-            print("DEBUG::Setting selectedModelID to \(String(describing: newValue))")
+            print("DEBUG:: Setting selectedModelID to \(String(describing: newValue))")
         }
     }
     
@@ -49,13 +47,12 @@ class PlacementSettings: ObservableObject {
         willSet(newValue) {
             guard let model = newValue else {
                 print("DEBUG::Clearing confirmedModel:")
-            return
+                return
             }
             
             print("DEBUG::Setting confirmedModel to \(model.name)")
             
             self.recentlyPlaced.append(model)
-            // TODO: send socke IO .emitOnPlace
         }
     }
     

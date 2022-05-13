@@ -1,10 +1,3 @@
-//
-//  PlaceConfirmView.swift
-//  TableTop
-//
-//  Created by Royce Kim on 4/7/22.
-//
-
 import SwiftUI
 
 struct PlaceConfirmView: View {

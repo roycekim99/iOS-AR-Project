@@ -1,9 +1,3 @@
-//
-//  ModelManageTest.swift
-//  TableTop
-//
-//  Created by Royce Kim on 5/7/22.
-//
 // This class controls all the active models in the scene.
 // ModelManager is a singleton.
 

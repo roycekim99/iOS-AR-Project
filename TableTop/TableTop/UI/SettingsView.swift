@@ -1,10 +1,3 @@
-//
-//  SettingsView.swift
-//  TableTop
-//
-//  Created by Royce Kim on 4/7/22.
-//
-
 import SwiftUI
 
 enum Setting {
@@ -59,7 +52,7 @@ struct SettingsView: View {
             SettingsGrid()
                 .navigationBarTitle(Text("Settings"), displayMode: .inline)
                 .navigationBarItems(trailing:
-                    Button(action: {
+                                        Button(action: {
                     self.showSettings.toggle()
                 }) {
                     Text("Done").bold()

@@ -1,10 +1,3 @@
-//
-//  ServiceManager.swift
-//  TableTop
-//
-//  Created by Nueton Huynh on 5/2/22.
-//
-
 import SwiftUI
 import SocketIO
 import UIKit
@@ -28,19 +21,19 @@ final class ServerHandler {
         
         socket?.connect()
         self.setUserName(newName: ModelLibrary.username)
-//        self.emitRequestForPlayerList()
+        //        self.emitRequestForPlayerList()
     }
     
     // MARK: DEBUG
-//    func testEmission(){
-////        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
-//        let testModel = SharedSessionData(modelUID: "Test ID", modelName: "Test Object", position: SIMD3<Float>())
-//
-//        emitOnTap(data: testModel)
-//        emitModelPlaced(data: testModel)
-//        emitModelTransformed(data: testModel)
-//        print("DEBUG:: Debug testEmissions called!!")
-//    }
+    //    func testEmission(){
+    ////        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
+    //        let testModel = SharedSessionData(modelUID: "Test ID", modelName: "Test Object", position: SIMD3<Float>())
+    //
+    //        emitOnTap(data: testModel)
+    //        emitModelPlaced(data: testModel)
+    //        emitModelTransformed(data: testModel)
+    //        print("DEBUG:: Debug testEmissions called!!")
+    //    }
     
     func setUserName(newName: String){
         self.userName = newName
@@ -68,26 +61,26 @@ final class ServerHandler {
         
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
-//            guard let dataInfo = data.first else { return } // TODO: HANDLE LATER
+            //            guard let dataInfo = data.first else { return } // TODO: HANDLE LATER
             self.socket?.emit("playerList-req", " ")
         }
-
+        
         
         self.socket?.on("model-tapped") { (data, ack) in
             print ("DEBUG:: from server--> model tapped received")
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
                 print("DEBUG:: Server requested to tap model: " + response.modelName)
+            }
+            // Call function here to display the message
         }
-        // Call function here to display the message
-    }
         
         self.socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: FROM SERVER -> model placed received")
             guard let dataInfo = data.first else { return }
-
+            
             let dataDict = dataInfo as! [String: Any]
-
+            
             let tempSharedSessionData = SharedSessionData(
                 modelUID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
@@ -95,10 +88,10 @@ final class ServerHandler {
                 positionY: (dataDict["positionY"] as! NSNumber).floatValue,
                 positionZ: (dataDict["positionZ"] as! NSNumber).floatValue)
             
-                let positionArr = [tempSharedSessionData.positionX,
-                                   tempSharedSessionData.positionY,
-                                   tempSharedSessionData.positionZ]
-
+            let positionArr = [tempSharedSessionData.positionX,
+                               tempSharedSessionData.positionY,
+                               tempSharedSessionData.positionZ]
+            
             print("DEBUG:: SH modelName ->>>>", tempSharedSessionData.modelName)
             
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName) {
@@ -110,7 +103,7 @@ final class ServerHandler {
             }
             print("DEBUG:: tempSharedSessionData: ", tempSharedSessionData)
         }
-    
+        
         self.socket?.on("model-transformed") { (data, ack) in
             print ("DEBUG:: from server--> model transform received")
             
@@ -122,11 +115,11 @@ final class ServerHandler {
         
         self.socket?.on("playerList-req") { (data, ack) in
             print("DEBUG:: SH PLAYER || FROM SERVER -> received new list of users")
-
+            
             guard let playerNames = data.first as? String else {return}
             print("DEBUG:: SH PLAYER || playerNames: ", playerNames.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
             print("DEBUG:: SH PLAYER || playerNames: ", type(of: playerNames))
-//            print("DEBUG:: SH PLAYER || playerNames: ", playerNames.)
+            //            print("DEBUG:: SH PLAYER || playerNames: ", playerNames.)
         }
     }
     
@@ -168,19 +161,19 @@ final class ServerHandler {
         self.socket?.emit("model-transformed", info)
     }
     
-//    func emitRequestForPlayerList(){
-//        print("DEBUG:: SH|| now asking for player list")
-//        socket?.emit("playerList-req", " ")
-//    }
-   
+    //    func emitRequestForPlayerList(){
+    //        print("DEBUG:: SH|| now asking for player list")
+    //        socket?.emit("playerList-req", " ")
+    //    }
     
-//    private func getSharedSessionData(from model: Model){
-//        return [String : Any] = [
-//            "objectID": Int(model.assetID),
-//            "modelName": String(model.name),
-//            "position": [0.0,0.0]
-//        ]
-//    }
+    
+    //    private func getSharedSessionData(from model: Model){
+    //        return [String : Any] = [
+    //            "objectID": Int(model.assetID),
+    //            "modelName": String(model.name),
+    //            "position": [0.0,0.0]
+    //        ]
+    //    }
     
     // Call this when ending a session.
     func stop() {
@@ -195,7 +188,7 @@ final class ServerHandler {
 class SocketParser {
     static func convert<T: Decodable>(data: Any) throws -> T {
         print ("DEBUG:: convert with regular input")
-
+        
         let jsonData = try JSONSerialization.data(withJSONObject: data)
         print("DEBUG:: Printing jsonData", jsonData)
         let decoder = JSONDecoder()
@@ -204,7 +197,7 @@ class SocketParser {
         
         return try decoder.decode(T.self, from: jsonData)
     }
-
+    
     static func convert<T: Decodable>(datas: [Any]) throws -> [T] {
         return try datas.map { (dict) -> T in
             let jsonData = try JSONSerialization.data(withJSONObject: dict)
@@ -224,11 +217,12 @@ struct SharedSessionData: Codable {
     var positionZ: Float
 }
 
+
 struct PlayerConnectionsFromServer: Codable {
     var playerNames: [String]
 }
 
-    
+
 class PlayerList: ObservableObject {
     @Published var playerNames = [String]()
 }

@@ -1,10 +1,3 @@
-//
-//  ControlView.swift
-//  TableTop
-//
-//  Created by Royce Kim on 4/7/22.
-//
-
 import SwiftUI
 import RealityKit
 import ARKit
@@ -37,8 +30,8 @@ struct ControlView: View {
                 StartView(showStartView: $showStartView, showUsernameView: $showUsernameView)
             } else {
                 ARSceneContainer()
-                    
-    //          If no model is selected for placement, show default UI
+                
+                //          If no model is selected for placement, show default UI
                 if self.placementSettings.selectedModel != nil {
                     // Show placement view
                     PlaceConfirmView(isOrigin: self.placementSettings.originfloor!)
@@ -48,11 +41,11 @@ struct ControlView: View {
                     DefaultView(isControlsVisible: $isControlsVisible,/* isZoomEnabled: $isZoomEnabled,*/ showBrowse: $showBrowse, showSettings: $showSettings, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled, showStartView: $showStartView, showPlayerList: $showPlayerList)
                 }
             }
-           
+            
         }
         .edgesIgnoringSafeArea(.all)
     }
-
+    
 }
 
 // MARK: Default View
@@ -67,7 +60,7 @@ struct DefaultView: View {
     
     var body: some View {
         VStack {
-        
+            
             ControlTopBar(isControlsVisible: $isControlsVisible, zoomEnabled: $zoomEnabled, deleteEnabled: $deleteEnabled, showStartView: $showStartView)
             
             Spacer()
@@ -75,7 +68,7 @@ struct DefaultView: View {
             if (isControlsVisible && !zoomEnabled){
                 ControlBottomBar(showBrowse: $showBrowse, showSettings: $showSettings, showPalyerList: $showPlayerList)
             }
-
+            
         }
     }
 }
@@ -96,14 +89,14 @@ struct ControlTopBar: View {
     @Binding var zoomEnabled: Bool
     @Binding var deleteEnabled: Bool
     @Binding var showStartView: Bool
-
+    
     var body: some View {
         VStack {
             HStack {
                 if isControlsVisible {
                     BackButton(showStartView: $showStartView)
                 }
-
+                
                 Spacer()
                 if !zoomEnabled {
                     ControlVisibilityToggleButton(isControlsVisible: $isControlsVisible)
@@ -122,7 +115,7 @@ struct ControlTopBar: View {
                 }
             }
         }
-   
+        
     }
 }
 
@@ -133,7 +126,7 @@ struct ControlVisibilityToggleButton: View {
     var body: some View {
         ZStack {
             Color.black.opacity(0.25)
-
+            
             Button(action: {
                 print("Control Visibility Toggle Button Pressed.")
                 self.isControlsVisible.toggle()
@@ -143,7 +136,7 @@ struct ControlVisibilityToggleButton: View {
                     .foregroundColor(.white)
                     .buttonStyle(PlainButtonStyle())
             }
-
+            
         }
         .frame(width: 50, height: 50)
         .cornerRadius(8.0)
@@ -182,11 +175,11 @@ struct DeletionButton: View {
 struct ZoomButton: View {
     @EnvironmentObject var zoomView: ZoomView
     @Binding var zoomEnabled: Bool
-
+    
     var body: some View {
         ZStack {
             Color.black.opacity(0.25)
-
+            
             Button(action: {
                 print("Zoom Button Pressed.")
                 self.zoomEnabled.toggle()
@@ -246,19 +239,19 @@ struct BackButton: View {
         
     }
 }
- 
+
 // MARK: Control Bottom Bar
 struct ControlBottomBar: View {
     @Binding var showBrowse: Bool
     @Binding var showSettings: Bool
     @Binding var showPalyerList: Bool
-
+    
     
     var body: some View {
         HStack {
             
             MostRecentlyPlacedButton()
-                        
+            
             Spacer()
             
             // Browse Button
@@ -270,7 +263,7 @@ struct ControlBottomBar: View {
             }
             
             Spacer()
-
+            
             // Settings Button
             ControlButton(systemIconName: "slider.horizontal.3") {
                 print("Settings button pressed")
@@ -288,7 +281,7 @@ struct ControlBottomBar: View {
             .sheet(isPresented: $showPalyerList) {
                 PlayerListView(showPlayerList: $showPalyerList)
             }
-                        
+            
         }
         .frame(maxWidth: 500)
         .padding(30)
@@ -301,7 +294,7 @@ struct PlayerListView: View {
     @Binding var showPlayerList: Bool
     @StateObject var players = PlayerList()
     
-//    let names = ["hfaje", "thoea hjka", "fhefewafe", "fnekfnefd", "bcndnvf", "mcsoj", "ndjnia", "njedknei", "mnkfeogkg", "gdkmeklnk"]
+    //    let names = ["hfaje", "thoea hjka", "fhefewafe", "fnekfnefd", "bcndnvf", "mcsoj", "ndjnia", "njedknei", "mnkfeogkg", "gdkmeklnk"]
     
     var body: some View {
         NavigationView {
@@ -318,7 +311,7 @@ struct PlayerListView: View {
             
             .navigationBarTitle(Text("Player List"), displayMode: .inline)
             .navigationBarItems(leading:
-                Button(action: {
+                                    Button(action: {
                 self.showPlayerList.toggle()
             }) {
                 Text("Done").bold()

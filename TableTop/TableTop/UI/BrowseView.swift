@@ -1,34 +1,25 @@
-//
-//  BrowseView.swift
-//  TableTop
-//
-//  Created by Royce Kim on 4/7/22.
-//
-
-// TODO: update after finishing other classes
-
 import SwiftUI
 
 struct BrowseView: View {
     @Binding var showBrowse: Bool
     
     var body: some View {
-            NavigationView {
-                ScrollView(showsIndicators: false) {
-                    // Gridviews for thumbnails
-                    RecentsGrid(showBrowse: $showBrowse)
-                    ModelsByCategoryGrid(showBrowse: $showBrowse)
-                }
-                .navigationBarTitle(Text("Browse"), displayMode: .large)
-                .navigationBarItems(trailing:
-                    Button(action: {
-                        self.showBrowse.toggle()
-                }) {
-                    Text("Done").bold()
-                })
+        NavigationView {
+            ScrollView(showsIndicators: false) {
+                // Gridviews for thumbnails
+                RecentsGrid(showBrowse: $showBrowse)
+                ModelsByCategoryGrid(showBrowse: $showBrowse)
             }
+            .navigationBarTitle(Text("Browse"), displayMode: .large)
+            .navigationBarItems(trailing:
+                                    Button(action: {
+                self.showBrowse.toggle()
+            }) {
+                Text("Done").bold()
+            })
         }
-
+    }
+    
 }
 
 struct ModelsByCategoryGrid: View {
@@ -54,25 +45,25 @@ struct ModelsByCategoryGrid: View {
 struct RecentsGrid: View {
     @EnvironmentObject var placementSettings: PlacementSettings
     @Binding var showBrowse: Bool
-
+    
     var body: some View {
         if !self.placementSettings.recentlyPlaced.isEmpty {
             // create a horitzontalGrid for recentlyPlacedbject
             HorizontalGrid(showBrowse: $showBrowse, title: "Recents", modelLibrary: getRecentsUniqueOrdered())
         }
     }
-
+    
     func getRecentsUniqueOrdered() -> [Model] {
         var recentsUniqueOrderedArray: [Model] = []
         var modelNameSet: Set<String> = []
-
+        
         for model in self.placementSettings.recentlyPlaced.reversed() {
             if !modelNameSet.contains(model.name) {
                 recentsUniqueOrderedArray.append(model)
                 modelNameSet.insert(model.name)
             }
         }
-
+        
         return recentsUniqueOrderedArray
     }
 }
@@ -104,12 +95,12 @@ struct HorizontalGrid: View {
                         
                         ItemButton(model: modelAtIndex){
                             self.loadIfNotLoaded(model: modelAtIndex)
-                        
+                            
                             self.placementSettings.selectedModel = modelAtIndex
                             self.placementSettings.selectedModelID = modelAtIndex.getModelUID()
                             print("DEBUG::BrowseView: selected \(modelAtIndex.name) for placement.")
                             self.showBrowse = false
-
+                            
                         }
                     }
                 }
