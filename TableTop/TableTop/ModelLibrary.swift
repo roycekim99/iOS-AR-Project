@@ -46,6 +46,7 @@ class ModelLibrary {
     static var username = ""
     
     private var cancellable: AnyCancellable? = nil
+    private static var isModelSersCreated = false
     
     
     // TODO: fix this bug here -- taking too long to load
@@ -145,11 +146,7 @@ class ModelLibrary {
         }
     }
     
-    
-    
-    
-    // TODO: only for testing purpose. get rid of it after finishing download function
-    init() {
+    private func createModelSets() {
         // Game Sets
         // Modern Checker Set
         let black1 = Model(name: "Black_1", category: .set, scaleCompensation: 1/1, childs: [], assetID: 0)
@@ -257,5 +254,17 @@ class ModelLibrary {
         ModelLibrary.availableAssets += [dripGoku, goku]
         
         self.configureUIDPerModel()
+    }
+    
+    
+    
+    
+    // TODO: only for testing purpose. get rid of it after finishing download function
+    init() {
+        if !ModelLibrary.isModelSersCreated {
+            createModelSets()
+            ModelLibrary.isModelSersCreated = true
+        }
+        
     }
 }
