@@ -1,3 +1,9 @@
+/*
+ Abstract:
+ ServerHandler handles connection to the server.
+ Implemented with singleton design pattern.
+ */
+
 import SwiftUI
 import SocketIO
 import UIKit
@@ -9,7 +15,6 @@ final class ServerHandler {
     // Configure SocketManager with socker server URL and show log on console
     private var manager = SocketManager(socketURL: URL(string: "http://35.161.104.204:3001/")!, config: [.log(true), .compress])
     var socket: SocketIOClient? = nil
-    
     var userName = ""
     var client_userName = UIDevice.current.identifierForVendor?.uuidString ?? ""
     
@@ -26,7 +31,7 @@ final class ServerHandler {
     
     // MARK: DEBUG
     //    func testEmission(){
-    ////        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
+    //        let testModel = SharedSessionData(username: ModelLibrary.username, objectID: "Test ID", modelName: "Test Object", position: [0.1, 0.5])
     //        let testModel = SharedSessionData(modelUID: "Test ID", modelName: "Test Object", position: SIMD3<Float>())
     //
     //        emitOnTap(data: testModel)
@@ -75,6 +80,7 @@ final class ServerHandler {
             // Call function here to display the message
         }
         
+        
         self.socket?.on("model-placed") { (data, ack) in
             print ("DEBUG:: FROM SERVER -> model placed received")
             guard let dataInfo = data.first else { return }
@@ -104,6 +110,7 @@ final class ServerHandler {
             print("DEBUG:: tempSharedSessionData: ", tempSharedSessionData)
         }
         
+        
         self.socket?.on("model-transformed") { (data, ack) in
             print ("DEBUG:: from server--> model transform received")
             
@@ -112,6 +119,7 @@ final class ServerHandler {
                 print("DEBUG:: Server requested to transform model: " + response.modelName)
             }
         }
+        
         
         self.socket?.on("playerList-req") { (data, ack) in
             print("DEBUG:: SH PLAYER || FROM SERVER -> received new list of users")
@@ -122,6 +130,7 @@ final class ServerHandler {
             //            print("DEBUG:: SH PLAYER || playerNames: ", playerNames.)
         }
     }
+    
     
     
     // MARK: SETUP SENDERS
@@ -182,46 +191,11 @@ final class ServerHandler {
 }
 
 
-// This class will help convert data received from the socket events.
-// The listener returns an Arrays of Any, where SocketParser converts
-// this information to a generic type.
-class SocketParser {
-    static func convert<T: Decodable>(data: Any) throws -> T {
-        print ("DEBUG:: convert with regular input")
-        
-        let jsonData = try JSONSerialization.data(withJSONObject: data)
-        print("DEBUG:: Printing jsonData", jsonData)
-        let decoder = JSONDecoder()
-        
-        print("DEBUG:: decoded data?")
-        
-        return try decoder.decode(T.self, from: jsonData)
-    }
-    
-    static func convert<T: Decodable>(datas: [Any]) throws -> [T] {
-        return try datas.map { (dict) -> T in
-            let jsonData = try JSONSerialization.data(withJSONObject: dict)
-            let decoder = JSONDecoder()
-            return try decoder.decode(T.self, from: jsonData)
-        }
-    }
-}
-
-
-// Class to hold information about the game session we want to send/receive from server
-struct SharedSessionData: Codable {
-    var modelUID: String
-    var modelName: String
-    var positionX: Float
-    var positionY: Float
-    var positionZ: Float
-}
 
 
 struct PlayerConnectionsFromServer: Codable {
     var playerNames: [String]
 }
-
 
 class PlayerList: ObservableObject {
     @Published var playerNames = [String]()
