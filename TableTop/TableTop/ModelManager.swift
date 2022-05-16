@@ -177,6 +177,7 @@ class ModelManager{
         if (posRequested == nil){
             // anchor based on focus entity
             anchorEntity = AnchorEntity(plane: .any)
+//            let relativePosTest = Model.worldTransform.translation
             let relativePos = Model.getRelativePosition(from: selectedClonedModel.getModelEntity(), to: ARSceneContainer.originPoint)
             
             let dataToEmit = SharedSessionData(
@@ -189,8 +190,11 @@ class ModelManager{
             ServerHandler.getInstance().emitModelPlaced(data: dataToEmit)
             
         }   else {
-            anchorEntity = AnchorEntity(world: posRequested!)
+            anchorEntity = AnchorEntity(plane: .any)
+            anchorEntity.setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
         }
+        
+        
         
         anchorEntity.addChild(selectedClonedModel.getModelEntity())
         selectedClonedModel.setAnchorEntity(&anchorEntity)

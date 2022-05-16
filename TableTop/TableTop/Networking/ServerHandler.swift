@@ -82,7 +82,7 @@ final class ServerHandler {
         
         
         self.socket?.on("model-placed") { (data, ack) in
-            print ("DEBUG:: FROM SERVER -> model placed received")
+            print ("DEBUG:: FROM SERVER -> model-placed received")
             guard let dataInfo = data.first else { return }
             
             let dataDict = dataInfo as! [String: Any]
@@ -103,6 +103,7 @@ final class ServerHandler {
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName) {
                 let reqPosSIMD3 = SIMD3<Float>(positionArr)
                 print("DEBUG:: SH INSIDE OF IF FOUNDMODEL")
+                // TODO: An idea I have yet to test: what if we just send the position of the anchor, send that, and place that anchor in our world with a .worldTransform
                 ModelManager.getInstance().place(for: foundModel, reqPos: reqPosSIMD3)
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
