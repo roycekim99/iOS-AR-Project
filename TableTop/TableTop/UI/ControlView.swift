@@ -19,8 +19,7 @@ struct ControlView: View {
     @State private var showStartView = false
     @State private var userName = ""
     
-    @State private var showMessage = false
-    @State private var message = ""
+    @ObservedObject private var messageManager = MessageManager.messageInstance
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -44,6 +43,9 @@ struct ControlView: View {
             
         }
         .edgesIgnoringSafeArea(.all)
+        .toast(isPresenting: $messageManager.show){
+            messageManager.alertToast
+        }
     }
     
 }

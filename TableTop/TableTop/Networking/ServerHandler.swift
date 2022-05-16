@@ -7,6 +7,7 @@
 import SwiftUI
 import SocketIO
 import UIKit
+import AlertToast
 
 
 final class ServerHandler {
@@ -17,6 +18,8 @@ final class ServerHandler {
     var socket: SocketIOClient? = nil
     var userName = ""
     var client_userName = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    
+    @ObservedObject private var messageManager = MessageManager.messageInstance
     
     init() {
         // Initialize the socket (a SocketIOClient) variable, used to emit and listen to events.
@@ -60,7 +63,14 @@ final class ServerHandler {
         // Default event
         socket?.on(clientEvent: .connect) { (data, ack) in
             print("Connected")
+        
             self.socket?.emit("New player joined", self.client_userName)
+            
+            //pop up message
+            self.messageManager.show = true
+                        
+            self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(self.userName) has joined")
+            
             self.socket?.emit("playerList-req", " ")
         }
         

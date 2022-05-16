@@ -54,6 +54,8 @@
 		874D6D8827FFD34F00E7DBF4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8727FFD34F00E7DBF4 /* SettingsView.swift */; };
 		874D6D8A27FFD35A00E7DBF4 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D6D8927FFD35A00E7DBF4 /* ZoomView.swift */; };
 		8796C6EE282802E6002F27A0 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8796C6ED282802E6002F27A0 /* ModelManager.swift */; };
+		AB2BD0F52832D56E0003FD3C /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2BD0F42832D56E0003FD3C /* MessageManager.swift */; };
+		AB2BD0F82832D5910003FD3C /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = AB2BD0F72832D5910003FD3C /* AlertToast */; };
 		AB62FA56282B5AF4007B7B1A /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB62FA55282B5AF4007B7B1A /* HomeScreenView.swift */; };
 		C5037D0927C5A36800EE9549 /* Checkers Test.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */; };
 		C5037D4F27C7024D00EE9549 /* Modern Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5037D4E27C7024D00EE9549 /* Modern Checkers.usdz */; };
@@ -164,6 +166,7 @@
 		874D6D8727FFD34F00E7DBF4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		874D6D8927FFD35A00E7DBF4 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
 		8796C6ED282802E6002F27A0 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		AB2BD0F42832D56E0003FD3C /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		AB62FA55282B5AF4007B7B1A /* HomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		C5037D0827C5A36800EE9549 /* Checkers Test.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = "Checkers Test.rcproject"; sourceTree = "<group>"; };
 		C5037D4E27C7024D00EE9549 /* Modern Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Modern Checkers.usdz"; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C55E64B327D792B000EC5DE7 /* MultipeerHelper in Frameworks */,
+				AB2BD0F82832D5910003FD3C /* AlertToast in Frameworks */,
 				C5F7D38C27AB4D850052FA59 /* FocusEntity in Frameworks */,
 				6F5F83A82820C6A200A1E102 /* SocketIO in Frameworks */,
 			);
@@ -368,6 +372,7 @@
 				6FC701CC2804E037009E1D98 /* PlacementSettings.swift */,
 				874D6D7727FFD12400E7DBF4 /* ARSceneContainer.swift */,
 				874D6D8127FFD1A100E7DBF4 /* ModelLibrary.swift */,
+				AB2BD0F42832D56E0003FD3C /* MessageManager.swift */,
 				874D6D7B27FFD16000E7DBF4 /* Model.swift */,
 				8796C6ED282802E6002F27A0 /* ModelManager.swift */,
 				C5823A6328067BF400BEF3E1 /* CustomARView.swift */,
@@ -470,6 +475,7 @@
 				C5F7D38B27AB4D850052FA59 /* FocusEntity */,
 				C55E64B227D792B000EC5DE7 /* MultipeerHelper */,
 				6F5F83A72820C6A200A1E102 /* SocketIO */,
+				AB2BD0F72832D5910003FD3C /* AlertToast */,
 			);
 			productName = TableTop;
 			productReference = C5EE084627A24DA200C3D9F6 /* TableTop.app */;
@@ -547,6 +553,7 @@
 				C5F7D38A27AB4D850052FA59 /* XCRemoteSwiftPackageReference "FocusEntity" */,
 				C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */,
 				6F5F83A62820C6A200A1E102 /* XCRemoteSwiftPackageReference "socket" */,
+				AB2BD0F62832D5910003FD3C /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = C5EE084727A24DA200C3D9F6 /* Products */;
 			projectDirPath = "";
@@ -661,6 +668,7 @@
 				874D6D7A27FFD15400E7DBF4 /* ControlView.swift in Sources */,
 				6F0AAACD2830BB6000870C99 /* SocketParser.swift in Sources */,
 				874D6D7827FFD12400E7DBF4 /* ARSceneContainer.swift in Sources */,
+				AB2BD0F52832D56E0003FD3C /* MessageManager.swift in Sources */,
 				874D6D8227FFD1A100E7DBF4 /* ModelLibrary.swift in Sources */,
 				6FC701CD2804E037009E1D98 /* PlacementSettings.swift in Sources */,
 				C5823A6628102BAD00BEF3E1 /* DeletionView.swift in Sources */,
@@ -833,7 +841,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
+				DEVELOPMENT_TEAM = WK862J65M7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -850,7 +858,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Roycetest1nh;
+				PRODUCT_BUNDLE_IDENTIFIER = ashleyLI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -867,7 +875,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
+				DEVELOPMENT_TEAM = WK862J65M7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -884,7 +892,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Roycetest1nh;
+				PRODUCT_BUNDLE_IDENTIFIER = ashleyLI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1019,6 +1027,14 @@
 				kind = branch;
 			};
 		};
+		AB2BD0F62832D5910003FD3C /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		C55E64B127D792B000EC5DE7 /* XCRemoteSwiftPackageReference "MultipeerHelper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/maxxfrazer/MultipeerHelper";
@@ -1042,6 +1058,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F5F83A62820C6A200A1E102 /* XCRemoteSwiftPackageReference "socket" */;
 			productName = SocketIO;
+		};
+		AB2BD0F72832D5910003FD3C /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB2BD0F62832D5910003FD3C /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
 		};
 		C55E64B227D792B000EC5DE7 /* MultipeerHelper */ = {
 			isa = XCSwiftPackageProductDependency;
