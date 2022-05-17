@@ -165,6 +165,7 @@ struct cardView: View {
 
     var body: some View {
         VStack {
+            Spacer()
             Text(title)
                 .bold()
             

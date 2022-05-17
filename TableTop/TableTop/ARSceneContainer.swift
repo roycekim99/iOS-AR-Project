@@ -9,6 +9,7 @@ import SwiftUI
 struct ARSceneContainer: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
+    @EnvironmentObject var sessionSettings: SessionSettings
     
     var serverHandler = ServerHandler.getInstance()
     
@@ -16,7 +17,7 @@ struct ARSceneContainer: UIViewRepresentable {
     static var floor = ModelEntity()
     
     func makeUIView(context: Context) -> CustomARView {
-        let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
+        let arView = CustomARView(frame: .zero, deletionManager: deletionManager, sessionSettings: sessionSettings)
         
         // Subscribe to sceneEvents.update
         self.placementSettings.sceneObserver = arView.scene.subscribe(to: SceneEvents.Update.self, {(event) in

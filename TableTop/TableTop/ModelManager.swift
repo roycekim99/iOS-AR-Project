@@ -158,11 +158,11 @@ class ModelManager{
                     }
                 }
                 CustomARView.Holder.anchorMap.removeAll()
-                print("Origin point old position: \(ARSceneContainer.originPoint.position)")
+                //print("Origin point old position: \(ARSceneContainer.originPoint.position)")
                 ARSceneContainer.originPoint.setPosition([0,0,0], relativeTo: ARSceneContainer.floor)
                 ARSceneContainer.floor.setParent(ARSceneContainer.originPoint, preservingWorldTransform: true)
-                print("Origin point new position: \(ARSceneContainer.originPoint.position)")
-                print("Floor position: \(ARSceneContainer.floor.position)")
+                //print("Origin point new position: \(ARSceneContainer.originPoint.position)")
+                //print("Floor position: \(ARSceneContainer.floor.position)")
             }
             self.objectMoved = nil
             
