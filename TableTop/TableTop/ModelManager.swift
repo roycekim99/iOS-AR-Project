@@ -127,7 +127,7 @@ class ModelManager{
                 
             let model = getModelType(modEnt: targetModelEntity!)
         
-            let finalRelativePos = Model.getRelativePosition(from: targetModelEntity!, to: ARSceneContainer.originPoint)
+            let finalRelativePos = Model.getRelativePosition(from: targetModelEntity!)
            
             print(model.name)
             print(finalRelativePos)
@@ -163,9 +163,11 @@ class ModelManager{
     
     
     func place(for model: Model, reqPos posRequested: SIMD3<Float>?) {
-        //DEBUG
-        print("DEBUG:: place started for \(model.name)! active models: \(ModelManager.getInstance().activeModels.count)")
-        print("DEBUG:: ARSC|| Model cloned from library of size: \(ModelLibrary.availableAssets.count)")
+        // DEBUG
+//        let numActiveModels = ModelManager.getInstance().activeModels.count
+//        let numAvailableAssets = ModelLibrary.availableAssets.count
+//        print("DEBUG:: place started for \(model.name)! active models: \(numActiveModels)")
+//        print("DEBUG:: ARSC|| Model cloned from library of size: \(numAvailableAssets)")
         
         let selectedClonedModel = ModelLibrary().getModelCloned(from: model)
         
@@ -177,8 +179,9 @@ class ModelManager{
         if (posRequested == nil){
             // anchor based on focus entity
             anchorEntity = AnchorEntity(plane: .any)
-//            let relativePosTest = Model.worldTransform.translation
-            let relativePos = Model.getRelativePosition(from: selectedClonedModel.getModelEntity(), to: ARSceneContainer.originPoint)
+            print("Hello am I in here bro")
+            let relativePos = Model.getRelativePosition(from: selectedClonedModel.getModelEntity())
+            print("DEBUG::NH relativePos = ", relativePos)
             
             let dataToEmit = SharedSessionData(
                 modelUID: selectedClonedModel.model_uid,
@@ -188,13 +191,11 @@ class ModelManager{
                 positionZ: relativePos.z)
 
             ServerHandler.getInstance().emitModelPlaced(data: dataToEmit)
-            
-        }   else {
+        } else {
             anchorEntity = AnchorEntity(plane: .any)
             anchorEntity.setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
+            print("DEBUG::NH posRequested = ", posRequested)
         }
-        
-        
         
         anchorEntity.addChild(selectedClonedModel.getModelEntity())
         selectedClonedModel.setAnchorEntity(&anchorEntity)

@@ -83,8 +83,8 @@ class Model {
     }
     
     //
-    static func getRelativePosition(from model: ModelEntity, to origin: Entity) -> SIMD3<Float> {
-        return model.position(relativeTo: origin)
+    static func getRelativePosition(from model: ModelEntity) -> SIMD3<Float> {
+        return model.position(relativeTo: ARSceneContainer.originPoint)
     }
     
     func getRelativePositionToNil() -> SIMD3<Float>{

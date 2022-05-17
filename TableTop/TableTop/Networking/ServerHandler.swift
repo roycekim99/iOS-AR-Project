@@ -43,7 +43,7 @@ final class ServerHandler {
     //        print("DEBUG:: Debug testEmissions called!!")
     //    }
     
-    func setUserName(newName: String){
+    func setUserName(newName: String) {
         self.userName = newName
         self.client_userName += ":" + newName
     }
@@ -52,7 +52,7 @@ final class ServerHandler {
         return self.client_userName
     }
     
-    static func getInstance() -> ServerHandler{
+    static func getInstance() -> ServerHandler {
         return SHInstane
     }
     
@@ -114,6 +114,7 @@ final class ServerHandler {
                 let reqPosSIMD3 = SIMD3<Float>(positionArr)
                 print("DEBUG:: SH INSIDE OF IF FOUNDMODEL")
                 // TODO: An idea I have yet to test: what if we just send the position of the anchor, send that, and place that anchor in our world with a .worldTransform
+//                let newPos = ARSceneContainer.originPoint.convert(position: reqPosSIMD3, from: ARSceneContainer.originPoint)
                 ModelManager.getInstance().place(for: foundModel, reqPos: reqPosSIMD3)
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
