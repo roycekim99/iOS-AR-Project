@@ -151,8 +151,9 @@ class ModelManager{
                         modelEntity.setParent(CustomARView.Holder.anchorMap[modelObj.getModelUID()], preservingWorldTransform: true)
                     }
                 }
+                CustomARView.Holder.anchorMap.removeAll()
             }
-            //self.anchorMap.removeAll()
+            self.objectMoved = nil
             
             
         default:
