@@ -85,6 +85,11 @@ class ModelManager{
         let location = recognizer.location(in: self.targetARView)
         
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity {
+            
+            if selectedModel.name == "floor" {
+                return
+            }
+            
             self.deletionManager.entitySelectedForDeletion = selectedModel
             
             //TODO: handle delete

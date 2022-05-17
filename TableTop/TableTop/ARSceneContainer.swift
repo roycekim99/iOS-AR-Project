@@ -53,6 +53,8 @@ struct ARSceneContainer: UIViewRepresentable {
         floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(massProperties: .default, material: nil, mode: .static)
         floor.components[ModelComponent.self] = nil
         
+        floor.name = "floor"
+        
         let anchorEntity = AnchorEntity(plane: .horizontal)
         anchorEntity.addChild(floor)
         
