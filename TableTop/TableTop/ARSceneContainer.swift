@@ -13,6 +13,7 @@ struct ARSceneContainer: UIViewRepresentable {
     var serverHandler = ServerHandler.getInstance()
     
     static var originPoint = AnchorEntity()
+    static var floor = ModelEntity()
     
     func makeUIView(context: Context) -> CustomARView {
         let arView = CustomARView(frame: .zero, deletionManager: deletionManager)
@@ -63,6 +64,7 @@ struct ARSceneContainer: UIViewRepresentable {
         // set origion point
         if setOrigin == true {
             ARSceneContainer.originPoint = anchorEntity
+            ARSceneContainer.floor = floor
             print("DEBUG:: ARSC|| set origin point")
         }
         

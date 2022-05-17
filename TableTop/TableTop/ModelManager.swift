@@ -74,7 +74,7 @@ class ModelManager{
         let location = recognizer.location(in: self.targetARView)
         
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity {
-            print()
+            print(Model.getRelativePosition(from: selectedModel))
             
             switchPhysicsMode(for: selectedModel, zoomIsEnabled: zoomIsEnabled)
             //TODO: setup tap function
@@ -126,6 +126,7 @@ class ModelManager{
                         modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
                     }
                 }
+                ARSceneContainer.floor.setParent(targetModelEntity, preservingWorldTransform: true)
             }
         case .ended:
             print("DEBUG::Stopped Moving")
@@ -157,6 +158,11 @@ class ModelManager{
                     }
                 }
                 CustomARView.Holder.anchorMap.removeAll()
+                print("Origin point old position: \(ARSceneContainer.originPoint.position)")
+                ARSceneContainer.originPoint.setPosition([0,0,0], relativeTo: ARSceneContainer.floor)
+                ARSceneContainer.floor.setParent(ARSceneContainer.originPoint, preservingWorldTransform: true)
+                print("Origin point new position: \(ARSceneContainer.originPoint.position)")
+                print("Floor position: \(ARSceneContainer.floor.position)")
             }
             self.objectMoved = nil
             
