@@ -89,6 +89,8 @@
 		C55E64BA27D7C42A00EC5DE7 /* Red_Piece.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */; };
 		C5823A6428067BF400BEF3E1 /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5823A6328067BF400BEF3E1 /* CustomARView.swift */; };
 		C5823A6628102BAD00BEF3E1 /* DeletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5823A6528102BAD00BEF3E1 /* DeletionView.swift */; };
+		C5E466602833ABB6005BAD89 /* Checkers Set.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E4665F2833ABB6005BAD89 /* Checkers Set.usdz */; };
+		C5E466622833ACD6005BAD89 /* Chess Set.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E466612833ACD6005BAD89 /* Chess Set.usdz */; };
 		C5E6798C27A9611B00E24F1D /* Vintage Checkers.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C5E6798B27A9611B00E24F1D /* Vintage Checkers.usdz */; };
 		C5EE084A27A24DA200C3D9F6 /* TableTopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */; };
 		C5EE084E27A24DA300C3D9F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5EE084D27A24DA300C3D9F6 /* Assets.xcassets */; };
@@ -200,6 +202,8 @@
 		C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Red_Piece.usdz; sourceTree = "<group>"; };
 		C5823A6328067BF400BEF3E1 /* CustomARView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
 		C5823A6528102BAD00BEF3E1 /* DeletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionView.swift; sourceTree = "<group>"; };
+		C5E4665F2833ABB6005BAD89 /* Checkers Set.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Checkers Set.usdz"; sourceTree = "<group>"; };
+		C5E466612833ACD6005BAD89 /* Chess Set.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Chess Set.usdz"; sourceTree = "<group>"; };
 		C5E6798B27A9611B00E24F1D /* Vintage Checkers.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Vintage Checkers.usdz"; sourceTree = "<group>"; };
 		C5EE084627A24DA200C3D9F6 /* TableTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5EE084927A24DA200C3D9F6 /* TableTopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTopApp.swift; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 		188FB3ED280705BE0091A185 /* Chess */ = {
 			isa = PBXGroup;
 			children = (
+				C5E466612833ACD6005BAD89 /* Chess Set.usdz */,
 				188FB40D280706020091A185 /* B_Bishop_1.usdz */,
 				188FB3F6280706000091A185 /* B_Bishop_2.usdz */,
 				188FB404280706010091A185 /* B_King.usdz */,
@@ -426,6 +431,7 @@
 		C5F7D39327AB73C90052FA59 /* Modern Checker Set */ = {
 			isa = PBXGroup;
 			children = (
+				C5E4665F2833ABB6005BAD89 /* Checkers Set.usdz */,
 				C5037D5227C70A3C00EE9549 /* Black_1.usdz */,
 				C5037D5127C70A3B00EE9549 /* Black_2.usdz */,
 				C5037D5627C70A3C00EE9549 /* Black_3.usdz */,
@@ -593,6 +599,7 @@
 				C5461C5427C973A0000197B0 /* Red_10.usdz in Resources */,
 				188FB412280706020091A185 /* B_Pawn_1.usdz in Resources */,
 				188FB416280706020091A185 /* W_Bishop_1.usdz in Resources */,
+				C5E466622833ACD6005BAD89 /* Chess Set.usdz in Resources */,
 				188FB413280706020091A185 /* B_Pawn_3.usdz in Resources */,
 				C5461C4C27C973A0000197B0 /* Red_3.usdz in Resources */,
 				C5EE087527A9500A00C3D9F6 /* Chess.usdz in Resources */,
@@ -624,6 +631,7 @@
 				C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */,
 				188FB41F280706020091A185 /* B_Pawn_8.usdz in Resources */,
 				C5037D4F27C7024D00EE9549 /* Modern Checkers.usdz in Resources */,
+				C5E466602833ABB6005BAD89 /* Checkers Set.usdz in Resources */,
 				188FB425280706020091A185 /* W_Pawn_1.usdz in Resources */,
 				C5F7D39227AB6B8C0052FA59 /* Drip Goku.usdz in Resources */,
 				188FB428280706020091A185 /* Chess Board.usdz in Resources */,

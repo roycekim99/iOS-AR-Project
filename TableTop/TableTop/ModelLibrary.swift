@@ -14,6 +14,7 @@ enum ModelCategory: CaseIterable {
     case set
     case pieces
     case board
+    case setModel
     case figures
     case unknown
     
@@ -27,6 +28,8 @@ enum ModelCategory: CaseIterable {
             case .pieces:
                 return "Pieces"
             case .board:
+                return "Boards"
+            case .setModel:
                 return "Set Models"
             case .figures:
                 return "Figures"
@@ -177,7 +180,7 @@ class ModelLibrary {
         
         let floor = Model(name: "floor", category: .test, scaleCompensation: 1/1, childs: [], assetID: 24)
         
-        let checkersBoard = Model(name: "Checkers Board", category: .set, scaleCompensation: 1/1, childs: [black1, black2, black3, black4, black5, black6, black7, black8, black9, black10, black11, black12, red1, red2, red3, red4, red5, red6, red7, red8, red9, red10, red11, red12], assetID: 25)
+        let checkersSet = Model(name: "Checkers Set", category: .set, scaleCompensation: 1/1, childs: [black1, black2, black3, black4, black5, black6, black7, black8, black9, black10, black11, black12, red1, red2, red3, red4, red5, red6, red7, red8, red9, red10, red11, red12], assetID: 25)
         
         // Chess Set
         let bBishop1 = Model(name: "B_Bishop_1", category: .set, scaleCompensation: 2/10000, childs: [], assetID: 26)
@@ -214,14 +217,20 @@ class ModelLibrary {
         let wRook1 = Model(name: "W_Rook_1", category: .set, scaleCompensation: 2/10000, childs: [], assetID: 56)
         let wRook2 = Model(name: "W_Rook_2", category: .set, scaleCompensation: 2/10000, childs: [], assetID: 57)
         
-        let chessBoard = Model(name: "Chess Board", category: .set, scaleCompensation: 2/10000, childs: [bBishop1, bBishop2, bKing, bKnight1, bKnight2, bPawn1, bPawn2, bPawn3, bPawn4, bPawn5, bPawn6, bPawn7, bPawn8, bQueen, bRook1, bRook2, wBishop1, wBishop2, wKing, wKnight1, wKnight2, wPawn1, wPawn2, wPawn3, wPawn4, wPawn5, wPawn6, wPawn7, wPawn8, wQueen, wRook1, wRook2], assetID: 58)
+        let chessSet = Model(name: "Chess Set", category: .set, scaleCompensation: 2/10000, childs: [bBishop1, bBishop2, bKing, bKnight1, bKnight2, bPawn1, bPawn2, bPawn3, bPawn4, bPawn5, bPawn6, bPawn7, bPawn8, bQueen, bRook1, bRook2, wBishop1, wBishop2, wKing, wKnight1, wKnight2, wPawn1, wPawn2, wPawn3, wPawn4, wPawn5, wPawn6, wPawn7, wPawn8, wQueen, wRook1, wRook2], assetID: 58)
         
-        ModelLibrary.availableAssets += [checkersBoard, chessBoard]
+        ModelLibrary.availableAssets += [checkersSet, chessSet]
         
+        // Boards
+        let checkersBoard = Model(name: "Checkers Board", category: .board, scaleCompensation: 1/1, childs: [], assetID: 78)
+        let chessBoard = Model(name: "Chess Board", category: .board, scaleCompensation: 2/10000, childs: [], assetID: 79)
+        
+        ModelLibrary.availableAssets += [checkersBoard, chessBoard
+        ]
         // Set Models
-        let chess = Model(name: "Chess", category: .board, scaleCompensation: 2/10000, childs: [], assetID: 59)
-        let modernCheckers = Model(name: "Modern Checkers", category: .board, scaleCompensation: 1/2, childs: [], assetID: 60)
-        let vintageCheckers = Model(name: "Vintage Checkers", category: .board, scaleCompensation: 1/5000, childs: [], assetID: 61)
+        let chess = Model(name: "Chess", category: .setModel, scaleCompensation: 2/10000, childs: [], assetID: 59)
+        let modernCheckers = Model(name: "Modern Checkers", category: .setModel, scaleCompensation: 1/2, childs: [], assetID: 60)
+        let vintageCheckers = Model(name: "Vintage Checkers", category: .setModel, scaleCompensation: 1/5000, childs: [], assetID: 61)
         
         ModelLibrary.availableAssets += [chess, modernCheckers, vintageCheckers, floor]
         
