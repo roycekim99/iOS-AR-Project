@@ -121,6 +121,8 @@ final class ServerHandler {
                 
                 let clonedModelFromRequest = ModelLibrary().getModelCloned(from: foundModel)
                 ModelManager.getInstance().place(for: clonedModelFromRequest, reqPos: reqPosSIMD3)
+                ModelManager.getInstance().addActiveModel(modelID: clonedModelFromRequest.model_uid, model: clonedModelFromRequest)
+
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
             }

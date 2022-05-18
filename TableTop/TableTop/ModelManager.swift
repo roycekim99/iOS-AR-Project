@@ -214,6 +214,7 @@ class ModelManager{
 //        for modelInstance in ModelManager.getInstance().activeModels {
 //            print("DEBUG:: MM ||| place ENDED! active model name: \(modelInstance.value.name)")
 //        }
+        //ROYCE WAS HERE HEHE
     }
     
     func moveModel(model selectedModel: Model, to finalPos: SIMD3<Float>){
