@@ -204,6 +204,7 @@ class ModelManager{
             //print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
             let clonedChildModel = ModelLibrary().getModelCloned(from: child)
             self.place(for: clonedChildModel, reqPos: posRequested)
+            self.addActiveModel(modelID: clonedChildModel.model_uid, model: clonedChildModel)
         }
         //testing is getrelativepostiion works
 //        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
