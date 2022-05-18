@@ -106,7 +106,7 @@ final class ServerHandler {
                 positionZ: (dataDict["positionZ"] as! NSNumber).floatValue)
             
             let positionArr = [tempSharedSessionData.positionX,
-                               tempSharedSessionData.positionY,
+                               0.3,
                                tempSharedSessionData.positionZ]
             
             //DEBUG
