@@ -189,7 +189,8 @@ class ModelManager{
         
         //if posRequested from server exists:
         if (posRequested != nil){
-            anchorEntity.setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
+//            anchorEntity.setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
+            model.getModelEntity().setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
             print("DEBUG::NH posRequested = ", posRequested)
         }
         
