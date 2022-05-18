@@ -95,7 +95,7 @@ final class ServerHandler {
             print ("DEBUG:: FROM SERVER -> model-placed received")
             guard let dataInfo = data.first else { return }
             
-            //parse data from server
+            // Parse data from server
             let dataDict = dataInfo as! [String: Any]
             
             let tempSharedSessionData = SharedSessionData(
@@ -105,27 +105,23 @@ final class ServerHandler {
                 positionY: (dataDict["positionY"] as! NSNumber).floatValue,
                 positionZ: (dataDict["positionZ"] as! NSNumber).floatValue)
             
+            // Hard coded y-value temporarily to fix receiving users objects falling
             let positionArr = [tempSharedSessionData.positionX,
                                0.3,
                                tempSharedSessionData.positionZ]
             
-            //DEBUG
             print("DEBUG:: SH modelName ->>>>", tempSharedSessionData.modelName)
             
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName) {
                 let reqPosSIMD3 = SIMD3<Float>(positionArr)
                 print("DEBUG:: SH INSIDE OF IF FOUNDMODEL")
-                // TODO: An idea I have yet to test: what if we just send the position of the anchor, send that, and place that anchor in our world with a .worldTransform
-//                let newPos = ARSceneContainer.originPoint.convert(position: reqPosSIMD3, from: ARSceneContainer.originPoint)
                 
                 let clonedModelFromRequest = ModelLibrary().getModelCloned(from: foundModel)
                 ModelManager.getInstance().place(for: clonedModelFromRequest, reqPos: reqPosSIMD3)
                 ModelManager.getInstance().addActiveModel(modelID: clonedModelFromRequest.model_uid, model: clonedModelFromRequest)
-
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
             }
-            print("DEBUG:: tempSharedSessionData: ", tempSharedSessionData)
         }
         
         
