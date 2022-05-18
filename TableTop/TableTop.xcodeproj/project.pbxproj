@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18660C102834DE0F001D6F1F /* White_Queen.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C042834DE0F001D6F1F /* White_Queen.usdz */; };
+		18660C112834DE0F001D6F1F /* B_Pawn.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C052834DE0F001D6F1F /* B_Pawn.usdz */; };
+		18660C122834DE0F001D6F1F /* B_Knight.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C062834DE0F001D6F1F /* B_Knight.usdz */; };
+		18660C132834DE0F001D6F1F /* W_Knight.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C072834DE0F001D6F1F /* W_Knight.usdz */; };
+		18660C142834DE0F001D6F1F /* White_King.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C082834DE0F001D6F1F /* White_King.usdz */; };
+		18660C152834DE0F001D6F1F /* Black_Queen.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C092834DE0F001D6F1F /* Black_Queen.usdz */; };
+		18660C162834DE0F001D6F1F /* B_Rook.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C0A2834DE0F001D6F1F /* B_Rook.usdz */; };
+		18660C172834DE0F001D6F1F /* W_Bishop.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C0B2834DE0F001D6F1F /* W_Bishop.usdz */; };
+		18660C182834DE0F001D6F1F /* W_Pawn.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C0C2834DE0F001D6F1F /* W_Pawn.usdz */; };
+		18660C192834DE0F001D6F1F /* B_Bishop.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C0D2834DE0F001D6F1F /* B_Bishop.usdz */; };
+		18660C1A2834DE0F001D6F1F /* W_Rook.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C0E2834DE0F001D6F1F /* W_Rook.usdz */; };
+		18660C1B2834DE0F001D6F1F /* Black_King.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 18660C0F2834DE0F001D6F1F /* Black_King.usdz */; };
 		188FB410280706020091A185 /* B_Rook_2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3EE280706000091A185 /* B_Rook_2.usdz */; };
 		188FB411280706020091A185 /* B_Pawn_7.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3EF280706000091A185 /* B_Pawn_7.usdz */; };
 		188FB412280706020091A185 /* B_Pawn_1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 188FB3F0280706000091A185 /* B_Pawn_1.usdz */; };
@@ -122,6 +134,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18660C042834DE0F001D6F1F /* White_Queen.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = White_Queen.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/White_Queen.usdz"; sourceTree = "<group>"; };
+		18660C052834DE0F001D6F1F /* B_Pawn.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = B_Pawn.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/B_Pawn.usdz"; sourceTree = "<group>"; };
+		18660C062834DE0F001D6F1F /* B_Knight.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = B_Knight.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/B_Knight.usdz"; sourceTree = "<group>"; };
+		18660C072834DE0F001D6F1F /* W_Knight.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = W_Knight.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/W_Knight.usdz"; sourceTree = "<group>"; };
+		18660C082834DE0F001D6F1F /* White_King.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = White_King.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/White_King.usdz"; sourceTree = "<group>"; };
+		18660C092834DE0F001D6F1F /* Black_Queen.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = Black_Queen.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/Black_Queen.usdz"; sourceTree = "<group>"; };
+		18660C0A2834DE0F001D6F1F /* B_Rook.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = B_Rook.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/B_Rook.usdz"; sourceTree = "<group>"; };
+		18660C0B2834DE0F001D6F1F /* W_Bishop.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = W_Bishop.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/W_Bishop.usdz"; sourceTree = "<group>"; };
+		18660C0C2834DE0F001D6F1F /* W_Pawn.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = W_Pawn.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/W_Pawn.usdz"; sourceTree = "<group>"; };
+		18660C0D2834DE0F001D6F1F /* B_Bishop.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = B_Bishop.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/B_Bishop.usdz"; sourceTree = "<group>"; };
+		18660C0E2834DE0F001D6F1F /* W_Rook.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = W_Rook.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/W_Rook.usdz"; sourceTree = "<group>"; };
+		18660C0F2834DE0F001D6F1F /* Black_King.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = Black_King.usdz; path = "../../../../../iOS-AR-Project (Main)/TableTop/TableTop/3D Assets/Pieces/Black_King.usdz"; sourceTree = "<group>"; };
 		188FB3EE280706000091A185 /* B_Rook_2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Rook_2.usdz; sourceTree = "<group>"; };
 		188FB3EF280706000091A185 /* B_Pawn_7.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_7.usdz; sourceTree = "<group>"; };
 		188FB3F0280706000091A185 /* B_Pawn_1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = B_Pawn_1.usdz; sourceTree = "<group>"; };
@@ -262,6 +286,18 @@
 			children = (
 				C55E64B727D7C3EE00EC5DE7 /* Black_Piece.usdz */,
 				C55E64B927D7C42A00EC5DE7 /* Red_Piece.usdz */,
+				18660C0D2834DE0F001D6F1F /* B_Bishop.usdz */,
+				18660C062834DE0F001D6F1F /* B_Knight.usdz */,
+				18660C052834DE0F001D6F1F /* B_Pawn.usdz */,
+				18660C0A2834DE0F001D6F1F /* B_Rook.usdz */,
+				18660C0F2834DE0F001D6F1F /* Black_King.usdz */,
+				18660C092834DE0F001D6F1F /* Black_Queen.usdz */,
+				18660C0B2834DE0F001D6F1F /* W_Bishop.usdz */,
+				18660C072834DE0F001D6F1F /* W_Knight.usdz */,
+				18660C0C2834DE0F001D6F1F /* W_Pawn.usdz */,
+				18660C0E2834DE0F001D6F1F /* W_Rook.usdz */,
+				18660C082834DE0F001D6F1F /* White_King.usdz */,
+				18660C042834DE0F001D6F1F /* White_Queen.usdz */,
 			);
 			path = Pieces;
 			sourceTree = "<group>";
@@ -577,6 +613,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18660C1A2834DE0F001D6F1F /* W_Rook.usdz in Resources */,
+				18660C102834DE0F001D6F1F /* White_Queen.usdz in Resources */,
 				188FB426280706020091A185 /* B_King.usdz in Resources */,
 				C5037D6427C7224C00EE9549 /* Black_12.usdz in Resources */,
 				188FB419280706020091A185 /* W_Pawn_5.usdz in Resources */,
@@ -587,6 +625,7 @@
 				C5E6798C27A9611B00E24F1D /* Vintage Checkers.usdz in Resources */,
 				188FB429280706020091A185 /* W_Queen.usdz in Resources */,
 				C55E64B827D7C3EE00EC5DE7 /* Black_Piece.usdz in Resources */,
+				18660C162834DE0F001D6F1F /* B_Rook.usdz in Resources */,
 				188FB41C280706020091A185 /* W_Pawn_2.usdz in Resources */,
 				188FB423280706020091A185 /* W_Pawn_7.usdz in Resources */,
 				C5461C4E27C973A0000197B0 /* Red_8.usdz in Resources */,
@@ -600,6 +639,7 @@
 				188FB412280706020091A185 /* B_Pawn_1.usdz in Resources */,
 				188FB416280706020091A185 /* W_Bishop_1.usdz in Resources */,
 				C5E466622833ACD6005BAD89 /* Chess Set.usdz in Resources */,
+				18660C142834DE0F001D6F1F /* White_King.usdz in Resources */,
 				188FB413280706020091A185 /* B_Pawn_3.usdz in Resources */,
 				C5461C4C27C973A0000197B0 /* Red_3.usdz in Resources */,
 				C5EE087527A9500A00C3D9F6 /* Chess.usdz in Resources */,
@@ -607,10 +647,14 @@
 				188FB41B280706020091A185 /* B_Rook_1.usdz in Resources */,
 				188FB415280706020091A185 /* W_Rook_2.usdz in Resources */,
 				C5461C4D27C973A0000197B0 /* Red_1.usdz in Resources */,
+				18660C132834DE0F001D6F1F /* W_Knight.usdz in Resources */,
+				18660C122834DE0F001D6F1F /* B_Knight.usdz in Resources */,
 				188FB418280706020091A185 /* B_Bishop_2.usdz in Resources */,
 				C5037D5927C70A3C00EE9549 /* Black_1.usdz in Resources */,
 				188FB420280706020091A185 /* W_Rook_1.usdz in Resources */,
 				C5461C5127C973A0000197B0 /* Red_9.usdz in Resources */,
+				18660C182834DE0F001D6F1F /* W_Pawn.usdz in Resources */,
+				18660C1B2834DE0F001D6F1F /* Black_King.usdz in Resources */,
 				C5037D6927C7224C00EE9549 /* Black_10.usdz in Resources */,
 				188FB42A280706020091A185 /* B_Queen.usdz in Resources */,
 				C5037D6827C7224C00EE9549 /* Black_7.usdz in Resources */,
@@ -630,8 +674,10 @@
 				188FB411280706020091A185 /* B_Pawn_7.usdz in Resources */,
 				C5461C5327C973A0000197B0 /* Red_5.usdz in Resources */,
 				188FB41F280706020091A185 /* B_Pawn_8.usdz in Resources */,
+				18660C112834DE0F001D6F1F /* B_Pawn.usdz in Resources */,
 				C5037D4F27C7024D00EE9549 /* Modern Checkers.usdz in Resources */,
 				C5E466602833ABB6005BAD89 /* Checkers Set.usdz in Resources */,
+				18660C192834DE0F001D6F1F /* B_Bishop.usdz in Resources */,
 				188FB425280706020091A185 /* W_Pawn_1.usdz in Resources */,
 				C5F7D39227AB6B8C0052FA59 /* Drip Goku.usdz in Resources */,
 				188FB428280706020091A185 /* Chess Board.usdz in Resources */,
@@ -641,7 +687,9 @@
 				C5461C4B27C973A0000197B0 /* Red_7.usdz in Resources */,
 				C5461C4A27C973A0000197B0 /* Red_11.usdz in Resources */,
 				188FB41D280706020091A185 /* B_Pawn_5.usdz in Resources */,
+				18660C172834DE0F001D6F1F /* W_Bishop.usdz in Resources */,
 				C5F7D38527AB48410052FA59 /* Goku.usdz in Resources */,
+				18660C152834DE0F001D6F1F /* Black_Queen.usdz in Resources */,
 				188FB410280706020091A185 /* B_Rook_2.usdz in Resources */,
 				188FB42F280706020091A185 /* B_Bishop_1.usdz in Resources */,
 				188FB42D280706020091A185 /* W_King.usdz in Resources */,

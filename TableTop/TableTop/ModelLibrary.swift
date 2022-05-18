@@ -225,8 +225,8 @@ class ModelLibrary {
         let checkersBoard = Model(name: "Checkers Board", category: .board, scaleCompensation: 1/1, childs: [], assetID: 78)
         let chessBoard = Model(name: "Chess Board", category: .board, scaleCompensation: 2/10000, childs: [], assetID: 79)
         
-        ModelLibrary.availableAssets += [checkersBoard, chessBoard
-        ]
+        ModelLibrary.availableAssets += [checkersBoard, chessBoard]
+        
         // Set Models
         let chess = Model(name: "Chess", category: .setModel, scaleCompensation: 2/10000, childs: [], assetID: 59)
         let modernCheckers = Model(name: "Modern Checkers", category: .setModel, scaleCompensation: 1/2, childs: [], assetID: 60)
