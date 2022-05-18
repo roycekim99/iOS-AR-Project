@@ -74,6 +74,7 @@ class ModelManager{
         let location = recognizer.location(in: self.targetARView)
         
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity {
+            print("DEBUG:: Model.getRelativePos:>>")
             print(Model.getRelativePosition(from: selectedModel))
             
             switchPhysicsMode(for: selectedModel, zoomIsEnabled: zoomIsEnabled)
@@ -181,55 +182,53 @@ class ModelManager{
 //        print("DEBUG:: place started for \(model.name)! active models: \(numActiveModels)")
 //        print("DEBUG:: ARSC|| Model cloned from library of size: \(numAvailableAssets)")
         
-        let selectedClonedModel = ModelLibrary().getModelCloned(from: model)
         
-        targetARView.installGestures(.all, for: selectedClonedModel.getModelEntity()).forEach { entityGesture in
+        targetARView.installGestures(.all, for: model.getModelEntity()).forEach { entityGesture in
             entityGesture.addTarget(ModelManager.getInstance(), action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
         }
         
-        var anchorEntity: AnchorEntity
-        if (posRequested == nil){
-            // anchor based on focus entity
-            anchorEntity = AnchorEntity(plane: .any)
-            print("Hello am I in here bro")
-            let relativePos = Model.getRelativePosition(from: selectedClonedModel.getModelEntity())
-            print("DEBUG::NH relativePos = ", relativePos)
-            
-            let dataToEmit = SharedSessionData(
-                modelUID: selectedClonedModel.model_uid,
-                modelName: selectedClonedModel.name,
-                positionX: relativePos.x,
-                positionY: relativePos.y,
-                positionZ: relativePos.z)
-
-            ServerHandler.getInstance().emitModelPlaced(data: dataToEmit)
-        } else {
-            anchorEntity = AnchorEntity(plane: .any)
+        var anchorEntity = AnchorEntity(plane: .any)
+        
+        //if posRequested from server exists:
+        if (posRequested != nil){
             anchorEntity.setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
             print("DEBUG::NH posRequested = ", posRequested)
         }
         
-        anchorEntity.addChild(selectedClonedModel.getModelEntity())
-        selectedClonedModel.setAnchorEntity(&anchorEntity)
+        anchorEntity.addChild(model.getModelEntity())
+        model.setAnchorEntity(&anchorEntity)
         
         targetARView.scene.addAnchor(anchorEntity)
 
-        print("DEBUG:: MM || Cloned model: \(selectedClonedModel.name)")
+        print("DEBUG:: MM || Cloned model: \(model.name)")
 
-        for child in selectedClonedModel.childs {
+        for child in model.childs {
             //print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
-            self.place(for: child, reqPos: posRequested)
+            let clonedChildModel = ModelLibrary().getModelCloned(from: child)
+            self.place(for: clonedChildModel, reqPos: posRequested)
         }
         //testing is getrelativepostiion works
 //        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
-        
-        ModelManager.getInstance().addActiveModel(modelID: selectedClonedModel.getModelUID(), model: selectedClonedModel)
-        
+                
         //DEBUG
         print("DEBUG:: MM ||| place ending! active models: \(ModelManager.getInstance().activeModels.count)")
-        for modelInstance in ModelManager.getInstance().activeModels {
-            print("DEBUG:: MM ||| place ENDED! active model name: \(modelInstance.value.name)")
-        }
+//        for modelInstance in ModelManager.getInstance().activeModels {
+//            print("DEBUG:: MM ||| place ENDED! active model name: \(modelInstance.value.name)")
+//        }
+    }
+    
+    func emitPlace(forModel clonedModelInput: Model){
+        let relativePos = Model.getRelativePosition(from: clonedModelInput.getModelEntity())
+        print("DEBUG:: MM|| NH relativePos = ", relativePos)
+        
+        let dataToEmit = SharedSessionData(
+            modelUID: clonedModelInput.model_uid,
+            modelName: clonedModelInput.name,
+            positionX: relativePos.x,
+            positionY: relativePos.y,
+            positionZ: relativePos.z)
+
+        ServerHandler.getInstance().emitModelPlaced(data: dataToEmit)
     }
     
     func moveAll(check: Bool){

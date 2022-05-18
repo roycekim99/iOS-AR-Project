@@ -49,7 +49,7 @@ class ModelLibrary {
     static var username = ""
     
     private var cancellable: AnyCancellable? = nil
-    private static var isModelSersCreated = false
+    private static var isModelSetsCreated = false
     
     
     // TODO: fix this bug here -- taking too long to load
@@ -75,7 +75,7 @@ class ModelLibrary {
                 
                 self.cancellable?.cancel()
                 
-                print("DEBUG:: model has been loaded")
+                print("DEBUG:: \(modelEntity.name) model has been loaded")
             })
     }
     
@@ -270,9 +270,9 @@ class ModelLibrary {
     
     // TODO: only for testing purpose. get rid of it after finishing download function
     init() {
-        if !ModelLibrary.isModelSersCreated {
+        if !ModelLibrary.isModelSetsCreated {
             createModelSets()
-            ModelLibrary.isModelSersCreated = true
+            ModelLibrary.isModelSetsCreated = true
         }
         
     }

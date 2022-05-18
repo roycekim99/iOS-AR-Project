@@ -40,8 +40,13 @@ struct ARSceneContainer: UIViewRepresentable {
             else {
                 //DEBUG
                 print("DEBUG:: ARSC|| confirmed model: \(confirmedModel.name)")
-                ModelManager.getInstance().place(for : confirmedModel, reqPos: nil)
-                ModelManager.getInstance().addActiveModel(modelID: confirmedModel.model_uid, model: confirmedModel)
+                
+                let selectedClonedModel = ModelLibrary().getModelCloned(from: confirmedModel)
+                
+                ModelManager.getInstance().place(for : selectedClonedModel, reqPos: nil)
+                ModelManager.getInstance().addActiveModel(modelID: selectedClonedModel.model_uid, model: selectedClonedModel)
+                
+                ModelManager.getInstance().emitPlace(forModel: selectedClonedModel)
             }
             self.placementSettings.confirmedModel = nil
             self.placementSettings.originfloor = false
