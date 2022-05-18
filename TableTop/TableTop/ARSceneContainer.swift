@@ -40,17 +40,21 @@ struct ARSceneContainer: UIViewRepresentable {
             else {
                 //DEBUG
                 print("DEBUG:: ARSC|| confirmed model: \(confirmedModel.name)")
-                
-                let selectedClonedModel = ModelLibrary().getModelCloned(from: confirmedModel)
-                
-                ModelManager.getInstance().place(for : selectedClonedModel, reqPos: nil)
-                ModelManager.getInstance().addActiveModel(modelID: selectedClonedModel.model_uid, model: selectedClonedModel)
-                
-                ModelManager.getInstance().emitPlace(forModel: selectedClonedModel)
+                self.cloneAndPlace(modelSelected: confirmedModel)
+               
             }
             self.placementSettings.confirmedModel = nil
             self.placementSettings.originfloor = false
         }
+    }
+    
+    private func cloneAndPlace(modelSelected confirmedModel: Model){
+        let selectedClonedModel = ModelLibrary().getModelCloned(from: confirmedModel)
+        
+        ModelManager.getInstance().place(for : selectedClonedModel, reqPos: nil)
+        ModelManager.getInstance().addActiveModel(modelID: selectedClonedModel.model_uid, model: selectedClonedModel)
+        
+        ModelManager.getInstance().emitPlacementData(forModel: selectedClonedModel)
     }
     
     // fun place floor in arview container

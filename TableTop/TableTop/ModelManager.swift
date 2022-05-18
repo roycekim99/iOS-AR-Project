@@ -174,14 +174,12 @@ class ModelManager{
         
     }
     
-    
     func place(for model: Model, reqPos posRequested: SIMD3<Float>?) {
         // DEBUG
 //        let numActiveModels = ModelManager.getInstance().activeModels.count
 //        let numAvailableAssets = ModelLibrary.availableAssets.count
 //        print("DEBUG:: place started for \(model.name)! active models: \(numActiveModels)")
 //        print("DEBUG:: ARSC|| Model cloned from library of size: \(numAvailableAssets)")
-        
         
         targetARView.installGestures(.all, for: model.getModelEntity()).forEach { entityGesture in
             entityGesture.addTarget(ModelManager.getInstance(), action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
@@ -217,7 +215,11 @@ class ModelManager{
 //        }
     }
     
-    func emitPlace(forModel clonedModelInput: Model){
+    func moveModel(withUID req_modelUID: String, to finalPos: SIMD3<Float>){
+        
+    }
+    
+    func emitPlacementData(forModel clonedModelInput: Model){
         let relativePos = Model.getRelativePosition(from: clonedModelInput.getModelEntity())
         print("DEBUG:: MM|| NH relativePos = ", relativePos)
         

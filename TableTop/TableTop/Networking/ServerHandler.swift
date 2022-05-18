@@ -115,6 +115,7 @@ final class ServerHandler {
                 print("DEBUG:: SH INSIDE OF IF FOUNDMODEL")
                 // TODO: An idea I have yet to test: what if we just send the position of the anchor, send that, and place that anchor in our world with a .worldTransform
 //                let newPos = ARSceneContainer.originPoint.convert(position: reqPosSIMD3, from: ARSceneContainer.originPoint)
+                
                 let clonedModelFromRequest = ModelLibrary().getModelCloned(from: foundModel)
                 ModelManager.getInstance().place(for: clonedModelFromRequest, reqPos: reqPosSIMD3)
             } else {
@@ -130,6 +131,9 @@ final class ServerHandler {
             guard let dataInfo = data.first else { return }
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
                 print("DEBUG:: Server requested to transform model: " + response.modelName)
+                
+                
+                
             }
         }
         
