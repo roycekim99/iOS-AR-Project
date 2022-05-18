@@ -161,7 +161,7 @@ class ModelManager{
         
         var anchorEntity = AnchorEntity(plane: .any)
         
-        if (posRequested != nil){
+        if (posRequested != nil) {
             anchorEntity.setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
             print("DEBUG::NH posRequested = ", posRequested!)
         }
