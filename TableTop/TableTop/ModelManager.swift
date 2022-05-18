@@ -74,8 +74,8 @@ class ModelManager{
         let location = recognizer.location(in: self.targetARView)
         
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity {
-            print("DEBUG:: Model.getRelativePos:>>")
-            print(Model.getRelativePosition(from: selectedModel))
+//            print("DEBUG:: Model.getRelativePos:>>")
+//            print(Model.getRelativePosition(from: selectedModel))
             
             switchPhysicsMode(for: selectedModel, zoomIsEnabled: zoomIsEnabled)
             //TODO: setup tap function
@@ -134,20 +134,20 @@ class ModelManager{
                 
             let model = getModelType(modEnt: targetModelEntity!)
         
-            let finalRelativePos = Model.getRelativePosition(from: targetModelEntity!)
-           
-            print(model.name)
-            print(finalRelativePos)
-            
-            //EMIT
-            let emissionData = SharedSessionData(
-                modelUID: model.model_uid,
-                modelName: model.name,
-                positionX: finalRelativePos.x,
-                positionY: finalRelativePos.y,
-                positionZ: finalRelativePos.z)
-            
-            ServerHandler.getInstance().emitModelTransformed(data: emissionData)
+//            let finalRelativePos = Model.getRelativePosition(from: targetModelEntity!)
+//           
+//            print(model.name)
+//            print(finalRelativePos)
+//            
+//            //EMIT
+//            let emissionData = SharedSessionData(
+//                modelUID: model.model_uid,
+//                modelName: model.name,
+//                positionX: finalRelativePos.x,
+//                positionY: finalRelativePos.y,
+//                positionZ: finalRelativePos.z)
+//            
+//            ServerHandler.getInstance().emitModelTransformed(data: emissionData)
 
 
             
@@ -224,8 +224,8 @@ class ModelManager{
     }
     
     func emitPlacementData(forModel clonedModelInput: Model){
-        let relativePos = Model.getRelativePosition(from: clonedModelInput.getModelEntity())
-        print("DEBUG:: MM|| Current pos = \(clonedModelInput.getModelEntity().position)")
+        let relativePos = Model.getRelativePosition(from: clonedModelInput.getAnchorEntity())
+        print("DEBUG:: MM|| Current pos = \(clonedModelInput.getAnchorEntity().position)")
         print("DEBUG:: MM|| NH relativePos = ", relativePos)
         
         let dataToEmit = SharedSessionData(
