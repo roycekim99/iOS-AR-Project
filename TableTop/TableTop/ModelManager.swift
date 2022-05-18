@@ -127,8 +127,23 @@ class ModelManager{
             }
         case .ended:
             print("DEBUG::Stopped Moving")
-            // TODO: Unused variable, can we remove?
-//            let model = getModelType(modEnt: targetModelEntity!)
+                
+            let model = getModelType(modEnt: targetModelEntity!)
+        
+//            let finalRelativePos = Model.getRelativePosition(from: targetModelEntity!)
+//
+//            print(model.name)
+//            print(finalRelativePos)
+//
+//            //EMIT
+//            let emissionData = SharedSessionData(
+//                modelUID: model.model_uid,
+//                modelName: model.name,
+//                positionX: finalRelativePos.x,
+//                positionY: finalRelativePos.y,
+//                positionZ: finalRelativePos.z)
+//
+//            ServerHandler.getInstance().emitModelTransformed(data: emissionData)
 
             if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {
