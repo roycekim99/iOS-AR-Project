@@ -33,7 +33,6 @@ class Model {
         self.childs = childs
         self.position = SIMD3<Float>()
         self.model_uid = String(assetID)
-        
     }
     
     init(name: String, category: ModelCategory, scaleCompensation: Float = 1.0, childs: [Model], assetID: String) {
@@ -82,7 +81,6 @@ class Model {
         return self.model_uid
     }
     
-    //
     static func getRelativePosition(from model: AnchorEntity) -> SIMD3<Float> {
         return model.position(relativeTo: ARSceneContainer.originPoint)
     }

@@ -102,7 +102,6 @@ class ModelLibrary {
         }
         //DEBUG
         print("DEBUG:: ML|| loaded: \(ModelLibrary.loadedModels.count)")
-        
         print("DEBUG:: ML|| loaded model ID: " + String(model.model_uid))
         print("DEBUG:: original ID: \(model.getModelEntity().id )|| new: \(clonedModelEntity?.id)")
         
@@ -266,14 +265,11 @@ class ModelLibrary {
     }
     
     
-    
-    
     // TODO: only for testing purpose. get rid of it after finishing download function
     init() {
         if !ModelLibrary.isModelSetsCreated {
             createModelSets()
             ModelLibrary.isModelSetsCreated = true
         }
-        
     }
 }

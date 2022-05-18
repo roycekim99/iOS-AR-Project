@@ -36,14 +36,11 @@ struct ARSceneContainer: UIViewRepresentable {
             
             if confirmedModel.name == "floor" {
                 self.placeFloor(in: arView, for: self.placementSettings.originfloor!)
-            }
-            else {
-                //DEBUG
+            } else {
                 print("DEBUG:: ARSC|| confirmed model: \(confirmedModel.name)")
-                self.cloneAndPlace(modelSelected: confirmedModel)
-                
-                //DEBUG
                 print("DEBUG:: ARSC|| current origin: \(ARSceneContainer.originPoint.position)")
+                
+                self.cloneAndPlace(modelSelected: confirmedModel)
             }
             self.placementSettings.confirmedModel = nil
             self.placementSettings.originfloor = false
@@ -55,7 +52,6 @@ struct ARSceneContainer: UIViewRepresentable {
         
         ModelManager.getInstance().place(for : selectedClonedModel, reqPos: nil)
         ModelManager.getInstance().addActiveModel(modelID: selectedClonedModel.model_uid, model: selectedClonedModel)
-        
         ModelManager.getInstance().emitPlacementData(forModel: selectedClonedModel)
     }
     
@@ -79,7 +75,6 @@ struct ARSceneContainer: UIViewRepresentable {
             ARSceneContainer.floor = floor
             print("DEBUG:: ARSC|| set origin point")
         }
-        
         print("DEBUG:: ARSC|| added floor")
     }
 }

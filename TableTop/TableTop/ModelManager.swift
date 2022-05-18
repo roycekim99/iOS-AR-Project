@@ -76,7 +76,6 @@ class ModelManager{
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity {
 //            print("DEBUG:: Model.getRelativePos:>>")
 //            print(Model.getRelativePosition(from: selectedModel))
-            
             switchPhysicsMode(for: selectedModel, zoomIsEnabled: zoomIsEnabled)
             //TODO: setup tap function
         }
@@ -92,7 +91,6 @@ class ModelManager{
             }
             
             self.deletionManager.entitySelectedForDeletion = selectedModel
-            
             //TODO: handle delete
         }
     }
@@ -103,7 +101,6 @@ class ModelManager{
         guard let gesture = sender as? EntityTranslationGestureRecognizer else { return }
         
         let targetModelEntity = gesture.entity as? ModelEntity
-        
     
         if self.objectMoved == nil {
             self.objectMoved = targetModelEntity
@@ -113,7 +110,6 @@ class ModelManager{
             
         switch gesture.state {
         case .began:
-            
             print("DEBUG::Started Moving")
                 
             if (CustomARView.Holder.zoomEnabled) {
@@ -149,8 +145,6 @@ class ModelManager{
 //
 //            ServerHandler.getInstance().emitModelTransformed(data: emissionData)
 
-
-            
             if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {
                     let modelEntity = modelObj.getModelEntity()
@@ -167,31 +161,24 @@ class ModelManager{
             }
             self.objectMoved = nil
             
-            
         default:
             return
         }
-        
     }
     
+    /// There are two ways that this place function is called:
+    ///     - A player places a model somewhere in the scene: when this happens, the parameter reqPos is nil and we will not set it's position
+    ///     - A player receives a model-placed event from the server, with a relative position, which is then used to set the position of the object
     func place(for model: Model, reqPos posRequested: SIMD3<Float>?) {
-        // DEBUG
-//        let numActiveModels = ModelManager.getInstance().activeModels.count
-//        let numAvailableAssets = ModelLibrary.availableAssets.count
-//        print("DEBUG:: place started for \(model.name)! active models: \(numActiveModels)")
-//        print("DEBUG:: ARSC|| Model cloned from library of size: \(numAvailableAssets)")
-        
         targetARView.installGestures(.all, for: model.getModelEntity()).forEach { entityGesture in
             entityGesture.addTarget(ModelManager.getInstance(), action: #selector(ModelManager.getInstance().handleTranslation(_ :)))
         }
         
         var anchorEntity = AnchorEntity(plane: .any)
         
-        //if posRequested from server exists:
         if (posRequested != nil){
             anchorEntity.setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
-//            model.getModelEntity().setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
-            print("DEBUG::NH posRequested = ", posRequested)
+            print("DEBUG::NH posRequested = ", posRequested!)
         }
         
         anchorEntity.addChild(model.getModelEntity())
@@ -207,15 +194,11 @@ class ModelManager{
             self.place(for: clonedChildModel, reqPos: posRequested)
             self.addActiveModel(modelID: clonedChildModel.model_uid, model: clonedChildModel)
         }
-        //testing is getrelativepostiion works
-//        ModelLibrary().getRelativePosition(from: modelEntity, to: ARSceneManager.originPoint[0])
                 
-        //DEBUG
         print("DEBUG:: MM ||| place ending! active models: \(ModelManager.getInstance().activeModels.count)")
 //        for modelInstance in ModelManager.getInstance().activeModels {
 //            print("DEBUG:: MM ||| place ENDED! active model name: \(modelInstance.value.name)")
 //        }
-        //ROYCE WAS HERE HEHE
     }
     
     func moveModel(model selectedModel: Model, to finalPos: SIMD3<Float>){
@@ -223,6 +206,7 @@ class ModelManager{
         selectedModel.getModelEntity().setPosition(finalPos, relativeTo: ARSceneContainer.originPoint)
     }
     
+    /// Given a Model object, obtain it's relative position from the origin point, created a SharedSessionData object to send to the server
     func emitPlacementData(forModel clonedModelInput: Model){
         let relativePos = Model.getRelativePosition(from: clonedModelInput.getAnchorEntity())
         print("DEBUG:: MM|| Current pos = \(clonedModelInput.getAnchorEntity().position)")
@@ -260,8 +244,7 @@ class ModelManager{
     }
     
     // MARK: *private functions*
-    private func switchPhysicsMode(for selectedModel: ModelEntity, zoomIsEnabled: Bool){
-        
+    private func switchPhysicsMode(for selectedModel: ModelEntity, zoomIsEnabled: Bool) {
         if (!zoomIsEnabled) {
             if selectedModel.physicsBody.self?.mode == .dynamic {
                 print("to kinematic")
@@ -272,7 +255,6 @@ class ModelManager{
                 selectedModel.physicsBody.self?.mode = .dynamic
             }
         }
-        
     }
     
     private func getModelType(modEnt: ModelEntity) -> Model {
@@ -286,17 +268,12 @@ class ModelManager{
     }
        
     private func getModelFromActive(reqModelEnt: Entity) -> Model?{
-        //1. look through active
-            // make sure
-        
         for (_, modelObj) in ModelManager.getInstance().activeModels {
             if( modelObj.getModelEntity() == reqModelEnt){
                 return modelObj
             }
         }
-        
         return nil
-        
     }
 }
 
