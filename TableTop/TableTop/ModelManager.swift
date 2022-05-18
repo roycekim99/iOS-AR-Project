@@ -135,10 +135,10 @@ class ModelManager{
             let model = getModelType(modEnt: targetModelEntity!)
         
 //            let finalRelativePos = Model.getRelativePosition(from: targetModelEntity!)
-//           
+//
 //            print(model.name)
 //            print(finalRelativePos)
-//            
+//
 //            //EMIT
 //            let emissionData = SharedSessionData(
 //                modelUID: model.model_uid,
@@ -146,7 +146,7 @@ class ModelManager{
 //                positionX: finalRelativePos.x,
 //                positionY: finalRelativePos.y,
 //                positionZ: finalRelativePos.z)
-//            
+//
 //            ServerHandler.getInstance().emitModelTransformed(data: emissionData)
 
 
