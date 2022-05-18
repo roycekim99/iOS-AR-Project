@@ -178,7 +178,8 @@ class ModelManager{
         
         if (posRequested != nil){
             anchorEntity.setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
-            print("DEBUG::NH posRequested = ", posRequested!)
+            print("DEBUG::NH received pos:", posRequested)
+            print("DEBUG::NH anchorRequested", anchorEntity.position)
         }
         
         anchorEntity.addChild(model.getModelEntity())
