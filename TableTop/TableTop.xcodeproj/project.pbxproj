@@ -272,6 +272,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18660C1C2835A47C001D6F1F /* Boards */ = {
+			isa = PBXGroup;
+			children = (
+				188FB406280706010091A185 /* Chess Board.usdz */,
+				C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */,
+			);
+			path = Boards;
+			sourceTree = "<group>";
+		};
 		188FB3E62806E5110091A185 /* Figures */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,7 +341,6 @@
 				188FB408280706020091A185 /* B_Queen.usdz */,
 				188FB3F9280706000091A185 /* B_Rook_1.usdz */,
 				188FB3EE280706000091A185 /* B_Rook_2.usdz */,
-				188FB406280706010091A185 /* Chess Board.usdz */,
 				188FB3F4280706000091A185 /* W_Bishop_1.usdz */,
 				188FB405280706010091A185 /* W_Bishop_2.usdz */,
 				188FB40B280706020091A185 /* W_King.usdz */,
@@ -455,6 +463,7 @@
 		C5EE087327A94FC700C3D9F6 /* 3D Assets */ = {
 			isa = PBXGroup;
 			children = (
+				18660C1C2835A47C001D6F1F /* Boards */,
 				188FB3ED280705BE0091A185 /* Chess */,
 				188FB3E62806E5110091A185 /* Figures */,
 				C5F7D39327AB73C90052FA59 /* Modern Checker Set */,
@@ -480,7 +489,6 @@
 				C5037D6327C7224B00EE9549 /* Black_10.usdz */,
 				C5037D5F27C7224B00EE9549 /* Black_11.usdz */,
 				C5037D5E27C7224B00EE9549 /* Black_12.usdz */,
-				C5037D5027C70A3B00EE9549 /* Checkers Board.usdz */,
 				C5461C4127C973A0000197B0 /* Red_1.usdz */,
 				C5461C4627C973A0000197B0 /* Red_2.usdz */,
 				C5461C4027C973A0000197B0 /* Red_3.usdz */,
@@ -897,7 +905,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
+				DEVELOPMENT_TEAM = Y3A8CRT877;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -914,7 +922,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nuetonhuynh;
+				PRODUCT_BUNDLE_IDENTIFIER = nuetonhuynh1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -932,7 +940,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TableTop/Preview Content\"";
-				DEVELOPMENT_TEAM = H9AJRJ2Q2X;
+				DEVELOPMENT_TEAM = Y3A8CRT877;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableTop/Info.plist;
@@ -949,7 +957,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nuetonhuynh;
+				PRODUCT_BUNDLE_IDENTIFIER = nuetonhuynh1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
