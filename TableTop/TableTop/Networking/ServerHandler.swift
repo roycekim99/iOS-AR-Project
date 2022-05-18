@@ -95,6 +95,7 @@ final class ServerHandler {
             print ("DEBUG:: FROM SERVER -> model-placed received")
             guard let dataInfo = data.first else { return }
             
+            //parse data from server
             let dataDict = dataInfo as! [String: Any]
             
             let tempSharedSessionData = SharedSessionData(
@@ -108,7 +109,9 @@ final class ServerHandler {
                                tempSharedSessionData.positionY,
                                tempSharedSessionData.positionZ]
             
+            //DEBUG
             print("DEBUG:: SH modelName ->>>>", tempSharedSessionData.modelName)
+            
             
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName) {
                 let reqPosSIMD3 = SIMD3<Float>(positionArr)
@@ -132,7 +135,29 @@ final class ServerHandler {
             if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
                 print("DEBUG:: Server requested to transform model: " + response.modelName)
                 
+                //parse data from server
+                let dataDict = dataInfo as! [String: Any]
                 
+                let incomingData = SharedSessionData(
+                    modelUID: dataDict["objectID"]! as! String,
+                    modelName: dataDict["modelName"]! as! String,
+                    positionX: (dataDict["positionX"] as! NSNumber).floatValue,
+                    positionY: (dataDict["positionY"] as! NSNumber).floatValue,
+                    positionZ: (dataDict["positionZ"] as! NSNumber).floatValue)
+                
+                let positionArr = [incomingData.positionX,
+                                   incomingData.positionY,
+                                   incomingData.positionZ]
+                
+                //DEBUG
+                print("DEBUG:: SH modelName ->>>>", incomingData.modelName)
+            
+                //1. find model from active models
+                if let activeModel = ModelManager.getInstance().activeModels[incomingData.modelUID]{
+                    ModelManager.getInstance().moveModel(model: activeModel, to: SIMD3<Float>(positionArr))
+                } else {
+                    print("DEBUG:: SH || no model found to move!!!!")
+                }
                 
             }
         }

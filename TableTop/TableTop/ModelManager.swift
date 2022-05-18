@@ -215,8 +215,8 @@ class ModelManager{
 //        }
     }
     
-    func moveModel(withUID req_modelUID: String, to finalPos: SIMD3<Float>){
-        
+    func moveModel(model selectedModel: Model, to finalPos: SIMD3<Float>){
+        selectedModel.getModelEntity().setPosition(finalPos, relativeTo: ARSceneContainer.originPoint)
     }
     
     func emitPlacementData(forModel clonedModelInput: Model){
