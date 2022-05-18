@@ -41,7 +41,9 @@ struct ARSceneContainer: UIViewRepresentable {
                 //DEBUG
                 print("DEBUG:: ARSC|| confirmed model: \(confirmedModel.name)")
                 self.cloneAndPlace(modelSelected: confirmedModel)
-               
+                
+                //DEBUG
+                print("DEBUG:: ARSC|| current origin: \(ARSceneContainer.originPoint.position)")
             }
             self.placementSettings.confirmedModel = nil
             self.placementSettings.originfloor = false

@@ -112,7 +112,6 @@ final class ServerHandler {
             //DEBUG
             print("DEBUG:: SH modelName ->>>>", tempSharedSessionData.modelName)
             
-            
             if let foundModel = ModelLibrary().getModelWithName(modelName: tempSharedSessionData.modelName) {
                 let reqPosSIMD3 = SIMD3<Float>(positionArr)
                 print("DEBUG:: SH INSIDE OF IF FOUNDMODEL")

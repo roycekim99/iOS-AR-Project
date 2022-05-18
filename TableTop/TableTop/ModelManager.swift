@@ -223,6 +223,7 @@ class ModelManager{
     
     func emitPlacementData(forModel clonedModelInput: Model){
         let relativePos = Model.getRelativePosition(from: clonedModelInput.getModelEntity())
+        print("DEBUG:: MM|| Current pos = \(clonedModelInput.getModelEntity().position)")
         print("DEBUG:: MM|| NH relativePos = ", relativePos)
         
         let dataToEmit = SharedSessionData(
