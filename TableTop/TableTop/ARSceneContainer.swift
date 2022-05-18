@@ -73,7 +73,7 @@ struct ARSceneContainer: UIViewRepresentable {
         if setOrigin == true {
             ARSceneContainer.originPoint = anchorEntity
             ARSceneContainer.floor = floor
-            print("DEBUG:: ARSC|| set origin point")
+            print("DEBUG:: ARSC|| set origin point: \(ARSceneContainer.originPoint.position)")
         }
         print("DEBUG:: ARSC|| added floor")
     }
