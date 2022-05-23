@@ -94,11 +94,15 @@ struct HorizontalGrid: View {
                         let modelAtIndex = modelLibrary[index]
                         
                         ItemButton(model: modelAtIndex){
-                            self.loadIfNotLoaded(model: modelAtIndex)
+                            ModelManager.getInstance().loadIfNotLoaded(model: modelAtIndex)
                             
                             self.placementSettings.selectedModel = modelAtIndex
                             self.placementSettings.selectedModelID = modelAtIndex.getModelUID()
                             print("DEBUG::BrowseView: selected \(modelAtIndex.name) for placement.")
+                            
+                            ServerHandler.getInstance().emitSelectedModel(data: SelectedModel(selectedModelName: (self.placementSettings.selectedModel?.name)!))
+                            
+                            
                             self.showBrowse = false
                             
                         }
@@ -111,17 +115,17 @@ struct HorizontalGrid: View {
         
     }
     
-    private func loadIfNotLoaded(model: Model){
-        if ModelLibrary.loadedModels[model.getModelUID()] == nil{
-            ModelLibrary().loadModelToClone(for: model)
-            
-            for childModel in model.childs {
-                if ModelLibrary.loadedModels[childModel.getModelUID()] == nil {
-                    ModelLibrary().loadModelToClone(for: childModel)
-                }
-            }
-        }
-    }
+//    private func loadIfNotLoaded(model: Model){
+//        if ModelLibrary.loadedModels[model.getModelUID()] == nil{
+//            ModelLibrary().loadModelToClone(for: model)
+//
+//            for childModel in model.childs {
+//                if ModelLibrary.loadedModels[childModel.getModelUID()] == nil {
+//                    ModelLibrary().loadModelToClone(for: childModel)
+//                }
+//            }
+//        }
+//    }
 }
 
 struct ItemButton: View {

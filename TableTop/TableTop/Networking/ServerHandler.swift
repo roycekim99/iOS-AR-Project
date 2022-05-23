@@ -116,11 +116,23 @@ final class ServerHandler {
                 let reqPosSIMD3 = SIMD3<Float>(positionArr)
                 print("DEBUG:: SH INSIDE OF IF FOUNDMODEL")
                 
-                let clonedModelFromRequest = ModelLibrary().getModelCloned(from: foundModel)
+                let clonedModelFromRequest =
+                ModelLibrary().getModelCloned(from: foundModel)
+                
                 ModelManager.getInstance().place(for: clonedModelFromRequest, reqPos: reqPosSIMD3)
                 ModelManager.getInstance().addActiveModel(modelID: clonedModelFromRequest.model_uid, model: clonedModelFromRequest)
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
+            }
+        }
+        
+        self.socket?.on("model-selected") { (data, ack) in
+            print("DEBUG:: a model has been selected -> load model now")
+            
+            guard let dataInfo = data.first else {return}
+            if let response: SelectedModel = try? SocketParser.convert(data: dataInfo) {
+                let selectedModel = ModelLibrary().getModelWithName(modelName: response.selectedModelName)
+                ModelManager.getInstance().loadIfNotLoaded(model: selectedModel!)
             }
         }
         
@@ -209,6 +221,14 @@ final class ServerHandler {
         self.socket?.emit("model-transformed", info)
     }
     
+    func emitSelectedModel(data: SelectedModel) {
+        let info: [String: Any] = [
+            "selectedModelName" : String(data.selectedModelName)
+        ]
+        
+        self.socket?.emit("model-selected", info)
+    }
+    
     //    func emitRequestForPlayerList(){
     //        print("DEBUG:: SH|| now asking for player list")
     //        socket?.emit("playerList-req", " ")
@@ -230,7 +250,9 @@ final class ServerHandler {
 }
 
 
-
+struct SelectedModel: Codable {
+    var selectedModelName: String
+}
 
 struct PlayerConnectionsFromServer: Codable {
     var playerNames: [String]

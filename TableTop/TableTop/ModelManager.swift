@@ -44,6 +44,18 @@ class ModelManager{
         return MMInstance
     }
     
+    func loadIfNotLoaded(model: Model){
+        if ModelLibrary.loadedModels[model.getModelUID()] == nil{
+            ModelLibrary().loadModelToClone(for: model)
+            
+            for childModel in model.childs {
+                if ModelLibrary.loadedModels[childModel.getModelUID()] == nil {
+                    ModelLibrary().loadModelToClone(for: childModel)
+                }
+            }
+        }
+    }
+    
     func clearActiveModels() {
         print("DEBUG:: activeModels before clearing \(activeModels)")
         activeModels = [String: Model]()

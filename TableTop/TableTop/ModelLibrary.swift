@@ -139,6 +139,12 @@ class ModelLibrary {
         for modelObj in ModelLibrary.availableAssets {
             if(modelObj.name == modelName){
                 return modelObj
+            } else {
+                for modelChild in modelObj.childs {
+                    if(modelChild.name == modelName) {
+                        return modelChild
+                    }
+                }
             }
         }
         return nil
