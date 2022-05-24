@@ -66,11 +66,6 @@ final class ServerHandler {
         
             self.socket?.emit("New player joined", self.client_userName)
             
-            //pop up message
-            self.messageManager.show = true
-                        
-            self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(self.userName) has joined")
-            
             self.socket?.emit("playerList-req", " ")
         }
         
@@ -78,6 +73,15 @@ final class ServerHandler {
             print ("You've been disconnected!")
             //            guard let dataInfo = data.first else { return } // TODO: HANDLE LATER
             self.socket?.emit("playerList-req", " ")
+        }
+        
+        self.socket?.on("New player joined") { (data, ack) in
+            
+            guard let dataInfo = data.first else {return}
+            print("TESTING:: receving user name \(dataInfo)")
+            
+            self.messageManager.show = true
+            self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(dataInfo) has joined")
         }
         
         
@@ -97,6 +101,9 @@ final class ServerHandler {
             
             // Parse data from server
             let dataDict = dataInfo as! [String: Any]
+            
+            self.messageManager.show = true
+            self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(dataDict["modelName"]! as! String) has been placed")
             
             let tempSharedSessionData = SharedSessionData(
                 modelUID: dataDict["objectID"]! as! String,
