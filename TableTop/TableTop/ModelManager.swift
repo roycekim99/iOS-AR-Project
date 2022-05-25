@@ -88,6 +88,7 @@ class ModelManager{
         {
             switchPhysicsMode(for: selectedModel, zoomIsEnabled: zoomIsEnabled)
             //TODO: setup tap function?
+            // Tap gestures are installed and handled in CustomARView, which sends the logic to handlePhysics or handleDeleteion
         }
     }
     
@@ -100,11 +101,13 @@ class ModelManager{
             
             self.deletionManager.entitySelectedForDeletion = selectedModel
             //TODO: handle delete
+            // Deletion is handled in DeletionView. Similar with placement, when there is a selected model the view will change to deletion view
         }
     }
     
     @objc func handleTranslation(_ sender: UIGestureRecognizer) {
         // TODO: - Can someone explain this
+        // Most of this function handles the zoom function
         guard let gesture = sender as? EntityTranslationGestureRecognizer else { return }
         
         let targetModelEntity = gesture.entity as? ModelEntity
@@ -125,6 +128,8 @@ class ModelManager{
             print("DEBUG:: MM|| startPos: \(model.transformationStartPos)")
             
         // TODO: Can someone explain the logic and why of this code
+            // In order to move everything at the same time, we need to set the parent of the models to the model that you are moving
+            // If the parent moves/rotates/resizes, all of their children will do the same
             if (CustomARView.Holder.zoomEnabled) {
                 print("DEBUG:: MM|| Zoom enabled")
                 for (_,modelObj) in self.activeModels {
@@ -137,6 +142,8 @@ class ModelManager{
                     }
                 }
                 // TODO: Why are we setting the parent of the floor?
+                // We are setting the parent of the floor to the model in order to also move the origin point
+                // The origin point and the floor should theoretically have the same coordinates
                 ARSceneContainer.floor.setParent(targetModelEntity, preservingWorldTransform: true)
             }
         case .ended:
@@ -162,6 +169,7 @@ class ModelManager{
             ServerHandler.getInstance().emitModelTransformed(data: emissionData)
 
             // TODO: Someone explain purpose and reasoning of code below
+            // After moving with "zoom" is finished, the models need to return to their original models. Failure to do so means that all the objects will stay dependent on their "zoom" parent
             if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {
                     let modelEntity = modelObj.getModelEntity()
