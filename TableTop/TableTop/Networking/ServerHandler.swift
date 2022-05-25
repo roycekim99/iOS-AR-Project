@@ -13,7 +13,7 @@ import AlertToast
 final class ServerHandler {
     private static var SHInstane = ServerHandler()
     
-    // Configure SocketManager with socker server URL and show log on console
+    /// Configure SocketManager with socker server URL and show log on console
     private var manager = SocketManager(socketURL: URL(string: "http://35.161.104.204:3001/")!, config: [.log(true), .compress])
     var socket: SocketIOClient? = nil
     var userName = ""
@@ -72,7 +72,6 @@ final class ServerHandler {
     // MARK: SETUP LISTENERS
     // Configures the event observers and socket events
     func setupSocketEvents() {
-        // Default event
         socket?.on(clientEvent: .connect) { (data, ack) in
             print("Connected")
         
@@ -155,27 +154,18 @@ final class ServerHandler {
             }
         }
         
-        self.socket?.on("model-selected") { (data, ack) in
-            print("DEBUG:: a model has been selected -> load model now")
-            
-            guard let dataInfo = data.first else {return}
-            if let response: SelectedModel = try? SocketParser.convert(data: dataInfo) {
-                let selectedModel = ModelLibrary().getModelWithName(modelName: response.selectedModelName)
-                ModelManager.getInstance().loadIfNotLoaded(model: selectedModel!)
-            }
-        }
-        
-        
         self.socket?.on("model-transformed") { (data, ack) in
-            print ("DEBUG:: from server--> model transform received")
+            print ("DEBUG:: SH|| model-transformed message received")
             
+            /// Extract data received
             guard let dataInfo = data.first else { return }
-            // Parse data from server
             let dataDict = dataInfo as! [String: Any]
             
+            /// Display message for user
             self.messageManager.show = true
             self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(dataDict["modelName"]! as! String) has been set for transformation")
             
+            /// Convert data received into a SharedSessionData object
             let incomingData = SharedSessionData(
                 modelUID: dataDict["objectID"]! as! String,
                 modelName: dataDict["modelName"]! as! String,
@@ -183,21 +173,18 @@ final class ServerHandler {
                 positionY: (dataDict["positionY"] as! NSNumber).floatValue,
                 positionZ: (dataDict["positionZ"] as! NSNumber).floatValue)
             
-            // Hard coded y-value temporarily to fix receiving users objects falling
+            // Possibly need to do testing for the y-value
             let positionArr = [incomingData.positionX,
-                               0.3,
+                               incomingData.positionY,
                                incomingData.positionZ]
-            //DEBUG
+            
             print("DEBUG:: SH|| Server requested to transform model: " + incomingData.modelName)
         
-            //1. find model from active models
+            // Find model from active models
             if let activeModel = ModelManager.getInstance().activeModels[incomingData.modelUID]{
-                
                 ModelManager.getInstance().moveModel(model: activeModel, by: SIMD3<Float>(positionArr))
-                
-                
             } else {
-                print("DEBUG:: SH || no model found to move!!!!")
+                print("DEBUG:: SH|| No model was found to move!")
             }
         }
         
@@ -240,6 +227,7 @@ final class ServerHandler {
         socket?.emit("model-placed", info)
     }
     
+    /// The position values being emitted right now are delta values of the model
     func emitModelTransformed(data: SharedSessionData){
         let info: [String : Any] = [
             "objectID": String(data.modelUID),

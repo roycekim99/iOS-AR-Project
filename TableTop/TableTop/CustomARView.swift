@@ -102,6 +102,7 @@ class CustomARView: ARView {
     }
     
     // MARK: Gesture Recognizer
+    // TODO: Someone explain the purpose of this new struct
     struct Holder {
         static var anchorMap = [String:AnchorEntity]()
         static var objectMoved: Entity? = nil

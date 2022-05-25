@@ -15,6 +15,8 @@ class Model {
     var position: SIMD3<Float>
     var thumbnail: UIImage
     
+    /// Variable used to book keep positions in order for us to get delta values
+    /// from translation.
     var transformationStartPos = SIMD3<Float>()
     
     init(name: String, category: ModelCategory, scaleCompensation: Float = 1.0, childs: [Model]){
