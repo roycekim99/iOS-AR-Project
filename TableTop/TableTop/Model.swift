@@ -2,8 +2,6 @@ import SwiftUI
 import RealityKit
 import Combine
 
-
-// TODO: uncomment position after figuring out how to get position
 class Model {
     var name: String
     var category: ModelCategory
@@ -89,6 +87,7 @@ class Model {
         return model.position(relativeTo: ARSceneContainer.originPoint)
     }
     
+    /// Getting relative position form nil is referecing to world space
     func getRelativePositionToNil() -> SIMD3<Float>{
         return self.anchorEntity.position(relativeTo: nil)
     }

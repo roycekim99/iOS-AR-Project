@@ -1,6 +1,3 @@
-/// This class controls all the active models in the scene.
-/// ModelManager is a singleton.
-
 import RealityKit
 import ARKit
 import SwiftUI
@@ -87,8 +84,6 @@ class ModelManager{
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity
         {
             switchPhysicsMode(for: selectedModel, zoomIsEnabled: zoomIsEnabled)
-            //TODO: setup tap function?
-            // Tap gestures are installed and handled in CustomARView, which sends the logic to handlePhysics or handleDeleteion
         }
     }
     
@@ -98,16 +93,12 @@ class ModelManager{
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity
         {
             if selectedModel.name == "floor" { return }
-            
             self.deletionManager.entitySelectedForDeletion = selectedModel
-            //TODO: handle delete
-            // Deletion is handled in DeletionView. Similar with placement, when there is a selected model the view will change to deletion view
         }
     }
     
     @objc func handleTranslation(_ sender: UIGestureRecognizer) {
-        // TODO: - Can someone explain this
-        // Most of this function handles the zoom function
+        /// Most of this function handles the zoom function
         guard let gesture = sender as? EntityTranslationGestureRecognizer else { return }
         
         let targetModelEntity = gesture.entity as? ModelEntity
@@ -127,13 +118,13 @@ class ModelManager{
             
             print("DEBUG:: MM|| startPos: \(model.transformationStartPos)")
             
-        // TODO: Can someone explain the logic and why of this code
-            // In order to move everything at the same time, we need to set the parent of the models to the model that you are moving
-            // If the parent moves/rotates/resizes, all of their children will do the same
+            /// In order to move everything at the same time, we need to set the parent of the models to
+            /// the model that you are moving
+            /// If the parent moves/rotates/resizes, all of their children will do the same
             if (CustomARView.Holder.zoomEnabled) {
                 print("DEBUG:: MM|| Zoom enabled")
                 for (_,modelObj) in self.activeModels {
-                    // Save current child parent relationship
+                    /// Save current child parent relationship
                     CustomARView.Holder.anchorMap[modelObj.getModelUID()] = modelObj.getModelEntity().parent as? AnchorEntity
                     
                     let modelEntity = modelObj.getModelEntity()
@@ -141,9 +132,8 @@ class ModelManager{
                         modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
                     }
                 }
-                // TODO: Why are we setting the parent of the floor?
-                // We are setting the parent of the floor to the model in order to also move the origin point
-                // The origin point and the floor should theoretically have the same coordinates
+                /// We are setting the parent of the floor to the model in order to also move the origin point
+                /// The origin point and the floor should theoretically have the same coordinates
                 ARSceneContainer.floor.setParent(targetModelEntity, preservingWorldTransform: true)
             }
         case .ended:
@@ -168,8 +158,8 @@ class ModelManager{
 
             ServerHandler.getInstance().emitModelTransformed(data: emissionData)
 
-            // TODO: Someone explain purpose and reasoning of code below
-            // After moving with "zoom" is finished, the models need to return to their original models. Failure to do so means that all the objects will stay dependent on their "zoom" parent
+            /// After moving with "zoom" is finished, the models need to return to their original models.
+            /// Failure to do so means that all the objects will stay dependent on their "zoom" parent
             if (CustomARView.Holder.zoomEnabled) {
                 for (_,modelObj) in self.activeModels {
                     let modelEntity = modelObj.getModelEntity()
@@ -247,6 +237,7 @@ class ModelManager{
         // TODO: Things we can try?
         // - setPosition on anchor
         // - try relativeTo: origin
+        // - try using ONLY relative to the world space, aka relativeTo: nil
         
         // Also, data received is a delta position of the target object,
         // so it would make sense to setPosition relative to the model's old position
