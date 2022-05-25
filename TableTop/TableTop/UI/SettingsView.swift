@@ -131,11 +131,7 @@ struct PhysicsButton: View {
             self.isOn.toggle()
             CustomARView.Holder.physicsEnabled.toggle()
             print("\(#file) - \(setting): \(self.isOn)")
-            if (CustomARView.Holder.physicsEnabled == true) {
-                ModelManager.getInstance().resetAll()
-            } else {
-                ModelManager.getInstance().noPhysics()
-            }
+            ModelManager.getInstance().resetAll()
         }) {
             VStack {
                 

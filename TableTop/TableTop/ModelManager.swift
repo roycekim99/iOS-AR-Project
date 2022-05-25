@@ -257,16 +257,14 @@ class ModelManager{
     func resetAll(){
         for (_, modelObj) in activeModels {
             let tempModel = modelObj.getModelEntity()
-            tempModel.physicsBody?.mode = .dynamic
+            if (CustomARView.Holder.physicsEnabled) {
+                tempModel.physicsBody?.mode = .dynamic
+            } else {
+                tempModel.physicsBody?.mode = .kinematic
+            }
         }
     }
     
-    func noPhysics() {
-        for (_, modelObj) in activeModels {
-            let tempModel = modelObj.getModelEntity()
-            tempModel.physicsBody?.mode = .kinematic
-        }
-    }
     
     // MARK: *private functions*
     private func switchPhysicsMode(for selectedModel: ModelEntity, zoomIsEnabled: Bool) {
