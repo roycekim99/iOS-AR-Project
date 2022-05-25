@@ -5,6 +5,7 @@ enum Setting {
     case objectOcclusion
     case lidarDebug
     case multiuser
+    case physics
     
     var label: String {
         get {
@@ -15,6 +16,8 @@ enum Setting {
                 return "LiDAR"
             case .multiuser:
                 return "Multiuser"
+            case .physics:
+                return "Physics"
             }
         }
     }
@@ -30,6 +33,8 @@ enum Setting {
                 return "light.min"
             case .multiuser:
                 return "person.2"
+            case .physics:
+                return "burst.fill"
             }
         }
     }
@@ -41,6 +46,7 @@ class SessionSettings: ObservableObject {
     @Published var isObjectOcclusionEnabled: Bool = false
     @Published var isLidarDebugEnabled: Bool = false
     @Published var isMultiuserEnabled: Bool = false
+    @Published var isPhysicsEnabled: Bool = false
 }
 
 
@@ -78,6 +84,9 @@ struct SettingsGrid: View {
                 SettingToggleButton(setting: .lidarDebug, isOn: $sessionSettings.isLidarDebugEnabled)
                 
                 SettingToggleButton(setting: .multiuser, isOn: $sessionSettings.isMultiuserEnabled)
+                
+                //PhysicsButton(setting: .physics)
+                PhysicsButton(setting: .physics, isOn: $sessionSettings.isPhysicsEnabled)
             }
         }
         .padding(.top, 35)
@@ -93,6 +102,40 @@ struct SettingToggleButton: View {
         Button(action: {
             self.isOn.toggle()
             print("\(#file) - \(setting): \(self.isOn)")
+        }) {
+            VStack {
+                
+                Image(systemName: setting.systemIconName)
+                    .font(.system(size: 35))
+                    .foregroundColor(self.isOn ? .green : Color(UIColor.secondaryLabel))
+                    .buttonStyle(PlainButtonStyle())
+                
+                Text(setting.label)
+                    .font(.system(size: 17, weight: .medium, design: .default))
+                    .foregroundColor(self.isOn ? Color(UIColor.label) : Color(UIColor.secondaryLabel))
+                    .padding(.top, 5)
+            }
+        }
+        .frame(width: 100, height: 100)
+        .background(Color(UIColor.secondarySystemFill))
+        .cornerRadius(20.0)
+    }
+}
+
+struct PhysicsButton: View {
+    let setting: Setting
+    @Binding var isOn: Bool
+    
+    var body: some View {
+        Button(action: {
+            self.isOn.toggle()
+            CustomARView.Holder.physicsEnabled.toggle()
+            print("\(#file) - \(setting): \(self.isOn)")
+            if (CustomARView.Holder.physicsEnabled == true) {
+                ModelManager.getInstance().resetAll()
+            } else {
+                ModelManager.getInstance().noPhysics()
+            }
         }) {
             VStack {
                 

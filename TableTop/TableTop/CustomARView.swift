@@ -107,6 +107,7 @@ class CustomARView: ARView {
         static var objectMoved: Entity? = nil
         static var zoomEnabled = false
         static var deletionEnabled = false
+        static var physicsEnabled = false
     }
     
     func configureTapGestureRecognizer() {
@@ -118,7 +119,7 @@ class CustomARView: ARView {
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         //DEBUG
         print("DEBUG:: CARV|| handling tap")
-        if (!Holder.deletionEnabled && !Holder.zoomEnabled) {
+        if (!Holder.deletionEnabled && !Holder.zoomEnabled && sessionSettings.isPhysicsEnabled) {
             ModelManager.getInstance().handlePhysics(recognizer: recognizer, zoomIsEnabled: Holder.zoomEnabled)
         } else if (Holder.deletionEnabled && !Holder.zoomEnabled){
             ModelManager.getInstance().handleDeleteion(recognizer: recognizer)

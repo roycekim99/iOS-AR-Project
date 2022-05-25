@@ -83,6 +83,7 @@ class ModelManager{
     }
     
     func handlePhysics(recognizer:UITapGestureRecognizer, zoomIsEnabled: Bool) {
+        
         let location = recognizer.location(in: self.targetARView)
         
         if let selectedModel = self.targetARView.entity(at: location) as? ModelEntity {
@@ -238,15 +239,17 @@ class ModelManager{
     }
     
     func moveAll(check: Bool){
-        for (_, modelObj) in activeModels {
-            let tempModel = modelObj.getModelEntity()
-            
-            if check {
-                tempModel.physicsBody?.mode = .kinematic
-                tempModel.transform.translation.y += 0.01
-            } else {
-                tempModel.transform.translation.y += -0.01
-                tempModel.physicsBody?.mode = .dynamic
+        if (CustomARView.Holder.physicsEnabled) {
+            for (_, modelObj) in activeModels {
+                let tempModel = modelObj.getModelEntity()
+                
+                if check {
+                    tempModel.physicsBody?.mode = .kinematic
+                    tempModel.transform.translation.y += 0.01
+                } else {
+                    tempModel.transform.translation.y += -0.01
+                    tempModel.physicsBody?.mode = .dynamic
+                }
             }
         }
     }
@@ -255,6 +258,13 @@ class ModelManager{
         for (_, modelObj) in activeModels {
             let tempModel = modelObj.getModelEntity()
             tempModel.physicsBody?.mode = .dynamic
+        }
+    }
+    
+    func noPhysics() {
+        for (_, modelObj) in activeModels {
+            let tempModel = modelObj.getModelEntity()
+            tempModel.physicsBody?.mode = .kinematic
         }
     }
     

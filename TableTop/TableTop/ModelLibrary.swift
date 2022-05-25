@@ -125,7 +125,7 @@ class ModelLibrary {
         
         // Set physics and mass
         if let collisionComponent = clonedModelEntity!.components[CollisionComponent.self] as? CollisionComponent {
-            clonedModelEntity!.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil, mode: .dynamic)
+            clonedModelEntity!.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil, mode: .kinematic)
         }
         
         let newID = deviceName + "_" + String(clonedModel.getModelEntity().id)
