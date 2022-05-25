@@ -58,12 +58,15 @@ struct ARSceneContainer: UIViewRepresentable {
     
     // fun place floor in arview container
     private func placeFloor(in arView: ARView, for setOrigin: Bool) {
-        let floor = ModelEntity(mesh: .generatePlane(width: 100, depth: 100), materials: [SimpleMaterial()])
+        //let floor = ModelEntity(mesh: .generatePlane(width: 100, depth: 100), materials: [SimpleMaterial()])
+        let floor = ModelEntity(mesh: .generateBox(size: [100,50,100]), materials: [SimpleMaterial()])
         floor.generateCollisionShapes(recursive: true)
         floor.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(massProperties: .default, material: nil, mode: .static)
         floor.components[ModelComponent.self] = nil
         
         floor.name = "floor"
+        
+        floor.transform.translation.y += -25
         
         let anchorEntity = AnchorEntity(plane: .horizontal)
         anchorEntity.addChild(floor)
