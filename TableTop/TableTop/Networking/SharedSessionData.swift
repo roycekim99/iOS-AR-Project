@@ -1,10 +1,3 @@
-//
-//  SharedSessionData.swift
-//  TableTop
-//
-//  Created by Nueton Huynh on 5/14/22.
-//
-
 import Foundation
 
 // Class to hold information about the game session we want to send/receive from server

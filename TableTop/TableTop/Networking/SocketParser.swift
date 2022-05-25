@@ -30,5 +30,4 @@ class SocketParser {
             return try decoder.decode(T.self, from: jsonData)
         }
     }
-    
 }

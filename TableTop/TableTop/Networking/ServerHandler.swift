@@ -52,7 +52,6 @@ final class ServerHandler {
     
     func disconnectUser() {
         socket?.disconnect()
-        
     }
     
     func setUserName(newName: String) {
@@ -212,7 +211,6 @@ final class ServerHandler {
             "position": Float(data.positionY),
             "position": Float(data.positionZ)
         ]
-        
         self.socket?.emit("model-tapped", info)
     }
     
@@ -240,26 +238,9 @@ final class ServerHandler {
     }
     
     func emitSelectedModel(data: SelectedModel) {
-        let info: [String: Any] = [
-            "selectedModelName" : String(data.selectedModelName)
-        ]
-        
+        let info: [String: Any] = ["selectedModelName" : String(data.selectedModelName)]
         self.socket?.emit("model-selected", info)
     }
-    
-    //    func emitRequestForPlayerList(){
-    //        print("DEBUG:: SH|| now asking for player list")
-    //        socket?.emit("playerList-req", " ")
-    //    }
-    
-    
-    //    private func getSharedSessionData(from model: Model){
-    //        return [String : Any] = [
-    //            "objectID": Int(model.assetID),
-    //            "modelName": String(model.name),
-    //            "position": [0.0,0.0]
-    //        ]
-    //    }
     
     // Call this when ending a session.
     func stop() {
