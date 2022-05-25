@@ -10,8 +10,9 @@ struct ARSceneContainer: UIViewRepresentable {
     @EnvironmentObject var placementSettings: PlacementSettings
     @EnvironmentObject var deletionManager: DeletionManager
     @EnvironmentObject var sessionSettings: SessionSettings
-    
-    var serverHandler = ServerHandler.getInstance()
+
+    // connect to the server
+//    var serverHandler = ServerHandler.getInstance()
     
     static var originPoint = AnchorEntity()
     static var floor = ModelEntity()

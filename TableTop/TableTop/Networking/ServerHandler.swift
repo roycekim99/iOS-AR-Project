@@ -27,8 +27,10 @@ final class ServerHandler {
         self.socket = manager.defaultSocket
         setupSocketEvents()
         
-        socket?.connect()
-        self.setUserName(newName: ModelLibrary.username)
+//        self.connectUser()
+        
+//        socket?.connect()
+//        self.setUserName(newName: ModelLibrary.username)
         //        self.emitRequestForPlayerList()
     }
     
@@ -42,6 +44,16 @@ final class ServerHandler {
     //        emitModelTransformed(data: testModel)
     //        print("DEBUG:: Debug testEmissions called!!")
     //    }
+    
+    func connectUser() {
+        socket?.connect()
+        self.setUserName(newName: ModelLibrary.username)
+    }
+    
+    func disconnectUser() {
+        socket?.disconnect()
+        
+    }
     
     func setUserName(newName: String) {
         self.userName = newName
@@ -72,6 +84,11 @@ final class ServerHandler {
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
             //            guard let dataInfo = data.first else { return } // TODO: HANDLE LATER
+            guard let userName = data.first else {return}
+            
+            self.messageManager.show = true
+            self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(userName) has left")
+            
             self.socket?.emit("playerList-req", " ")
         }
         

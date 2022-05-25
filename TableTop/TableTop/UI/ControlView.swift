@@ -226,7 +226,7 @@ struct BackButton: View {
                 ModelManager.getInstance().clearActiveModels()
                 placementSettings.reset()
                 //TODO: disconnect
-                
+                ServerHandler.getInstance().disconnectUser()
                 self.showStartView.toggle()
             }) {
                 Image(systemName: "arrowshape.turn.up.left")

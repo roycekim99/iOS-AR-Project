@@ -61,7 +61,7 @@ struct StartView: View {
     @Binding var showStartView: Bool
     @Binding var showUsernameView: Bool
     @State private var showAbout = false
-    @State private var showJoin = false
+//    @State private var showJoin = false
     @State private var showHowTo = false
 
     var body: some View {
@@ -88,11 +88,12 @@ struct StartView: View {
                 
                 //button for joining a game
                 Buttons(text: "Join a Game", fontStyle: "title" ){
-                    self.showJoin.toggle()
+                    ServerHandler.getInstance().connectUser()
+                    self.showStartView.toggle()
                 }
-                .sheet(isPresented: $showJoin){
-                    JoinView(showJoin: $showJoin, showStartView: $showStartView)
-                }
+//                .sheet(isPresented: $showJoin){
+//                    JoinView(showJoin: $showJoin, showStartView: $showStartView)
+//                }
                 
                 // button for instructions
                 Buttons(text: "How to Play", fontStyle: "title" ){
@@ -207,53 +208,53 @@ struct AboutView: View {
     }
 }
 
-// MARK: Join a game
-struct JoinView: View {
-    @Binding var showJoin: Bool
-    @Binding var showStartView: Bool
-    @State var sessionID = ""
-    let limit = 10
-    
-    var body: some View {
-
-        VStack {
-            Text("Enter the session ID you want to join")
-                .padding()
-            
-            HStack{
-                TextField("Session ID", text: $sessionID)
-                    .onReceive(Just(sessionID)){
-                        _ in limitText(limit)
-                    }
-                    .multilineTextAlignment(.center)
-            }
-            .textFieldStyle(CustomInputBox())
-            
-            Buttons(text: "Join", fontStyle: "title2"){
-                // start arview
-                self.showStartView.toggle()
-            }
-            .padding(.top, 10)
-            .padding(10)
-            
-            Buttons(text: "Cancel", fontStyle:"title2" ){
-                self.showJoin.toggle()
-            }
-            .padding(10)
-            
-            
-        }
-
-        
-}
-    
-    func limitText(_ limit: Int) {
-        if sessionID.count > limit {
-            sessionID = String(sessionID.prefix(limit))
-        }
-    }
-    
-}
+//// MARK: Join a game
+//struct JoinView: View {
+//    @Binding var showJoin: Bool
+//    @Binding var showStartView: Bool
+//    @State var sessionID = ""
+//    let limit = 10
+//
+//    var body: some View {
+//
+//        VStack {
+//            Text("Enter the session ID you want to join")
+//                .padding()
+//
+//            HStack{
+//                TextField("Session ID", text: $sessionID)
+//                    .onReceive(Just(sessionID)){
+//                        _ in limitText(limit)
+//                    }
+//                    .multilineTextAlignment(.center)
+//            }
+//            .textFieldStyle(CustomInputBox())
+//
+//            Buttons(text: "Join", fontStyle: "title2"){
+//                // start arview
+//                self.showStartView.toggle()
+//            }
+//            .padding(.top, 10)
+//            .padding(10)
+//
+//            Buttons(text: "Cancel", fontStyle:"title2" ){
+//                self.showJoin.toggle()
+//            }
+//            .padding(10)
+//
+//
+//        }
+//
+//
+//}
+//
+//    func limitText(_ limit: Int) {
+//        if sessionID.count > limit {
+//            sessionID = String(sessionID.prefix(limit))
+//        }
+//    }
+//
+//}
 
 struct CustomInputBox: TextFieldStyle {
 
