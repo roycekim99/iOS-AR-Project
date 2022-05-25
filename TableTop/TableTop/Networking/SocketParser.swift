@@ -16,8 +16,8 @@ class SocketParser {
         
         let jsonData = try JSONSerialization.data(withJSONObject: data)
         print("DEBUG:: Printing jsonData", jsonData)
-        let decoder = JSONDecoder()
         
+        let decoder = JSONDecoder()
         print("DEBUG:: decoded data?")
         
         return try decoder.decode(T.self, from: jsonData)
