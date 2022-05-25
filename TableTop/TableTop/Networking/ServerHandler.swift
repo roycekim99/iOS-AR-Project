@@ -84,10 +84,7 @@ final class ServerHandler {
         socket?.on(clientEvent: .disconnect) { (data, ack) in
             print ("You've been disconnected!")
             //            guard let dataInfo = data.first else { return } // TODO: HANDLE LATER
-            guard let userName = data.first else {return}
             
-            self.messageManager.show = true
-            self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(userName) has left")
             
             self.socket?.emit("playerList-req", " ")
         }
@@ -99,6 +96,13 @@ final class ServerHandler {
             
             self.messageManager.show = true
             self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(dataInfo) has joined")
+        }
+        
+        self.socket?.on("disconnect user") {(data, ack) in
+            guard let userName = data.first else {return}
+            
+            self.messageManager.show = true
+            self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(userName) has left")
         }
         
         
