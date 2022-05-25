@@ -60,26 +60,36 @@ class ModelLibrary {
     func loadModelToClone(for model: Model) {
         let fileName = model.name + ".usdz"
         
-        cancellable = ModelEntity.loadModelAsync(named: fileName)
-            .sink(receiveCompletion:{ loadCompletion in
-                
-                switch loadCompletion {
-                    
-                case .failure(let error): print("DEBUG::Unable to load modelEntity for \(fileName). Error \(error.localizedDescription)")
-                    self.cancellable?.cancel()
-                    
-                case .finished:
-                    break
-                }
-            } , receiveValue: { modelEntity in
-                
-                ModelLibrary.loadedModels[model.model_uid] = modelEntity
-                ModelLibrary.loadedModels[model.model_uid]?.scale *= model.scaleCompensation
-                
-                self.cancellable?.cancel()
-                
-                print("DEBUG:: \(modelEntity.name) model has been loaded")
-            })
+        do{
+            let modelEntity = try ModelEntity.loadModel(named: fileName)
+            ModelLibrary.loadedModels[model.model_uid] = modelEntity
+            ModelLibrary.loadedModels[model.model_uid]?.scale *= model.scaleCompensation
+            print("DEBUG:: \(modelEntity.name) model has been loaded")
+        } catch {
+            print("unable to load")
+        }
+        
+        
+//        cancellable = ModelEntity.loadModelAsync(named: fileName)
+//            .sink(receiveCompletion:{ loadCompletion in
+//
+//                switch loadCompletion {
+//
+//                case .failure(let error): print("DEBUG::Unable to load modelEntity for \(fileName). Error \(error.localizedDescription)")
+//                    self.cancellable?.cancel()
+//
+//                case .finished:
+//                    break
+//                }
+//            } , receiveValue: { modelEntity in
+//
+//                ModelLibrary.loadedModels[model.model_uid] = modelEntity
+//                ModelLibrary.loadedModels[model.model_uid]?.scale *= model.scaleCompensation
+//
+//                self.cancellable?.cancel()
+//
+//                print("DEBUG:: \(modelEntity.name) model has been loaded")
+//            })
     }
     
     
@@ -97,9 +107,7 @@ class ModelLibrary {
         }  else {
             // load model
             loadModelToClone(for: model)
-            
             print("DEBUG:: Model was not loaded prior to cloning. Finished loading")
-            
             let selectedModelEntity = ModelLibrary.loadedModels[model.model_uid]
             clonedModelEntity = selectedModelEntity?.clone(recursive: true)
         }
