@@ -3,9 +3,10 @@ import RealityKit
 import Combine
 
 class PlacementSettings: ObservableObject {
-    // This property retains the cancellable object for our SceneEvents. Update subscriber
+    /// This property retains the cancellable object for our SceneEvents.
     var sceneObserver: Cancellable?
-    // This property retains a record of placed models in the scene. The last element in the array is the most recently placed model.
+    /// This property retains a record of placed models in the scene.
+    /// The last element in the array is the most recently placed model.
     @Published var recentlyPlaced: [Model] = []
     @Published var recentlyPlacedID: [String] = []
     
@@ -20,16 +21,16 @@ class PlacementSettings: ObservableObject {
             scaleCompensation: 1/1,
             childs: [],
             assetID: 100)
-        self.originfloor = true
+        self.originFloor = true
     }
     
-    @Published var originfloor: Bool? {
+    @Published var originFloor: Bool? {
         willSet(newValue){
             print("DEBUG:: Setting origin point")
         }
     }
     
-    // When the user selects a model in BrowseView, this property is set.
+    /// When the user selects a model in BrowseView, this property is set.
     @Published var selectedModel: Model? {
         willSet(newValue) {
             print("DEBUG:: Setting selectedModel to \(String(describing: newValue?.name))")
@@ -46,11 +47,11 @@ class PlacementSettings: ObservableObject {
     @Published var confirmedModel: Model? {
         willSet(newValue) {
             guard let model = newValue else {
-                print("DEBUG::Clearing confirmedModel:")
+                print("DEBUG:: Clearing confirmedModel")
                 return
             }
             
-            print("DEBUG::Setting confirmedModel to \(model.name)")
+            print("DEBUG:: Setting confirmedModel to \(model.name)")
             
             self.recentlyPlaced.append(model)
         }
@@ -60,7 +61,7 @@ class PlacementSettings: ObservableObject {
     @Published var confirmedModelID: String? {
         willSet(newValue) {
             guard let id = newValue else {
-                print("DEBUG::confirmedModel has no ID")
+                print("DEBUG:: confirmedModel has no ID")
                 return
             }
             

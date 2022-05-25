@@ -1,13 +1,3 @@
-/// Handling floor and objects - falling through - (y-values? 0.1?)
-/// Loading models before placing especially for receiving users
-/// Debugging placement
-
-/// Turn collision off
-/// Username
-/// Popup messages
-/// Singleplayer - multiplayer
-
-
 import RealityKit
 import Combine
 import UIKit
@@ -46,7 +36,6 @@ enum ModelCategory: CaseIterable {
 class ModelLibrary {
     var deviceName = UIDevice.current.identifierForVendor?.uuidString ?? ""
     
-    // Holds an array of model entities
     static var availableAssets: [Model] = []
     static var loadedModels = [String: ModelEntity]()   //Name:modelEntity()
     static var username = ""
@@ -54,9 +43,6 @@ class ModelLibrary {
     private var cancellable: AnyCancellable? = nil
     private static var isModelSetsCreated = false
     
-    
-    // TODO: fix this bug here -- taking too long to load
-    // load model entity and store in loadModels
     func loadModelToClone(for model: Model) {
         let fileName = model.name + ".usdz"
         
@@ -66,10 +52,10 @@ class ModelLibrary {
             ModelLibrary.loadedModels[model.model_uid]?.scale *= model.scaleCompensation
             print("DEBUG:: \(modelEntity.name) model has been loaded")
         } catch {
-            print("unable to load")
+            print("Unable to load")
         }
         
-        
+/// Commented out code below was used for async loading. Keeping for reference. /
 //        cancellable = ModelEntity.loadModelAsync(named: fileName)
 //            .sink(receiveCompletion:{ loadCompletion in
 //
@@ -93,29 +79,25 @@ class ModelLibrary {
     }
     
     
-    // clone model entity and return this entity to be placed into the scene
-    // Returns a Model(deep copy).
-    // Important to keep in mind that this cloned model uses the anchor position from
-    // the tap gesture.
+    /// Returns a Model(deep copy).
+    /// Important to keep in mind that this cloned model uses the anchor position from
+    /// the tap gesture.
     func getModelCloned(from model: Model) -> Model {
         let clonedModel = Model(from:model)
-        
         var clonedModelEntity: ModelEntity?
         
         if let modelLoadedAlready = ModelLibrary.loadedModels[model.model_uid] {
             clonedModelEntity = modelLoadedAlready.clone(recursive: true)
         }  else {
-            // load model
             loadModelToClone(for: model)
-            print("DEBUG:: Model was not loaded prior to cloning. Finished loading")
+            print("DEBUG:: Model was not loaded prior to cloning. Finished loading.")
             let selectedModelEntity = ModelLibrary.loadedModels[model.model_uid]
             clonedModelEntity = selectedModelEntity?.clone(recursive: true)
         }
-        //DEBUG
+        
         print("DEBUG:: ML|| loaded: \(ModelLibrary.loadedModels.count)")
         print("DEBUG:: ML|| loaded model ID: " + String(model.model_uid))
-        print("DEBUG:: original ID: \(model.getModelEntity().id )|| new: \(clonedModelEntity?.id)")
-        
+        print("DEBUG:: original ID: \(model.getModelEntity().id )|| new: \(String(describing: clonedModelEntity?.id))")
         
         //        testing if setPosition works
         //        print("hard coding to test get realtive position")
@@ -123,7 +105,7 @@ class ModelLibrary {
         
         clonedModelEntity!.generateCollisionShapes(recursive: true)
         
-        // Set physics and mass
+        /// Set physics and mass
         if let collisionComponent = clonedModelEntity!.components[CollisionComponent.self] as? CollisionComponent {
             clonedModelEntity!.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(shapes: collisionComponent.shapes, mass: 100, material: nil, mode: .kinematic)
         }
@@ -136,7 +118,7 @@ class ModelLibrary {
         return clonedModel
     }
     
-    // return categories for displaying in browseview
+    // Return categories for displaying in browseview
     func getCategory(category: ModelCategory) -> [Model] {
         //DEBUG
         print("DEBUG:: ML|| Library size: \(ModelLibrary.availableAssets.count)")
@@ -157,6 +139,7 @@ class ModelLibrary {
         }
         return nil
     }
+    
     
     private func configureUIDPerModel(){
         for modelObj in ModelLibrary.availableAssets {

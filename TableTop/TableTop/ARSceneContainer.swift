@@ -32,7 +32,7 @@ struct ARSceneContainer: UIViewRepresentable {
         /// Add model to scene if confirmed for placement
         if let confirmedModel = self.placementSettings.confirmedModel {
             if confirmedModel.name == "floor" {
-                self.placeFloor(in: arView, for: self.placementSettings.originfloor!)
+                self.placeFloor(in: arView, for: self.placementSettings.originFloor!)
             }
             else {
                 // Debug code
@@ -44,11 +44,12 @@ struct ARSceneContainer: UIViewRepresentable {
                 self.cloneAndPlace(modelSelected: confirmedModel)
             }
             self.placementSettings.confirmedModel = nil
-            self.placementSettings.originfloor = false
+            self.placementSettings.originFloor = false
         }
     }
     
-    
+    /// Given a Model object, this function gets a cloned copy, places it, adds it to the activeModel's array for bookkeeping,
+    /// and emit the data to the server
     private func cloneAndPlace(modelSelected confirmedModel: Model){
         let selectedClonedModel = ModelLibrary().getModelCloned(from: confirmedModel)
         ModelManager.getInstance().place(for : selectedClonedModel, reqPos: nil)
@@ -56,7 +57,7 @@ struct ARSceneContainer: UIViewRepresentable {
         ModelManager.getInstance().emitPlacementData(forModel: selectedClonedModel)
     }
     
-    /// Placing a floor, which acts as an origin for the scene, important for
+    /// Placing a floor, which acts as an origin for the scene. Important for
     ///  attempting to simulate relative placement for multiplayer users.
     ///  The "floor" is a box, because there were with issues falling through the
     ///  previous implementation, which was using a plane as a "floor".

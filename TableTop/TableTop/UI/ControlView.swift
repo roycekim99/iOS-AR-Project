@@ -33,7 +33,7 @@ struct ControlView: View {
                 //          If no model is selected for placement, show default UI
                 if self.placementSettings.selectedModel != nil {
                     // Show placement view
-                    PlaceConfirmView(isOrigin: self.placementSettings.originfloor!)
+                    PlaceConfirmView(isOrigin: self.placementSettings.originFloor!)
                 } else if self.deleteEnabled {
                     DeletionView(deleteEnabled: $deleteEnabled)
                 } else {

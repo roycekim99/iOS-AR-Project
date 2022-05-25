@@ -1,6 +1,3 @@
-/// This class controls all the active models in the scene.
-/// ModelManager is a singleton.
-
 import RealityKit
 import ARKit
 import SwiftUI
@@ -239,6 +236,7 @@ class ModelManager{
         // TODO: Things we can try?
         // - setPosition on anchor
         // - try relativeTo: origin
+        // - try using ONLY relative to the world space, aka relativeTo: nil
         
         // Also, data received is a delta position of the target object,
         // so it would make sense to setPosition relative to the model's old position

@@ -1,10 +1,3 @@
-//
-//  MessageManager.swift
-//  TableTop
-//
-//  Created by Ashley Li on 5/16/22.
-//
-
 import Foundation
 import AlertToast
 
@@ -23,5 +16,4 @@ class MessageManager: ObservableObject {
     }
     
     @Published var alertToast = AlertToast(displayMode: .hud, type: .regular, title: " ")
-
 }
