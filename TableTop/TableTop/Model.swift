@@ -15,6 +15,8 @@ class Model {
     var position: SIMD3<Float>
     var thumbnail: UIImage
     
+    var transformationStartPos = SIMD3<Float>()
+    
     init(name: String, category: ModelCategory, scaleCompensation: Float = 1.0, childs: [Model]){
         self.name = name
         self.category = category
@@ -81,7 +83,7 @@ class Model {
         return self.model_uid
     }
     
-    static func getRelativePosition(from model: AnchorEntity) -> SIMD3<Float> {
+    static func getRelativePosition(for model: AnchorEntity) -> SIMD3<Float> {
         return model.position(relativeTo: ARSceneContainer.originPoint)
     }
     

@@ -121,59 +121,66 @@ class ModelManager{
             return
         }
             
+        let model = getModelWithMEntity(modEnt: targetModelEntity!)
+        
         switch gesture.state {
         case .began:
-            print("DEBUG::Started Moving")
+                print("DEBUG::MM|| Started Moving")
+                model.transformationStartPos = targetModelEntity!.position
                 
-            if (CustomARView.Holder.zoomEnabled) {
-                print("DEBUG:: zoooom")
-                for (_,modelObj) in self.activeModels {
-                    //save current child parent relationship
-                    CustomARView.Holder.anchorMap[modelObj.getModelUID()] = modelObj.getModelEntity().parent as? AnchorEntity
-                    
-                    let modelEntity = modelObj.getModelEntity()
-                    if (modelEntity != targetModelEntity!) {
-                        modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
+                print("DEBUG:: MM|| startPos \(model.transformationStartPos)")
+                
+                if (CustomARView.Holder.zoomEnabled) {
+                    print("DEBUG:: zoooom")
+                    for (_,modelObj) in self.activeModels {
+                        //save current child parent relationship
+                        CustomARView.Holder.anchorMap[modelObj.getModelUID()] = modelObj.getModelEntity().parent as? AnchorEntity
+                        
+                        let modelEntity = modelObj.getModelEntity()
+                        if (modelEntity != targetModelEntity!) {
+                            modelEntity.setParent(targetModelEntity, preservingWorldTransform: true)
+                        }
                     }
+                    ARSceneContainer.floor.setParent(targetModelEntity, preservingWorldTransform: true)
                 }
-                ARSceneContainer.floor.setParent(targetModelEntity, preservingWorldTransform: true)
-            }
         case .ended:
-            print("DEBUG::Stopped Moving")
-                
-            let model = getModelType(modEnt: targetModelEntity!)
-        
-//            let finalRelativePos = Model.getRelativePosition(from: targetModelEntity!)
-//
-//            print(model.name)
-//            print(finalRelativePos)
-//
-//            //EMIT
-//            let emissionData = SharedSessionData(
-//                modelUID: model.model_uid,
-//                modelName: model.name,
-//                positionX: finalRelativePos.x,
-//                positionY: finalRelativePos.y,
-//                positionZ: finalRelativePos.z)
-//
-//            ServerHandler.getInstance().emitModelTransformed(data: emissionData)
+                print("DEBUG:: MM|| Stopped Moving")
 
-            if (CustomARView.Holder.zoomEnabled) {
-                for (_,modelObj) in self.activeModels {
-                    let modelEntity = modelObj.getModelEntity()
-                    if (modelEntity != targetModelEntity!) {
-                        modelEntity.setParent(CustomARView.Holder.anchorMap[modelObj.getModelUID()], preservingWorldTransform: true)
+                let finalPos = targetModelEntity!.position
+                print("DEBUG:: MM|| final Pos: \(finalPos)")
+                
+                var deltaPos = SIMD3<Float>()
+                deltaPos.x = finalPos.x - model.transformationStartPos.x
+                deltaPos.y = finalPos.y - model.transformationStartPos.y
+                deltaPos.z = finalPos.z - model.transformationStartPos.z
+                
+                print("DEBUG:: MM|| deltaPOS: \(deltaPos)")
+                //EMIT
+                let emissionData = SharedSessionData(
+                    modelUID: model.model_uid,
+                    modelName: model.name,
+                    positionX: deltaPos.x,
+                    positionY: deltaPos.y,
+                    positionZ: deltaPos.z)
+
+                ServerHandler.getInstance().emitModelTransformed(data: emissionData)
+
+                if (CustomARView.Holder.zoomEnabled) {
+                    for (_,modelObj) in self.activeModels {
+                        let modelEntity = modelObj.getModelEntity()
+                        if (modelEntity != targetModelEntity!) {
+                            modelEntity.setParent(CustomARView.Holder.anchorMap[modelObj.getModelUID()], preservingWorldTransform: true)
+                        }
                     }
+                    CustomARView.Holder.anchorMap.removeAll()
+                    //print("Origin point old position: \(ARSceneContainer.originPoint.position)")
+                    ARSceneContainer.originPoint.setPosition([0,0,0], relativeTo: ARSceneContainer.floor)
+                    ARSceneContainer.floor.setParent(ARSceneContainer.originPoint, preservingWorldTransform: true)
+                    //print("Origin point new position: \(ARSceneContainer.originPoint.position)")
+                    //print("Floor position: \(ARSceneContainer.floor.position)")
                 }
-                CustomARView.Holder.anchorMap.removeAll()
-                //print("Origin point old position: \(ARSceneContainer.originPoint.position)")
-                ARSceneContainer.originPoint.setPosition([0,0,0], relativeTo: ARSceneContainer.floor)
-                ARSceneContainer.floor.setParent(ARSceneContainer.originPoint, preservingWorldTransform: true)
-                //print("Origin point new position: \(ARSceneContainer.originPoint.position)")
-                //print("Floor position: \(ARSceneContainer.floor.position)")
-            }
-            self.objectMoved = nil
-            
+                self.objectMoved = nil
+                model.transformationStartPos = finalPos
         default:
             return
         }
@@ -194,7 +201,7 @@ class ModelManager{
             print("DEBUG::NH received relative position:", posRequested)
             print("DEBUG::NH origin point position:     ", ARSceneContainer.originPoint)
             print("DEBUG::NH anchorEntity's position:   ", anchorEntity.position)
-            print("DEBUG::NH current relative position: ", Model.getRelativePosition(from: anchorEntity))
+            print("DEBUG::NH current relative position: ", Model.getRelativePosition(for: anchorEntity))
         }
         
         anchorEntity.addChild(model.getModelEntity())
@@ -204,10 +211,11 @@ class ModelManager{
 
         print("DEBUG:: MM || Cloned model: \(model.name)")
 
-        for child in model.childs {
+        for (index,child) in model.childs.enumerated() {
             //print("DEBUG:: going thorugh children for \(selectedClonedModel.name)..." + child.name)
             let clonedChildModel = ModelLibrary().getModelCloned(from: child)
             self.place(for: clonedChildModel, reqPos: posRequested)
+            clonedChildModel.setModelID(to: model.model_uid + "_" + String(index))
             self.addActiveModel(modelID: clonedChildModel.model_uid, model: clonedChildModel)
         }
                 
@@ -217,14 +225,22 @@ class ModelManager{
 //        }
     }
     
-    func moveModel(model selectedModel: Model, to finalPos: SIMD3<Float>){
+    func moveModel(model selectedModel: Model, by deltaPos: SIMD3<Float>){
+        let currentPos = selectedModel.getModelEntity().position
+        var changedPos = currentPos
+        changedPos.x += deltaPos.x
+        changedPos.y += deltaPos.y
+        changedPos.z += deltaPos.z
+        
+        print("DEBUG:: MM|| moveModel currentPos: \(currentPos)")
+        print("DEBUG:: MM|| moveModel changedPos: \(changedPos)")
         //DEBUG
-        selectedModel.getModelEntity().setPosition(finalPos, relativeTo: ARSceneContainer.originPoint)
+        selectedModel.getModelEntity().setPosition(changedPos, relativeTo: nil)
     }
     
     /// Given a Model object, obtain it's relative position from the origin point, created a SharedSessionData object to send to the server
     func emitPlacementData(forModel clonedModelInput: Model){
-        let relativePos = Model.getRelativePosition(from: clonedModelInput.getAnchorEntity())
+        let relativePos = Model.getRelativePosition(for: clonedModelInput.getAnchorEntity())
         print("DEBUG:: MM|| Current pos = \(clonedModelInput.getAnchorEntity().position)")
         print("DEBUG:: MM|| NH relativePos = ", relativePos)
         
@@ -280,10 +296,16 @@ class ModelManager{
         }
     }
     
-    private func getModelType(modEnt: ModelEntity) -> Model {
+    private func getModelWithMEntity(modEnt: ModelEntity) -> Model {
         var model: AnyObject?
+        
+        print("DEBUG:: MM.getEntity, entity ID: \(modEnt.id )")
+
+        
         for mod in ModelManager.getInstance().activeModels {
             if (mod.value.modelEntity == modEnt) {
+                print("DEBUG:: MM.getEntity, ENTITY FOUND: \(mod.value.name)")
+
                 model = mod.value
             }
         }

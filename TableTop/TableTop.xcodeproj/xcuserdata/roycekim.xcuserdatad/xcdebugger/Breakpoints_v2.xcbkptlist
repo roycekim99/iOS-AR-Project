@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
             endingLineNumber = "93"
-            landmarkName = "getModelCloned(from:)"
+            landmarkName = "loadModelToClone(for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -147,6 +147,7 @@ final class ServerHandler {
                 let clonedModelFromRequest =
                 ModelLibrary().getModelCloned(from: foundModel)
                 
+                clonedModelFromRequest.setModelID(to: tempSharedSessionData.modelUID)
                 ModelManager.getInstance().place(for: clonedModelFromRequest, reqPos: reqPosSIMD3)
                 ModelManager.getInstance().addActiveModel(modelID: clonedModelFromRequest.model_uid, model: clonedModelFromRequest)
             } else {
@@ -169,33 +170,34 @@ final class ServerHandler {
             print ("DEBUG:: from server--> model transform received")
             
             guard let dataInfo = data.first else { return }
-            if let response: SharedSessionData = try? SocketParser.convert(data: dataInfo) {
-                print("DEBUG:: Server requested to transform model: " + response.modelName)
-                
-                //parse data from server
-                let dataDict = dataInfo as! [String: Any]
-                
-                let incomingData = SharedSessionData(
-                    modelUID: dataDict["objectID"]! as! String,
-                    modelName: dataDict["modelName"]! as! String,
-                    positionX: (dataDict["positionX"] as! NSNumber).floatValue,
-                    positionY: (dataDict["positionY"] as! NSNumber).floatValue,
-                    positionZ: (dataDict["positionZ"] as! NSNumber).floatValue)
-                
-                let positionArr = [incomingData.positionX,
-                                   incomingData.positionY,
-                                   incomingData.positionZ]
-                
-                //DEBUG
-                print("DEBUG:: SH modelName ->>>>", incomingData.modelName)
+            // Parse data from server
+            let dataDict = dataInfo as! [String: Any]
             
-                //1. find model from active models
-                if let activeModel = ModelManager.getInstance().activeModels[incomingData.modelUID]{
-                    ModelManager.getInstance().moveModel(model: activeModel, to: SIMD3<Float>(positionArr))
-                } else {
-                    print("DEBUG:: SH || no model found to move!!!!")
-                }
+            self.messageManager.show = true
+            self.messageManager.alertToast = AlertToast(displayMode: .hud, type: .regular, title: "\(dataDict["modelName"]! as! String) has been set for transformation")
+            
+            let incomingData = SharedSessionData(
+                modelUID: dataDict["objectID"]! as! String,
+                modelName: dataDict["modelName"]! as! String,
+                positionX: (dataDict["positionX"] as! NSNumber).floatValue,
+                positionY: (dataDict["positionY"] as! NSNumber).floatValue,
+                positionZ: (dataDict["positionZ"] as! NSNumber).floatValue)
+            
+            // Hard coded y-value temporarily to fix receiving users objects falling
+            let positionArr = [incomingData.positionX,
+                               0.3,
+                               incomingData.positionZ]
+            //DEBUG
+            print("DEBUG:: SH|| Server requested to transform model: " + incomingData.modelName)
+        
+            //1. find model from active models
+            if let activeModel = ModelManager.getInstance().activeModels[incomingData.modelUID]{
                 
+                ModelManager.getInstance().moveModel(model: activeModel, by: SIMD3<Float>(positionArr))
+                
+                
+            } else {
+                print("DEBUG:: SH || no model found to move!!!!")
             }
         }
         
