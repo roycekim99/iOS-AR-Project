@@ -98,7 +98,6 @@ class ModelManager{
     }
     
     @objc func handleTranslation(_ sender: UIGestureRecognizer) {
-        /// Most of this function handles the zoom function
         guard let gesture = sender as? EntityTranslationGestureRecognizer else { return }
         
         let targetModelEntity = gesture.entity as? ModelEntity
@@ -225,29 +224,20 @@ class ModelManager{
     /// This function then receives the new relative position and set the active model's
     /// position to the new relative position.
     func moveModel(model selectedModel: Model, by deltaPos: SIMD3<Float>){
-        let currentPos = selectedModel.getModelEntity().position
-        var changedPos = currentPos
-        changedPos.x += deltaPos.x
-        changedPos.y += deltaPos.y
-        changedPos.z += deltaPos.z
-        
-        print("DEBUG:: MM|| moveModel currentPos: \(currentPos)")
-        print("DEBUG:: MM|| moveModel changedPos: \(changedPos)")
-        
+        selectedModel.getModelEntity().transform.translation += deltaPos
+
         // TODO: Things we can try?
-        // - setPosition on anchor
         // - try relativeTo: origin
         // - try using ONLY relative to the world space, aka relativeTo: nil
         
         // Also, data received is a delta position of the target object,
         // so it would make sense to setPosition relative to the model's old position
-        let currModel = selectedModel.getModelEntity()
+        
         // Maybe we need to make an temporary exact copy of the entity, setPosition
         // relative to that copy, and then delete the copy?
         // So far with this implentation below, translation works a little initially,
         // but eventually no matter what direction you move the object, the receiver's
         // object keeps moving the same direction. lol.
-        currModel.setPosition(changedPos, relativeTo: currModel)
     }
     
     /// Given a Model object, obtain it's relative position from the origin point, created a SharedSessionData object to send to the server
