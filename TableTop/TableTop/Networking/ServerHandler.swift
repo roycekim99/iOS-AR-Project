@@ -133,7 +133,7 @@ final class ServerHandler {
             
             // Hard coded y-value temporarily to fix receiving users objects falling
             let positionArr = [tempSharedSessionData.positionX,
-                               0.3,
+                               0.05,
                                tempSharedSessionData.positionZ]
             
             print("DEBUG:: SH modelName ->>>>", tempSharedSessionData.modelName)
