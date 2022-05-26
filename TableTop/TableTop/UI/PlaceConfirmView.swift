@@ -30,6 +30,7 @@ struct PlaceConfirmView: View {
                 
                 // record id only when the object is comfirmed
                 self.placementSettings.confirmedModelID = self.placementSettings.selectedModelID
+                // print("DEBUG:: Model UID is: ", placementSettings.confirmedModelID)
                 
                 self.placementSettings.selectedModel = nil
                 self.placementSettings.selectedModelID = nil
