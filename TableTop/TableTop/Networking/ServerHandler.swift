@@ -148,6 +148,11 @@ final class ServerHandler {
                 clonedModelFromRequest.setModelID(to: tempSharedSessionData.modelUID)
                 ModelManager.getInstance().place(for: clonedModelFromRequest, reqPos: reqPosSIMD3)
                 ModelManager.getInstance().addActiveModel(modelID: clonedModelFromRequest.model_uid, model: clonedModelFromRequest)
+                
+                //DEBUG
+                let tempModelFoundActive = ModelManager.getInstance().activeModels[clonedModelFromRequest.model_uid]
+                
+                print("DEBUG:: SH || foundActive: \(tempModelFoundActive?.getModelUID())")
             } else {
                 print("DEBUG:: SH || unable to find model with requested name, failed requested placement!!")
             }

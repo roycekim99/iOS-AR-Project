@@ -89,4 +89,29 @@ struct ARSceneContainer: UIViewRepresentable {
         }
         print("DEBUG:: ARSC|| Floor added successfully!")
     }
+    
+    /*
+    func placeSphere(in arView: ARView, for setOrigin: Bool) {
+        let sphere = ModelEntity(mesh: .generateSphere(radius: 1), materials: [SimpleMaterial()])
+        sphere.generateCollisionShapes(recursive: true)
+        sphere.components[PhysicsBodyComponent.self] = PhysicsBodyComponent(massProperties: .default, material: nil, mode: .static)
+        sphere.components[ModelComponent.self] = nil
+        sphere.name = "sphere"
+        
+        let anchorEntity2 = AnchorEntity(plane: .horizontal)
+        anchorEntity2.addChild(sphere)
+        arView.scene.addAnchor(anchorEntity2)
+        
+        if setOrigin == true {
+            ARSceneContainer.originPoint = anchorEntity2
+            ARSceneContainer.floor = sphere
+            
+            // Debug code
+            let originPointPos = ARSceneContainer.originPoint.position
+            print("DEBUG:: ARSC|| Origin point pos: \(originPointPos)")
+            
+        }
+        print("DEBUG:: ARSC|| Sphere added successfully!")
+    }
+    */
 }

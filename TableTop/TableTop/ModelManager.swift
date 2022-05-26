@@ -211,13 +211,29 @@ class ModelManager{
             let clonedChildModel = ModelLibrary().getModelCloned(from: child)
             self.place(for: clonedChildModel, reqPos: posRequested)
             clonedChildModel.setModelID(to: model.model_uid + "_" + String(index))
+            
+            //DEBUG
+            print("DEBUG:: MM|| setting \(child.name) UID as: \(model.model_uid) + \(index)")
+            
             self.addActiveModel(modelID: clonedChildModel.model_uid, model: clonedChildModel)
         }
+        
+        //DEBUG
+        let foundModel = activeModels[model.getModelUID()]
+        
+        print("DEBUG:: MM || Model found: \(foundModel != nil) \nModel UID after placement is: \(foundModel?.getModelUID())")
                 
         print("DEBUG:: MM ||| place ending! active models: \(ModelManager.getInstance().activeModels.count)")
 //        for modelInstance in ModelManager.getInstance().activeModels {
 //            print("DEBUG:: MM ||| place ENDED! active model name: \(modelInstance.value.name)")
 //        }
+        
+        /*
+        //DEBUG
+        for (uid, modelValue) in activeModels {
+            print("DEBUG:: MM || \(modelValue.name) is kinematic? \(modelValue.getModelEntity().physicsBody.self?.mode == .kinematic)")
+        }
+        */
     }
     
     /// This function here is only called when we received data from the server.
