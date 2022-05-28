@@ -201,7 +201,12 @@ class ModelManager{
         anchorEntity.addChild(model.getModelEntity())
         model.setAnchorEntity(&anchorEntity)
         
+        
+        
         targetARView.scene.addAnchor(anchorEntity)
+        
+        // Set model to be on the floor
+        anchorEntity.setPosition([anchorEntity.position(relativeTo: ARSceneContainer.originPoint).x, 0, anchorEntity.position(relativeTo: ARSceneContainer.originPoint).z], relativeTo: ARSceneContainer.originPoint)
 
         print("DEBUG:: MM || Cloned model: \(model.name)")
 
