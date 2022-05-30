@@ -30,4 +30,18 @@ class SocketParser {
             return try decoder.decode(T.self, from: jsonData)
         }
     }
+    
+    static func JSONConvert(string: String) -> [AnyObject] {
+        if let data = string.data(using: String.Encoding.utf8) {
+            do {
+                if let arrayData = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)  as? [AnyObject] {
+                    return arrayData
+                                    }
+                } catch {
+                    print("error")
+                }
+                
+            }
+        return [AnyObject]()
+    }
 }

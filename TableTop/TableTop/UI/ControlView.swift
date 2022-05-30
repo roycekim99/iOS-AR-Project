@@ -248,7 +248,6 @@ struct ControlBottomBar: View {
     @Binding var showSettings: Bool
     @Binding var showPalyerList: Bool
     
-    
     var body: some View {
         HStack {
             
@@ -276,12 +275,15 @@ struct ControlBottomBar: View {
             
             Spacer()
             
+            //Playerlist button
             ControlButton(systemIconName: "book") {
                 print("PlayerList button pressed")
                 self.showPalyerList.toggle()
+                
             }
             .sheet(isPresented: $showPalyerList) {
                 PlayerListView(showPlayerList: $showPalyerList)
+                
             }
             
         }
@@ -294,27 +296,39 @@ struct ControlBottomBar: View {
 // MARK: PlayerListview
 struct PlayerListView: View {
     @Binding var showPlayerList: Bool
-    @StateObject var players = PlayerList()
+    @ObservedObject private var playerlistManager = PlayerList.playerListInstance
     
     //    let names = ["hfaje", "thoea hjka", "fhefewafe", "fnekfnefd", "bcndnvf", "mcsoj", "ndjnia", "njedknei", "mnkfeogkg", "gdkmeklnk"]
     
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(0..<players.playerNames.count) { i in
-                    VStack{
-                        Text(players.playerNames[i])
-                            .padding(5)
+                if playerlistManager.shouldUpdated {
+                    ForEach(0..<playerlistManager.playerNames.count) { i in
+                        VStack{
+                            Text(playerlistManager.playerNames[i])
+                                .padding(5)
+                        }
+                        .padding(.leading, 30)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .padding(.leading, 30)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    ForEach(0..<playerlistManager.playerNames.count) { i in
+                        VStack{
+                            Text(playerlistManager.playerNames[i])
+                                .padding(5)
+                        }
+                        .padding(.leading, 30)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
+
             }
-            
             .navigationBarTitle(Text("Player List"), displayMode: .inline)
             .navigationBarItems(leading:
                                     Button(action: {
                 self.showPlayerList.toggle()
+
             }) {
                 Text("Done").bold()
             })

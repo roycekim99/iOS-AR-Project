@@ -192,9 +192,24 @@ final class ServerHandler {
             print("DEBUG:: SH PLAYER || FROM SERVER -> received new list of users")
             
             guard let playerNames = data.first as? String else {return}
-            print("DEBUG:: SH PLAYER || playerNames: ", playerNames.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
-            print("DEBUG:: SH PLAYER || playerNames: ", type(of: playerNames))
-            //            print("DEBUG:: SH PLAYER || playerNames: ", playerNames.)
+            
+            // parse JSON string
+            let parsedPlayerNames = SocketParser.JSONConvert(string: playerNames)
+            print("DEBUG:: SH PLAYER || parsedplayerNames: ", parsedPlayerNames[0])
+            
+            print("DEBUG:: SH PLAYER || playerNames: ", playerNames)
+            
+            
+            print("DEBUG:: SH PLAYER || playerNames: ", type(of: parsedPlayerNames[0]))
+            
+            PlayerList.playerListInstance.playerNames = []
+            
+            parsedPlayerNames.forEach { parsedName in
+                PlayerList.playerListInstance.playerNames += [parsedName as! String]
+            }
+            
+            PlayerList.playerListInstance.shouldUpdated.toggle()
+
         }
     }
     
@@ -258,5 +273,9 @@ struct PlayerConnectionsFromServer: Codable {
 }
 
 class PlayerList: ObservableObject {
+    static let playerListInstance = PlayerList()
+    
     @Published var playerNames = [String]()
+    
+    @Published var shouldUpdated = false
 }
