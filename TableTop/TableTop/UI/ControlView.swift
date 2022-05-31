@@ -303,26 +303,14 @@ struct PlayerListView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                if playerlistManager.shouldUpdated {
-                    ForEach(0..<playerlistManager.playerNames.count) { i in
-                        VStack{
-                            Text(playerlistManager.playerNames[i])
-                                .padding(5)
-                        }
-                        .padding(.leading, 30)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                ForEach(0..<playerlistManager.playerNames.count, id: \.self) { i in
+                    VStack{
+                        Text(playerlistManager.playerNames[i])
+                            .padding(5)
                     }
-                } else {
-                    ForEach(0..<playerlistManager.playerNames.count) { i in
-                        VStack{
-                            Text(playerlistManager.playerNames[i])
-                                .padding(5)
-                        }
-                        .padding(.leading, 30)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
+                    .padding(.leading, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-
             }
             .navigationBarTitle(Text("Player List"), displayMode: .inline)
             .navigationBarItems(leading:

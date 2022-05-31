@@ -195,20 +195,18 @@ final class ServerHandler {
             
             // parse JSON string
             let parsedPlayerNames = SocketParser.JSONConvert(string: playerNames)
-            print("DEBUG:: SH PLAYER || parsedplayerNames: ", parsedPlayerNames[0])
-            
-            print("DEBUG:: SH PLAYER || playerNames: ", playerNames)
-            
-            
-            print("DEBUG:: SH PLAYER || playerNames: ", type(of: parsedPlayerNames[0]))
+//            print("DEBUG:: SH PLAYER || parsedplayerNames: ", parsedPlayerNames[0])
+//
+//            print("DEBUG:: SH PLAYER || playerNames: ", playerNames)
+//
+//
+//            print("DEBUG:: SH PLAYER || playerNames: ", type(of: parsedPlayerNames[0]))
             
             PlayerList.playerListInstance.playerNames = []
             
             parsedPlayerNames.forEach { parsedName in
                 PlayerList.playerListInstance.playerNames += [parsedName as! String]
             }
-            
-            PlayerList.playerListInstance.shouldUpdated.toggle()
 
         }
     }
@@ -276,6 +274,4 @@ class PlayerList: ObservableObject {
     static let playerListInstance = PlayerList()
     
     @Published var playerNames = [String]()
-    
-    @Published var shouldUpdated = false
 }
