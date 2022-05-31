@@ -4,7 +4,6 @@ enum Setting {
     case peopleOcclusion
     case objectOcclusion
     case lidarDebug
-    case multiuser
     case physics
     
     var label: String {
@@ -14,8 +13,6 @@ enum Setting {
                 return "Occlusion"
             case .lidarDebug:
                 return "LiDAR"
-            case .multiuser:
-                return "Multiuser"
             case .physics:
                 return "Physics"
             }
@@ -31,8 +28,6 @@ enum Setting {
                 return  "cube.box.fill"
             case .lidarDebug:
                 return "light.min"
-            case .multiuser:
-                return "person.2"
             case .physics:
                 return "burst.fill"
             }
@@ -45,7 +40,6 @@ class SessionSettings: ObservableObject {
     @Published var isPeopleOcclusionEnabled: Bool = false
     @Published var isObjectOcclusionEnabled: Bool = false
     @Published var isLidarDebugEnabled: Bool = false
-    @Published var isMultiuserEnabled: Bool = false
     @Published var isPhysicsEnabled: Bool = false
 }
 
@@ -82,10 +76,7 @@ struct SettingsGrid: View {
                 SettingToggleButton(setting: .objectOcclusion, isOn: $sessionSettings.isObjectOcclusionEnabled)
                 
                 SettingToggleButton(setting: .lidarDebug, isOn: $sessionSettings.isLidarDebugEnabled)
-                
-                SettingToggleButton(setting: .multiuser, isOn: $sessionSettings.isMultiuserEnabled)
-                
-                //PhysicsButton(setting: .physics)
+                                
                 PhysicsButton(setting: .physics, isOn: $sessionSettings.isPhysicsEnabled)
             }
         }
