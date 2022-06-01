@@ -190,7 +190,7 @@ struct ZoomButton: View {
                 self.zoomView.ZoomEnabled = self.zoomEnabled
                 ModelManager.getInstance().moveAll(check: self.zoomView.ZoomEnabled)
             }) {
-                Image(systemName: self.zoomEnabled ? "magnifyingglass.circle.fill" : "magnifyingglass")
+                Image(systemName: "mappin.and.ellipse")
                     .font(.system(size: 25))
                     .foregroundColor(.white)
                     .buttonStyle(PlainButtonStyle())
@@ -276,7 +276,7 @@ struct ControlBottomBar: View {
             Spacer()
             
             //Playerlist button
-            ControlButton(systemIconName: "book") {
+            ControlButton(systemIconName: "person.2") {
                 print("PlayerList button pressed")
                 self.showPalyerList.toggle()
                 
