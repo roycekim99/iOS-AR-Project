@@ -17,7 +17,7 @@ class PlacementSettings: ObservableObject {
     func reset() {
         self.selectedModel = Model(
             name: "floor",
-            category: .unknown,
+            category: .floor,
             scaleCompensation: 1/1,
             childs: [],
             assetID: 100)

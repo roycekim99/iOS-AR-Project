@@ -3,18 +3,18 @@ import Combine
 import UIKit
 
 enum ModelCategory: CaseIterable {
-    case test
     case set
     case pieces
     case board
-    case setModel
+    // case setModel
     case figures
-    case unknown
+    // case unknown
+    case floor
     
     var label: String {
         get {
             switch self {
-            case .test:
+            case .floor:
                 return "Floor"
             case .set:
                 return "Game Sets"
@@ -22,12 +22,12 @@ enum ModelCategory: CaseIterable {
                 return "Pieces"
             case .board:
                 return "Boards"
-            case .setModel:
-                return "Set Models"
+            // case .setModel:
+                // return "Set Models"
             case .figures:
                 return "Figures"
-            case .unknown:
-                return "Unknown"
+            // case .unknown:
+                // return "Unknown"
             }
         }
     }
@@ -177,7 +177,7 @@ class ModelLibrary {
         let red11 = Model(name: "Red_11", category: .set, scaleCompensation: 1/1, childs: [], assetID: 22)
         let red12 = Model(name: "Red_12", category: .set, scaleCompensation: 1/1, childs: [], assetID: 23)
         
-        let floor = Model(name: "floor", category: .test, scaleCompensation: 1/1, childs: [], assetID: 24)
+        let floor = Model(name: "floor", category: .floor, scaleCompensation: 1/1, childs: [], assetID: 24)
         
         let checkersSet = Model(name: "Checkers Set", category: .set, scaleCompensation: 1/1, childs: [black1, black2, black3, black4, black5, black6, black7, black8, black9, black10, black11, black12, red1, red2, red3, red4, red5, red6, red7, red8, red9, red10, red11, red12], assetID: 25)
         
@@ -227,11 +227,15 @@ class ModelLibrary {
         ModelLibrary.availableAssets += [checkersBoard, chessBoard]
         
         // Set Models
+        /*
         let chess = Model(name: "Chess", category: .setModel, scaleCompensation: 2/10000, childs: [], assetID: 59)
         let modernCheckers = Model(name: "Modern Checkers", category: .setModel, scaleCompensation: 1/2, childs: [], assetID: 60)
         let vintageCheckers = Model(name: "Vintage Checkers", category: .setModel, scaleCompensation: 1/5000, childs: [], assetID: 61)
         
         ModelLibrary.availableAssets += [chess, modernCheckers, vintageCheckers, floor]
+        */
+        
+        ModelLibrary.availableAssets += [floor]
         
         // Pieces
         // Checkers
