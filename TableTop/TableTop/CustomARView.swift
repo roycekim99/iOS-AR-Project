@@ -38,7 +38,7 @@ class CustomARView: ARView {
         ModelManager.getInstance().setDeletionmanager(deletionManager: deletionManager)
         
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection = [.horizontal, .vertical]
+        config.planeDetection = [.horizontal]
         
         if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
             config.sceneReconstruction = .mesh
