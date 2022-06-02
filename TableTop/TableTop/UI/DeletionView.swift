@@ -62,14 +62,15 @@ struct DeletionView: View {
                 guard let modelSelectedToDelete = self.deletionManager.entitySelectedForDeletion else { return }
                 guard let anchorSelectedToDelete = self.deletionManager.entitySelectedForDeletion?.anchor else { return }
                 
+                for mod in ModelManager.getInstance().activeModels {
+                    if (mod.value.modelEntity == modelSelectedToDelete) {
+                        print("DEBUG:: MM.getEntity, ENTITY FOUND: \(mod.value.name)")
+                        let model = mod.value
+                        let modelUID = model.model_uid
+                        ServerHandler.getInstance().emitDeleteSelectedModel(data: modelUID)
+                    }
+                }
                 
-                let anchoringIdentifier = anchorSelectedToDelete.anchorIdentifier
-                
-                /*if let modelForDeletion = ModelManager.getInstance().activeModels.first(where: {$0.value.getAnchorEntity().anchorIdentifier == anchoringIdentifier}){
-                 print("DEBUG:: found anchor to delete!")
-                 
-                 ModelManager.getInstance().activeModels.removeValue(forKey: modelForDeletion.key)
-                 }*/
                 
                 if let modelForDeletion = ModelManager.getInstance().activeModels.first(where: {$0.value.getAnchorEntity() == anchorSelectedToDelete}){
                     print("DEBUG:: found anchor to delete!")
@@ -101,6 +102,7 @@ struct DeletionView: View {
                 
                 //TODO: might not need
                 ModelManager.getInstance().activeModels.removeAll()
+                ServerHandler.getInstance().emitDeleteAllModels()
             }
             
             Spacer()

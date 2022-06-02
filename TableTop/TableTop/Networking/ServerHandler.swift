@@ -192,6 +192,30 @@ final class ServerHandler {
             }
         }
         
+        self.socket?.on("delete-selected-model") { (data, ack) in
+            guard let dataInfo = data.first else { return }
+            let dataDict = dataInfo as! String
+            let modelUID = dataDict
+            
+            let modelObject = ModelManager.getInstance().activeModels[modelUID]
+            ModelManager.getInstance().activeModels.removeValue(forKey: modelUID)
+            modelObject?.getAnchorEntity().removeFromParent()
+            print("DEBUG:: SH Deleting anchorEntity with id: \(modelObject?.name)")
+        }
+        
+        self.socket?.on("delete-all-models") { (data, ack) in
+            for (_,model) in ModelManager.getInstance().activeModels {
+                let anchorEntity = model.getAnchorEntity()
+//                print("DEBUG:: SH Deleting anchorEntity with id: \(model.name)")
+                
+                anchorEntity.removeFromParent()
+                anchorEntity.children.removeAll()
+            }
+            print("DEBUG:: SH Deleted all models")
+            //TODO: might not need
+            ModelManager.getInstance().activeModels.removeAll()
+        }
+        
         
         self.socket?.on("playerList-req") { (data, ack) in
             print("DEBUG:: SH PLAYER || FROM SERVER -> received new list of users")
@@ -212,7 +236,6 @@ final class ServerHandler {
             parsedPlayerNames.forEach { parsedName in
                 PlayerList.playerListInstance.playerNames += [parsedName as! String]
             }
-
         }
     }
     
@@ -258,6 +281,14 @@ final class ServerHandler {
     func emitSelectedModel(data: SelectedModel) {
         let info: [String: Any] = ["selectedModelName" : String(data.selectedModelName)]
         self.socket?.emit("model-selected", info)
+    }
+    
+    func emitDeleteAllModels() {
+        self.socket?.emit("delete-all-models", "")
+    }
+    
+    func emitDeleteSelectedModel(data: String) {
+        self.socket?.emit("delete-selected-model", data)
     }
     
     // Call this when ending a session.

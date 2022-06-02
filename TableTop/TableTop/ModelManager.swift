@@ -192,16 +192,10 @@ class ModelManager{
         
         if (posRequested != nil) {
             anchorEntity.setPosition(posRequested!, relativeTo: ARSceneContainer.originPoint)
-//            print("DEBUG::NH MM|| received relative position:", posRequested)
-//            print("DEBUG::NH MM|| origin point position:     ", ARSceneContainer.originPoint)
-//            print("DEBUG::NH MM|| anchorEntity's position:   ", anchorEntity.position)
-//            print("DEBUG::NH MM|| current relative position: ", Model.getRelativePosition(for: anchorEntity))
         }
         
         anchorEntity.addChild(model.getModelEntity())
         model.setAnchorEntity(&anchorEntity)
-        
-        
         
         targetARView.scene.addAnchor(anchorEntity)
         
@@ -246,19 +240,6 @@ class ModelManager{
     /// position to the new relative position.
     func moveModel(model selectedModel: Model, by deltaPos: SIMD3<Float>){
         selectedModel.getModelEntity().transform.translation += deltaPos
-
-        // TODO: Things we can try?
-        // - try relativeTo: origin
-        // - try using ONLY relative to the world space, aka relativeTo: nil
-        
-        // Also, data received is a delta position of the target object,
-        // so it would make sense to setPosition relative to the model's old position
-        
-        // Maybe we need to make an temporary exact copy of the entity, setPosition
-        // relative to that copy, and then delete the copy?
-        // So far with this implentation below, translation works a little initially,
-        // but eventually no matter what direction you move the object, the receiver's
-        // object keeps moving the same direction. lol.
     }
     
     /// Given a Model object, obtain it's relative position from the origin point, created a SharedSessionData object to send to the server
